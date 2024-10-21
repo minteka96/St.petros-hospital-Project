@@ -7577,3 +7577,82 @@ body.offcanvas-open {
   color: #000;
   font-weight: 500;
 }
+/* Video Section */
+
+.video-section {
+    position: relative;
+    padding: 130px 0 120px;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.video-section .sec-bg {
+    position: absolute;
+    top: -70px;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+    background-size: cover;
+}
+
+.video-section h5 {
+    position: relative;
+    color: #fff;
+    font-size: 22px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.video-section h5:before {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    width: 85px;
+    height: 2px;
+    width: 50px;
+    right: -68px;
+    bottom: 10px;
+}
+
+.video-section h2 {
+    position: relative;
+    font-size: 60px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 60px;
+    margin-bottom: 20px;
+}
+
+.video-section .video-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: center;
+}
+
+.video-section .video-box .video-btn a {
+    position: relative;
+    height: 70px;
+    width: 70px;
+    line-height: 70px;
+    text-align: center;
+    border-radius: 50%;
+    margin-right: 25px;
+    display: inline-block;
+    font-size: 72px;
+    transition: .5s;
+    background-color: #fff;
+}
+
+.video-section .video-box .video-btn a:hover {
+    color: #fff;
+}
+
+.video-section .video-box .text {
+    position: relative;
+    color: #fff;
+    margin-bottom: 0;
+    font-size: 15px;
+    text-transform: uppercase;
+}

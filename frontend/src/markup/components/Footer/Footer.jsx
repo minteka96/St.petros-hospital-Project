@@ -38,38 +38,39 @@ function Footer() {
                   <ul class="posts-item">
                     <li>
                       <a href="blog-details.html">
-                        <i class="icon icofont-rounded-double-right"></i>Lorem
-                        Ispum dolor sit amet putilor
+                        <i class="icon icofont-rounded-double-right"></i>ዶ/ር
+                        አብርሀም እሸቱም የቅዱስ ጴጥሮስ ስፔሻላይዝድ ሆስፒታል ዋና ስራ አስፈጻሚ ሆነው በጤና
+                        ሚኒስቴር ሚኒስትር ዶ/ር ሊያ ታደሰ ተሾሙ፡፡
                       </a>
                     </li>
                     <li>
-                      <a href="blog-details.html">
-                        <i class="icon icofont-rounded-double-right"></i>Medical
-                        is all about quality.
+                      <a href="https://t.me/spsh1955/1609">
+                        <i class="icon icofont-rounded-double-right"></i>የአሜሪካ
+                        ተራድኦ ድርጅት ከፍተኛ ኃላፊዎች ሆስፒታሉን ጎበኙ
                       </a>
                     </li>
                     <li>
-                      <a href="blog-details.html">
-                        <i class="icon icofont-rounded-double-right"></i>Is your
-                        website user friendly ?
+                      <a href="https://t.me/spsh1955/1609">
+                        <i class="icon icofont-rounded-double-right"></i>ሆስፒታሉ
+                        ለጣይቱ ብጡል አንደኛ ደረጃ ት/ቤት ሴት ተማሪዎች ድጋፍ አደረገ
                       </a>
                     </li>
                     <li>
-                      <a href="blog-details.html">
-                        <i class="icon icofont-rounded-double-right"></i>Ai
-                        offer weekly updates & more.
+                      <a href="https://t.me/spsh1955/1609">
+                        <i class="icon icofont-rounded-double-right"></i>የዝውውር
+                        ማስታወቂያ
                       </a>
                     </li>
                     <li>
-                      <a href="blog-details.html">
+                      <a href="https://t.me/spsh1955/1609">
                         <i class="icon icofont-rounded-double-right"></i>
-                        Customer should love your web.
+                        የጨጓራ ህመም ምንድነው?
                       </a>
                     </li>
                     <li>
-                      <a href="blog-details.html">
-                        <i class="icon icofont-rounded-double-right"></i>Your
-                        site smooth and stunning.
+                      <a href="https://t.me/spsh1955/1609">
+                        <i class="icon icofont-rounded-double-right"></i>የሆስፒታሉ
+                        አመራሮችና ሰራተኞች የማዕድ መጋራት ስነ-ስርዓት አካሄዱ
                       </a>
                     </li>
                   </ul>

@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./style/css/style.css";
+import "./assets/css/flaticon.css";
+import "./style/customeCSS/custome.css";
 import "./assets/css/icofont.css";
 
 import { BrowserRouter } from "react-router-dom";

@@ -14,6 +14,7 @@ export default defineConfig({
       icofont: "icofont/dist/icofont.css",
     },
   },
+  assetsInclude: ["**/*.woff", "**/*.woff2", "**/*.ttf"],
 });
 
 

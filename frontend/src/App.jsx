@@ -4,7 +4,6 @@ import Header from "./markup/components/Header/Header";
 import Footer from "./markup/components/Footer/Footer";
 import Home from "./markup/pages/Home/Home";
 import About from "./markup/pages/AboutPage/About";
-// import "./App.css";
 import "./style/css/style.css";
 // import "./style/customCSS/custom.css"
 function App() {

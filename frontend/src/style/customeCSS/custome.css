@@ -1,0 +1,42 @@
+.video-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh; /* Adjust this based on your needs */
+}
+
+.video-btn {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  background-color: #c64420;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px; /* Space between video button and text */
+}
+
+.video-btn i {
+  font-size: 35px;
+  color: white;
+}
+
+.text {
+  font-size: 35px;
+  font-weight: 700;
+  color: white;
+  font-family: "Arial", sans-serif;
+  line-height: 1.3;
+  margin-left: 12px;
+}
+
+.text span {
+  display: block;
+  font-size: 28px;
+  font-weight: 300;
+}
+.play_btn{
+  display: flex;
+  justify-content: center;
+}

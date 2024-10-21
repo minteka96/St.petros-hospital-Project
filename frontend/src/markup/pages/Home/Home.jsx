@@ -8,6 +8,8 @@ import doctor1 from "../../../assets/img/photos/st.peter9jpg.png";
 import blog1 from "../../../assets/img/blog/sendek.png";
 import blog2 from "../../../assets/img/blog/Transfer.png";
 import blog3 from "../../../assets/img/blog/pox.png";
+import play from "../../../assets/img/icons/red-play-button-icon.svg";
+import { Link } from "react-router-dom";
 function Home() {
   return (
     <>
@@ -25,24 +27,49 @@ function Home() {
                       <div class="col-12">
                         <div class="slider-content">
                           <h5 class="title animated delay2">
-                            መኖራችን
-                            <span class="d-block">ለእርስዎ ነዉ!</span>
+                            We are Classic and Historical,
+                            <span class="d-block">Serving Since 1953</span>
                           </h5>
-                          <h2 class="title animated delay2">
-                            Our Existence is
-                            <span class="d-block">For You</span>
-                          </h2>
-                          <a
-                            href="#"
-                            class="btn btn-danger me-3 animated delay1"
-                          >
-                            our services
-                          </a>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* <div className="video-section">
+                      <div className="sec-bg"></div>
+                      <div className="auto-container">
+                        <div className="video-box mt-5">
+                          <div className="video-btn">
+                            <Link
+                              to="https://www.youtube.com/watch?v=nfP5N9Yc72A&amp;t=28s"
+                              className="overlay-link lightbox-image video-fancybox ripple"
+                            >
+                              <i className="flaticon-play"></i>
+                            </Link>
+                          </div>
+
+                          <div className="text">
+                            Watch intro video <br /> <span>About us</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div> */}
+                    <div className=" mt-5 pl-5">
+                      <div className="play_btn">
+                        <Link
+                          to="https://www.youtube.com/watch?v=T8VqfQACMbM&t=511s"
+                          className="overlay-link lightbox-image video-fancybox ripple"
+                          target="_blank"
+                        >
+                          <img src={play} alt="Play Video" width={80} />
+                        </Link>
+                        <div className="text">
+                          Watch intro video <br /> <span>About us</span>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
                 <div
                   class="swiper-slide"
                   style={{ backgroundImage: `url(${banner3})` }}
@@ -59,12 +86,6 @@ function Home() {
                             Our Existence is
                             <span class="d-block">For You</span>
                           </h2>
-                          <a
-                            href="#"
-                            class="btn btn-danger me-3 animated delay1"
-                          >
-                            our services
-                          </a>
                         </div>
                       </div>
                     </div>
@@ -91,7 +112,8 @@ function Home() {
                   <div class="section-title text-center">
                     <p>Our services</p>
                     <h2 class="title">
-                      <span>Best Solution</span> For Your Health
+                      <span>We promise compassionate care</span> with a deep
+                      understanding of your pain.
                     </h2>
                   </div>
                 </div>
@@ -105,7 +127,11 @@ function Home() {
                       </div>
                       <div class="content">
                         <h5 class="service-name">Psychiatry</h5>
-                        <p>Lorem ispm dolor sit amaettum prahraph dolor sum</p>
+                        <p>
+                          Diagnose and treat mental disorders using
+                          psychotherapy and medication for emotional and
+                          behavioral health.
+                        </p>
                         <a class="btn-link" href="service-details.html">
                           More <i class="icofont-simple-right"></i>
                         </a>
@@ -117,7 +143,11 @@ function Home() {
                       </div>
                       <div class="content">
                         <h5 class="service-name">Opthalmology</h5>
-                        <p>Lorem ispm dolor sit amaettum prahraph dolor sum</p>
+                        <p>
+                          SDiagnose and treat eye disorders, offering corrective
+                          lenses and surgical interventions for vision
+                          improvement.
+                        </p>
                         <a class="btn-link" href="service-details.html">
                           More <i class="icofont-simple-right"></i>
                         </a>
@@ -129,7 +159,11 @@ function Home() {
                       </div>
                       <div class="content">
                         <h5 class="service-name">Cardiology</h5>
-                        <p>Lorem ispm dolor sit amaettum prahraph dolor sum</p>
+                        <p>
+                          Provide care for cardiovascular diseases, using
+                          medications to modify heart function and manage
+                          symptoms.
+                        </p>
                         <a class="btn-link" href="service-details.html">
                           More <i class="icofont-simple-right"></i>
                         </a>
@@ -141,7 +175,11 @@ function Home() {
                       </div>
                       <div class="content">
                         <h5 class="service-name">Immumnology</h5>
-                        <p>Lorem ispm dolor sit amaettum prahraph dolor sum</p>
+                        <p>
+                          Treat immune system disorders, including allergies and
+                          autoimmune diseases, regulating or enhancing immune
+                          responses.
+                        </p>
                         <a class="btn-link" href="service-details.html">
                           More <i class="icofont-simple-right"></i>
                         </a>
@@ -153,7 +191,11 @@ function Home() {
                       </div>
                       <div class="content">
                         <h5 class="service-name">Hematology</h5>
-                        <p>Lorem ispm dolor sit amaettum prahraph dolor sum</p>
+                        <p>
+                          Diagnose and treat blood disorders, including anemia,
+                          leukemia, and clotting, with transfusions and
+                          transplants.
+                        </p>
                         <a class="btn-link" href="service-details.html">
                           More <i class="icofont-simple-right"></i>
                         </a>
@@ -165,7 +207,11 @@ function Home() {
                       </div>
                       <div class="content">
                         <h5 class="service-name">Laboratory</h5>
-                        <p>Lorem ispm dolor sit amaettum prahraph dolor sum</p>
+                        <p>
+                          Perform diagnostic tests on clinical specimens to
+                          guide treatment decisions and assess patient health
+                          conditions.
+                        </p>
                         <a class="btn-link" href="service-details.html">
                           More <i class="icofont-simple-right"></i>
                         </a>
@@ -177,7 +223,11 @@ function Home() {
                       </div>
                       <div class="content">
                         <h5 class="service-name">Oncology</h5>
-                        <p>Lorem ispm dolor sit amaettum prahraph dolor sum</p>
+                        <p>
+                          Specializes in treating cancer using chemotherapy,
+                          radiation, and targeted therapies to manage different
+                          cancer types.
+                        </p>
                         <a class="btn-link" href="service-details.html">
                           More <i class="icofont-simple-right"></i>
                         </a>
@@ -189,7 +239,11 @@ function Home() {
                       </div>
                       <div class="content">
                         <h5 class="service-name">Dental</h5>
-                        <p>Lorem ispm dolor sit amaettum prahraph dolor sum</p>
+                        <p>
+                          Provide dental care, including diagnosis, prevention,
+                          and treatment of oral diseases and hygiene
+                          restoration.
+                        </p>
                         <a class="btn-link" href="service-details.html">
                           More <i class="icofont-simple-right"></i>
                         </a>
@@ -231,8 +285,10 @@ function Home() {
                         <div class="content">
                           <h5 class="title">Medical Counseling</h5>
                           <p>
-                            Lorem ipsum dolor sit amet, consect adipisicing elit
-                            vero. Donec ultri sollicitudin lacus
+                            We provide personalized medical counseling services
+                            to help you make informed decisions about your
+                            health. Our experienced team offers guidance on
+                            treatments, diagnoses, and healthcare management
                           </p>
                         </div>
                       </div>
@@ -245,8 +301,11 @@ function Home() {
                         <div class="content">
                           <h5 class="title">Top Level Doctors</h5>
                           <p>
-                            Lorem ipsum dolor sit amet, consect adipisicing elit
-                            vero. Donec ultri sollicitudin lacus
+                            Our hospital is staffed with board-certified doctors
+                            and specialists from various medical fields. With
+                            years of experience and advanced training, they
+                            ensure that you receive the highest standard of
+                            care.
                           </p>
                         </div>
                       </div>
@@ -259,8 +318,11 @@ function Home() {
                         <div class="content">
                           <h5 class="title">Medical Facilites</h5>
                           <p>
-                            Lorem ipsum dolor sit amet, consect adipisicing elit
-                            vero. Donec ultri sollicitudin lacus
+                            Saint Peter's Hospital is equipped with
+                            state-of-the-art medical technology and modern
+                            facilities. From diagnostic equipment to comfortable
+                            patient rooms, we strive to offer an environment
+                            that promotes healing and recovery.
                           </p>
                         </div>
                       </div>
@@ -273,8 +335,10 @@ function Home() {
                         <div class="content">
                           <h5 class="title">24 Hours Services</h5>
                           <p>
-                            Lorem ipsum dolor sit amet, consect adipisicing elit
-                            vero. Donec ultri sollicitudin lacus
+                            We understand that medical emergencies can happen at
+                            any time. That’s why our hospital provides 24-hour
+                            emergency services and round-the-clock patient care,
+                            ensuring immediate attention whenever you need it.
                           </p>
                         </div>
                       </div>
@@ -287,8 +351,11 @@ function Home() {
                         <div class="content">
                           <h5 class="title">Personal Services</h5>
                           <p>
-                            Lorem ipsum dolor sit amet, consect adipisicing elit
-                            vero. Donec ultri sollicitudin lacus
+                            We take a patient-centered approach to healthcare,
+                            offering tailored services that meet the individual
+                            needs of each patient. From specialized treatments
+                            to personalized care plans, your health is our
+                            priority.
                           </p>
                         </div>
                       </div>
@@ -301,8 +368,11 @@ function Home() {
                         <div class="content">
                           <h5 class="title">Dedicated Patient Care</h5>
                           <p>
-                            Lorem ipsum dolor sit amet, consect adipisicing elit
-                            vero. Donec ultri sollicitudin lacus
+                            Our team is committed to delivering compassionate
+                            and comprehensive care to all patients. With a focus
+                            on quality and comfort, we work diligently to ensure
+                            every patient receives the best possible care during
+                            their stay.
                           </p>
                         </div>
                       </div>
@@ -507,7 +577,8 @@ function Home() {
                             aria-expanded="true"
                             aria-controls="collapseOne"
                           >
-                            Can I Get A Divorce Without A Consultant?
+                            Can I Get A Medical Consultation Without An
+                            Appointment?
                             <i class="icon icon-plus icofont-thin-down"></i>
                             <i class="icon icon-minus icofont-close-line"></i>
                           </button>
@@ -519,12 +590,10 @@ function Home() {
                           data-bs-parent="#accordionStyle"
                         >
                           <div class="accordion-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Curabitur consectetur elit lacinia ornare. In
-                            volutpat rutrum molestie. Vivamus efficitur orci, ac
-                            gravida eros bibendum non. Nullam auctor varius fer
-                            vestibulum ante ipsum primis in faucibus orci luctus
-                            et ultrices.
+                            Yes, we offer walk-in consultations for urgent
+                            cases. However, scheduling an appointment is
+                            recommended for non-emergencies to ensure a
+                            convenient time with your preferred doctor.
                           </div>
                         </div>
                       </div>
@@ -551,12 +620,9 @@ function Home() {
                           data-bs-parent="#accordionStyle"
                         >
                           <div class="accordion-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Curabitur consectetur elit lacinia ornare. In
-                            volutpat rutrum molestie. Vivamus efficitur orci, ac
-                            gravida eros bibendum non. Nullam auctor varius fer
-                            vestibulum ante ipsum primis in faucibus orci luctus
-                            et ultrices.
+                            For any technical or support issues related to your
+                            online patient account, medical records, or billing,
+                            please email our support team at pr@kpsh.gov.et
                           </div>
                         </div>
                       </div>
@@ -582,12 +648,11 @@ function Home() {
                           data-bs-parent="#accordionStyle"
                         >
                           <div class="accordion-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Curabitur consectetur elit lacinia ornare. In
-                            volutpat rutrum molestie. Vivamus efficitur orci, ac
-                            gravida eros bibendum non. Nullam auctor varius fer
-                            vestibulum ante ipsum primis in faucibus orci luctus
-                            et ultrices.
+                            Saint Peter's Hospital provides a comprehensive
+                            range of services, including primary care, specialty
+                            consultations, surgical procedures, and
+                            rehabilitative therapies, ensuring all your
+                            healthcare needs are met.
                           </div>
                         </div>
                       </div>
@@ -601,7 +666,7 @@ function Home() {
                             aria-expanded="false"
                             aria-controls="collapseFour"
                           >
-                            Are You Hiring?
+                            Do You Have Other links besides this Website?
                             <i class="icon icon-plus icofont-thin-down"></i>
                             <i class="icon icon-minus icofont-close-line"></i>
                           </button>
@@ -613,12 +678,9 @@ function Home() {
                           data-bs-parent="#accordionStyle"
                         >
                           <div class="accordion-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Curabitur consectetur elit lacinia ornare. In
-                            volutpat rutrum molestie. Vivamus efficitur orci, ac
-                            gravida eros bibendum non. Nullam auctor varius fer
-                            vestibulum ante ipsum primis in faucibus orci luctus
-                            et ultrices.
+                            You can also follow us on
+                            facebook,telegram,youtube,instagram for updates, or
+                            contact us directly for more information.
                           </div>
                         </div>
                       </div>
@@ -769,7 +831,9 @@ function Home() {
           </div>
         </div>
 
-      <div class="scroll-to-top"><span class="icofont-rounded-up"></span></div>
+        <div class="scroll-to-top">
+          <span class="icofont-rounded-up"></span>
+        </div>
       </div>
     </>
   );
