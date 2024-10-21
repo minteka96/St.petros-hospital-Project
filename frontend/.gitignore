@@ -1,9 +1,4 @@
 # Logs
-
-/backend/node_modules
-/frontend/node_modules
-/frontend/dist
-.env
 logs
 *.log
 npm-debug.log*
