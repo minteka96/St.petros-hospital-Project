@@ -18,7 +18,7 @@ function AdminDashboard() {
             <Link to="../Doctors/Doctors.jsx">Doctors</Link>
           </li>
           <li>
-            <Link to="../Add Doctor/AddDoctor.jsxl">Add Doctor</Link>
+            <Link to="../Add Doctor/AddDoctor.jsxl">Add Tender</Link>
           </li>
           <li>
             <Link to="../Patients/Patients.jsx">Patients</Link>
