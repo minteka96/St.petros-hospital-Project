@@ -1,0 +1,188 @@
+/* Global styles */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+/* Logout Button */
+.logoutBtn {
+  background-color: #e53935; /* Red color for logout */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.logoutBtn:hover {
+  background-color: #c62828; /* Darker red on hover */
+}
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Header */
+.adminHeader {
+  background-color: #8f1b1b;
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.adminHeader h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: white;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #8f1b1b;
+  width: 200px;
+  height: 100vh;
+  padding-top: 80px; /* Adjusted for fixed header */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 1rem 0;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 1rem;
+  display: block;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.sidebar ul li a.active,
+.sidebar ul li a:hover {
+  background-color: #00695c;
+}
+
+/* Main Content */
+.content {
+  margin-left: 200px;
+  padding-top: 100px; /* Adjusted for fixed header */
+  padding: 2rem;
+  flex-grow: 1;
+}
+
+/* Doctors Section */
+.doctorsList h2 {
+  color: #8f1b1b;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.searchBar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  margin-top: 3.5rem;
+}
+
+.searchBar input[type="text"] {
+  padding: 0.75rem;
+  width: 250px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.searchBar button {
+  padding: 0.75rem 1.5rem;
+  background-color: #00796b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.searchBar button:hover {
+  background-color: #004d40;
+}
+
+/* Table */
+.doctorsTable {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.doctorsTable thead th {
+  background-color: #8f1b1b;
+  color: white;
+  padding: 1rem;
+  text-align: left;
+  font-weight: bold;
+}
+
+.doctorsTable tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.doctorsTable tbody tr:last-child {
+  border-bottom: none;
+}
+
+.doctorsTable tbody td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+.doctorsTable tbody td button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.doctorsTable tbody td .editBtn {
+  background-color: #00796b;
+  color: white;
+  margin-right: 0.5rem;
+}
+
+.doctorsTable tbody td .editBtn:hover {
+  background-color: #004d40;
+}
+
+.doctorsTable tbody td .deleteBtn {
+  background-color: #e53935;
+  color: white;
+}
+
+.doctorsTable tbody td .deleteBtn:hover {
+  background-color: #c62828;
+}
+
+/* Doctor Photo */
+.doctorPhoto {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}

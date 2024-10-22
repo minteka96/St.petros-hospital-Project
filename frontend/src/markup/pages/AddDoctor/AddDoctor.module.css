@@ -1,0 +1,152 @@
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+/* Logout Button */
+.logoutBtn {
+  background-color: #e53935; /* Red color for logout */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.logoutBtn:hover {
+  background-color: #c62828; /* Darker red on hover */
+}
+/* Header */
+.adminHeader {
+  background-color: #8f1b1b;
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.adminHeader h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: white;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #8f1b1b;
+  width: 200px;
+  height: 100vh;
+  padding-top: 80px; /* Adjusted for fixed header */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 1rem 0;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 1rem;
+  display: block;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.sidebar ul li a.active,
+.sidebar ul li a:hover {
+  background-color: #00695c;
+}
+
+/* Content Styling */
+.content {
+  margin-left: 270px; /* To prevent the content from going under the sidebar */
+  padding: 20px;
+}
+.addDoctorForm {
+  max-width: 800px; /* Wider form */
+  margin: 120px auto; /* Center the form */
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: grid; /* Grid layout */
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 1.5rem; /* Space between form elements */
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column; /* Stack label and input */
+}
+
+.formGroup label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="number"],
+.formGroup input[type="file"] {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.formGroup input[type="text"]:focus,
+.formGroup input[type="email"]:focus,
+.formGroup input[type="number"]:focus {
+  border-color: #00796b; /* Change border color on focus */
+  outline: none; /* Remove outline */
+}
+
+.formActions {
+  grid-column: span 2; /* Span across both columns for the button */
+  display: flex;
+  justify-content: center; /* Center the button */
+}
+
+.submitBtn {
+  padding: 0.75rem 2rem;
+  background-color: #00796b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submitBtn:hover {
+  background-color: #004d40;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+}

@@ -1,0 +1,139 @@
+/* Global styles */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+/* Logout Button */
+.logoutBtn {
+  background-color: #e53935; /* Red color for logout */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.logoutBtn:hover {
+  background-color: #c62828; /* Darker red on hover */
+}
+
+/* Header */
+.adminHeader {
+  background-color: #8f1b1b;
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.adminHeader h1 {
+  color: white;
+  margin: 0;
+  font-size: 2rem;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #8f1b1b;
+  width: 200px;
+  height: 100vh;
+  padding-top: 80px; /* Adjusted for fixed header */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 1rem 0;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 1rem;
+  display: block;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+  background-color: #00695c;
+}
+
+/* Main Content */
+.content {
+  margin-left: 200px;
+  padding-top: 100px; /* Adjusted for fixed header */
+  padding: 2rem;
+  flex-grow: 1;
+}
+
+.dashboardOverview,
+.recentActivity {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  color: #00796b;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+/* Cards */
+.cards {
+  display: flex;
+  gap: 1rem;
+}
+
+.card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  text-align: center;
+}
+
+.card h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.card p {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00796b;
+}
+
+/* Recent Activities */
+.recentActivity ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.recentActivity ul li {
+  background-color: white;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
