@@ -2,7 +2,7 @@ import React from "react";
 import banner1 from "../../../assets/img/slider/st.peter1jpg copy.png";
 import banner3 from "../../../assets/img/slider/kidus petros 2copy.jpg";
 import team1 from "../../../assets/img/team/doc1.png";
-import team2 from "../../../assets/img/team/doct2.png";
+import team2 from "../../../assets/img/team/doc2.png";
 import team3 from "../../../assets/img/team/doc3.png";
 import doctor1 from "../../../assets/img/photos/st.peter9jpg.png";
 import blog1 from "../../../assets/img/blog/sendek.png";
@@ -33,26 +33,6 @@ function Home() {
                         </div>
                       </div>
                     </div>
-
-                    {/* <div className="video-section">
-                      <div className="sec-bg"></div>
-                      <div className="auto-container">
-                        <div className="video-box mt-5">
-                          <div className="video-btn">
-                            <Link
-                              to="https://www.youtube.com/watch?v=nfP5N9Yc72A&amp;t=28s"
-                              className="overlay-link lightbox-image video-fancybox ripple"
-                            >
-                              <i className="flaticon-play"></i>
-                            </Link>
-                          </div>
-
-                          <div className="text">
-                            Watch intro video <br /> <span>About us</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div> */}
                     <div className=" mt-5 pl-5">
                       <div className="play_btn">
                         <Link
@@ -60,8 +40,13 @@ function Home() {
                           className="overlay-link lightbox-image video-fancybox ripple"
                           target="_blank"
                         >
-                          <img src={play} alt="Play Video" width={80} />
+                          <div class="play-icon">
+                            <div class="play-button">
+                              <div class="triangle"></div>
+                            </div>
+                          </div>
                         </Link>
+
                         <div className="text">
                           Watch intro video <br /> <span>About us</span>
                         </div>
@@ -416,7 +401,7 @@ function Home() {
                     <div class="swiper-wrapper team-slider">
                       <div class="swiper-slide team-member">
                         <div class="thumb">
-                          <img src={team1} alt="hope-HasTech" width="200" />
+                          <img src={team1} alt="hope-HasTech" />
                         </div>
                         <div class="content">
                           <div class="member-info">
@@ -431,7 +416,7 @@ function Home() {
 
                       <div class="swiper-slide team-member">
                         <div class="thumb">
-                          <img src={team2} alt="hope-HasTech" width="200" />
+                          <img src={team2} alt="hope-HasTech" />
                         </div>
                         <div class="content">
                           <div class="member-info">
@@ -446,7 +431,7 @@ function Home() {
 
                       <div class="swiper-slide team-member">
                         <div class="thumb">
-                          <img src={team3} alt="hope-HasTech" height="350" />
+                          <img src={team3} alt="hope-HasTech" />
                         </div>
                         <div class="content">
                           <div class="member-info">
