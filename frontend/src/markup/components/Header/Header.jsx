@@ -197,11 +197,32 @@ function Header() {
                         News
                       </a>
                     </li>
-                    <li>
+                    {/* <li>
                       <a class="main-menu-link" href="/Tender">
                         Tender
                       </a>
+                    </li> */}
+                    <li className="tender-menu">
+                      <a href="#" onClick={toggleSubMenu}>
+                        Tender
+                      </a>
+                      {showSubMenu && (
+                        <ul className="sub-menu">
+                          <li>
+                            <Link to="/tender-form-post">Tender Post</Link>
+                          </li>
+                          <li>
+                            <Link to="/tender-list">Tender List</Link>
+                          </li>
+                          <li>
+                            <Link to="/all-tender-form-details/:tenderNo">
+                              Tender Details
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
                     </li>
+
                     <li>
                       <a class="main-menu-link" href="/Jobs">
                         Jobs
@@ -290,8 +311,8 @@ function Header() {
                         </li>
                       </ul>
                     </li>
-
-                    {/* <li>
+                    {/* 
+                    <li>
                       <a class="main-menu-link" href="#">
                         Tender
                       </a>
