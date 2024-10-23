@@ -1,0 +1,32 @@
+.tender-menu {
+  position: relative;
+}
+
+.sub-menu {
+  display: none; /* Hide the submenu initially */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  list-style: none;
+  padding: 10px 0;
+  border: 1px solid #ccc;
+  z-index: 999; /* Ensure it appears on top */
+}
+
+.tender-menu:hover .sub-menu {
+  display: block; /* Show the submenu when hovering over the Tender menu */
+}
+
+.sub-menu li {
+  padding: 5px 20px;
+}
+
+.sub-menu li a {
+  color: #000;
+  text-decoration: none;
+}
+
+.sub-menu li a:hover {
+  text-decoration: underline;
+}
