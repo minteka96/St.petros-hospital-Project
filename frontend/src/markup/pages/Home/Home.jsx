@@ -4,7 +4,7 @@ import banner3 from "../../../assets/img/slider/kidus petros 2copy.jpg";
 import team1 from "../../../assets/img/team/doc1.png";
 import team2 from "../../../assets/img/team/doc2.png";
 import team3 from "../../../assets/img/team/doc3.png";
-import doctor1 from "../../../assets/img/photos/st.peter9jpg.png";
+import doctor1 from "../../../assets/img/photos/st.peter9jpg copy.png";
 import blog1 from "../../../assets/img/blog/sendek.png";
 import blog2 from "../../../assets/img/blog/Transfer.png";
 import blog3 from "../../../assets/img/blog/pox.png";
@@ -366,7 +366,7 @@ function Home() {
               </div>
             </div>
             <div class="thumb" data-aos="fade-left" data-aos-duration="1500">
-              <img src={doctor1} alt="hope-Image" width="600" />
+              <img src={doctor1} alt="hope-Image" />
             </div>
           </section>
 
@@ -465,16 +465,16 @@ function Home() {
                     </h2>
                   </div>
                   <div
-                    class="post-items-style1"
+                    class="post_items-style1"
                     data-aos="fade-up"
                     data-aos-duration="1100"
                   >
-                    <div class="post-item">
-                      
+                    <div class="post_item">
+                      <div class="thumb">
                         <a href="blog-details.html">
-                          <img src={blog1} height="100" />
+                          <img src={blog1} />
                         </a>
-                      
+                      </div>
                       <div class="content">
                         <h4 class="title">
                           <a href="blog-details.html">
@@ -490,10 +490,10 @@ function Home() {
                       </div>
                     </div>
 
-                    <div class="post-item">
+                    <div class="post_item">
                       <div class="thumb">
                         <a href="blog-details.html">
-                          <img src={blog2} alt="hope-Blog" height="100" />
+                          <img src={blog2} alt="hope-Blog" />
                         </a>
                       </div>
                       <div class="content">
@@ -509,10 +509,10 @@ function Home() {
                       </div>
                     </div>
 
-                    <div class="post-item">
+                    <div class="post_item">
                       <div class="thumb">
                         <a href="blog-details.html">
-                          <img src={blog3} alt="hope-Blog" height="100" />
+                          <img src={blog3} alt="hope-Blog" />
                         </a>
                       </div>
                       <div class="content">
@@ -523,9 +523,9 @@ function Home() {
                           </a>
                         </h4>
                         <div class="meta">
-                          አዲስ አበባ - ነሐሴ 15 - 2016 <br />
+                          አዲስ አበባ - ነሐሴ 15 - 2016 
                           <a class="author" href="blog.html">
-                            በቅዱስ ጴጥሮስ ሆስፒታል የጤና ትምህርት ክፍል የተዘጋጀ ©
+                            (ቅ.ጴ.ስ.ሆ)
                           </a>
                         </div>
                       </div>
