@@ -8,7 +8,6 @@ import doctor1 from "../../../assets/img/photos/st.peter9jpg.png";
 import blog1 from "../../../assets/img/blog/sendek.png";
 import blog2 from "../../../assets/img/blog/Transfer.png";
 import blog3 from "../../../assets/img/blog/pox.png";
-import play from "../../../assets/img/icons/red-play-button-icon.svg";
 import { Link } from "react-router-dom";
 function Home() {
   return (
@@ -367,7 +366,7 @@ function Home() {
               </div>
             </div>
             <div class="thumb" data-aos="fade-left" data-aos-duration="1500">
-              <img src={doctor1} alt="hope-Image" width="550" />
+              <img src={doctor1} alt="hope-Image" width="600" />
             </div>
           </section>
 
@@ -471,11 +470,11 @@ function Home() {
                     data-aos-duration="1100"
                   >
                     <div class="post-item">
-                      <div class="thumb">
+                      
                         <a href="blog-details.html">
                           <img src={blog1} height="100" />
                         </a>
-                      </div>
+                      
                       <div class="content">
                         <h4 class="title">
                           <a href="blog-details.html">

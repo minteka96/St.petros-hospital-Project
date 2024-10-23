@@ -1,7 +1,12 @@
-import React from "react";
-// import logo from "../assets/img/St.PeterLogo.png";
+import React, { useState } from "react";
+import logo from "../../../assets/img/St.PeterLogo.png";
 import logo1 from "../../../assets/img/logo1.png";
 function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+   const toggleMenu = () => {
+     setMenuOpen((prevState) => !prevState);
+   };
+
   return (
     <>
       <header class="header">
@@ -12,7 +17,11 @@ function Header() {
                 <div class="header-middle-content">
                   <div class="header-logo">
                     <a href="/">
-                      <img src={logo1} alt="Logo" width="215" />
+                      {menuOpen ? (
+                        <img src={logo} alt="Logo" width="215" />
+                      ) : (
+                        <img src={logo1} alt="Logo" width="215" />
+                      )}
                     </a>
                   </div>
                   <ul class="media-wrap d-none d-lg-flex">
@@ -65,7 +74,7 @@ function Header() {
                     book an appointment
                   </a>
                   <div class="mobile-menu-toggle d-lg-none">
-                    <a href="#offcanvas-mobile-menu" class="offcanvas-toggle">
+                    <a onClick={toggleMenu} className="offcanvas-toggle">
                       <svg viewBox="0 0 800 600">
                         <path
                           d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
@@ -80,6 +89,48 @@ function Header() {
                       </svg>
                     </a>
                   </div>
+                  {menuOpen && (
+                    <div
+                      id="offcanvas-mobile-menu"
+                      className="mobile-menu d-lg-none"
+                    >
+                      <ul>
+                        <li>
+                          <a href="/">Home</a>
+                        </li>
+                        <li>
+                          <a href="/about">About</a>
+                        </li>
+                        <li>
+                          <a href="/Services">Services</a>
+                        </li>
+                        <li>
+                          <a href="/News">News</a>
+                        </li>
+                        <li>
+                          <a href="/Tender">Tender</a>
+                        </li>
+                        <li>
+                          <a href="/Jobs">Jobs</a>
+                        </li>
+                        <li>
+                          <a href="/CPD">CPD</a>
+                        </li>
+
+                        <li>
+                          <a href="/contact">Contact</a>
+                        </li>
+                        <li>
+                          <a href="/Admin">Admin</a>
+                        </li>
+                        <li className="ms-5">
+                          <a href="/Login" className="btn">
+                            Login
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
