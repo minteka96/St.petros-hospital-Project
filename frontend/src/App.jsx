@@ -8,6 +8,8 @@ import About from "./markup/pages/AboutPage/About";
 
 import Cpd from "./markup/pages/CPD/cpd";
 import "./style/css/style.css";
+import News from "./markup/pages/News/News";
+import NewsDetails from "./markup/pages/News/NewsDetails";
 // import "./style/customCSS/custom.css"
 
 import AddTenderForm from "./markup/components/Admin/AddTenderForm/AddTenderForm.jsx";
@@ -25,6 +27,10 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/about" element={<About />} />
 
+        <Route path="/News" element={<News />} />
+        <Route path="/news-details" element={<NewsDetails />} />
+
+
         <Route path="/cpd" element={<Cpd />} />
 
         {/* Tender Routes */}
@@ -36,6 +42,7 @@ function App() {
         />
         <Route path="/tender-form-post/:tenderNo" element={<AddTenderForm />} />
         <Route path="/tender-form-post" element={<AddTenderForm />} />
+
 
       </Routes>
       <Footer />
