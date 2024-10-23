@@ -15,6 +15,9 @@ export default defineConfig({
     },
   },
   assetsInclude: ["**/*.woff", "**/*.woff2", "**/*.ttf"],
+  build: {
+    outDir: "dist", // Ensure the output directory is 'dist'
+  },
 });
 
 

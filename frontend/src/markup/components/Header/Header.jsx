@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import logo from "../../../assets/img/St.PeterLogo.png";
 import logo1 from "../../../assets/img/logo1.png";
+import { Link } from "react-router-dom";
+import "./Header.css"; // Assuming you will style here
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-   const toggleMenu = () => {
-     setMenuOpen((prevState) => !prevState);
-   };
+  const [showSubMenu, setShowSubMenu] = useState(false);
+
+  const toggleSubMenu = () => {
+    setShowSubMenu(!showSubMenu);
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen((prevState) => !prevState);
+  };
 
   return (
     <>
@@ -165,11 +173,38 @@ function Header() {
                         News
                       </a>
                     </li>
-                    <li>
+
+                    {/* <li>
                       <a class="main-menu-link" href="/Tender">
                         Tender
                       </a>
+                    </li> */}
+
+                    <li className="tender-menu">
+                      <a
+                        className="main-menu-link tender-menu"
+                        href="#"
+                        onClick={toggleSubMenu}
+                      >
+                        Tender
+                      </a>
+                      {showSubMenu && (
+                        <ul className="sub-menu">
+                          <li>
+                            <Link to="/tender-form-post">Tender Post</Link>
+                          </li>
+                          <li>
+                            <Link to="/tender-list">Tender List</Link>
+                          </li>
+                          <li>
+                            <Link to="/all-tender-form-details/:tenderNo">
+                              Tender Details
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
                     </li>
+
                     <li>
                       <a class="main-menu-link" href="/Jobs">
                         Jobs
@@ -258,6 +293,7 @@ function Header() {
                         </li>
                       </ul>
                     </li>
+                    {/* 
                     <li>
                       <a class="main-menu-link" href="#">
                         Tender
@@ -274,7 +310,33 @@ function Header() {
                           </a>
                         </li>
                       </ul>
+                    </li> */}
+
+                    <li className="tender-menu">
+                      <a
+                        className="main-menu-link tender-menu"
+                        href="#"
+                        onClick={toggleSubMenu}
+                      >
+                        Tender
+                      </a>
+                      {showSubMenu && (
+                        <ul className="sub-menu">
+                          <li>
+                            <Link to="/tender-form-post">Tender Post</Link>
+                          </li>
+                          <li>
+                            <Link to="/tender-list">Tender List</Link>
+                          </li>
+                          <li>
+                            <Link to="/all-tender-form-details/:tenderNo">
+                              Tender Details
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
                     </li>
+
                     <li>
                       <a class="main-menu-link" href="#">
                         Jobs
