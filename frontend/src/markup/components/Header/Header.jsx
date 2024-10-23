@@ -118,30 +118,6 @@ function Header() {
                         <li>
                           <a href="/Tender">Tender</a>
                         </li>
-                        {/* Start Tender */}
-                        {/* Tender Menu */}
-                        {/* <li className="tender-menu">
-                          <a href="#" onClick={toggleSubMenu}>
-                            Tender
-                          </a>
-                          {showSubMenu && (
-                            <ul className="sub-menu">
-                              <li>
-                                <Link to="/tender-form-post">Tender Post</Link>
-                              </li>
-                              <li>
-                                <Link to="/tender-list">Tender List</Link>
-                              </li>
-                              <li>
-                                <Link to="/all-tender-form-details/:tenderNo">
-                                  Tender Details
-                                </Link>
-                              </li>
-                            </ul>
-                          )}
-                        </li> */}
-
-                        {/* ed tender */}
                         <li>
                           <a href="/Jobs">Jobs</a>
                         </li>
@@ -197,13 +173,19 @@ function Header() {
                         News
                       </a>
                     </li>
+
                     {/* <li>
                       <a class="main-menu-link" href="/Tender">
                         Tender
                       </a>
                     </li> */}
+
                     <li className="tender-menu">
-                      <a href="#" onClick={toggleSubMenu}>
+                      <a
+                        className="main-menu-link tender-menu"
+                        href="#"
+                        onClick={toggleSubMenu}
+                      >
                         Tender
                       </a>
                       {showSubMenu && (
@@ -331,7 +313,11 @@ function Header() {
                     </li> */}
 
                     <li className="tender-menu">
-                      <a href="#" onClick={toggleSubMenu}>
+                      <a
+                        className="main-menu-link tender-menu"
+                        href="#"
+                        onClick={toggleSubMenu}
+                      >
                         Tender
                       </a>
                       {showSubMenu && (
