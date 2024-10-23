@@ -1,139 +1,86 @@
 import React from "react";
-import logo from "../../../assets/img/St.PeterLogo.png";
-
-function Footer() {
+import logo from "../../../assets/img/new logo.png";
+import classes from "./footer.module.css";
+const Footer = () => {
   return (
     <>
-      <footer class="footer-area">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3">
-              <div class="widget-item">
-                <div class="about-widget">
-                  <a class="footer-logo" href="/">
-                    <img src={logo} alt="Logo" width="215" />
-                  </a>
-                  <ul class="widget-contact-info">
-                    <li class="info-address">
-                      <i class="icofont-location-pin"></i>Gulele Kifle Ketema,
-                      Wereda 01, along the road from Shiromeda to Entoto Park.
+      {/* Start Fotter Area Wrapper */}
+      <footer className="footer-area pt-5">
+        <div className={`${classes.footer_bottom}`}>
+          <div className="container">
+            <div className=" ">
+              <div className="row">
+                <div className="col-md-3 mb-sm-0">
+                  <div className="widget-item ">
+                    <div className="about-widget mb-sm-0">
+                      <a className="footer-logo" href="index.html">
+                        <img src={logo} alt="Logo" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3 ">
+                  <ul className="widget-contact-info">
+                    <li className="info-mail">
+                      <i className="icofont-email"></i>
+                      <a href="mailto://  info@kpsh.gov.et">info@kpsh.gov.et</a>
                     </li>
-                    <li class="info-mail">
-                      <i class="icofont-email"></i>
-                      <a href="mailto://info@kpsh.gov.et">info@kpsh.gov.et</a>
-                    </li>
-                    <li class="info-phone">
-                      <i class="icofont-ui-call"></i>
+                    <li className="info-phone">
+                      <i className="icofont-ui-call"></i>
                       <a href="tel://+251111541746">+251111541746</a>
                     </li>
                   </ul>
                 </div>
+                <div className="col-md-4">
+                  <ul className="widget-contact-info">
+                    <li className="info-address">
+                      <i className="icofont-location-pin"></i> Gulele Sub-City,
+                      Woreda 1 ,Addis Ababa,Ethiopia
+                    </li>
+                  </ul>
+                  <div className="widget-social-icons ">
+                    <a href="#">
+                      <i className="icofont-twitter"></i>
+                    </a>
+                    <a href="#">
+                      <i className="icofont-google-plus"></i>
+                    </a>
+                    <a href="#">
+                      <i className="icofont-pinterest"></i>
+                    </a>
+                    <a href="#">
+                      <i className="icofont-rss"></i>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61555827683411">
+                      <i className="icofont-facebook"></i>
+                    </a>
+                    <a href="#">
+                      <i className="icofont-dribbble"></i>
+                    </a>
+                  </div>
+                </div>
+
+                <div className={`${classes.widget_copyright} text-center`}>
+                  <p className="">
+                    Copyright &copy; 2024 Kidus Petros Hospital
+                    <a target="" href="#" className={`${classes.uparrowhover}`}>
+                      <span class={`${classes.upArrow}`}>
+                        <i className="icofont-arrow-up"></i>
+                      </span>
+                    </a>
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div class="col-sm col-md col-lg col-xl">
-              <div class="widget-item">
-                <h4 class="widget-title line-bottom">Recent Posts</h4>
-                <nav class="widget-posts">
-                  <ul class="posts-item">
-                    <li>
-                      <a href="blog-details.html">
-                        <i class="icon icofont-rounded-double-right"></i>Lorem
-                        Ispum dolor sit amet putilor
-                      </a>
-                    </li>
-                    <li>
-                      <a href="blog-details.html">
-                        <i class="icon icofont-rounded-double-right"></i>Medical
-                        is all about quality.
-                      </a>
-                    </li>
-                    <li>
-                      <a href="blog-details.html">
-                        <i class="icon icofont-rounded-double-right"></i>Is your
-                        website user friendly ?
-                      </a>
-                    </li>
-                    <li>
-                      <a href="blog-details.html">
-                        <i class="icon icofont-rounded-double-right"></i>Ai
-                        offer weekly updates & more.
-                      </a>
-                    </li>
-                    <li>
-                      <a href="blog-details.html">
-                        <i class="icon icofont-rounded-double-right"></i>
-                        Customer should love your web.
-                      </a>
-                    </li>
-                    <li>
-                      <a href="blog-details.html">
-                        <i class="icon icofont-rounded-double-right"></i>Your
-                        site smooth and stunning.
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-            <div class="col-sm col-md offset-md col-lg offset-lg col-xl">
-              <div class="widget-item">
-                <h4 class="widget-title line-bottom">Newsletter</h4>
-                <div class="widget-newsletter">
-                  <p>
-                    Sign up for our mailing list to get latest updates and
-                    offers.
-                  </p>
-                  <form class="newsletter-form input-btn-group">
-                    <input
-                      class="form-control"
-                      type="text"
-                      placeholder="Enter your email"
-                    />
-                    <button class="btn btn-theme" type="button">
-                      <i class="icofont-long-arrow-right"></i>
-                    </button>
-                  </form>
-                </div>
-                <div class="widget-social-icons">
-                  <a href="https://t.me/spsh1955" target="_blank">
-                    <i class="icofont-telegram"></i>
-                  </a>
-                  <a
-                    href="https://www.instagram.com/kiduspetroshospital?igsh=ZjB0bHUzZGUwanRx"
-                    target="_blank"
-                  >
-                    <i class="icofont-instagram"></i>
-                  </a>
-                  <a
-                    href="https://www.facebook.com/profile.php?id=61555827683411"
-                    target="_blank"
-                  >
-                    <i class="icofont-facebook"></i>
-                  </a>
-                  <a
-                    href="https://youtube.com/@stpetershospital3127?si=0eJXeauhP6v0dQ72"
-                    target="_blank"
-                  >
-                    <i class="icofont-youtube"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <div class="container">
-            <div class="row text-center">
-              <div class="col-sm-12">
-                <div class="widget-copyright"></div>
-              </div>
-            </div>
+            {/* <a href="#"></a> */}
           </div>
         </div>
       </footer>
+
+      {/* <!--== End Footer Area Wrapper ==--> */}
     </>
   );
-}
+};
 
 export default Footer;

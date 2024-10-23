@@ -769,7 +769,7 @@ function Home() {
           </div>
         </div>
 
-      <div class="scroll-to-top"><span class="icofont-rounded-up"></span></div>
+    
       </div>
     </>
   );

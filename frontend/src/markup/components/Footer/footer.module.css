@@ -1,0 +1,15 @@
+footer{
+padding-top: 50px;
+background: #d9d9d9;
+padding-bottom: 0 !important;
+
+}
+.upArrow i{
+  font-size: 55px;
+  float: right;
+ 
+}
+
+.uparrowhover:hover{
+    color: #1F867E !important;
+}
