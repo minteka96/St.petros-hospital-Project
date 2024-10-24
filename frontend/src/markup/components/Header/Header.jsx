@@ -1,88 +1,151 @@
 import React, { useState } from "react";
+import "./offcanvasmenu.css"; // Ensure this is included
+import classes from "./header.module.css";
 import logo from "../../../assets/img/St.PeterLogo.png";
-import logo1 from "../../../assets/img/logo1.png";
 import { Link } from "react-router-dom";
-import "./Header.css"; // Assuming you will style here
-function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [showSubMenu, setShowSubMenu] = useState(false);
 
-  const toggleSubMenu = () => {
-    setShowSubMenu(!showSubMenu);
+const Header = () => {
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [activeSubMenu, setActiveSubMenu] = useState(null);
+
+  // Function to toggle the submenu
+  const toggleSubMenu = (menu) => {
+    setActiveSubMenu((prev) => (prev === menu ? null : menu)); // Toggle between menus
   };
 
   const toggleMenu = () => {
-    setMenuOpen((prevState) => !prevState);
+    setMenuOpen(!isMenuOpen);
   };
 
   return (
     <>
-      <header class="header">
-        <div class="header-middle mobile-sticky">
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <div class="header-middle-content">
-                  <div class="header-logo">
-                    <a href="/">
-                      {menuOpen ? (
-                        <img src={logo} alt="Logo" width="215" />
-                      ) : (
-                        <img src={logo1} alt="Logo" width="215" />
-                      )}
-                    </a>
+      <header className="header">
+        {/* Header Top Start */}
+        <div
+          className={`header-top ${classes.header_top_bg} d-none d-lg-block`}
+        >
+          <div className="container">
+            <div className={`${classes.header_top_hover} row row-cols-2`}>
+              <div className="col">
+                <p>
+                  <i className="icofont-google-map"></i> <span>ADDRESS:</span>
+                  Gulele Kifle Ketema, Wereda 01, along the road from Shiromeda
+                  to Entoto Park
+                </p>
+              </div>
+              <div className="col">
+                <ul className="social-links text-end">
+                  <li>
+                    <Link to="https://t.me/spsh1955" target="_blank">
+                      <i class="icofont-telegram"></i>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="https://www.instagram.com/kiduspetroshospital?igsh=ZjB0bHUzZGUwanRx"
+                      target="_blank"
+                    >
+                      <i class="icofont-instagram"></i>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="https://www.facebook.com/profile.php?id=61555827683411"
+                      target="_blank"
+                    >
+                      <i class="icofont-facebook"></i>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="https://youtube.com/@stpetershospital3127?si=0eJXeauhP6v0dQ72"
+                      target="_blank"
+                    >
+                      <i class="icofont-youtube"></i>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Header Top End */}
+
+        {/* Header Middle Start */}
+        <div
+          className={` ${classes.header_middle_bg} header-middle mobile-sticky`}
+        >
+          <div className="container">
+            <div className="row">
+              <div className="col-12">
+                <div className="header-middle-content">
+                  <div className="header-logo">
+                    <Link to="index.html">
+                      <img src={logo} alt="Logo" className={classes.logo} />
+                    </Link>
                   </div>
-                  <ul class="media-wrap d-none d-lg-flex">
+                  {/* =================== */}
+                  <ul className={`  media-wrap d-none d-lg-flex`}>
                     {/* <!-- media-list start --> */}
-                    <li class="media media-list">
-                      <span class="media-icon">
-                        <i class="icofont-clock-time"></i>
+                    <li className="media media-list">
+                      <span className="media-icon">
+                        <i className="icofont-clock-time"></i>
                       </span>
-                      <div class="media-content">
-                        <span class="media-sub-heading">working hours</span>
-                        <span class="media-heading">
-                          MON - FRI: 8:00AM - 5:00PM
+                      <div
+                        className={` ${classes.media_wrapper} media-content`}
+                      >
+                        <span className="media-sub-heading">working hours</span>
+                        <span className="media-heading">
+                          MON - FRI: 9.00 - 21.00
                         </span>
                       </div>
                     </li>
-                    {/* <!-- media-list end --> */}
-
-                    {/* <!-- media-list start --> */}
-                    <li class="media media-list">
-                      <span class="media-icon">
-                        <i class="icofont-ui-call"></i>
+                    {/* <!-- media-list end --> <!-- media-list start -->*/}
+                    <li
+                      className={` ${classes.media_wrapper} media media-list`}
+                    >
+                      <span className="media-icon">
+                        <i className="icofont-ui-call"></i>
                       </span>
-                      <div class="media-content">
-                        <span class="media-sub-heading">hotline 24/7</span>
-                        <a class="media-heading" href="tel:+251111541746">
+                      <div className={`${classes.media_wrapper} media-content`}>
+                        <span className="media-sub-heading">hotline 24/7</span>
+                        <Link className="media-heading" to="tel:+251111541746">
                           +251111541746
-                        </a>
+                        </Link>
                       </div>
                     </li>
-                    {/* <!-- media-list end --> */}
+                    {/* <!-- media-list end -->
 
-                    {/* <!-- media-list start --> */}
-                    <li class="media media-list">
-                      <span class="media-icon">
-                        <i class="icofont-envelope"></i>
+                    <!-- media-list start --> */}
+                    <li className="media media-list">
+                      <span className="media-icon">
+                        <i className="icofont-envelope"></i>
                       </span>
-                      <div class="media-content">
-                        <span class="media-sub-heading">email us</span>
-                        <a class="media-heading" href="mailto:info@kpsh.gov.et">
+                      <div className={`${classes.media_wrapper} media-content`}>
+                        <span className="media-sub-heading">email us</span>
+                        <Link
+                          className="media-heading"
+                          to="mailto: info@kpsh.gov.et"
+                        >
                           info@kpsh.gov.et
-                        </a>
+                        </Link>
                       </div>
                     </li>
                     {/* <!-- media-list end --> */}
                   </ul>
-                  <a
-                    href="#"
-                    class="book-now-btn d-none d-sm-inline-block d-lg-none"
+                  {/* =================== */}
+                  <Link
+                    to="#"
+                    className={` ${classes.book_now_btn} book-now-btn d-none d-sm-inline-block d-lg-none`}
                   >
                     book an appointment
-                  </a>
+                  </Link>
                   <div class="mobile-menu-toggle d-lg-none">
-                    <a onClick={toggleMenu} className="offcanvas-toggle">
+                    <Link
+                      to="#offcanvas-mobile-menu"
+                      class="offcanvas-toggle"
+                      onClick={toggleMenu}
+                    >
                       <svg viewBox="0 0 800 600">
                         <path
                           d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
@@ -95,299 +158,436 @@ function Header() {
                           transform="translate(480, 320) scale(1, -1) translate(-480, -318)"
                         ></path>
                       </svg>
-                    </a>
+                    </Link>
                   </div>
-                  {menuOpen && (
-                    <div
-                      id="offcanvas-mobile-menu"
-                      className="mobile-menu d-lg-none"
-                    >
-                      <ul>
-                        <li>
-                          <a href="/">Home</a>
-                        </li>
-                        <li>
-                          <a href="/about">About</a>
-                        </li>
-                        <li>
-                          <a href="/Services">Services</a>
-                        </li>
-                        <li>
-                          <a href="/News">News</a>
-                        </li>
-                        <li>
-                          <a href="/Tender">Tender</a>
-                        </li>
-                        <li>
-                          <a href="/Jobs">Jobs</a>
-                        </li>
-                        <li>
-                          <a href="/CPD">CPD</a>
-                        </li>
-
-                        <li>
-                          <a href="/contact">Contact</a>
-                        </li>
-                        <li>
-                          <a href="/Admin">Admin</a>
-                        </li>
-                        <li className="ms-5">
-                          <a href="/Login" className="btn">
-                            Login
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* <!-- header-middle end --> */}
-
+        {/* Header Middle End */}
+        {/* ================================= */}
         {/* <!-- header-bottom start --> */}
-        <div class="header-bottom d-none d-lg-block">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="d-flex flex-wrap align-items-center justify-content-between">
-                  <ul class="main-menu">
-                    <li class="active">
-                      <a class="main-menu-link" href="/">
+        <div
+          className={`${classes.header_bottom_bg} header-bottom d-none d-lg-block`}
+        >
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12">
+                <div
+                  className={`${classes.main_menu_wrapper} d-flex flex-wrap align-items-center justify-content-between`}
+                >
+                  <ul className="main-menu">
+                    <li className="">
+                      <Link className="main-menu-link" to="/">
                         Home
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a class="main-menu-link" href="/about">
-                        About
-                      </a>
-                    </li>
-                    <li>
-                      <a class="main-menu-link" href="/Services">
-                        Services
-                      </a>
-                    </li>
-                    <li>
-                      <a class="main-menu-link" href="/News">
+                      <Link className="main-menu-link" to="/News">
                         News
-                      </a>
-                    </li>
-
-                    {/* <li>
-                      <a class="main-menu-link" href="/Tender">
-                        Tender
-                      </a>
-                    </li> */}
-
-                    <li className="tender-menu">
-                      <a
-                        className="main-menu-link tender-menu"
-                        href="#"
-                        onClick={toggleSubMenu}
-                      >
-                        Tender
-                      </a>
-                      {showSubMenu && (
-                        <ul className="sub-menu">
-                          <li>
-                            <Link to="/tender-form-post">Tender Post</Link>
-                          </li>
-                          <li>
-                            <Link to="/tender-list">Tender List</Link>
-                          </li>
-                          <li>
-                            <Link to="/all-tender-form-details/:tenderNo">
-                              Tender Details
-                            </Link>
-                          </li>
-                        </ul>
-                      )}
+                      </Link>
                     </li>
 
                     <li>
-                      <a class="main-menu-link" href="/Jobs">
-                        Jobs
-                      </a>
-                    </li>
-                    <li>
-                      <a class="main-menu-link" href="/CPD">
-                        CPD
-                      </a>
-                    </li>
-
-                    <li>
-                      <a class="main-menu-link" href="/contact">
-                        Contact
-                      </a>
-                    </li>
-                    <li>
-                      <a class="main-menu-link" href="/Admin">
-                        Admin
-                      </a>
-                    </li>
-                    <li>
-                      <a class="main-menu-link" href="/Login">
-                        Login
-                      </a>
-                    </li>
-                  </ul>
-                  <a href="#" class="book-now-btn">
-                    book an appointment
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* <!-- header-bottom end --> */}
-
-        {/* <!-- header-bottom start --> */}
-        <div class="header-bottom sticky-header d-none d-lg-block">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="d-flex flex-wrap align-items-center justify-content-between">
-                  <ul class="main-menu">
-                    <li class="active">
-                      <a class="main-menu-link" href="/">
-                        Home
-                      </a>
-                    </li>
-                    <li>
-                      <a class="main-menu-link" href="/about">
-                        About
-                      </a>
-                    </li>
-                    <li>
-                      <a class="main-menu-link" href="/">
+                      <Link className="main-menu-link" to="/services">
                         Services
-                      </a>
-                      <ul class="sub-menu">
+                      </Link>
+                      <ul className="sub-menu">
                         <li>
-                          <a class="sub-menu-link" href="/">
+                          <Link className="sub-menu-link" to="/service-detail">
                             Services
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a class="sub-menu-link" href="/">
+                          <Link className="sub-menu-link" to="/service-detail">
                             Service Details
-                          </a>
+                          </Link>
                         </li>
                       </ul>
-                    </li>
-                    <li>
-                      <a class="main-menu-link" href="#">
-                        News
-                      </a>
-                      <ul class="sub-menu">
-                        <li>
-                          <a class="sub-menu-link" href="#">
-                            News Headline
-                          </a>
-                        </li>
-                        <li>
-                          <a class="sub-menu-link" href="#">
-                            news Details
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    {/* 
-                    <li>
-                      <a class="main-menu-link" href="#">
-                        Tender
-                      </a>
-                      <ul class="sub-menu">
-                        <li>
-                          <a class="sub-menu-link" href="#">
-                            Tender Headline
-                          </a>
-                        </li>
-                        <li>
-                          <a class="sub-menu-link" href="#">
-                            Tender Details
-                          </a>
-                        </li>
-                      </ul>
-                    </li> */}
-
-                    <li className="tender-menu">
-                      <a
-                        className="main-menu-link tender-menu"
-                        href="#"
-                        onClick={toggleSubMenu}
-                      >
-                        Tender
-                      </a>
-                      {showSubMenu && (
-                        <ul className="sub-menu">
-                          <li>
-                            <Link to="/tender-form-post">Tender Post</Link>
-                          </li>
-                          <li>
-                            <Link to="/tender-list">Tender List</Link>
-                          </li>
-                          <li>
-                            <Link to="/all-tender-form-details/:tenderNo">
-                              Tender Details
-                            </Link>
-                          </li>
-                        </ul>
-                      )}
                     </li>
 
                     <li>
-                      <a class="main-menu-link" href="#">
-                        Jobs
-                      </a>
-                      <ul class="sub-menu">
-                        <li>
-                          <a class="sub-menu-link" href="#">
-                            Jobs list
-                          </a>
-                        </li>
-                        <li>
-                          <a class="sub-menu-link" href="#">
-                            Jobs Detail
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a class="main-menu-link" href="about.html">
+                      <Link className="main-menu-link" to="/cpd">
                         CPD
-                      </a>
+                      </Link>
+                      <ul className="sub-menu">
+                        <li>
+                          <Link className="sub-menu-link" to="/about-cpd">
+                            About CPD
+                          </Link>
+                        </li>
+                      </ul>
                     </li>
 
                     <li>
-                      <a class="main-menu-link" href="contact.html">
-                        Contact
-                      </a>
+                      <Link className="main-menu-link" to="/about">
+                        About
+                      </Link>
                     </li>
                     <li>
-                      <a class="main-menu-link" href="#">
-                        Admin
-                      </a>
+                      <Link className="main-menu-link" to="/jobs">
+                        Jobs
+                      </Link>
                     </li>
                     <li>
-                      <a class="main-menu-link" href="#">
-                        Login
-                      </a>
+                      <Link className="main-menu-link" to="/tender">
+                        Tender
+                      </Link>
+                      <ul className="sub-menu">
+                        <li>
+                          <Link to="/tender-form-post">Tender Post</Link>
+                        </li>
+                        <li>
+                          <Link to="/tender-list">Tender List</Link>
+                        </li>
+                        <li>
+                          <Link to="/all-tender-form-details/:tenderNo">
+                            Tender Details
+                          </Link>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <Link className="main-menu-link" to="/contact">
+                        Contact Us
+                      </Link>
                     </li>
                   </ul>
-                  <a href="#" class="book-now-btn">
+                  <Link
+                    to="#"
+                    className={` ${classes.book_now_btn} book-now-btn`}
+                  >
                     book an appointment
-                  </a>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* <!-- header-bottom end -->
+        {/* =================================== */}
+
+        {/* ====================================================== */}
+        {/* <!-- header-bottom start --> */}
+        <div className="header-bottom sticky-header d-none d-lg-block">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12">
+                <div
+                  className={`${classes.main_menu_wrapper} d-flex flex-wrap align-items-center justify-content-between`}
+                >
+                  <ul className="main-menu">
+                    <li className="active">
+                      <Link className="main-menu-link" to="/">
+                        Home
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="main-menu-link" to="/News">
+                        News
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="main-menu-link" to="/services">
+                        Services
+                      </Link>
+                      <ul className="sub-menu">
+                        <li>
+                          <Link className="sub-menu-link" to="/services">
+                            Services
+                          </Link>
+                        </li>
+                        <li>
+                          <Link className="sub-menu-link" to="/service-detail">
+                            Service Details
+                          </Link>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <Link className="main-menu-link" to="/cpd">
+                        CPD
+                      </Link>
+                      <ul className="sub-menu">
+                        <li>
+                          <Link className="sub-menu-link" to="/about-cpd">
+                            ABOUT CPD
+                          </Link>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <Link className="main-menu-link" to="/about">
+                        About
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="main-menu-link" to="/jobs">
+                        Jobs
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="main-menu-link" to="about.html">
+                        Tender
+                      </Link>
+                      <ul className="sub-menu">
+                        <li>
+                          <Link to="/tender-form-post">Tender Post</Link>
+                        </li>
+                        <li>
+                          <Link to="/tender-list">Tender List</Link>
+                        </li>
+                        <li>
+                          <Link to="/all-tender-form-details/:tenderNo">
+                            Tender Details
+                          </Link>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <Link className="main-menu-link" to="/contact">
+                        Contact
+                      </Link>
+                    </li>
+                  </ul>
+                  <Link
+                    to="#"
+                    className={` ${classes.book_now_btn} book-now-btn`}
+                  >
+                    book an appointment
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
         {/* <!-- header-bottom end --> */}
+        {/* ============================================= */}
+        {/* Offcanvas Menu Start */}
+        <div>
+          <div
+            className={`offcanvas-overlay ${isMenuOpen ? "active" : ""}`}
+            onClick={toggleMenu}
+          ></div>
+
+          <div
+            id="offcanvas-mobile-menu"
+            className={`offcanvas offcanvas-mobile-menu ${
+              isMenuOpen ? "active" : ""
+            }`}
+          >
+            <div className="inner">
+              <div className="border-bottom mb-3 pb-3 text-end">
+                <button className="offcanvas-close" onClick={toggleMenu}>
+                  ×
+                </button>
+              </div>
+              <div className="offcanvas-head mb-3">
+                <div className="header-top-offcanvas">
+                  <p>
+                    <i className="icofont-google-map"></i> <span>ADDRESS:</span>
+                    Gulele Kifle Ketema, Wereda 01, along the road from
+                    Shiromeda to Entoto Park
+                  </p>
+                </div>
+              </div>
+              <nav className="offcanvas-menu">
+                <ul>
+                  <li>
+                    <Link to="/">
+                      <span className="menu-text">Home</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="main-menu-link" to="/News">
+                      News
+                    </Link>
+                  </li>
+                  <li
+                    className={`sub-menu-list ${
+                      activeSubMenu === "services" ? "active" : ""
+                    }`}
+                  >
+                    <span
+                      className="menu-expand"
+                      onClick={() => toggleSubMenu("services")}
+                    >
+                      {/* Change icon based on state */}
+                    </span>
+                    <Link to="/services">
+                      <span className="menu-text">Services</span>
+                    </Link>
+                    <ul
+                      className="offcanvas-submenu"
+                      style={{
+                        display:
+                          activeSubMenu === "services" ? "block" : "none",
+                      }}
+                    >
+                      <li>
+                        <Link to="/services">Service</Link>
+                      </li>
+                      <li>
+                        <Link to="/service-detail">Service Details</Link>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li
+                    className={`sub-menu-list ${
+                      activeSubMenu === "cpd" ? "active" : ""
+                    }`}
+                  >
+                    <span
+                      className="menu-expand"
+                      onClick={() => toggleSubMenu("cpd")}
+                    >
+                      {/* Change icon based on state */}
+                    </span>
+                    <Link to="/cpd">
+                      <span className="menu-text">CPD</span>
+                    </Link>
+                    <ul
+                      className="offcanvas-submenu"
+                      style={{
+                        display: activeSubMenu === "cpd" ? "block" : "none",
+                      }}
+                    >
+                      <li>
+                        <Link to="/about-cpd">ABOUT CPD</Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <Link to="/about">About</Link>
+                  </li>
+                  <li>
+                    <Link className="main-menu-link" to="/jobs">
+                      Jobs
+                    </Link>
+                  </li>
+                  <li
+                    className={`sub-menu-list ${
+                      activeSubMenu === "tender" ? "active" : ""
+                    }`}
+                  >
+                    <span
+                      className="menu-expand"
+                      onClick={() => toggleSubMenu("tender")}
+                    >
+                      {/* Change icon based on state */}
+                    </span>
+                    <Link className="main-menu-link" to="/tender">
+                      Tender
+                    </Link>
+                    <ul
+                      className="offcanvas-submenu"
+                      style={{
+                        display: activeSubMenu === "tender" ? "block" : "none",
+                      }}
+                    >
+                      <li>
+                        <Link to="/tender-form-post">Tender Post</Link>
+                      </li>
+                      <li>
+                        <Link to="/tender-list">Tender List</Link>
+                      </li>
+                      <li>
+                        <Link to="/all-tender-form-details/:tenderNo">
+                          Tender Details
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <Link to="/contact">Contact Us</Link>
+                  </li>
+                </ul>
+              </nav>
+              <div className="offcanvas-social my-4">
+                <ul>
+                  <li>
+                    <a href="https://t.me/spsh1955" target="_blank">
+                      <i class="icofont-telegram"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.instagram.com/kiduspetroshospital?igsh=ZjB0bHUzZGUwanRx"
+                      target="_blank"
+                    >
+                      <i class="icofont-instagram"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.facebook.com/profile.php?id=61555827683411"
+                      target="_blank"
+                    >
+                      <i class="icofont-facebook"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://youtube.com/@stpetershospital3127?si=0eJXeauhP6v0dQ72"
+                      target="_blank"
+                    >
+                      <i class="icofont-youtube"></i>
+                    </a>
+                  </li>
+                
+                </ul>
+              </div>
+              <ul className="media-wrap">
+                <li className="media media-list">
+                  <span className="media-icon">
+                    <i className="icofont-clock-time"></i>
+                  </span>
+                  <div className="media-content">
+                    <span className="media-sub-heading">working hours</span>
+                    <span className="media-heading">
+                      MON - FRI: 9.00 - 21.00
+                    </span>
+                  </div>
+                </li>
+                <li className="media media-list">
+                  <span className="media-icon">
+                    <i className="icofont-ui-call"></i>
+                  </span>
+                  <div className="media-content">
+                    <span className="media-sub-heading">hotline 24/7</span>
+                    <Link className="media-heading" to="tel:+251111541746">
+                      +251111541746
+                    </Link>
+                  </div>
+                </li>
+                <li className="media media-list">
+                  <span className="media-icon">
+                    <i className="icofont-envelope"></i>
+                  </span>
+                  <div className="media-content">
+                    <span className="media-sub-heading">email us</span>
+                    <Link
+                      className="media-heading"
+                      to="mailto:info@kpsh.gov.et"
+                    >
+                      info@kpsh.gov.et
+                    </Link>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {/* Offcanvas Menu End */}
       </header>
     </>
   );
-}
+};
 
 export default Header;
