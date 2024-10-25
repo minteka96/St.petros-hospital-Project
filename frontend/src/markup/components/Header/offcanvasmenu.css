@@ -213,10 +213,11 @@
   display:block;
 }
  .media-wrap li span i,.media-wrap li span,.media-content .media-heading{
-    color:#1F867E !important;
+    color:#1F867E ;
   }
   .media-wrap li span i:hover,.media-wrap li span:hover,.media-content .media-heading:hover{
-    color:#F26524 !important;
+    color:#0c4c47 !important;
+    font-weight: bolder;
   }
 .offcanvas-social ul li a {
   background-color:#F26524 !important;;

@@ -5,6 +5,7 @@ import Footer from "./markup/components/Footer/Footer";
 import Home from "./markup/pages/Home/Home";
 import Services from "./markup/pages/servicepage/Services";
 import About from "./markup/pages/AboutPage/About";
+import Contact from "./markup/pages/Contact/Contact.jsx";
 
 import Cpd from "./markup/pages/CPD/cpd";
 import "./style/css/style.css";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact/>} />
 
         <Route path="/News" element={<News />} />
         <Route path="/news-details" element={<NewsDetails />} />

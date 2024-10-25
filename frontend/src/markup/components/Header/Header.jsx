@@ -25,15 +25,74 @@ const Header = () => {
           className={`header-top ${classes.header_top_bg} d-none d-lg-block`}
         >
           <div className="container">
-            <div className={`${classes.header_top_hover} row row-cols-2`}>
-              <div className="col">
-                <p>
-                  <i className="icofont-google-map"></i> <span>ADDRESS:</span>
-                  Gulele Kifle Ketema, Wereda 01, along the road from Shiromeda
-                  to Entoto Park
-                </p>
+            <div className={`${classes.header_top_hover} row row-cols-2 `}>
+              <div className="col-3 d-flex align-items-center">
+                <ul className={`media-wrap d-none d-lg-flex`}>
+                  <li className="media media-list d-flex">
+                    <span className="media-icon">
+                      <i
+                        className="icofont-google-map"
+                        style={{ fontSize: "30px" }}
+                      ></i>
+                    </span>
+                    <div className="d-flex ">
+                      <span className="media-sub-heading mr-3">
+                        <strong style={{ color: "white" }}>ADDRESS</strong>
+                      </span>
+                      <span
+                        className="media-heading"
+                        style={{ color: "white" }}
+                      >
+                        WOREDA 01,GULELE KIFLE KETEMA, SHIROMEDA TO ENTOTO PARK.
+                      </span>
+                    </div>
+                  </li>
+                </ul>
               </div>
-              <div className="col">
+              <div className="col-7 d-flex align-items-center">
+                <ul className={`media-wrap d-none d-lg-flex`}>
+                  <li className="media media-list d-flex">
+                    <span className="media-icon">
+                      <i className="icofont-clock-time"></i>
+                    </span>
+                    <div className={` ${classes.media_wrapper} media-content`}>
+                      <span className="media-sub-heading">working hours</span>
+                      <span className="media-heading">
+                        MON - FRI: 8:00AM - 5:00PM
+                      </span>
+                    </div>
+                  </li>
+                  <li
+                    className={`${classes.media_wrapper} media media-list d-flex`}
+                  >
+                    <span className="media-icon">
+                      <i className="icofont-ui-call"></i>
+                    </span>
+                    <div className={`${classes.media_wrapper} media-content`}>
+                      <span className="media-sub-heading">hotline 24/7</span>
+                      <span className="media-heading" to="tel:+251111541746">
+                        +251111541746
+                      </span>
+                    </div>
+                  </li>
+                  <li className="media media-list d-flex">
+                    <span className="media-icon">
+                      <i className="icofont-envelope"></i>
+                    </span>
+                    <div className={`${classes.media_wrapper} media-content`}>
+                      <span className="media-sub-heading">email us</span>
+                      <Link
+                        className="media-heading"
+                        to="mailto: info@kpsh.gov.et"
+                      >
+                        info@kpsh.gov.et
+                      </Link>
+                    </div>
+                  </li>
+                  {/* <!-- media-list end --> */}
+                </ul>
+              </div>
+              <div className="col-2 d-flex align-items-center">
                 <ul className="social-links text-end">
                   <li>
                     <Link to="https://t.me/spsh1955" target="_blank">
@@ -73,66 +132,14 @@ const Header = () => {
 
         {/* Header Middle Start */}
         <div
-          className={` ${classes.header_middle_bg} header-middle mobile-sticky`}
+          className={` ${classes.header_middle_bg} header-middle mobile-sticky d-lg-none`}
         >
           <div className="container">
             <div className="row">
               <div className="col-12">
                 <div className="header-middle-content">
-                  <div className="header-logo">
-                    <Link to="index.html">
-                      <img src={logo} alt="Logo" className={classes.logo} />
-                    </Link>
-                  </div>
                   {/* =================== */}
-                  <ul className={`  media-wrap d-none d-lg-flex`}>
-                    {/* <!-- media-list start --> */}
-                    <li className="media media-list">
-                      <span className="media-icon">
-                        <i className="icofont-clock-time"></i>
-                      </span>
-                      <div
-                        className={` ${classes.media_wrapper} media-content`}
-                      >
-                        <span className="media-sub-heading">working hours</span>
-                        <span className="media-heading">
-                          MON - FRI: 9.00 - 21.00
-                        </span>
-                      </div>
-                    </li>
-                    {/* <!-- media-list end --> <!-- media-list start -->*/}
-                    <li
-                      className={` ${classes.media_wrapper} media media-list`}
-                    >
-                      <span className="media-icon">
-                        <i className="icofont-ui-call"></i>
-                      </span>
-                      <div className={`${classes.media_wrapper} media-content`}>
-                        <span className="media-sub-heading">hotline 24/7</span>
-                        <Link className="media-heading" to="tel:+251111541746">
-                          +251111541746
-                        </Link>
-                      </div>
-                    </li>
-                    {/* <!-- media-list end -->
 
-                    <!-- media-list start --> */}
-                    <li className="media media-list">
-                      <span className="media-icon">
-                        <i className="icofont-envelope"></i>
-                      </span>
-                      <div className={`${classes.media_wrapper} media-content`}>
-                        <span className="media-sub-heading">email us</span>
-                        <Link
-                          className="media-heading"
-                          to="mailto: info@kpsh.gov.et"
-                        >
-                          info@kpsh.gov.et
-                        </Link>
-                      </div>
-                    </li>
-                    {/* <!-- media-list end --> */}
-                  </ul>
                   {/* =================== */}
                   <Link
                     to="#"
@@ -173,11 +180,16 @@ const Header = () => {
         >
           <div className="container">
             <div className="row">
-              <div className="col-lg-12">
+              <div className="col-lg-10">
                 <div
                   className={`${classes.main_menu_wrapper} d-flex flex-wrap align-items-center justify-content-between`}
                 >
                   <ul className="main-menu">
+                    <div className="header-logo mr-5">
+                      <Link to="/">
+                        <img src={logo} alt="Logo" className={classes.logo} />
+                      </Link>
+                    </div>
                     <li className="">
                       <Link className="main-menu-link" to="/">
                         Home
@@ -255,13 +267,13 @@ const Header = () => {
                       </Link>
                     </li>
                   </ul>
-                  <Link
-                    to="#"
-                    className={` ${classes.book_now_btn} book-now-btn`}
-                  >
-                    book an appointment
-                  </Link>
                 </div>
+              </div>
+              <div className={`${classes.moto_box} col-lg-2 `}>
+                <strong className={`${classes.moto_text}`}>
+                  መኖራችን ለእርስዎ ነዉ!
+                  <br /> Our Existence is For You
+                </strong>
               </div>
             </div>
           </div>
@@ -279,7 +291,12 @@ const Header = () => {
                   className={`${classes.main_menu_wrapper} d-flex flex-wrap align-items-center justify-content-between`}
                 >
                   <ul className="main-menu">
-                    <li className="active">
+                    <div className="header-logo mr-5">
+                      <Link to="index.html">
+                        <img src={logo} alt="Logo" className={classes.logo} />
+                      </Link>
+                    </div>
+                    <li className="active ml-5">
                       <Link className="main-menu-link" to="/">
                         Home
                       </Link>
@@ -540,7 +557,6 @@ const Header = () => {
                       <i class="icofont-youtube"></i>
                     </a>
                   </li>
-                
                 </ul>
               </div>
               <ul className="media-wrap">

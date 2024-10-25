@@ -20,7 +20,7 @@
 
 .form-header h1 {
   font-size: 24px;
-  color: #618D85;
+  color: #1f867e;
 }
 
 /* Form section titles */
@@ -30,13 +30,13 @@
 
 .form-section h2 {
   font-size: 18px;
-  color: #618D85; /* Set section title color */
+  color: #f26524; /* Set section title color */
   border-bottom: 2px solid #ddd;
   padding-bottom: 10px;
   margin-bottom: 20px;
 }
-h2{
-  color: #618D85;
+h2 {
+  color: #F26525;
 }
 
 /* Responsive form row styling */
@@ -74,7 +74,7 @@ h2{
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border: 2px solid #007BFF;
+  border: 2px solid #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
 }
 
@@ -108,7 +108,7 @@ h2{
 
 /* Submit button styling */
 .submit-button {
-  background-color: #1B8D85; /* Updated button color */
+  background-color: #1b8d85; /* Updated button color */
   color: white;
   border: none;
   border-radius: 4px;
@@ -125,7 +125,7 @@ h2{
 }
 
 .submit-button:hover {
-  background-color: #17A69E; /* Darker hover color */
+  background-color: #17a69e; /* Darker hover color */
   transform: translateY(-2px);
 }
 
