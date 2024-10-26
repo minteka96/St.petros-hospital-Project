@@ -1,0 +1,82 @@
+/* Main Content */
+.mainContent {
+  padding: 20px;
+}
+
+/* Page Title Area */
+.pageTitleArea {
+  background-color: #e3f2fd;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Department Area */
+.departmentArea {
+  display: flex;
+}
+
+/* Department Gallery */
+.departmentGallery {
+  margin: 20px 0;
+  width: 80%;
+  max-width: 600px;
+  height: 300px;
+  margin: auto;
+}
+
+.galleryTitle {
+  margin-bottom: 10px;
+    color: #0288d1;
+}
+
+.galleryImage {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Toxicology Services */
+.toxicologyServices {
+  margin: 20px 0;
+}
+
+.servicesTitle {
+  margin-bottom: 10px;
+  color: #ec6212;
+}
+
+.servicesList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.servicesItem {
+  margin: 5px 0;
+}
+
+/* Head Of Department */
+.headOfDepartment {
+  margin: 20px 0;
+}
+
+.departmentHeadTitle {
+  margin-bottom: 5px;
+  color:  #ec6212;
+}
+
+.departmentHeadName {
+  margin: 5px 0;
+}
+
+/* Swiper Navigation Buttons */
+.swiper-button-prev, .swiper-button-next {
+  color: #1976d2;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .departmentArea {
+    flex-direction: column;
+  }
+}
