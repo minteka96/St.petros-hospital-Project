@@ -102,137 +102,278 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="row service-style2">
-                    <div class="col-sm-6 col-md-6 col-lg-3 service-item">
-                      <div class="icon">
-                        <i class="icofont-brain"></i>
-                      </div>
-                      <div class="content">
-                        <h5 class="service-name">Psychiatry</h5>
-                        <p>
-                          Diagnose and treat mental disorders using
-                          psychotherapy and medication for emotional and
-                          behavioral health.
-                        </p>
-                        <a class="btn-link" href="service-details.html">
-                          More <i class="icofont-simple-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-3 service-item">
-                      <div class="icon">
-                        <i class="icofont-eye"></i>
-                      </div>
-                      <div class="content">
-                        <h5 class="service-name">Opthalmology</h5>
-                        <p>
-                          SDiagnose and treat eye disorders, offering corrective
-                          lenses and surgical interventions for vision
-                          improvement.
-                        </p>
-                        <a class="btn-link" href="service-details.html">
-                          More <i class="icofont-simple-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-3 service-item">
-                      <div class="icon">
-                        <i class="icofont-heart-beat"></i>
-                      </div>
-                      <div class="content">
-                        <h5 class="service-name">Cardiology</h5>
-                        <p>
-                          Provide care for cardiovascular diseases, using
+             <div className="row">
+            <div className="col-lg-12">
+              <div className="row service-style2">
+                
+                {/* ART Service */}
+                <div className="col-sm-6 col-md-6 col-lg-3 service-item">
+                  <div className="icon">
+                    <i className="icofont-heart-beat"></i>
+                  </div>
+                  <div className="content">
+                    <h5 className="service-name">ART</h5>
+                    <p>Comprehensive Antiretroviral Therapy for managing and treating HIV/AIDS with ongoing medical support.</p>
+                    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+                  </div>
+                </div>
+
+                {/* Cardiology Service */}
+                <div className="col-sm-6 col-md-6 col-lg-3 service-item">
+                  <div className="icon">
+                    <i className="icofont-heart-beat"></i>
+                  </div>
+                  <div className="content">
+                    <h5 className="service-name">Cardiology</h5>
+                    <p> Provide care for cardiovascular diseases, using
                           medications to modify heart function and manage
-                          symptoms.
-                        </p>
-                        <a class="btn-link" href="service-details.html">
-                          More <i class="icofont-simple-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-3 service-item">
-                      <div class="icon">
-                        <i class="icofont-microscope-alt"></i>
-                      </div>
-                      <div class="content">
-                        <h5 class="service-name">Immumnology</h5>
-                        <p>
-                          Treat immune system disorders, including allergies and
-                          autoimmune diseases, regulating or enhancing immune
-                          responses.
-                        </p>
-                        <a class="btn-link" href="service-details.html">
-                          More <i class="icofont-simple-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-3 service-item">
-                      <div class="icon">
-                        <i class="icofont-blood-drop"></i>
-                      </div>
-                      <div class="content">
-                        <h5 class="service-name">Hematology</h5>
-                        <p>
-                          Diagnose and treat blood disorders, including anemia,
-                          leukemia, and clotting, with transfusions and
-                          transplants.
-                        </p>
-                        <a class="btn-link" href="service-details.html">
-                          More <i class="icofont-simple-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-3 service-item">
-                      <div class="icon">
-                        <i class="icofont-laboratory"></i>
-                      </div>
-                      <div class="content">
-                        <h5 class="service-name">Laboratory</h5>
-                        <p>
-                          Perform diagnostic tests on clinical specimens to
-                          guide treatment decisions and assess patient health
-                          conditions.
-                        </p>
-                        <a class="btn-link" href="service-details.html">
-                          More <i class="icofont-simple-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-3 service-item">
-                      <div class="icon">
-                        <i class="icofont-pills"></i>
-                      </div>
-                      <div class="content">
-                        <h5 class="service-name">Oncology</h5>
-                        <p>
-                          Specializes in treating cancer using chemotherapy,
-                          radiation, and targeted therapies to manage different
-                          cancer types.
-                        </p>
-                        <a class="btn-link" href="service-details.html">
-                          More <i class="icofont-simple-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-3 service-item">
-                      <div class="icon">
-                        <i class="icofont-tooth"></i>
-                      </div>
-                      <div class="content">
-                        <h5 class="service-name">Dental</h5>
-                        <p>
-                          Provide dental care, including diagnosis, prevention,
+                          symptoms.</p>
+                    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+                  </div>
+                </div>
+
+            <div className="col-sm-6 col-md-6 col-lg-3 service-item">
+  <div className="icon">
+    <i className="icofont-tooth"></i>
+  </div>
+  <div className="content">
+    <h5 className="service-name">Dental</h5>
+    <p>Provide dental care, including diagnosis, prevention,
                           and treatment of oral diseases and hygiene
-                          restoration.
-                        </p>
-                        <a class="btn-link" href="service-details.html">
-                          More <i class="icofont-simple-right"></i>
-                        </a>
-                      </div>
-                    </div>
+                          restoration.</p>
+    <a className="btn-link" href="servicedetail">
+      More <i className="icofont-simple-right"></i>
+    </a>
+  </div>
+</div>
+    
+             {/* Dermatology Service */}
+<div className="col-sm-6 col-md-6 col-lg-3 service-item">
+  <div className="icon">
+    <i className="icofont-ui-skin"></i> {/* Updated icon */}
+  </div>
+  <div className="content">
+    <h5 className="service-name">Dermatology</h5>
+    <p>Comprehensive skin care, including treatment for skin diseases, cosmetic dermatology, and skin cancer screening.</p>
+    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+  </div>
+</div>
+
+
+                {/* DR-TB Treatment Service */}
+                <div className="col-sm-6 col-md-6 col-lg-3 service-item">
+                  <div className="icon">
+                    <i className="icofont-lungs"></i>
+                  </div>
+                  <div className="content">
+                    <h5 className="service-name">DR-TB Treatment</h5>
+                    <p>Specialized treatment for drug-resistant tuberculosis with advanced medical protocols.</p>
+                    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+                  </div>
+                </div>
+
+                {/* Emergency Service */}
+                <div className="col-sm-6 col-md-6 col-lg-3 service-item">
+                  <div className="icon">
+                    <i className="icofont-ambulance-cross"></i>
+                  </div>
+                  <div className="content">
+                    <h5 className="service-name">Emergency</h5>
+                    <p>24/7 emergency services providing immediate and life-saving care for all critical conditions.</p>
+                    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+                  </div>
+                </div>
+
+                {/* ENT Service */}
+                <div className="col-sm-6 col-md-6 col-lg-3 service-item">
+                  <div className="icon">
+                    <i className="icofont-doctor"></i>
+                  </div>
+                  <div className="content">
+                    <h5 className="service-name">ENT</h5>
+                    <p>Comprehensive Ear, Nose, and Throat care for all ages, providing expert diagnosis and treatment.</p>
+                    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+                  </div>
+                </div>
+               {/* Clinical Laboratory Service */}
+<div className="col-sm-6 col-md-6 col-lg-3 service-item">
+  <div className="icon">
+    <i className="icofont-test-tube"></i> {/* Updated icon */}
+  </div>
+  <div className="content">
+    <h5 className="service-name">General Laboratory</h5>
+    <p>Perform diagnostic tests on clinical specimens to
+                          guide treatment decisions and assess patient health
+                          conditions.</p>
+    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+  </div>
+</div>
+
+
+
+                {/* ICU Service */}
+                <div className="col-sm-6 col-md-6 col-lg-3 service-item">
+                  <div className="icon">
+                    <i className="icofont-heart-beat-alt"></i>
+                  </div>
+                  <div className="content">
+                    <h5 className="service-name">ICU</h5>
+                    <p>Intensive care services with 24/7 monitoring and advanced medical equipment for critical patients.</p>
+                    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+                  </div>
+                </div>
+
+                {/* Imaging Service */}
+              {/* Imaging Service */}
+<div className="col-sm-6 col-md-6 col-lg-3 service-item">
+  <div className="icon">
+    <i className="icofont-radiology"></i> {/* Updated icon */}
+  </div>
+  <div className="content">
+    <h5 className="service-name">Imaging</h5>
+    <p>State-of-the-art imaging services, including MRI, CT scans, and X-rays for precise diagnosis.</p>
+    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+  </div>
+</div>
+
+                {/* MCH Service */}
+                <div className="col-sm-6 col-md-6 col-lg-3 service-item">
+                  <div className="icon">
+                    <i className="icofont-baby"></i>
+                  </div>
+                  <div className="content">
+                    <h5 className="service-name">MCH</h5>
+                    <p>Maternal and Child Health services focused on ensuring the well-being of mothers and children.</p>
+                    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+                  </div>
+                </div>
+
+                {/* Medical Service */}
+                <div className="col-sm-6 col-md-6 col-lg-3 service-item">
+                  <div className="icon">
+                    <i className="icofont-stethoscope"></i>
+                  </div>
+                  <div className="content">
+                    <h5 className="service-name">Medical</h5>
+                    <p>Comprehensive medical care, providing consultation, diagnosis, and treatment for a wide range of illnesses and health conditions.</p>
+                    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+                  </div>
+                </div>
+
+                {/* Ophthalmology Service */}
+                <div className="col-sm-6 col-md-6 col-lg-3 service-item">
+                  <div className="icon">
+                    <i className="icofont-eye"></i>
+                  </div>
+                  <div className="content">
+                    <h5 className="service-name">Ophthalmology</h5>
+                    <p>   Diagnose and treat eye disorders, offering corrective
+                          lenses and surgical interventions for vision
+                          improvement.</p>
+                    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+                  </div>
+                </div>
+
+                {/* Orthopedics Service */}
+                <div className="col-sm-6 col-md-6 col-lg-3 service-item">
+                  <div className="icon">
+                    <i className="icofont-bone"></i>
+                  </div>
+                  <div className="content">
+                    <h5 className="service-name">Orthopedics</h5>
+                    <p>Specialized care for musculoskeletal conditions and injuries.</p>
+                    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+                  </div>
+                </div>
+
+                {/* Pathology Service */}
+                <div className="col-sm-6 col-md-6 col-lg-3 service-item">
+                  <div className="icon">
+                    <i className="icofont-dna-alt-1"></i>
+                  </div>
+                  <div className="content">
+                    <h5 className="service-name">Pathology</h5>
+                    <p>Accurate diagnosis of diseases through examination of tissues, cells, and bodily fluids.</p>
+                    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+                  </div>
+                </div>
+                {/* Pediatrics Service */}
+<div className="col-sm-6 col-md-6 col-lg-3 service-item">
+  <div className="icon">
+    <i className="icofont-child"></i> {/* Icon for Pediatrics */}
+  </div>
+  <div className="content">
+    <h5 className="service-name">Pediatrics</h5>
+    <p>Expert care for infants, children, and adolescents, including routine check-ups, immunizations, and treatment of childhood illnesses.</p>
+    <a className="btn-link" href="servicedetail">
+      More <i className="icofont-simple-right"></i>
+    </a>
+  </div>
+</div>
+
+
+                {/* Pharmacy Service */}
+                <div className="col-sm-6 col-md-6 col-lg-3 service-item">
+                  <div className="icon">
+                    <i className="icofont-prescription"></i>
+                  </div>
+                  <div className="content">
+                    <h5 className="service-name">Pharmacy</h5>
+                    <p>Comprehensive pharmacy services, ensuring the provision of medications, consultations, and safe prescription management.</p>
+                    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+                  </div>
+                </div>
+
+                {/* Psychiatry Service */}
+                <div className="col-sm-6 col-md-6 col-lg-3 service-item">
+                  <div className="icon">
+                    <i className="icofont-brain-alt"></i>
+                  </div>
+                  <div className="content">
+                    <h5 className="service-name">Psychiatry</h5>
+                    <p>  Diagnose and treat mental disorders using
+                          psychotherapy and medication for emotional and
+                          behavioral health.</p>
+                    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+                  </div>
+                </div>
+
+               {/* Surgery Service */}
+<div className="col-sm-6 col-md-6 col-lg-3 service-item">
+  <div className="icon">
+    <i className="icofont-surgeon"></i> {/* Updated icon */}
+  </div>
+  <div className="content">
+    <h5 className="service-name">Surgery</h5>
+    <p>State-of-the-art surgical services for various procedures, from minor surgeries to complex operations.</p>
+    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+  </div>
+</div>
+{/* Toxicology Service */}
+<div className="col-sm-6 col-md-6 col-lg-3 service-item">
+  <div className="icon">
+    <i className="icofont-laboratory"></i> {/* Updated icon */}
+  </div>
+  <div className="content">
+    <h5 className="service-name">Toxicology</h5>
+    <p>Expert testing and diagnosis of poisoning cases and toxic substance exposures.</p>
+    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+  </div>
+</div>
+
+
+               {/* Urology Service */}
+<div className="col-sm-6 col-md-6 col-lg-3 service-item">
+  <div className="icon">
+    <i className="icofont-doctor"></i> {/* Updated icon */}
+  </div>
+  <div className="content">
+    <h5 className="service-name">Urology</h5>
+    <p>Expert care for urinary tract disorders, including kidney stones, bladder conditions, and male reproductive health.</p>
+    <a className="btn-link" href="servicedetail">More <i className="icofont-simple-right"></i></a>
+  </div>
+</div>
+
                   </div>
                 </div>
               </div>
@@ -249,7 +390,7 @@ function Home() {
                     data-aos-duration="1100"
                   >
                     <h2 class="title">
-                      <span>Why Choose</span> Saint Peters Hospital
+                      <span>Why Choose</span>  Kidus Petros Hospital
                     </h2>
                   </div>
                 </div>
@@ -302,7 +443,7 @@ function Home() {
                         <div class="content">
                           <h5 class="title">Medical Facilites</h5>
                           <p>
-                            Saint Peter's Hospital is equipped with
+                            Kidus Petros Hospital is equipped with
                             state-of-the-art medical technology and modern
                             facilities. From diagnostic equipment to comfortable
                             patient rooms, we strive to offer an environment

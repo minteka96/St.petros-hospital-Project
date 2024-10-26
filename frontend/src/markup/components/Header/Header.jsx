@@ -207,12 +207,12 @@ const Header = () => {
                       </Link>
                       <ul className="sub-menu">
                         <li>
-                          <Link className="sub-menu-link" to="/service-detail">
+                          <Link className="sub-menu-link" to="/servicedetail">
                             Services
                           </Link>
                         </li>
                         <li>
-                          <Link className="sub-menu-link" to="/service-detail">
+                          <Link className="sub-menu-link" to="/servicedetail">
                             Service Details
                           </Link>
                         </li>
