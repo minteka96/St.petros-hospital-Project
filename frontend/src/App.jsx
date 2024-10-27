@@ -41,7 +41,9 @@ import AddTenderForm from "./markup/components/Admin/AddTenderForm/AddTenderForm
 import TenderSubmitForm from "./markup/components/Admin/AddTenderForm/TenderSubmitForm.jsx";
 import TenderList from "./markup/components/Admin/AddTenderForm/TenderLists.jsx";
 import AllTenderFormDetails from "./markup/components/Admin/AddTenderForm/AllTenderFormDetails.jsx";
+import Vacancies from "./markup/pages/Jobs/Vacancies.jsx";
 
+import ApplicationForm from "./markup/pages/Jobs/ApplicationForm.jsx";
 
 function App() {
   return (
@@ -51,7 +53,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
 
-<Route path="/servicedetail" element={<ServiceDetail />}>
+        <Route path="/servicedetail" element={<ServiceDetail />}>
           {/* Change these routes to relative paths */}
           <Route path="neurology" element={<Neurology />} />
           <Route path="cardiology" element={<Cardiology />} />
@@ -76,13 +78,11 @@ function App() {
           <Route path="imaging" element={<Imaging />} />
         </Route>
 
-
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact/>} />
+        <Route path="/contact" element={<Contact />} />
 
         <Route path="/News" element={<News />} />
         <Route path="/news-details" element={<NewsDetails />} />
-
 
         <Route path="/cpd" element={<Cpd />} />
 
@@ -95,8 +95,9 @@ function App() {
         />
         <Route path="/tender-form-post/:tenderNo" element={<AddTenderForm />} />
         <Route path="/tender-form-post" element={<AddTenderForm />} />
+        <Route path="/Jobs" element={<Vacancies />} />
 
-
+        <Route path="/application-form" element={<ApplicationForm />} />
       </Routes>
       <Footer />
     </div>
