@@ -21,8 +21,11 @@
 
 /* Gallery Slider */
 .gallerySlider img {
-  width: 100%;
-  border-radius: 8px;
+    margin: 20px 0;
+  width: 80%;
+  max-width: 800px;
+  height: 500px;
+  margin: auto;
 }
 
 /* Content Section */

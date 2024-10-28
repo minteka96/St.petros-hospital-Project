@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Swiper from 'swiper';
 import img1 from '../../../../assets/img/slider/neuro/nurology.jpg';
-import img2 from '../../../../assets/img/slider/neuro/nurology.jpg';
+import img2 from '../../../../assets/img/slider/neuro/923530Dr Felke WMichael Neurosurgeon.jpg';
 import img3 from '../../../../assets/img/slider/st.peter1jpg copy.png';
 import classes from './Neurology.module.css';
 const Neurology = () => {
