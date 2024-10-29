@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./AddTenderForm.css"; // Assuming you will style here
 import logo from "../../../../assets/img/images/logo copy.png";
-import TenderSubmitForm from "./TenderSubmitForm"; // Import TenderSubmitForm
+// import TenderSubmitForm from "./TenderSubmitForm"; // Import TenderSubmitForm
 
 const AddTenderForm = () => {
   const [formData, setFormData] = useState({
@@ -190,12 +190,12 @@ const AddTenderForm = () => {
         </div>
       </form>
 
-      {isTenderFormVisible && (
+      {/* {isTenderFormVisible && (
         <TenderSubmitForm
           tenderData={formData} // Pass form data to the TenderSubmitForm
           onClose={() => setTenderFormVisible(false)} // Handle closing the form
         />
-      )}
+      )} */}
     </div>
   );
 };

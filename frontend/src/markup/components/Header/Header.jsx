@@ -183,8 +183,9 @@ function Header() {
                     <li className="tender-menu">
                       <a
                         className="main-menu-link tender-menu"
-                        href="#"
-                        onClick={toggleSubMenu}
+                        href="/tender-list"
+                        // onClick={toggleSubMenu}
+                        onMouseEnter={toggleSubMenu} // Correct event for hover
                       >
                         Tender
                       </a>
@@ -315,8 +316,9 @@ function Header() {
                     <li className="tender-menu">
                       <a
                         className="main-menu-link tender-menu"
-                        href="#"
-                        onClick={toggleSubMenu}
+                        href="/tender-list"
+                        // onClick={toggleSubMenu}
+                        onMouseEnter={toggleSubMenu} // Correct event for hover
                       >
                         Tender
                       </a>

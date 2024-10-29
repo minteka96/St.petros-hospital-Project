@@ -18,11 +18,11 @@ function App() {
         <Route path="/about" element={<About />} />
         {/* Tender Routes */}
         <Route path="/tender-list" element={<TenderList />} />
+        <Route path="/tender-list/:tenderNo" element={<TenderList />} />
         <Route path="/tender-form-submit" element={<TenderSubmitForm />} />
         <Route
           path="/all-tender-form-details/:tenderNo"
-          element={<AllTenderFormDetails />}
-        />
+          element={<AllTenderFormDetails />}/>
         <Route path="/tender-form-post/:tenderNo" element={<AddTenderForm />} />
         <Route path="/tender-form-post" element={<AddTenderForm />} />
       </Routes>

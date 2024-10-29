@@ -120,9 +120,14 @@ const TenderList = () => {
               <td>
                 {tender.title}
                 <br />
+
                 <Link to={`/all-tender-form-details/${tender.tenderNo}`}>
                   More Details &rarr;
                 </Link>
+
+                {/* <Link to={`/tender-list/${tender.tenderNo}`}>
+                  More Details &rarr;
+                </Link> */}
               </td>
               <td>{tender.openingDate}</td>
               <td>{tender.closingDate}</td>
@@ -136,4 +141,3 @@ const TenderList = () => {
 };
 
 export default TenderList;
-

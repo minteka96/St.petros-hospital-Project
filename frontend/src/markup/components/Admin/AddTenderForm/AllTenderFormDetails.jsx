@@ -3,13 +3,12 @@ import React, { useState } from "react";
 import "./AddTenderFormDetails.css"; // Assuming you will style here
 import logo from "../../../../assets/img/images/logo copy.png";
 import TenderSubmitForm from "./TenderSubmitForm"; // Import TenderSubmitForm
-
+import { Link } from "react-router-dom";
 const AllTenderFormDetails = () => {
   // Set the initial form data directly in the state
   const [formData, setFormData] = useState([
     {
-      tenderTitle:
-        "Insurance corporate partnership with Thomson Medical Centre",
+      tenderTitle: "Insurance corporate partnership with St. Petros Hospital",
       description: "Detailed proposal for corporate insurance partnership.",
       category: "Pharmaceuticals",
       openingDate: "28 Aug 2024",
@@ -64,9 +63,11 @@ const AllTenderFormDetails = () => {
   return (
     <div className="add-tender-form">
       {/* Logo Section */}
-      <div className="logo-container">
-        <img src={logo} alt="Logo" className="logo" />
-      </div>
+      <Link to="/">
+        <div className="logo-container">
+          <img src={logo} alt="Logo" className="logo" />
+        </div>
+      </Link>
 
       <h1>Details of all tenders</h1>
 
