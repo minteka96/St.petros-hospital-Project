@@ -232,43 +232,10 @@ const Header = () => {
                       </ul>
                     </li>
 
-
-                    {/* <li>
-                      <a class="main-menu-link" href="/Tender">
-                        Tender
-                      </a>
-                    </li> */}
-
-                    <li className="tender-menu">
-                      <a
-                        className="main-menu-link tender-menu"
-                        href="/tender-list"
-                        // onClick={toggleSubMenu}
-                        onMouseEnter={toggleSubMenu} // Correct event for hover
-                      >
-                        Tender
-                      </a>
-                      {showSubMenu && (
-                        <ul className="sub-menu">
-                          <li>
-                            <Link to="/tender-form-post">Tender Post</Link>
-                          </li>
-                          <li>
-                            <Link to="/tender-list">Tender List</Link>
-                          </li>
-                          <li>
-                            <Link to="/all-tender-form-details/:tenderNo">
-                              Tender Details
-                            </Link>
-                          </li>
-                        </ul>
-                      )}
-
                     <li>
                       <Link className="main-menu-link" to="/about">
                         About
                       </Link>
-
                     </li>
                     <li>
                       <Link className="main-menu-link" to="/jobs">
@@ -370,37 +337,10 @@ const Header = () => {
                       </ul>
                     </li>
 
-
-                    <li className="tender-menu">
-                      <a
-                        className="main-menu-link tender-menu"
-                        href="/tender-list"
-                        // onClick={toggleSubMenu}
-                        onMouseEnter={toggleSubMenu} // Correct event for hover
-                      >
-                        Tender
-                      </a>
-                      {showSubMenu && (
-                        <ul className="sub-menu">
-                          <li>
-                            <Link to="/tender-form-post">Tender Post</Link>
-                          </li>
-                          <li>
-                            <Link to="/tender-list">Tender List</Link>
-                          </li>
-                          <li>
-                            <Link to="/all-tender-form-details/:tenderNo">
-                              Tender Details
-                            </Link>
-                          </li>
-                        </ul>
-                      )}
-
                     <li>
                       <Link className="main-menu-link" to="/about">
                         About
                       </Link>
-
                     </li>
                     <li>
                       <Link className="main-menu-link" to="/jobs">
