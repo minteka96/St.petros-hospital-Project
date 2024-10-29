@@ -1,0 +1,11 @@
+
+
+.upArrow i{
+  font-size: 55px;
+  float: right;
+ 
+}
+
+.uparrowhover:hover{
+    color: #1F867E !important;
+}

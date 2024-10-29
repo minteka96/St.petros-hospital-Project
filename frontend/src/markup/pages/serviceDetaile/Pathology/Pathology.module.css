@@ -1,0 +1,111 @@
+.mainContent {
+  padding: 20px;
+}
+
+/* Page Title Area */
+.pageTitleArea {
+  background-color: #dbf1f1;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Department Area */
+.departmentArea {
+  display: flex;
+}
+
+/* Department Gallery */
+.departmentGallery {
+    margin: 20px 0;
+  width: 80%;
+  max-width: 800px;
+  height: 500px;
+  margin: auto;
+}
+
+.galleryTitle {
+  margin-bottom: 10px;
+  color:#00796b;
+}
+
+.galleryImage {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* ART Services */
+.artServices {
+  margin: 20px 0;
+}
+
+.servicesTitle {
+  margin-bottom: 10px;
+  color:#00796b;
+}
+
+.servicesList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.servicesItem {
+  margin: 5px 0;
+}
+
+/* Head Of Department */
+.headOfDepartment {
+  margin: 20px 0;
+}
+
+.departmentHeadTitle {
+  margin-bottom: 5px;
+  color: #1e88e5;
+}
+
+.departmentHeadName {
+  margin: 5px 0;
+}
+
+/* Appointment Form */
+.appointmentForm {
+  margin-top: 20px;
+}
+
+.formTitle {
+  margin-bottom: 10px;
+  color: #00796b;
+}
+.formInput,
+.formTextarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submitButton {
+  background-color: #00796b;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #1565c0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .departmentArea {
+    flex-direction: column;
+  }
+
+  .sidebarWrapper {
+    margin-bottom: 40px;
+  }
+}

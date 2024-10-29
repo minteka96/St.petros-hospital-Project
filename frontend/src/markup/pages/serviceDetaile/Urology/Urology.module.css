@@ -1,0 +1,62 @@
+.mainContent {
+  padding: 20px;
+}
+
+.pageTitleArea {
+  background-color: #e0f7fa;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.departmentArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contentWrapper {
+  width: 80%;
+  max-width: 800px;
+}
+
+.departmentGallery {
+    margin: 20px 0;
+  width: 80%;
+  max-width: 800px;
+  height: 400px;
+  margin: auto;
+}
+
+.galleryTitle {
+  margin-bottom: 10px;
+  color: #00796b;
+  text-align: center;
+}
+
+.galleryImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.services {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.servicesTitle {
+  font-size: 1.5
+}
+.formTitle {
+  margin-bottom: 10px;
+  color: #00796b;
+}
+.submitButton {
+  background-color: #00796b;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}

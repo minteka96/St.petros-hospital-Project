@@ -1,0 +1,91 @@
+/* Department Content */
+.departmentContent {
+  padding: 20px;
+}
+
+/* Page Title Area */
+.pageTitleArea {
+  background-color: #e0f7fa;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Swiper Container */
+.swiperContainer {
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  margin: auto;
+}
+
+/* Gallery Slider */
+.gallerySlider img {
+    margin: 20px 0;
+  width: 80%;
+  max-width: 800px;
+  height: 500px;
+  margin: auto;
+}
+
+/* Content Section */
+.content {
+  margin: 20px 0;
+  
+
+}
+.content h4{
+   color:#00796b;
+}
+.listStyle1 {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+/* Price List */
+.priceListCol2 {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.priceList {
+  width: 48%;
+}
+
+.serviceName {
+  font-weight: bold;
+}
+
+.servicePrice {
+  float: right;
+  color: #00796b;
+}
+
+/* Head Of Department */
+.teamSingle {
+  
+ margin: 20px 0;
+}
+
+.title span {
+  color: #00796b;
+}
+
+.departmentHeadName {
+  font-weight: bold;
+  color: #00796b;
+}
+.swiperContainer {
+  width: 100%;
+  max-width: 600px; /* Adjust based on the required size */
+  height: auto; /* Let the height adjust based on the image size */
+  margin: auto;
+}
+
+/* Gallery Slider */
+.gallerySlider img {
+  width: 100%;
+  height: auto; /* Ensure images scale properly */
+  border-radius: 8px;
+}
