@@ -18,21 +18,37 @@ const Header = () => {
                 <div className="contact-info-content">
                   <div className="info-address">
                     <h2 className="title">
-                      Ethiopia, <span>Addiss Ababa</span>
+                      Ethiopia, Addiss Ababa
                     </h2>
                     <p>
                       Kidus Petros Hospital Gulele Sub-City, Addis Ababa,
                       Ethiopia.
                     </p>
                     <a href="mailto:hello@yourdomain.com">
-                      <span>Email:</span> info@kpsh.gov.et
+                      Email: info@kpsh.gov.et
                     </a>
                   </div>
                   <div className="brand-office">
-                    <div className="info-tem style-two">
+                    <div className="info-tem">
                       <h6>Call directly:</h6>
-                      <p>+251111541746</p>
-                      <p>998</p>
+                      <p
+                        style={{
+                          fontSize: "18px",
+                          color: "#ffffff",
+                          lineHeight: "24px",
+                        }}
+                      >
+                        +251111541746
+                      </p>
+                      <p
+                        style={{
+                          fontSize: "18px",
+                          color: "#ffffff",
+                          lineHeight: "24px",
+                        }}
+                      >
+                        998
+                      </p>
                     </div>
 
                     <div className="info-tem mb-0">
