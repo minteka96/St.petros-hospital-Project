@@ -13,6 +13,10 @@ router.post(
   // [authMiddleware.verifyToken, authMiddleware.isAdmin],
   jobsController.createJob
 );
+// Define a route to get all jobs
+router.get("/api/vacancies", jobsController.getAllJobs);
 
+// Define a route to get a job by ID
+router.get("/api/vacancies/:id", jobsController.getJobById);
 // Export the router
 module.exports = router;
