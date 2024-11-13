@@ -10,8 +10,17 @@ const corsOptions = {
   origin: process.env.FRONTEND_URL,
   optionsSuccessStatus: 200,
 };
+<<<<<<< HEAD
 
 // Create Express app
+=======
+// Create a variable to hold our port number
+const port = process.env.PORT;
+// Import the router
+const router = require("./Routes/index");
+// Import the path module
+// Create the webserver
+>>>>>>> 30274e53dde6f1d908267b649fe6fdd9b25d85a0
 const app = express();
 const port = process.env.PORT;
 
