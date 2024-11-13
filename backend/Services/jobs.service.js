@@ -45,10 +45,10 @@ async function createJob(jobData) {
       deadline,
     ]);
 
-    const jobId = resultIdentifier.insertId;
+    const id = resultIdentifier.insertId;
 
     await connection.commit();
-    return jobId; // Optionally return the jobId if needed
+    return id; // Optionally return the id if needed
   } catch (error) {
     await connection.rollback();
     throw error;
@@ -57,6 +57,38 @@ async function createJob(jobData) {
   }
 }
 
+// Function to get all jobs
+async function getAllJobs() {
+  const selectAllVacanciesQuery = `SELECT * FROM Vacancy`;
+  
+  const connection = await conn.pool.getConnection();
+  try {
+    const [rows] = await connection.query(selectAllVacanciesQuery);
+    return rows; // Returns an array of all vacancy records
+  } catch (error) {
+    throw error;
+  } finally {
+    await connection.release();
+  }
+}
+
+//Function to get job by id
+async function getJobById(vacancy_id) {
+  const selectJobByIdQuery = `SELECT * FROM Vacancy WHERE vacancy_id = ?`;
+
+  const connection = await conn.pool.getConnection();
+  try {
+    const [rows] = await connection.query(selectJobByIdQuery, [vacancy_id]);
+    return rows[0] || null; // Return the job if found, otherwise return null
+  } catch (error) {
+    throw error;
+  } finally {
+    await connection.release();
+  }
+}
+// Export the function
 module.exports = {
   createJob,
+  getAllJobs,
+  getJobById,
 };
