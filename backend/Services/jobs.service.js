@@ -60,7 +60,7 @@ async function createJob(jobData) {
 // Function to get all jobs
 async function getAllJobs() {
   const selectAllVacanciesQuery = `SELECT * FROM Vacancy`;
-  
+
   const connection = await conn.pool.getConnection();
   try {
     const [rows] = await connection.query(selectAllVacanciesQuery);
@@ -86,9 +86,28 @@ async function getJobById(vacancy_id) {
     await connection.release();
   }
 }
+
+// Function to delete the job by id
+async function deleteJob(vacancy_id) {
+  const deleteJobQuery = `DELETE FROM Vacancy WHERE vacancy_id = ?`;
+
+  const connection = await conn.pool.getConnection();
+  try {
+    await connection.beginTransaction();
+    const [result] = await connection.query(deleteJobQuery, [vacancy_id]);
+    await connection.commit();
+    return result.affectedRows > 0;
+  } catch (error) {
+    await connection.rollback();
+    throw error;
+  } finally {
+    await connection.release();
+  }
+}
 // Export the function
 module.exports = {
   createJob,
   getAllJobs,
   getJobById,
+  deleteJob,
 };
