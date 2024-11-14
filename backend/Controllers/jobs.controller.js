@@ -103,8 +103,7 @@ async function getJobById(req, res) {
       success: true,
       data: job,
     });
-  } 
-  catch (error) {
+  } catch (error) {
     console.error("Error:", error);
     res.status(500).json({
       error: "Internal Server Error",
@@ -113,8 +112,38 @@ async function getJobById(req, res) {
     });
   }
 }
+
+// Controller to delete a job by ID
+
+async function deleteJob(req, res) {
+  const { id } = req.params;
+
+  try {
+    const deleted = await jobService.deleteJob(id);
+
+    if (!deleted) {
+      return res.status(404).json({
+        message: "Job not found",
+        success: false,
+      });
+    }
+
+    res.status(200).json({
+      message: "Job deleted successfully",
+      success: true,
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({
+      error: "Internal Server Error",
+      message: "An unexpected error occurred.",
+    });
+  }
+}
+
 module.exports = {
   createJob,
   getAllJobs,
   getJobById,
+  deleteJob,
 };
