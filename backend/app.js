@@ -3,7 +3,8 @@ const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
 const path = require("path");
-const tenderRoutes = require("./Routes/tender.routes");
+const tenderRoutes = require("./Routes/tender.routes.js");
+const newsRoutes = require("./Routes/news.routes.jsx");
 const router = require("./Routes/index"); // Import the router
 
 // CORS setup
@@ -21,6 +22,7 @@ app.use(cors(corsOptions));
 app.use(express.static("public"));
 app.use(express.json());
 app.use("/api", tenderRoutes); // Use /api as the base path
+app.use("/api", newsRoutes); // Use /api as the base path for news routes
 app.use("/", router); // If you have additional routes
 
 // Start the server
