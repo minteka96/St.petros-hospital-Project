@@ -1,0 +1,96 @@
+.video-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh; /* Adjust this based on your needs */
+}
+
+.video-btn {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  background-color: #c64420;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px; /* Space between video button and text */
+}
+
+.video-btn i {
+  font-size: 35px;
+  color: white;
+}
+
+.text {
+  font-size: 35px;
+  font-weight: 700;
+  color: white;
+  font-family: "Arial", sans-serif;
+  line-height: 1.3;
+  margin-left: 12px;
+}
+
+.text span {
+  display: block;
+  font-size: 28px;
+  font-weight: 300;
+}
+.play_btn{
+  display: flex;
+  justify-content: center;
+}
+/* hamburger menu */
+.mobile-menu {
+  display: block;
+  position: fixed;
+  top: 105px;
+  right: 0;
+  width: 50%;
+  height: 78%;
+  z-index: 999;
+  padding-top: 5px;
+  padding-left: 25px;
+  background-color: rgb(236, 241, 237);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.mobile-menu ul {
+  list-style: block;
+  padding: 0;
+}
+
+.mobile-menu ul li {
+  margin: 10px 0;
+}
+
+.mobile-menu ul li a:not(.btn) {
+  color: #C64420;
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.mobile-menu ul li a:hover {
+font-weight: bolder;
+}
+.btn{
+  background-color: #1B8D85;
+    font-size: 22px;
+    font-weight: 500;
+    color: white;
+}
+.btn:hover{
+  color: white;
+  background-color: #1B8D85;
+}
+.post_item {
+  display: flex;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.15);
+  margin-bottom: 27px;
+  padding-bottom: 24px;
+}
+.post_item img{
+  margin-right: 20px;
+}

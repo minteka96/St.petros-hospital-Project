@@ -1,0 +1,72 @@
+/* Container for the entire tender list */
+.tender-list-container {
+  padding: 20px; /* Padding around the container */
+}
+
+/* Flexbox for filter options */
+.filter-options {
+  margin-bottom: 20px; /* Spacing below the filter options */
+  display: flex; /* Enable flexbox layout */
+  justify-content: center; /* Center buttons horizontally */
+}
+
+/* Style for filter buttons */
+.filter-btn {
+  padding: 10px 15px; /* Padding inside buttons */
+  margin-right: 10px; /* Spacing between buttons */
+  border: 1px solid #ccc; /* Light border around buttons */
+  background-color: #1B8D85; /* Background color for all buttons */
+  color: white; /* Text color for buttons */
+  border-radius: 5px; /* Rounded corners for buttons */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.filter-btn:last-child {
+  margin-right: 0; /* Remove right margin on the last button */
+}
+
+/* Table styles for tender data */
+.tender-table {
+  width: 100%; /* Full width for the table */
+  border-collapse: collapse; /* Collapse borders between table cells */
+}
+
+.tender-table th,
+.tender-table td {
+  border: 1px solid #ddd; /* Light border for table cells */
+  padding: 10px 20px; /* Padding inside table cells */
+  text-align: left; /* Align text to the left */
+}
+
+.tender-table th {
+  background-color: #f0f0f0; /* Light background for header cells */
+}
+
+/* Link styles within table cells */
+.tender-table td a {
+  color: #6a0dad; /* Link color */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.tender-table td a:hover {
+  text-decoration: underline; /* Underline links on hover */
+}
+
+/* Styles for tender status colors */
+.tender-opened {
+  background-color: #d4edda; /* Light green for opened tenders */
+}
+
+.tender-closed {
+  background-color: #f8d7da; /* Light red for closed tenders */
+}
+
+.tender-default {
+  background-color: #ffffff; /* Default background color for tenders */
+}
+
+/* Global button styles (if needed) */
+button {
+  color: black; /* Default text color for buttons */
+}

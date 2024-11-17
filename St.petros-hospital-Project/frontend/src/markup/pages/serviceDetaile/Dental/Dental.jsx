@@ -1,0 +1,111 @@
+
+
+
+/* eslint-disable no-unused-vars */
+import React from 'react';
+import img1 from '../../../../assets/img/photos/department-s2.jpg';
+import img2 from '../../../../assets/img/photos/department-s1.jpg';
+import classes from './Dental.module.css';
+// Correct imports for Swiper components and modules
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+function Dental() {
+  return (
+    <div className={classes.departmentContent}>
+      {/* Page Title Area */}
+      <div className={classes.pageTitleArea}>
+        <h1>Dental Department</h1>
+        <p>Comprehensive care for dental health.</p>
+        <p>
+          The dental department specializes in the diagnosis and treatment of various dental conditions, including preventive care, cosmetic dentistry, and restorative treatments. TGH provides the finest and most recent health care services in managing dental health, such as:
+        </p>
+        <ul>
+          <li>Routine Check-ups</li>
+          <li>Dental Cleanings</li>
+          <li>Fillings and Restorations</li>
+          <li>Root Canal Treatments</li>
+          <li>Teeth Whitening</li>
+          <li>Orthodontics</li>
+        </ul>
+      </div>
+
+      {/* Swiper Carousel for Gallery */}
+      <Swiper
+        navigation={true} // Enable navigation arrows
+        pagination={{ clickable: true }} // Enable pagination
+        modules={[Navigation, Pagination]} // Add Swiper modules for navigation and pagination
+        className={classes.swiperContainer}
+        spaceBetween={10} // Adjust space between slides if needed
+        slidesPerView={1} // Number of slides to show at a time
+      >
+        <SwiperSlide className={classes.gallerySlider}>
+          <img src={img1} alt="Dental Department Image 1" />
+        </SwiperSlide>
+        <SwiperSlide className={classes.gallerySlider}>
+          <img src={img2} alt="Dental Department Image 2" />
+        </SwiperSlide>
+      </Swiper>
+
+      {/* Dental Services */}
+      <div className={classes.content}>
+        <h4>Our Services</h4>
+        <p>
+          Kidus Petros Hospital Department of Dentistry offers a broad range of services, including:
+        </p>
+        <ul className={classes.listStyle1}>
+          <li>Preventive Dental Care</li>
+          <li>Cosmetic Dentistry</li>
+          <li>Restorative Treatments</li>
+          <li>Dental Implants</li>
+        </ul>
+      </div>
+
+      {/* Price List for Services */}
+      <div className={classes.priceListCol2}>
+        <div className={classes.priceList}>
+          <h4>Cosmetic Dentistry</h4>
+          <ul>
+            <li>
+              <span className={classes.serviceName}>Teeth Whitening</span>
+              <span className={classes.servicePrice}>$300</span>
+            </li>
+            <li>
+              <span className={classes.serviceName}>Veneers</span>
+              <span className={classes.servicePrice}>$800</span>
+            </li>
+          </ul>
+        </div>
+        <div className={classes.priceList}>
+          <h4>Restorative Dentistry</h4>
+          <ul>
+            <li>
+              <span className={classes.serviceName}>Root Canal Treatment</span>
+              <span className={classes.servicePrice}>$1,200</span>
+            </li>
+            <li>
+              <span className={classes.serviceName}>Dental Implants</span>
+              <span className={classes.servicePrice}>$2,500</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Head Of Department Section */}
+      <div className={classes.teamSingle}>
+        <h2 className={classes.title}>
+          <span>Head Of</span> Department
+        </h2>
+        <div className={classes.membrInfo}>
+          <h4 className={classes.departmentHeadName}>Dr. Sarah Mendez</h4>
+          <p>Dr. melkam has over 8 years of experience in dentistry.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Dental;

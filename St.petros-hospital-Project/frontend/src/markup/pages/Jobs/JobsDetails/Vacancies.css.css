@@ -1,0 +1,113 @@
+.vacancies-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #1F867E;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.vacancies-title {
+  font-size: 28px;
+  color: git commit -m "Your descriptive commit message"
+;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.vacancies-description {
+  font-size: 16px;
+  color: #555;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.vacancy {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.vacancy:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.vacancy-header {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 10px;
+}
+
+.vacancy-position {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.vacancy-subtitle {
+  font-size: 14px;
+  color: #777;
+  margin-top: 5px;
+}
+
+.toggle-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #1F867E;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-button:hover {
+  background-color: #F26524;
+}
+
+.details-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 15px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.details-list li {
+  margin: 8px 0;
+  padding: 6px 0;
+  border-bottom: 1px dotted #eaeaea;
+}
+
+.details-list li:last-child {
+  border-bottom: none;
+}
+
+.details-list li strong {
+  font-weight: 600;
+  color: #333;
+}
+
+.details-list a {
+  color: #8b4513;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.details-list a:hover {
+  color: #6a3310;
+  text-decoration: underline;
+}
