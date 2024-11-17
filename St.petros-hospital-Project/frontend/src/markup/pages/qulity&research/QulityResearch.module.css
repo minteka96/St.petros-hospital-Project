@@ -1,0 +1,57 @@
+/* src/components/ResearchPublicationQualityImprovement.module.css */
+
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+  color: #00A99E;
+  font-size: 2rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.sectionTitle {
+  font-size: 1.4rem;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.linkList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.linkListItem {
+  margin-bottom: 10px;
+}
+
+.link {
+  color: #00A99E;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.link:hover {
+  color: #00A99E;
+  text-decoration: underline;
+}
+
+.caseStudyDescription {
+  font-size: 1rem;
+  color: #666;
+  margin: 10px 0;
+}

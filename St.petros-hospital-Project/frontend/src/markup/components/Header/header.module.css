@@ -1,0 +1,93 @@
+.header {
+  position: relative;
+  z-index: 1000;
+}
+
+.header_top_bg {
+  background-color: #f26524;
+  border-bottom: 1px solid white !important;
+}
+
+.header_top_hover i:hover {
+  color: #1f867e !important;
+}
+
+.header_middle_bg {
+  background-color: #fff !important;
+}
+
+.media_wrapper span,
+.media_wrapper a {
+  color: white !important;
+}
+
+.media_wrapper span:hover,
+.media_wrapper a:hover {
+  color: #f26524 !important;
+}
+
+.header_bottom_bg {
+  background-color: #fff !important;
+  border-bottom: 1px solid #d9d9d9 !important;
+  opacity: 1;
+  visibility: visible;
+  animation: fadeInDown 0.5s ease-in-out;
+  box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.4);
+}
+
+.main_menu_wrapper li a {
+  color: #1f867e !important;
+}
+
+.main_menu_wrapper li a:hover {
+  color: #f26524 !important;
+}
+
+.book_now_btn {
+  background-color: #1f867e !important;
+}
+
+.book_now_btn:hover {
+  background-color: #f26524 !important;
+}
+
+.logo {
+  max-width: 220px !important;
+  padding: 10px;
+}
+
+.moto_box {
+  position: relative;
+  z-index: 11;
+  display: flex; /* Enable Flexbox */
+  align-items: center; /* Vertical center */
+  justify-content: center; /* Horizontal center */
+}
+
+.moto_box:before {
+  position: absolute;
+  content: "";
+  left: -42px;
+  top: -1px;
+  height: 103px;
+  width: 200%;
+  transform: skewX(50deg);
+  background-color: #1f867e;
+  z-index: 11;
+  border-bottom: white 1px solid;
+  border-left: white 1px solid;
+  -webkit-animation: fadeInDown 0.5s ease-in-out;
+  animation: fadeInDown 0.5s ease-in-out;
+  -webkit-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.4);
+}
+.moto_box strong {
+  position: relative;
+  color: white;
+  z-index: 12;
+}
+.moto_text {
+  margin-left: -4px;
+  font-size: 17px;
+  font-weight: bold;
+}

@@ -1,0 +1,160 @@
+/* Tender form container styling */
+.tender-form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styles */
+.form-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.form-header img.logo {
+  width: 150px;
+  margin-bottom: 5px;
+}
+
+.form-header h1 {
+  font-size: 24px;
+  color: #1f867e;
+}
+
+/* Form section titles */
+.form-section {
+  margin-bottom: 30px;
+}
+
+.form-section h2 {
+  font-size: 18px;
+  color: #f26524; /* Set section title color */
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+h2 {
+  color: #F26525;
+}
+
+/* Responsive form row styling */
+.form-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap; /* Wraps fields on smaller screens */
+}
+
+/* Form group styling */
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Input, textarea, and file input styling */
+.form-group input[type="text"],
+.form-group input[type="file"],
+.form-group textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%; /* Ensure inputs are full width */
+  box-sizing: border-box; /* Include padding and borders in width */
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border: 2px solid #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+}
+
+.form-group textarea {
+  resize: vertical; /* Allow vertical resizing */
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* File input specific styling */
+.form-group input[type="file"] {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.form-group input[type="file"]::-webkit-file-upload-button,
+.form-group input[type="file"]::-moz-file-upload-button,
+.form-group input[type="file"]::-ms-file-upload-button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+/* Submit button styling */
+.submit-button {
+  background-color: #1b8d85; /* Updated button color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px; /* Balanced padding */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex; /* Center button horizontally */
+  justify-content: center;
+  margin-top: 20px; /* Space above button */
+}
+
+.submit-button:hover {
+  background-color: #17a69e; /* Darker hover color */
+  transform: translateY(-2px);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column; /* Stack fields vertically */
+  }
+
+  .submit-button {
+    width: 100%; /* Full-width button on small screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .form-group input,
+  .form-group textarea {
+    font-size: 12px; /* Smaller text on very small screens */
+  }
+
+  .form-header h1 {
+    font-size: 20px; /* Adjust header size */
+  }
+
+  .form-section h2 {
+    font-size: 16px; /* Adjust section title size */
+  }
+}

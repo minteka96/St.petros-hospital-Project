@@ -1,0 +1,61 @@
+/* HealthTip.module.css */
+
+.healthTip {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.healthTip:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.intro,
+.fullDescription {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.readMoreButton {
+  background-color:#00A99E ;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.readMoreButton:hover {
+  background-color:#00A99E;
+}
+
+.additionalInfo {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.additionalInfo p {
+  margin: 4px 0;
+}
