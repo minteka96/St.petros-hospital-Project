@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "../../../assets/img/St.PeterLogo.png";
 import classes from "./footer.module.css"
-
 function Footer() {
   return (
     <>

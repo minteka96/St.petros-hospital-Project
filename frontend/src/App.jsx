@@ -52,8 +52,7 @@ import AddVacancyForm from "./markup/components/Dashbord/AddVacancyForm";
 // import AddTenderForm from "./markup/components/Dashbord/AddTenderForm";
 import QulityResearch from "./markup/pages/qulity&research/qulityResearch.jsx";
 import VacancyApplicationForm from "./markup/components/Dashbord/VacancyApplicationForm";
-import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
-
+import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication";
 function App() {
   return (
     <div>
@@ -61,10 +60,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
-         <Route path="/cpd" element={<Cpd />} />
- <Route path="/healhtip" element={<HealthTip />}></Route>
-  <Route path="/HealthWorkerEntertainment" element={<HealthWorkerINfo />}></Route>
-  {/* service detail page */}
+        <Route path="/cpd" element={<Cpd />} />
+        <Route path="/healhtip" element={<HealthTip />}></Route>
+        <Route
+          path="/HealthWorkerEntertainment"
+          element={<HealthWorkerINfo />}
+        ></Route>
+        {/* service detail page */}
         <Route path="/servicedetail" element={<ServiceDetail />}>
           <Route path="neurology" element={<Neurology />} />
           <Route path="cardiology" element={<Cardiology />} />
@@ -83,7 +85,7 @@ function App() {
           <Route path="pharmacy" element={<Pharmacy />} />
           <Route path="dental" element={<Dental />} />
           <Route path="icu" element={<ICU />} />
-          <Route path="emergency" element={<Emergency/>} />
+          <Route path="emergency" element={<Emergency />} />
           <Route path="pathology" element={<Pathology />} />
           <Route path="psychiatric" element={<Psychiatric />} />
           <Route path="imaging" element={<Imaging />} />
@@ -91,21 +93,24 @@ function App() {
 
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-          <Route path="/qulity&research" element={<QulityResearch />} />
-           <Route path="/researchpublication" element={<ResearchPublication />} />
+        <Route path="/qulity&research" element={<QulityResearch />} />
+        <Route path="/researchpublication" element={<ResearchPublication />} />
         <Route path="/AdminDashboard" element={<AdminDashboard />} />
         {/* news page */}
         <Route path="/news" element={<News />} />
         <Route path="/newsDetails/:postId" element={<NewsDetails />} />
         <Route path="/tender-list" element={<TenderList />} />
         <Route path="/tender-form-submit" element={<TenderSubmitForm />} />
-        <Route path="/all-tender-form-details/:tenderNo" element={<AllTenderFormDetails />} />
+        <Route
+          path="/all-tender-form-details/:tenderNo"
+          element={<AllTenderFormDetails />}
+        />
         <Route path="/tender-form-post/:tenderNo" element={<AddTenderForm />} />
         <Route path="/tender-form-post" element={<AddTenderForm />} />
         <Route path="/Jobs" element={<Vacancies />} />
         <Route path="/admin/application-form" element={<ApplicationForm />} />
-        
-     {/* Admin Dashboard with nested routes */}
+
+        {/* Admin Dashboard with nested routes */}
         <Route path="/admin-dashboard" element={<AdminDashboard />}>
           <Route path="addnews" element={<AddNewsForm />} />
           <Route path="addnewsdetail" element={<AddNewsDetailForm />} />
