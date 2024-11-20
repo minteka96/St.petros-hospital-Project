@@ -35,9 +35,11 @@ const createNews = async (req, res) => {
     const result = await newsService.createNews(newsData);
 
     // Respond with a success message and the ID of the created news entry
-    res
-      .status(201)
-      .json({ message: "News created successfully", id: result.id });
+    res.status(201).json({
+      status: "success",
+      message: "News created successfully",
+      id: result.id,
+    });
   } catch (err) {
     // Catch any errors during the process and respond with an error message
     res.status(500).json({ error: err.message });
@@ -49,17 +51,14 @@ const getNewsById = async (req, res) => {
   try {
     // Extract the news ID from the request parameters
     const newsId = req.params.id;
-
     // Call the news service to fetch the news entry by ID
     const news = await newsService.getNewsById(newsId);
-
     // If the news entry is not found, return a 404 error
     if (!news) {
       return res.status(404).json({ error: "News not found" });
     }
-
     // Respond with the retrieved news data
-    res.status(200).json(news);
+    res.status(200).json({ data: news });
   } catch (err) {
     // Catch any errors and return a 500 error message
     res.status(500).json({ error: err.message });
@@ -67,25 +66,46 @@ const getNewsById = async (req, res) => {
 };
 
 // Function to retrieve all news entries
-const getAllNews = async (req, res) => {
-  try {
-    // Call the news service to fetch all news entries
-    const newsList = await newsService.getAllNews();
+// const getAllNews = async (req, res) => {
+//   try {
+//     // Call the news service to fetch all news entries
+//     const newsList = await newsService.getAllNews();
 
-    // Respond with the list of news entries
-    res.status(200).json(newsList);
+//     // Respond with the list of news entries
+//     res.status(200).json(newsList);
+//   } catch (err) {
+//     // Catch any errors and return a 500 error message
+//     res.status(500).json({ error: err.message });
+//   }
+// };
+
+async function getAllNews(req, res, next) {
+  try {
+    // Call the getAllNews method from the news service
+    const newsList = await newsService.getAllNews();
+    if (!newsList) {
+      res.status(400).json({
+        error: "Failed to fetch news entries!",
+      });
+    } else {
+      res.status(200).json({
+        status: "success",
+        data: newsList,
+      });
+    }
   } catch (err) {
     // Catch any errors and return a 500 error message
-    res.status(500).json({ error: err.message });
+    res.status(500).json({
+      error: err.message,
+    });
   }
-};
+}
 
 // Function to update an existing news entry by its ID
 const updateNews = async (req, res) => {
   try {
     // Extract the news ID from the request parameters
     const newsId = req.params.id;
-
     // Destructure the updated news data from the request body
     const {
       news_title,
@@ -106,14 +126,15 @@ const updateNews = async (req, res) => {
 
     // Call the news service to update the news entry in the database
     const result = await newsService.updateNews(newsId, updatedData);
-
     // If the news entry is not found, return a 404 error
     if (!result) {
       return res.status(404).json({ error: "News not found" });
     }
-
     // Respond with a success message upon successful update
-    res.status(200).json({ message: "News updated successfully" });
+    res.status(200).json({
+      status: "success",
+      message: "News updated successfully",
+    });
   } catch (err) {
     // Catch any errors and return a 500 error message
     res.status(500).json({ error: err.message });
@@ -125,17 +146,17 @@ const deleteNews = async (req, res) => {
   try {
     // Extract the news ID from the request parameters
     const newsId = req.params.id;
-
     // Call the news service to delete the news entry from the database
     const result = await newsService.deleteNews(newsId);
-
     // If the news entry is not found, return a 404 error
     if (!result) {
       return res.status(404).json({ error: "News not found" });
     }
-
     // Respond with a success message upon successful deletion
-    res.status(200).json({ message: "News deleted successfully" });
+    res.status(200).json({
+      status: "success",
+      message: "News deleted successfully",
+    });
   } catch (err) {
     // Catch any errors and return a 500 error message
     res.status(500).json({ error: err.message });

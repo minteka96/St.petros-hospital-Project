@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api'; // Change to your backend URL if necessary
+const API_URL = 'http://localhost:30001/api'; // Change to your backend URL if necessary
 
 // User API
 export const fetchUsers = () => axios.get(`${API_URL}/users`);

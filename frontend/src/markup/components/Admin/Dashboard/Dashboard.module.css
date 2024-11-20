@@ -1,0 +1,78 @@
+/* src/components/Dashboard.module.css */
+
+.dashboardContainer {
+  padding: 20px;
+  background-color: #f8f9fa; /* Light background for the dashboard */
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #f26524; /* Dark text color */
+}
+
+.sectionTitle {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  color: #f26524; /* Darker gray for section titles */
+  border-bottom: 2px solid #00A99E;/* Blue underline */
+  padding-bottom: 5px;
+}
+
+.userManagement,
+.vacancyManagement,
+.applicationManagement,
+.newsManagement {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #ffffff; /* White background for sections */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px #f26524; /* Subtle shadow for depth */
+}
+
+.userList,
+.vacancyList,
+.applicationList,
+.newsList {
+  margin-top: 20px;
+}
+
+/* Form styles */
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+form input,
+form textarea,
+form select,
+form button {
+  margin: 5px 0; /* Spacing between inputs */
+  padding: 10px;
+  border: 1px solid #ced4da; /* Light gray border */
+  border-radius: 4px; /* Slightly rounded corners */
+}
+
+form button {
+  background-color:  #00A99E; /* Bootstrap primary color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color:  #f26524;  /* Darker blue on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5em;
+  }
+
+  .sectionTitle {
+    font-size: 1.2em;
+  }
+}

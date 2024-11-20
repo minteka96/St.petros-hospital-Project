@@ -6,10 +6,10 @@ import Footer from "./markup/components/Footer/Footer";
 import Home from "./markup/pages/Home/Home";
 import Services from "./markup/pages/servicepage/Services";
 import HealthTip from "./markup/components/Header/HealthTip.jsx";
-import ServiceDetail from "./markup/pages/serviceDetaile/ServiceDetail"; 
-import Cardiology from './markup/pages/serviceDetaile/cardac/Cardiology'; 
-import MCH from './markup/pages/serviceDetaile/mch/MCH'; 
-import Neurology from './markup/pages/serviceDetaile/neurology/Neurology'; 
+import ServiceDetail from "./markup/pages/serviceDetaile/ServiceDetail";
+import Cardiology from "./markup/pages/serviceDetaile/cardac/Cardiology";
+import MCH from "./markup/pages/serviceDetaile/mch/MCH";
+import Neurology from "./markup/pages/serviceDetaile/neurology/Neurology";
 import Orthopedics from "./markup/pages/serviceDetaile/Orthopedics/Orthopedics";
 import ART from "./markup/pages/serviceDetaile/ART/ART";
 import Dermatology from "./markup/pages/serviceDetaile/Dermatology/Dermatology";
@@ -19,7 +19,7 @@ import ENT from "./markup/pages/serviceDetaile/ENT/ENT";
 import Medical from "./markup/pages/serviceDetaile/medical/Medical";
 import Toxicology from "./markup/pages/serviceDetaile/Toxicology/Toxicology";
 import Surgery from "./markup/pages/serviceDetaile/Surgical/Surgery";
-import Urology from './markup/pages/serviceDetaile/Urology/Urology';
+import Urology from "./markup/pages/serviceDetaile/Urology/Urology";
 import GeneralLab from "./markup/pages/serviceDetaile/lab/GeneralLab";
 import Pharmacy from "./markup/pages/serviceDetaile/Pharmacy/Pharmacy";
 import Dental from "./markup/pages/serviceDetaile/Dental/Dental";
@@ -34,7 +34,7 @@ import Cpd from "./markup/pages/CPD/cpd.jsx";
 import "./style/css/style.css";
 import News from "./markup/pages/News/News";
 import NewsDetails from "./markup/pages/News/NewsDetails";
- import AddTenderForm from "./markup/components/Admin/AddTenderForm/AddTenderForm.jsx";
+import AddTenderForm from "./markup/components/Admin/AddTenderForm/AddTenderForm.jsx";
 import TenderSubmitForm from "./markup/components/Admin/AddTenderForm/TenderSubmitForm.jsx";
 import TenderList from "./markup/components/Admin/AddTenderForm/TenderLists.jsx";
 import AllTenderFormDetails from "./markup/components/Admin/AddTenderForm/AllTenderFormDetails.jsx";
@@ -54,17 +54,34 @@ import QulityResearch from "./markup/pages/qulity&research/qulityResearch.jsx";
 import VacancyApplicationForm from "./markup/components/Dashbord/VacancyApplicationForm";
 import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
 
+/* ************ My Task Start Here about news ********************  */
+import AddNews from "./markup/pages/Admin/AddNews.jsx";
+import EditNews from "./markup/pages/Admin/EditNews.jsx";
+import Newss from "./markup/pages/Admin/News.jsx";
+import PrivateAuthRoute from "./markup/components/Auth/PrivateAuthRoute.jsx";
+/* **************** My Task End Here about news  ******************/
+
 function App() {
   return (
     <div>
       <Header />
       <Routes>
+        {/******************* My Task Start Here ****************/}
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/add-news" element={<AddNews />} />
+        <Route path="/admin/news" element={<Newss />} />
+        <Route path="/admin/news/edit/:news_id" element={<EditNews />} />
+        {/* ******************** My Task End Here *****************/}
+
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
-         <Route path="/cpd" element={<Cpd />} />
- <Route path="/healhtip" element={<HealthTip />}></Route>
-  <Route path="/HealthWorkerEntertainment" element={<HealthWorkerINfo />}></Route>
-  {/* service detail page */}
+        <Route path="/cpd" element={<Cpd />} />
+        <Route path="/healhtip" element={<HealthTip />}></Route>
+        <Route
+          path="/HealthWorkerEntertainment"
+          element={<HealthWorkerINfo />}
+        ></Route>
+        {/* service detail page */}
         <Route path="/servicedetail" element={<ServiceDetail />}>
           <Route path="neurology" element={<Neurology />} />
           <Route path="cardiology" element={<Cardiology />} />
@@ -83,7 +100,7 @@ function App() {
           <Route path="pharmacy" element={<Pharmacy />} />
           <Route path="dental" element={<Dental />} />
           <Route path="icu" element={<ICU />} />
-          <Route path="emergency" element={<Emergency/>} />
+          <Route path="emergency" element={<Emergency />} />
           <Route path="pathology" element={<Pathology />} />
           <Route path="psychiatric" element={<Psychiatric />} />
           <Route path="imaging" element={<Imaging />} />
@@ -91,21 +108,24 @@ function App() {
 
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-          <Route path="/qulity&research" element={<QulityResearch />} />
-           <Route path="/researchpublication" element={<ResearchPublication />} />
+        <Route path="/qulity&research" element={<QulityResearch />} />
+        <Route path="/researchpublication" element={<ResearchPublication />} />
         <Route path="/AdminDashboard" element={<AdminDashboard />} />
         {/* news page */}
         <Route path="/news" element={<News />} />
         <Route path="/newsDetails/:postId" element={<NewsDetails />} />
         <Route path="/tender-list" element={<TenderList />} />
         <Route path="/tender-form-submit" element={<TenderSubmitForm />} />
-        <Route path="/all-tender-form-details/:tenderNo" element={<AllTenderFormDetails />} />
+        <Route
+          path="/all-tender-form-details/:tenderNo"
+          element={<AllTenderFormDetails />}
+        />
         <Route path="/tender-form-post/:tenderNo" element={<AddTenderForm />} />
         <Route path="/tender-form-post" element={<AddTenderForm />} />
         <Route path="/Jobs" element={<Vacancies />} />
         <Route path="/admin/application-form" element={<ApplicationForm />} />
-        
-     {/* Admin Dashboard with nested routes */}
+
+        {/* Admin Dashboard with nested routes */}
         <Route path="/admin-dashboard" element={<AdminDashboard />}>
           <Route path="addnews" element={<AddNewsForm />} />
           <Route path="addnewsdetail" element={<AddNewsDetailForm />} />
