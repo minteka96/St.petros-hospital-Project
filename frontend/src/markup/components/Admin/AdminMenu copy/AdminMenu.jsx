@@ -36,10 +36,10 @@ function AdminMenu() {
           List of Jobs
         </Link>
         <Link to="/admin-dashboard/applicationform" className="list-group-item">
-          Application Forms
+          Application 
         </Link>
         <Link
-          to="/admin-dashboard/list-of-applicants"
+          to="/admin/applicant"
           className="list-group-item"
         >
           List of Applicants

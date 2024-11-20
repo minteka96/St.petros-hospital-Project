@@ -59,8 +59,9 @@ import AddNews from "./markup/pages/Admin/AddNews.jsx";
 import EditNews from "./markup/pages/Admin/EditNews.jsx";
 import Newss from "./markup/pages/Admin/News.jsx";
 import PrivateAuthRoute from "./markup/components/Auth/PrivateAuthRoute.jsx";
+import AdminRoute from "./markup/routes/AdminRoute.jsx";
 /* **************** My Task End Here about news  ******************/
-
+import ApplicationForms from "../src/markup/pages/testApplicant.jsx";
 function App() {
   return (
     <div>
@@ -73,6 +74,7 @@ function App() {
         <Route path="/admin/news/edit/:news_id" element={<EditNews />} />
         {/* ******************** My Task End Here *****************/}
 
+        <Route path="/test" element={<ApplicationForms />} />
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/cpd" element={<Cpd />} />
@@ -126,6 +128,7 @@ function App() {
         <Route path="/admin/application-form" element={<ApplicationForm />} />
 
         {/* Admin Dashboard with nested routes */}
+        <Route path="/admin/*" element={<AdminRoute />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />}>
           <Route path="addnews" element={<AddNewsForm />} />
           <Route path="addnewsdetail" element={<AddNewsDetailForm />} />
