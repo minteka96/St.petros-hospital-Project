@@ -40,10 +40,9 @@ const getAllNews = async () => {
 const updateNews = async (newsId, data) => {
   const { newsTitle, newsDetail, newsDescription, newsLink, newsImageLink } =
     data;
-
   try {
     await db.query(
-      `UPDATE News 
+      `UPDATE News
        SET news_title = ?, news_detail = ?, news_description = ?, news_link = ?, news_image_link = ?
        WHERE news_id = ?`,
       [newsTitle, newsDetail, newsDescription, newsLink, newsImageLink, newsId]
@@ -54,6 +53,45 @@ const updateNews = async (newsId, data) => {
     throw new Error("Error updating news: " + err.message);
   }
 };
+
+
+// const updateNews = async (newsId, data) => {
+//   const {
+//     news_title,
+//     news_detail,
+//     news_description,
+//     news_link,
+//     news_image_link,
+//   } = data;
+
+//   // Replace undefined or empty fields with null (or empty string, based on your preference)
+//   const updatedData = {
+//     news_title: news_title || null,
+//     news_detail: news_detail || null,
+//     news_description: news_description || null,
+//     news_link: news_link || null,
+//     news_image_link: news_image_link || null,
+//   };
+
+//   try {
+//     await db.query(
+//       `UPDATE News 
+//        SET news_title = ?, news_detail = ?, news_description = ?, news_link = ?, news_image_link = ?
+//        WHERE news_id = ?`,
+//       [
+//         updatedData.news_title,
+//         updatedData.news_detail,
+//         updatedData.news_description,
+//         updatedData.news_link,
+//         updatedData.news_image_link,
+//         newsId,
+//       ]
+//     );
+//     return { message: "News updated successfully" };
+//   } catch (err) {
+//     throw new Error("Error updating news: " + err.message);
+//   }
+// };
 
 const deleteNews = async (newsId) => {
   try {

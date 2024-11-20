@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-// src/components/AddNewsForm.jsx
-
 import React, { useState } from 'react';
 import { addNews } from '../../../Util/api/api';
 import classes from './AddNewsForm.module.css';

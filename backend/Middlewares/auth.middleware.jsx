@@ -1,7 +1,5 @@
 const jwt = require("jsonwebtoken");
 
-
-
 const authenticate = (req, res, next) => {
   const token = req.headers["x-api-key"];
   if (!token) return res.status(401).json({ error: "API key is required" });
@@ -15,3 +13,4 @@ const authenticate = (req, res, next) => {
 };
 
 module.exports = authenticate;
+
