@@ -8,19 +8,19 @@ const healthTipController = require("../Controllers/healthtip.controller");
 // Define routes related to health tips
 
 // Route to create a new health tip
-router.post("/", healthTipController.createHealthTip);
+router.post("/health-tips", healthTipController.createHealthTip);
 
 // Route to fetch a single health tip by ID
-router.get("/:id", healthTipController.getHealthTipById);
+router.get("/health-tips:id", healthTipController.getHealthTipById);
 
 // Route to fetch all health tips
-router.get("/", healthTipController.getAllHealthTips);
+router.get("/health-tips", healthTipController.getAllHealthTips);
 
 // Route to update a health tip by ID
-router.put("/:id", healthTipController.updateHealthTip);
+router.put("/health-tips:id", healthTipController.updateHealthTip);
 
 // Route to delete a health tip by ID
-router.delete("/:id", healthTipController.deleteHealthTip);
+router.delete("/health-tips:id", healthTipController.deleteHealthTip);
 
 // Export the health tip routes
 module.exports = router;

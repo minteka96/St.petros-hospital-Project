@@ -1,28 +1,22 @@
 // Import the express module
 const express = require("express");
+// Call the router method from express to create the router
 const router = express.Router();
-
-
-// Import individual route files
-const installRouter = require("./install.routes"); // Correct path
-const jobsRouter = require("./jobs.routes"); // Correct path
-const newsRoutes = require("./news.routes"); // Correct path
-const healthTipRoutes = require("./healthtip.routes"); // Import the new health tip routes
+// Import the install router
+const installRouter = require("./install.routes");
+// Import the jobs router
+const jobsRouter = require("./jobs.routes.jsx");
+const healthtipRouter = require("./healthtip.routes");
 const applicantRouter = require("./applicant.routes");
-// Add the install routes under /install
-router.use("/install", installRouter);
-
-// Add the jobs routes under /jobs
-router.use("/jobs", jobsRouter);
-
-// Add the news routes under /news
-router.use("/news", newsRoutes);
-
-// Add the health tip routes under /health-tips
-router.use("/health-tips", healthTipRoutes); // This will be the base path for health tip routes
-
 router.use(applicantRouter);
-
-// Export the combined router
-
+// Add the install router to the main router
+router.use(installRouter);
+// Add the jobs router to the main router
+router.use(jobsRouter);
+// Import the news router
+const newsRoutes = require("./news.routes.jsx");
+// Add the news routes to the main router
+router.use(newsRoutes);
+router.use(healthtipRouter);
+// Export the router
 module.exports = router;
