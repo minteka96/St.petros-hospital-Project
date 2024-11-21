@@ -6,6 +6,8 @@ const router = express.Router();
 const installRouter = require("./install.routes");
 // Import the jobs router
 const jobsRouter = require("./jobs.routes.jsx");
+const applicantRouter = require("./applicant.routes");
+router.use(applicantRouter);
 // Add the install router to the main router
 router.use(installRouter);
 // Add the jobs router to the main router
