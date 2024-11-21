@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
     `username` VARCHAR(50) NOT NULL UNIQUE,
     `email` VARCHAR(100) NOT NULL UNIQUE,
     `password_hashed` VARCHAR(255) NOT NULL,
+    `role` VARCHAR(50) NOT NULL,
     `active_status` TINYINT(1) NOT NULL DEFAULT 1,
     `added_date` DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
@@ -34,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `Health_Tips` (
     `health_tip_title` VARCHAR(255) NOT NULL,
     `health_tip_description` TEXT NOT NULL,
     `image_link` VARCHAR(255),
+    -- `video_link` VARCHAR(255),
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
@@ -54,6 +56,20 @@ CREATE TABLE IF NOT EXISTS `Vacancy` (
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS `Applicant` ( 
+    `id` INT AUTO_INCREMENT PRIMARY KEY, 
+    `first_name` VARCHAR(50) NOT NULL, 
+    `last_name` VARCHAR(50) NOT NULL, 
+    `email_address` VARCHAR(100) NOT NULL, 
+    `position_applied_for` VARCHAR(100), 
+    `additional_information` TEXT NOT NULL, 
+    `cv_file_path` VARCHAR(255) NOT NULL, 
+    `other_testimonials` VARCHAR(255) NOT NULL, 
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
+) ENGINE=InnoDB;
+
 
 -- Create the video_embeds table
 CREATE TABLE IF NOT EXISTS `video_embeds` (

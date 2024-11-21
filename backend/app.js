@@ -19,6 +19,7 @@ const app = express();
 const port = process.env.PORT || 3000; // Fallback to port 3000 if process.env.PORT is not defined
 
 // Middleware
+
 app.use(cors(corsOptions));
 app.use(express.static("public"));
 app.use(express.json());
@@ -26,7 +27,7 @@ app.use("/api", tenderRoutes); // Use /api as the base path
 app.use("/api", newsRoutes); // Use /api as the base path for news routes
 app.use("/api", healthTipRoutes);
 app.use("/", router); // If you have additional routes
-
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
