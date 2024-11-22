@@ -1,10 +1,38 @@
+.gradientCustom {
+/* fallback for old browsers */
+background: #F26524;
+margin: 0;
+/* height: 100vh; */
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right, #ffffff, #1F867E);
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right, #ffffff, #1F867E)
+}
 .admin-menu {
-  background:  #00A99E;
+  
+  background: #00a99e;
   padding: 10px 20px;
+}
+.color1 {
+  color: #f26524;
+}
+.color2 {
+  color: #00a99e;
+}
+.bg1 {
+  background-color: #f26524;
+}
+.bg2 {
+  background-color: #00a99e;
+}
+.normalBg{
+  background-color: #F4F4F9;
 }
 .admin-menu h2 {
   font-size: 21px;
-  font-weight: 300;
+  font-weight: 900;
+  text-shadow: #211e1e 1px 1px 1px;
   line-height: 50px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -12,31 +40,29 @@
   display: block;
   text-decoration: none;
 }
-.list-group{
-  width: 95%;
+.list-group {
+  width: 90%;
   margin-top: 10%;
 }
 .admin-left-side .list-group-item.active {
   z-index: 2;
   color: #fff;
-  background-color: #38a5d8;
-  border-color: #75beca;
-  border-bottom: 1px solid #616675;
+  font-weight: 600;
 }
-
+.admin-right-side{
+  /* width: 95%; */
+}
 .admin-left-side .list-group-item {
-  background-color: #00A99E;
-  border-bottom: 1px solid #616675;
-  margin-bottom: 0px;
-  color: #fff;
+width: 90%;
+  border-radius: 20px;
 }
 
 .admin-left-side a {
   color: #a2a5ad;
-  border-bottom: 1px solid #616675;
 }
 .admin-left-side a:hover {
-  color: #fff;
+  background: rgba(1, 253, 232, 0.148);
+  border-radius: 10px;
 }
 .validation-error {
   color: red;
@@ -44,12 +70,9 @@
   font-style: italic;
 }
 
-/* My trying */
 .anchor-link a {
   display: block;
   padding: 8px 3px;
   text-decoration: none;
   color: inherit;
-  border-bottom: 1px solid #ddd;
 }
-

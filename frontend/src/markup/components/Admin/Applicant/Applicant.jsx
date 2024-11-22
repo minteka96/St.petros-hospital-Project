@@ -7,6 +7,8 @@ import { useNavigate } from "react-router";
 const ApplicantsTable = () => {
  const navigate = useNavigate();
   const [applicants, setApplicants] = useState([]);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchApplicants = async () => {
       try {
@@ -20,6 +22,22 @@ const ApplicantsTable = () => {
     fetchApplicants();
   }, []);
 
+  const deleteAll=async()=>{
+    if(confirmDelete){
+      setLoading(true);
+      try {
+        await applicantService.deleteAllApplicants();
+        const response = await applicantService.getAllApplicants();
+        setLoading(false);
+        setApplicants(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+      
+    }
+    setConfirmDelete(!confirmDelete);
+  }
   console.log("Applicants:", applicants);
 
   return (
@@ -63,6 +81,9 @@ const ApplicantsTable = () => {
               </td>
             </tr>
           ))}
+          {applicants.length === 0 && <tr><td colSpan="6">No Applicants Found</td></tr>}
+          {applicants.length !== 0 &&<button onClick={deleteAll} className="btn btn-danger">{loading ? "loading.." :confirmDelete ? "sure to delete" : "Delete All Applicants"}</button>}
+          {confirmDelete && <button className="btn btn-danger" onClick={()=>{setConfirmDelete(false)}}>no</button>}
         </tbody>
       </table>
     </div>

@@ -89,7 +89,7 @@ function ApplicantDetail() {
   };
 
   return (
-    <div className="container my-5">
+    <div className="container py-5">
       <div className="card shadow-lg">
         <div className="card-header text-white">
           <h3 className="mb-0">

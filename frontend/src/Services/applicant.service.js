@@ -89,5 +89,40 @@ const deleteApplicant = async (id) => {
   }
 };
 
-const applicantService = { getAllApplicants, getApplicantById, deleteApplicant };
+//delete all applications
+const deleteAllApplicants = async () => {
+  const requestOptions = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const response = await fetch(
+      `${api_url}/api/applicants`,
+      requestOptions
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    if (response.status === 200) {
+      return data;
+    }
+    throw new Error(
+      "Failed to fetch applications: " + (data.message || "Unknown error")
+    );    
+  } catch (error) {
+    console.error("Error fetching applications:", error);
+    throw error;    
+  }
+};
+
+const applicantService = {
+  getAllApplicants,
+  getApplicantById,
+  deleteApplicant,
+  deleteAllApplicants,
+};
 export default applicantService;

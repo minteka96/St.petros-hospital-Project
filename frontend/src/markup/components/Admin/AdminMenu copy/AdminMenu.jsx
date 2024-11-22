@@ -9,7 +9,7 @@ function AdminMenu() {
       <div className="admin-menu">
         <h2>Admin Menu</h2>
       </div>
-      <div className="list-group">
+      <div className="list-group gap-2 mx-2 d-flex align-items-center">
         <Link to="/admin" className="list-group-item">
           Dashboard
         </Link>
@@ -36,12 +36,9 @@ function AdminMenu() {
           List of Jobs
         </Link>
         <Link to="/admin-dashboard/applicationform" className="list-group-item">
-          Application 
+          Application
         </Link>
-        <Link
-          to="/admin/applicant"
-          className="list-group-item"
-        >
+        <Link to="/admin/applicant" className="list-group-item">
           List of Applicants
         </Link>
         <Link to="/admin-dashboard/add-tender" className="list-group-item">

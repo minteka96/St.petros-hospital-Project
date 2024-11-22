@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import newsService from "../../../../services/news.service"; // Adjust path if necessary
 import classes from "./NewsList.module.css";
 import { format } from "date-fns"; // Import the 'format' function from date-fns
+const api_url = import.meta.env.VITE_API_URL;
 
 const NewsList = () => {
   const [newsList, setNewsList] = useState([]);
@@ -70,12 +71,15 @@ const NewsList = () => {
                 <td>{news.news_detail}</td>
                 <td>{news.news_description}</td>
                 <td>{news.news_link}</td>
-                <td>{news.news_image_link}</td>
+                <td style={{ textAlign: "center" }}>
+                  <a href={`${api_url}${news.news_image_link}`}>
+                    <img style={{ width: "60px",borderRadius:"5%" }} src={`${api_url}${news.news_image_link}`} alt="click to view" />
+                  </a>
+                </td>
                 {/* <td>{news.news_category}</td> */}
                 {/* <td>{new Date(news.news_date).toLocaleDateString()}</td> */}
                 <td>{format(new Date(news.created_at), "MM-dd-yyyy HH:mm")}</td>
                 <td>
-                  
                   {/* <button
                     onClick={() =>
                       (window.location.href = `/news/${news.news_id}`)

@@ -1,21 +1,32 @@
-const db = require("../Config/db.config.js");
+const db = require("../Config/db.config");
 
+// Function to create a news entry in the database
 const createNews = async (data) => {
   const { newsTitle, newsDetail, newsDescription, newsLink, newsImageLink } =
     data;
 
   try {
+    // The INSERT query should return an array with the result at index 0
     const result = await db.query(
       `INSERT INTO News (news_title, news_detail, news_description, news_link, news_image_link)
       VALUES (?, ?, ?, ?, ?)`,
       [newsTitle, newsDetail, newsDescription, newsLink, newsImageLink]
     );
 
-    return { id: result.insertId };
+    // Return the inserted ID and other details
+    return {
+      newsTitle,
+      newsDetail,
+      newsDescription,
+      newsLink,
+      newsImageLink,
+    };
   } catch (err) {
+    console.error("Error creating news:", err);
     throw new Error("Error creating news: " + err.message);
   }
 };
+
 
 const getNewsById = async (newsId) => {
   try {
@@ -54,7 +65,6 @@ const updateNews = async (newsId, data) => {
   }
 };
 
-
 // const updateNews = async (newsId, data) => {
 //   const {
 //     news_title,
@@ -75,7 +85,7 @@ const updateNews = async (newsId, data) => {
 
 //   try {
 //     await db.query(
-//       `UPDATE News 
+//       `UPDATE News
 //        SET news_title = ?, news_detail = ?, news_description = ?, news_link = ?, news_image_link = ?
 //        WHERE news_id = ?`,
 //       [

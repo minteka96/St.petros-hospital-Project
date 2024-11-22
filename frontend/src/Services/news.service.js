@@ -1,16 +1,11 @@
-// Import from the env
 const api_url = import.meta.env.VITE_API_URL;
 
-// A function to send POST request to create a new news entry
 const createNews = async (formData) => {
   const requestOptions = {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      // "x-access-token": loggedInEmployeeToken,
-    },
-    body: JSON.stringify(formData),
+    body: formData,
   };
+
   try {
     const response = await fetch(`${api_url}/api/news`, requestOptions);
     if (!response.ok) {
@@ -20,18 +15,17 @@ const createNews = async (formData) => {
       );
     }
     const data = await response.json();
-    if (data.status === "success") {
-      return data;
-    } else {
-      throw new Error(
-        `Failed to create news: ${data.message || "Unknown error"}`
-      );
-    }
+    return data;
   } catch (error) {
     console.error("Error creating news:", error);
-    throw error;
+    throw error;  // Throw error to be caught in the component
   }
 };
+
+// export default { createNews };
+
+
+
 
 // A function to send GET request to get all news entries
 const getAllNews = async () => {

@@ -9,50 +9,51 @@ const AddNewsForm = () => {
   const [newsDetail, setNewsDetail] = useState("");
   const [newsDescription, setNewsDescription] = useState("");
   const [newsLink, setNewsLink] = useState("");
-  const [newsImageLink, setNewsImageLink] = useState("");
+  const [newsImageLink, setNewsImageLink] = useState(null);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    // Create form data object with updated field names to match the backend
-    const formData = {
-      news_title: newsTitle,
-      news_detail: newsDetail,
-      news_description: newsDescription,
-      news_link: newsLink,
-      news_image_link: newsImageLink,
-    };
+  const formData = new FormData();
+  formData.append("news_title", newsTitle);
+  formData.append("news_detail", newsDetail);
+  formData.append("news_description", newsDescription);
+  formData.append("news_link", newsLink);
+  if (newsImageLink) {
+    formData.append("news_image", newsImageLink);
+  }
 
-    try {
-      // Call the createNews service
-      const response = await newsService.createNews(formData);
-
-      if (response.error) {
-        setError(response.error);
-        setSuccess("");
-      } else {
-        setSuccess("News added successfully!");
-        setError("");
-
-        // Clear form fields
-        setNewsTitle("");
-        setNewsDetail("");
-        setNewsDescription("");
-        setNewsLink("");
-        setNewsImageLink("");
-        // Add 2-second timeout before navigating
-        setTimeout(() => {
-          navigate("/admin/news");
-        }, 2000);
-      }
-    } catch (err) {
-      setError("Something went wrong while adding the news.");
+  try {
+    const response = await newsService.createNews(formData);
+console.log("response", response);
+    if (response.error) {
+      setError(response.error);
       setSuccess("");
+    } else {
+      setSuccess("News added successfully!");
+      setError("");
+
+      setNewsTitle("");
+      setNewsDetail("");
+      setNewsDescription("");
+      setNewsLink("");
+      setNewsImageLink(null);
+
+      setTimeout(() => {
+        navigate("/admin/news");
+      }, 2000);
     }
-  };
+  } catch (err) {
+    // Improved error handling
+    console.error("Error submitting news:", err);
+    // setError("Something went wrong while adding the news.");
+    // alert("Something went wrong while adding the news.");
+  }
+};
+
 
   return (
     <form onSubmit={handleSubmit} className={classes.formContainer}>
@@ -88,11 +89,9 @@ const AddNewsForm = () => {
         className={classes.inputField}
       />
       <input
-        type="text"
-        placeholder="Image URL"
-        value={newsImageLink}
-        onChange={(e) => setNewsImageLink(e.target.value)}
-        className={classes.inputField}
+        type="file"
+        // accept="image/*"
+        onChange={(e) => setNewsImageLink(e.target.files[0])}
       />
       <button type="submit" className={classes.submitButton}>
         Add News

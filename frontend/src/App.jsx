@@ -62,18 +62,30 @@ import PrivateAuthRoute from "./markup/components/Auth/PrivateAuthRoute.jsx";
 import AdminRoute from "./markup/routes/AdminRoute.jsx";
 /* **************** My Task End Here about news  ******************/
 import ApplicationForms from "../src/markup/pages/testApplicant.jsx";
+import Login from "./markup/pages/Login/Login.jsx";
+
 function App() {
+  // check if thr route is '/login' or not
+  if (window.location.pathname === "/login") {
+    
+  } 
   return (
     <div>
-      <Header />
+      {["/login", "/admin"].some((path) =>
+        window.location.pathname.startsWith(path)
+      ) ? null : (
+        <Header />
+      )}
+
       <Routes>
         {/******************* My Task Start Here ****************/}
-        <Route path="/admin" element={<AdminDashboard />} />
+        {/* <Route path="/admin" element={<AdminDashboard />} /> */}
         <Route path="/admin/add-news" element={<AddNews />} />
         <Route path="/admin/news" element={<Newss />} />
         <Route path="/admin/news/edit/:news_id" element={<EditNews />} />
         {/* ******************** My Task End Here *****************/}
 
+        <Route path="/login" element={<Login />} />
         <Route path="/test" element={<ApplicationForms />} />
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
@@ -112,7 +124,6 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/qulity&research" element={<QulityResearch />} />
         <Route path="/researchpublication" element={<ResearchPublication />} />
-        <Route path="/AdminDashboard" element={<AdminDashboard />} />
         {/* news page */}
         <Route path="/news" element={<News />} />
         <Route path="/newsDetails/:postId" element={<NewsDetails />} />
@@ -140,7 +151,11 @@ function App() {
           <Route path="applicationform" element={<VacancyApplicationForm />} />
         </Route>
       </Routes>
-      <Footer />
+      {["/login", "/admin"].some((path) =>
+        window.location.pathname.startsWith(path)
+      ) ? null : (
+        <Footer />
+      )}
     </div>
   );
 }

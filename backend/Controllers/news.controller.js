@@ -1,28 +1,24 @@
-// Import the news service to handle database operations related to news
-const newsService = require("../Services/news.service.jsx");
+const newsService = require("../Services/news.service");
 
-// Function to create a new news entry
+// Function to create a news entry
 const createNews = async (req, res) => {
   try {
-    console.log(req.body); // Log the request body for debugging purposes (ensure it's properly structured)
+    // Extract data from the request body
+    const { news_title, news_detail, news_description, news_link } = req.body;
 
-    // Destructure the news data from the request body
-    const {
-      news_title,
-      news_detail,
-      news_description,
-      news_link,
-      news_image_link,
-    } = req.body;
-
-    // Validate that required fields (title and detail) are present
+    // Validate required fields
     if (!news_title || !news_detail) {
       return res
         .status(400)
-        .json({ error: "Title and detail fields are required" }); // Respond with a validation error
+        .json({ error: "News title and detail are required" });
     }
 
-    // Prepare the data to be sent to the news service for creation
+    // Get the file path for the uploaded image
+    const news_image_link = req.files.news_image // Fixed field name here
+      ? `/uploads/news/${req.files.news_image[0].filename}`
+      : null;
+
+    // Prepare data for the service
     const newsData = {
       newsTitle: news_title,
       newsDetail: news_detail,
@@ -31,17 +27,22 @@ const createNews = async (req, res) => {
       newsImageLink: news_image_link,
     };
 
-    // Call the news service to create the news entry in the database
+    // Call the service to save the news to the database
     const result = await newsService.createNews(newsData);
 
-    // Respond with a success message and the ID of the created news entry
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
+
+    // Respond with success and the created news data
     res.status(201).json({
-      status: "success",
       message: "News created successfully",
-      id: result.id,
+      data: {
+        id: result.id,
+        ...newsData,
+        newsImageLink: news_image_link ? `${baseUrl}${news_image_link}` : null,
+      },
     });
   } catch (err) {
-    // Catch any errors during the process and respond with an error message
+    // Handle errors
     res.status(500).json({ error: err.message });
   }
 };
