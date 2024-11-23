@@ -55,9 +55,12 @@ import VacancyApplicationForm from "./markup/components/Dashbord/VacancyApplicat
 import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
 
 /* ************ My Task Start Here about news ********************  */
-import AddNews from "./markup/pages/Admin/AddNews.jsx";
-import EditNews from "./markup/pages/Admin/EditNews.jsx";
-import Newss from "./markup/pages/Admin/News.jsx";
+import AddNews from "./markup/components/Dashbord/AddNewsForm.jsx";
+import Newss from "./markup/components/Dashbord/NewsList/NewsList.jsx";
+import EditNews from "./markup/components/Dashbord/NewsEditForm/NewsEditForm.jsx";
+// import AddNews from "./markup/pages/Admin/AddNews.jsx";
+// import EditNews from "./markup/pages/Admin/EditNews.jsx";
+// import Newss from "./markup/pages/Admin/News.jsx";
 import PrivateAuthRoute from "./markup/components/Auth/PrivateAuthRoute.jsx";
 import AdminRoute from "./markup/routes/AdminRoute.jsx";
 /* **************** My Task End Here about news  ******************/
@@ -78,13 +81,6 @@ function App() {
       )}
 
       <Routes>
-        {/******************* My Task Start Here ****************/}
-        {/* <Route path="/admin" element={<AdminDashboard />} /> */}
-        <Route path="/admin/add-news" element={<AddNews />} />
-        <Route path="/admin/news" element={<Newss />} />
-        <Route path="/admin/news/edit/:news_id" element={<EditNews />} />
-        {/* ******************** My Task End Here *****************/}
-
         <Route path="/login" element={<Login />} />
         <Route path="/test" element={<ApplicationForms />} />
         <Route path="/" element={<Home />} />
@@ -141,11 +137,17 @@ function App() {
         {/* Admin Dashboard with nested routes */}
         <Route path="/admin/*" element={<AdminRoute />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />}>
-          <Route path="addnews" element={<AddNewsForm />} />
+          
+          {/******************* My Task Start Here ****************/}
+          <Route path="add-news" element={<AddNews />} />
+          <Route path="news" element={<Newss />} />
+          <Route path="news/edit/:news_id" element={<EditNews />} />
+          {/* ******************** My Task End Here *****************/}
+
           <Route path="addnewsdetail" element={<AddNewsDetailForm />} />
           <Route path="vacancy-list" element={<VacancyList />} />
           <Route path="application-list" element={<ApplicationList />} />
-          <Route path="news-list" element={<NewsList />} />
+
           <Route path="add-vacancy" element={<AddVacancyForm />} />
           <Route path="add-tender" element={<AddTenderForm />} />
           <Route path="applicationform" element={<VacancyApplicationForm />} />

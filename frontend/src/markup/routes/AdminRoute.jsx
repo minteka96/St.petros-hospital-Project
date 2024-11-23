@@ -6,6 +6,14 @@ import ApplicantDetails from "../components/Admin/Applicant/ApplicantDetail.jsx"
 import AdminMenu from "../components/Admin/AdminMenu copy/AdminMenu.jsx";
 import logo from "../../assets/img/logo copy.png";
 import Admin from "../components/Admin/AdminDashbord/Admin.jsx";
+
+
+/* ************ My Task Start Here about news ********************  */
+import AddNews from "../components/Admin/AddNewsForm/AddNewsForm.jsx";
+import EditNews from "../components/Admin/NewsEditForm/NewsEditForm.jsx";
+import Newss from "../pages/Admin/News.jsx";
+/* **************** My Task End Here about news  ******************/
+
 const AdminRoute = () => {
   return (
     <div>
@@ -58,6 +66,14 @@ const AdminRoute = () => {
                 <Route path="/applicant/:id" element={<ApplicantDetails />} />
                 {/************************ end *****************/}
 
+                {/******************* My Task Start Here ****************/}
+                <Route path="/add-news" element={<AddNews />} />
+                <Route path="/news" element={<Newss />} />
+                <Route
+                  path="news/edit/:news_id"
+                  element={<EditNews />}
+                />
+                {/* ******************** My Task End Here *****************/}
                 {/* Add more admin routes here */}
               </Routes>
             </div>

@@ -1,122 +1,96 @@
-import React, { useState } from 'react';
-import { addNews } from '../../../Util/api/api';
-import classes from './AddNewsForm.module.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import newsService from "../../../Services/news.service"; // Adjust the path if necessary
+import classes from "./AddNewsForm.module.css";
 
 const AddNewsForm = () => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [image, setImage] = useState('');
-  const [alt, setAlt] = useState('');
-  const [detailsLink, setDetailsLink] = useState('');
-  const [categoryLink, setCategoryLink] = useState('');
-  const [category, setCategory] = useState('');
-  const [date, setDate] = useState('');
-  const [author, setAuthor] = useState('');
-  const [authorLink, setAuthorLink] = useState('');
+  // State variables for the form
+  const [newsTitle, setNewsTitle] = useState("");
+  const [newsDetail, setNewsDetail] = useState("");
+  const [newsDescription, setNewsDescription] = useState("");
+  const [newsLink, setNewsLink] = useState("");
+  const [newsImageLink, setNewsImageLink] = useState(null);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("news_title", newsTitle);
+    formData.append("news_detail", newsDetail);
+    formData.append("news_description", newsDescription);
+    formData.append("news_link", newsLink);
+    if (newsImageLink) {
+      formData.append("news_image", newsImageLink);
+    }
+
     try {
-      await addNews({
-        title,
-        content,
-        image,
-        alt,
-        detailsLink,
-        categoryLink,
-        category,
-        date,
-        author,
-        authorLink,
-      });
-      // Clear the form fields
-      setTitle('');
-      setContent('');
-      setImage('');
-      setAlt('');
-      setDetailsLink('');
-      setCategoryLink('');
-      setCategory('');
-      setDate('');
-      setAuthor('');
-      setAuthorLink('');
-    } catch (error) {
-      console.error('Error adding news:', error);
+      const response = await newsService.createNews(formData);
+      console.log("response", response);
+      if (response.error) {
+        setError(response.error);
+        setSuccess("");
+      } else {
+        setSuccess("News added successfully!");
+        setError("");
+
+        setNewsTitle("");
+        setNewsDetail("");
+        setNewsDescription("");
+        setNewsLink("");
+        setNewsImageLink(null);
+
+        setTimeout(() => {
+          navigate("/admin/news");
+        }, 2000);
+      }
+    } catch (err) {
+      // Improved error handling
+      console.error("Error submitting news:", err);
+      // setError("Something went wrong while adding the news.");
+      // alert("Something went wrong while adding the news.");
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className={classes.formContainer}>
       <h2>Add News</h2>
+      {error && <div className={classes.errorMessage}>{error}</div>}
+      {success && <div className={classes.successMessage}>{success}</div>}
       <input
         type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        placeholder="News Title"
+        value={newsTitle}
+        onChange={(e) => setNewsTitle(e.target.value)}
         className={classes.inputField}
         required
       />
       <textarea
-        placeholder="Content"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
+        placeholder="News Detail"
+        value={newsDetail}
+        onChange={(e) => setNewsDetail(e.target.value)}
         className={classes.textareaField}
         required
       />
-      <input
-        type="text"
-        placeholder="Image URL"
-        value={image}
-        onChange={(e) => setImage(e.target.value)}
-        className={classes.inputField}
+      <textarea
+        placeholder="News Description"
+        value={newsDescription}
+        onChange={(e) => setNewsDescription(e.target.value)}
+        className={classes.textareaField}
       />
       <input
         type="text"
-        placeholder="Image Alt Text"
-        value={alt}
-        onChange={(e) => setAlt(e.target.value)}
+        placeholder="News Link"
+        value={newsLink}
+        onChange={(e) => setNewsLink(e.target.value)}
         className={classes.inputField}
       />
       <input
-        type="text"
-        placeholder="Details Link"
-        value={detailsLink}
-        onChange={(e) => setDetailsLink(e.target.value)}
-        className={classes.inputField}
-      />
-      <input
-        type="text"
-        placeholder="Category Link"
-        value={categoryLink}
-        onChange={(e) => setCategoryLink(e.target.value)}
-        className={classes.inputField}
-      />
-      <input
-        type="text"
-        placeholder="Category"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        className={classes.inputField}
-      />
-      <input
-        type="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-        className={classes.inputField}
-      />
-      <input
-        type="text"
-        placeholder="Author"
-        value={author}
-        onChange={(e) => setAuthor(e.target.value)}
-        className={classes.inputField}
-      />
-      <input
-        type="text"
-        placeholder="Author Link"
-        value={authorLink}
-        onChange={(e) => setAuthorLink(e.target.value)}
-        className={classes.inputField}
+        type="file"
+        // accept="image/*"
+        onChange={(e) => setNewsImageLink(e.target.files[0])}
       />
       <button type="submit" className={classes.submitButton}>
         Add News

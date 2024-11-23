@@ -1,0 +1,52 @@
+.newsListContainer {
+  padding: 20px;
+}
+
+.newsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.newsTable th,
+.newsTable td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.viewButton {
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.editButton {
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.deleteButton {
+  color: #fff;
+  background-color: #dc3545;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.errorMessage {
+  color: #dc3545;
+  margin-bottom: 10px;
+}
+
+.successMessage {
+  color: #28a745;
+  margin-bottom: 10px;
+}

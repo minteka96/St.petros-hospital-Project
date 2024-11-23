@@ -73,7 +73,11 @@ const NewsList = () => {
                 <td>{news.news_link}</td>
                 <td style={{ textAlign: "center" }}>
                   <a href={`${api_url}${news.news_image_link}`}>
-                    <img style={{ width: "60px",borderRadius:"5%" }} src={`${api_url}${news.news_image_link}`} alt="click to view" />
+                    <img
+                      style={{ width: "60px", borderRadius: "5%" }}
+                      src={`${api_url}${news.news_image_link}`}
+                      alt="click to view"
+                    />
                   </a>
                 </td>
                 {/* <td>{news.news_category}</td> */}
@@ -90,7 +94,7 @@ const NewsList = () => {
                   </button> */}
                   <button
                     onClick={() =>
-                      (window.location.href = `/admin/news/edit/${news.news_id}`)
+                      (window.location.href = `/admin-dashboard/news/edit/${news.news_id}`)
                     }
                     className={classes.editButton}
                   >
@@ -98,8 +102,7 @@ const NewsList = () => {
                   </button>
                   <button
                     onClick={() => handleDelete(news.news_id)}
-                    className={classes.deleteButton}
-                  >
+                    className={classes.deleteButton}>
                     Delete
                   </button>
                 </td>
