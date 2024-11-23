@@ -43,7 +43,7 @@ const AddNewsForm = () => {
         setNewsImageLink(null);
 
         setTimeout(() => {
-          navigate("/admin/news");
+          navigate("/admin-dashboard/news");
         }, 2000);
       }
     } catch (err) {

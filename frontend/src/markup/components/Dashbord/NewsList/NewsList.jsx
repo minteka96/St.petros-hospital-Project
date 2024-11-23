@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-import newsService from "../../../../Services/news.service"; // Adjust path if necessary
+import { useNavigate } from "react-router-dom";
+import newsService from "../../../../Services/news.service";
 import classes from "./NewsList.module.css";
-import { format } from "date-fns"; // Import the 'format' function from date-fns
+import { format } from "date-fns";
 const api_url = import.meta.env.VITE_API_URL;
 
 const NewsList = () => {
   const [newsList, setNewsList] = useState([]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await newsService.getAllNews(); // Assumes this method exists
+        const response = await newsService.getAllNews();
         setNewsList(response.data || []);
       } catch (err) {
         setError("Failed to fetch news list.");
@@ -28,9 +30,9 @@ const NewsList = () => {
     }
 
     try {
-      await newsService.deleteNews(newsId); // Assumes this method exists
-      setNewsList(newsList.filter((news) => news.news_id !== newsId)); // Update newsList after deletion
-      setSuccess("News deleted successfully!!");
+      await newsService.deleteNews(newsId);
+      setNewsList(newsList.filter((news) => news.news_id !== newsId));
+      setSuccess("News deleted successfully!");
     } catch (err) {
       setError("Failed to delete news item.");
     }
@@ -46,14 +48,6 @@ const NewsList = () => {
       ) : (
         <table className={classes.newsTable}>
           <thead>
-            {/* <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Category</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr> */}
-
             <tr>
               <th>Title</th>
               <th>Detail</th>
@@ -80,21 +74,13 @@ const NewsList = () => {
                     />
                   </a>
                 </td>
-                {/* <td>{news.news_category}</td> */}
-                {/* <td>{new Date(news.news_date).toLocaleDateString()}</td> */}
                 <td>{format(new Date(news.created_at), "MM-dd-yyyy HH:mm")}</td>
                 <td>
-                  {/* <button
-                    onClick={() =>
-                      (window.location.href = `/news/${news.news_id}`)
-                    }
-                    className={classes.viewButton}
-                  >
-                    View
-                  </button> */}
                   <button
                     onClick={() =>
-                      (window.location.href = `/admin-dashboard/news/edit/${news.news_id}`)
+                      navigate(`/admin-dashboard/news/edit/${news.news_id}`, {
+                        state: { news },
+                      })
                     }
                     className={classes.editButton}
                   >
@@ -102,7 +88,8 @@ const NewsList = () => {
                   </button>
                   <button
                     onClick={() => handleDelete(news.news_id)}
-                    className={classes.deleteButton}>
+                    className={classes.deleteButton}
+                  >
                     Delete
                   </button>
                 </td>

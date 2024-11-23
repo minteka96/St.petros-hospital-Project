@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import newsService from "../../../../Services/news.service"; // Adjust path if necessary
-import classes from "./EditNewsForm.module.css"; // Adjust path if necessary
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import newsService from "../../../../Services/news.service";
+import classes from "./EditNewsForm.module.css";
 
 const EditNewsForm = () => {
-  // const { newsId } = useParams(); // Get the news ID from URL params
-  const { news_id } = useParams(); // Extract `news_id` from the URL
+  const { news_id } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     news_title: "",
@@ -17,43 +18,71 @@ const EditNewsForm = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchNewsDetails = async () => {
-      try {
-        const response = await newsService.getNewsById(news_id); // Fetch the news details by ID
-        const news = response.data;
-        console.log('news',news)
-        setFormData({
-          news_title: news.news_title || "",
-          news_detail: news.news_detail || "",
-          news_description: news.news_description || "",
-          news_link: news.news_link || "",
-          news_image: news.news_image_link || "",
-        });
-      } catch (err) {
-        setError("Failed to fetch news details.");
-      } finally {
-        setLoading(false);
-      }
+    const populateFormData = (news) => {
+      setFormData({
+        news_title: news.news_title || "",
+        news_detail: news.news_detail || "",
+        news_description: news.news_description || "",
+        news_link: news.news_link || "",
+        news_image: news.news_image_link || "", // Safely handle the `news_image_link` field
+      });
     };
 
-    fetchNewsDetails();
-  }, [news_id]);
+    if (location.state?.news) {
+      // Use passed state to populate the form
+      populateFormData(location.state.news);
+      setLoading(false);
+    } else {
+      // Fetch the news details if state is not provided
+      const fetchNewsDetails = async () => {
+        try {
+          const response = await newsService.getNewsById(news_id);
+          if (response.data) {
+            populateFormData(response.data);
+          } else {
+            setError("News details not found.");
+          }
+        } catch (err) {
+          setError("Failed to fetch news details.");
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchNewsDetails();
+    }
+  }, [news_id, location.state]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    // Handle file inputs separately
+    if (name === "news_image" && e.target.files) {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: e.target.files[0], // Set the file object
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Create form data for file uploads
+    const formDataToSend = new FormData();
+    Object.keys(formData).forEach((key) => {
+      formDataToSend.append(key, formData[key]);
+    });
+
     try {
-      const response = await newsService.updateNews(news_id, formData);
+      const response = await newsService.updateNews(news_id, formDataToSend);
 
       if (response.error) {
         setError(response.error);
@@ -61,9 +90,8 @@ const EditNewsForm = () => {
       } else {
         setSuccess("News updated successfully!");
         setError("");
-        // Add 2-second timeout before navigating
         setTimeout(() => {
-          navigate("/admin/news");
+          navigate("/admin-dashboard/news");
         }, 2000);
       }
     } catch (err) {
@@ -75,13 +103,12 @@ const EditNewsForm = () => {
   if (loading) {
     return <p>Loading...</p>;
   }
-  console.log(formData);
+
   return (
     <form onSubmit={handleSubmit} className={classes.formContainer}>
       <h2>Edit News</h2>
       {error && <div className={classes.errorMessage}>{error}</div>}
       {success && <div className={classes.successMessage}>{success}</div>}
-
       <input
         type="text"
         name="news_title"
@@ -117,10 +144,9 @@ const EditNewsForm = () => {
       <input
         type="file"
         name="news_image"
-        // value={formData.news_image_link}
         onChange={handleChange}
-        // placeholder="Image URL"
         className={classes.inputField}
+        accept="image/*" // Restrict file input to image files
       />
       <button type="submit" className={classes.submitButton}>
         Update News
