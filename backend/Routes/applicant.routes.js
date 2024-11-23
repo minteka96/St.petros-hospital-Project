@@ -11,16 +11,16 @@ const storage = multer.diskStorage({
       file.fieldname === "cv_file" ? "uploads/cv" : "uploads/testimonials";
     cb(null, folder);
   },
-  // // uniqueName
-  // filename: (req, file, cb) => {
-  //   const uniqueName = `${Date.now()}_${file.originalname}`;
-  //   cb(null, uniqueName);
-  // },
+  // uniqueName
+  filename: (req, file, cb) => {
+    const uniqueName = `${Date.now()}_${file.originalname}`;
+    cb(null, uniqueName);
+  },
 
   // originalName
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
+  // filename: (req, file, cb) => {
+  //   cb(null, file.originalname);
+  // },
 });
 
 const upload = multer({ storage });

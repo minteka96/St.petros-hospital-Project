@@ -18,9 +18,15 @@ const storage = multer.diskStorage({
     }
     cb(null, dir);
   },
+  // uniqueName
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
+    const uniqueName = `${Date.now()}_${file.originalname}`;
+    cb(null, uniqueName);
   },
+
+  // filename: (req, file, cb) => {
+  //   cb(null, file.originalname);
+  // },
 });
 
 const upload = multer({ storage });
@@ -36,7 +42,11 @@ router.get("/api/news/:id", newsController.getNewsById);
 
 router.get("/api/news", newsController.getAllNews);
 
-router.put("/api/news/:id", newsController.updateNews);
+router.put(
+  "/api/news/:id",
+  upload.fields([{ name: "news_image", maxCount: 1 }]),
+  newsController.updateNews
+);
 
 router.delete("/api/news/:id", newsController.deleteNews);
 // Exporting the router to be used in the main application file
