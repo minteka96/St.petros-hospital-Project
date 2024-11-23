@@ -39,7 +39,6 @@ router.post(
 );
 
 router.get("/api/news/:id", newsController.getNewsById);
-
 router.get("/api/news", newsController.getAllNews);
 
 router.put(

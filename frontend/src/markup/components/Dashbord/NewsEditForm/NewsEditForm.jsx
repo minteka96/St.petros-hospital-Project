@@ -26,21 +26,19 @@ const EditNewsForm = () => {
         news_detail: news.news_detail || "",
         news_description: news.news_description || "",
         news_link: news.news_link || "",
-        news_image: news.news_image_link || "", // Safely handle the `news_image_link` field
+        news_image: "",
       });
     };
 
     if (location.state?.news) {
-      // Use passed state to populate the form
       populateFormData(location.state.news);
       setLoading(false);
     } else {
-      // Fetch the news details if state is not provided
       const fetchNewsDetails = async () => {
         try {
-          const response = await newsService.getNewsById(news_id);
-          if (response.data) {
-            populateFormData(response.data);
+          const news = await newsService.getNewsById(news_id);
+          if (news) {
+            populateFormData(news);
           } else {
             setError("News details not found.");
           }
@@ -50,40 +48,31 @@ const EditNewsForm = () => {
           setLoading(false);
         }
       };
-
       fetchNewsDetails();
     }
   }, [news_id, location.state]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
 
-    // Handle file inputs separately
-    if (name === "news_image" && e.target.files) {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: e.target.files[0], // Set the file object
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: files ? files[0] : value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create form data for file uploads
     const formDataToSend = new FormData();
     Object.keys(formData).forEach((key) => {
-      formDataToSend.append(key, formData[key]);
+      if (formData[key]) {
+        formDataToSend.append(key, formData[key]);
+      }
     });
 
     try {
       const response = await newsService.updateNews(news_id, formDataToSend);
-
       if (response.error) {
         setError(response.error);
         setSuccess("");
@@ -95,7 +84,7 @@ const EditNewsForm = () => {
         }, 2000);
       }
     } catch (err) {
-      setError("Something went wrong while updating the news.");
+      setError("Something went wrong while updating the news!");
       setSuccess("");
     }
   };
@@ -146,7 +135,7 @@ const EditNewsForm = () => {
         name="news_image"
         onChange={handleChange}
         className={classes.inputField}
-        accept="image/*" // Restrict file input to image files
+        accept="image/*"
       />
       <button type="submit" className={classes.submitButton}>
         Update News

@@ -89,22 +89,52 @@ const getNewsById = async (news_id) => {
 };
 
 // Function to update a specific news item
+// const updateNews = async (news_id, formData) => {
+//   const requestOptions = {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//       // "x-access-token": token,
+//     },
+//     body: JSON.stringify(formData),
+//   };
+
+//   try {
+//     const response = await fetch(
+//       `${api_url}/api/news/${news_id}`,
+//       requestOptions
+//     );
+
+//     if (!response.ok) {
+//       const errorText = await response.text();
+//       throw new Error(
+//         `HTTP error! Status: ${response.status}, Details: ${errorText}`
+//       );
+//     }
+//     const data = await response.json();
+//     if (data.status === "success") {
+//       return data;
+//     } else {
+//       throw new Error(
+//         `Failed to update news: ${data.message || "Unknown error"}`
+//       );
+//     }
+//   } catch (error) {
+//     console.error("Error updating news:", error);
+//     throw error;
+//   }
+// };
+
 const updateNews = async (news_id, formData) => {
   const requestOptions = {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      // "x-access-token": token,
-    },
-    body: JSON.stringify(formData),
+    body: formData, // FormData includes files and text data
   };
-
   try {
     const response = await fetch(
       `${api_url}/api/news/${news_id}`,
       requestOptions
     );
-
     if (!response.ok) {
       const errorText = await response.text();
       throw new Error(
@@ -112,18 +142,14 @@ const updateNews = async (news_id, formData) => {
       );
     }
     const data = await response.json();
-    if (data.status === "success") {
-      return data;
-    } else {
-      throw new Error(
-        `Failed to update news: ${data.message || "Unknown error"}`
-      );
-    }
+    return data;
   } catch (error) {
     console.error("Error updating news:", error);
     throw error;
   }
 };
+
+
 
 // A function to send DELETE request to delete a specific news item
 const deleteNews = async (news_id) => {
