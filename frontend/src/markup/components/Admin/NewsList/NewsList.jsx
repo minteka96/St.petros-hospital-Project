@@ -73,13 +73,14 @@ const NewsList = () => {
               <th>Actions</th>
             </tr>
           </thead>
+
           <tbody>
             {newsList.map((news) => (
               <tr key={news.news_id}>
-                <td>{news.news_title}</td>
-                <td>{news.news_detail}</td>
-                <td>{news.news_description}</td>
-                <td>
+                <td data-label="Title">{news.news_title}</td>
+                <td data-label="Detail">{news.news_detail}</td>
+                <td data-label="Description">{news.news_description}</td>
+                <td data-label="Link">
                   {news.news_link ? (
                     <a
                       href={news.news_link}
@@ -93,7 +94,7 @@ const NewsList = () => {
                     "No Link"
                   )}
                 </td>
-                <td style={{ textAlign: "center" }}>
+                <td data-label="Image Link" style={{ textAlign: "center" }}>
                   <a
                     href={
                       news.news_image_link
@@ -112,24 +113,23 @@ const NewsList = () => {
                     />
                   </a>
                 </td>
-                <td>
+                <td data-label="Date">
                   {format(new Date(news.created_at), "MM-dd-yyyy | HH:mm")}
                 </td>
-                <td>
+                <td data-label="Actions">
                   <button
                     onClick={() =>
                       navigate(`/admin/news/edit/${news.news_id}`, {
-                        state: { news }, // Pass the news item as state
+                        state: { news },
                       })
                     }
-                    className={classes.iconButton} // New CSS class
+                    className={classes.iconButton}
                   >
                     <FaEdit className={classes.editIcon} />
                   </button>
-
                   <button
                     onClick={() => handleDelete(news.news_id)}
-                    className={classes.iconButton} // New CSS class
+                    className={classes.iconButton}
                   >
                     <FaTrash className={classes.deleteIcon} />
                   </button>
