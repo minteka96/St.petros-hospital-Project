@@ -7,29 +7,33 @@ const AdminDashboard = () => {
   return (
     <div className="dashboardContainer">
       <div className="sidebar">
-        <div className="sec-title style-two">
+        <div className="sec-title style-two" style={{ textAlign:"center"}}>
           <h2>Admin Dashboard</h2>
-          <div className="text" style={{ backgroundColor: "#1F867E",borderRadius:"5px" }}>
+          <div
+            className="text"
+            style={{ backgroundColor: "#1F867E", borderRadius: "5px" }}
+          >
             Welcome to the Admin Dashboard! Here, you'll find all the tools and
             insights you need to manage our hospital efficiently.
           </div>
         </div>
         <nav>
-          {/* <Link to="/admin-dashboard/addnews">Add News</Link>
-          <Link to="/admin-dashboard/addnewsdetail">Add News Detail</Link>
-          <Link to="/admin-dashboard/news-list">News List</Link> */}
+          {/* <Link to="/admin-dashboard/add-news">Add News</Link>
+          <Link to="/admin-dashboard/news">News List</Link>
+          <Link to="/admin/news/edit/:news_id">News Edit</Link> */}
+          {/* <Link to="/admin-dashboard/addnewsdetail">Add News Detail</Link> */}
 
           {/*********************/}
-          <Link to="/admin/add-news">Add News</Link>
-          <Link to="/admin/news">News List</Link>
+          {/* <Link to="/admin/add-news">Add News</Link> */}
+          {/* <Link to="/admin/news">News List</Link> */}
           {/* <Link to="/admin/news/edit/:news_id">News Edit</Link> */}
           {/*********************/}
 
-          <Link to="/admin-dashboard/vacancy-list">Vacancy List</Link>
+          {/* <Link to="/admin-dashboard/vacancy-list">Vacancy List</Link>
           <Link to="/admin-dashboard/application-list">Application List</Link>
           <Link to="/admin-dashboard/add-vacancy">Add Vacancy</Link>
           <Link to="/admin-dashboard/add-tender">Add Tender</Link>
-          <Link to="/admin-dashboard/applicationform">Add Application</Link>
+          <Link to="/admin-dashboard/applicationform">Add Application</Link> */}
           {/* Updated link */}
         </nav>
       </div>

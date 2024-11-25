@@ -1,18 +1,15 @@
 const newsService = require("../Services/news.service");
-
 // Function to create a news entry
 const createNews = async (req, res) => {
   try {
     // Extract data from the request body
     const { news_title, news_detail, news_description, news_link } = req.body;
-
     // Validate required fields
     if (!news_title || !news_detail) {
       return res
         .status(400)
         .json({ error: "News title and detail are required" });
     }
-
     // Get the file path for the uploaded image
     const news_image_link = req.files.news_image // Fixed field name here
       ? `/uploads/news/${req.files.news_image[0].filename}`
@@ -29,9 +26,7 @@ const createNews = async (req, res) => {
 
     // Call the service to save the news to the database
     const result = await newsService.createNews(newsData);
-
     const baseUrl = `${req.protocol}://${req.get("host")}`;
-
     // Respond with success and the created news data
     res.status(201).json({
       message: "News created successfully",
@@ -66,20 +61,6 @@ const getNewsById = async (req, res) => {
   }
 };
 
-// Function to retrieve all news entries
-// const getAllNews = async (req, res) => {
-//   try {
-//     // Call the news service to fetch all news entries
-//     const newsList = await newsService.getAllNews();
-
-//     // Respond with the list of news entries
-//     res.status(200).json(newsList);
-//   } catch (err) {
-//     // Catch any errors and return a 500 error message
-//     res.status(500).json({ error: err.message });
-//   }
-// };
-
 async function getAllNews(req, res, next) {
   try {
     // Call the getAllNews method from the news service
@@ -101,43 +82,44 @@ async function getAllNews(req, res, next) {
     });
   }
 }
-
-// Function to update an existing news entry by its ID
 const updateNews = async (req, res) => {
   try {
-    // Extract the news ID from the request parameters
     const newsId = req.params.id;
-    // Destructure the updated news data from the request body
-    const {
-      news_title,
-      news_detail,
-      news_description,
-      news_link,
-      news_image_link,
-    } = req.body;
+    const { news_title, news_detail, news_description, news_link } = req.body;
 
-    // Prepare the updated news data
+    if (!news_title || !news_detail) {
+      return res
+        .status(400)
+        .json({ error: "News title and detail are required" });
+    }
+
+    const news_image_link = req.files?.news_image
+      ? `/uploads/news/${req.files.news_image[0].filename}`
+      : null;
+
+    const existingNews = await newsService.getNewsById(newsId);
+    if (!existingNews) {
+      return res.status(404).json({ error: "News not found" });
+    }
+
     const updatedData = {
       newsTitle: news_title,
       newsDetail: news_detail,
       newsDescription: news_description,
       newsLink: news_link,
-      newsImageLink: news_image_link,
+      newsImageLink: news_image_link || existingNews.newsImageLink,
     };
 
-    // Call the news service to update the news entry in the database
     const result = await newsService.updateNews(newsId, updatedData);
-    // If the news entry is not found, return a 404 error
+
     if (!result) {
-      return res.status(404).json({ error: "News not found" });
+      return res.status(404).json({ error: "Failed to update news" });
     }
-    // Respond with a success message upon successful update
-    res.status(200).json({
-      status: "success",
-      message: "News updated successfully",
-    });
+
+    res
+      .status(200)
+      .json({ status: "success", message: "News updated successfully" });
   } catch (err) {
-    // Catch any errors and return a 500 error message
     res.status(500).json({ error: err.message });
   }
 };

@@ -13,19 +13,14 @@ function AdminMenu() {
         <Link to="/admin" className="list-group-item">
           Dashboard
         </Link>
-        {/* <Link to="/admin-dashboard/addnews" className="list-group-item">Add News</Link>
-        <Link to="/admin-dashboard/list-of-news" className="list-group-item">List of News</Link>
-        <Link to="/admin-dashboard/addnewsdetail" className="list-group-item">Add News Detail</Link>
-        <Link to="/admin-dashboard/list-of-news-detail" className="list-group-item">List of News Details</Link> */}
 
-        {/* ********Start */}
         <Link to="/admin/add-news" className="list-group-item">
           Add News
         </Link>
         <Link to="/admin/news" className="list-group-item">
           List of News
         </Link>
-        {/* Ed */}
+
         <Link to="/admin-dashboard/add-vacancy" className="list-group-item">
           Job Post
         </Link>

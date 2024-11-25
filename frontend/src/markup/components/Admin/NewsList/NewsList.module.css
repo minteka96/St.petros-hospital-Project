@@ -1,11 +1,9 @@
-.newsListContainer {
-  padding: 20px;
-}
-
+/* News Table Styles */
 .newsTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  table-layout: fixed; /* Ensures all columns have a fixed width */
 }
 
 .newsTable th,
@@ -13,40 +11,129 @@
   padding: 10px;
   border: 1px solid #ddd;
   text-align: left;
+  word-wrap: break-word; /* Ensures content wraps inside the cell */
+  white-space: normal; /* Allows text wrapping */
+  height: 60px; /* Uniform height for cells */
 }
 
-.viewButton {
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  margin-right: 5px;
+.newsTable th {
+  background-color: #f4f4f4; /* Light gray for table headers */
+  font-weight: bold;
+  text-align: center; /* Center-align headers */
 }
 
-.editButton {
-  color: #fff;
-  background-color: #28a745;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  margin-right: 5px;
+/* Column Widths */
+.newsTable th:nth-child(1),
+.newsTable td:nth-child(1) {
+  width: 15%; /* Title column */
 }
 
-.deleteButton {
-  color: #fff;
-  background-color: #dc3545;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
+.newsTable th:nth-child(2),
+.newsTable td:nth-child(2) {
+  width: 20%; /* Detail column */
 }
 
+.newsTable th:nth-child(3),
+.newsTable td:nth-child(3) {
+  width: 25%; /* Description column */
+}
+
+.newsTable th:nth-child(4),
+.newsTable td:nth-child(4) {
+  width: 20%; /* Link column */
+  overflow-wrap: break-word; /* Force long URLs to wrap */
+}
+
+.newsTable th:nth-child(5),
+.newsTable td:nth-child(5) {
+  width: 15%; /* ImageLink column */
+  text-align: center;
+}
+
+.newsTable td:nth-child(5) img {
+  width: 80px; /* Adjust the width of the image */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 5px; /* Add a subtle rounded corner */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow */
+  object-fit: cover; /* Ensure the image fills the area without distortion */
+}
+
+.newsTable th:nth-child(6),
+.newsTable td:nth-child(6) {
+  width: 10%; /* Date column */
+}
+
+.newsTable th:nth-child(7),
+.newsTable td:nth-child(7) {
+  width: 10%; /* Actions column */
+  text-align: center;
+}
+
+/* Title Styling */
+.newsListContainer h2 {
+  text-align: center; /* Centers the "News List" title */
+  font-size: 2rem; /* Increase font size */
+  color: #333; /* Set dark color for text */
+  margin-bottom: 20px; /* Add spacing below title */
+}
+
+/* Link Styles */
+.link {
+  color: #007bff; /* Blue color for links */
+  text-decoration: none;
+  word-wrap: break-word; /* Ensure links wrap properly */
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Button Styles for React Icons */
+.iconButton {
+  background: none; /* No background for icon buttons */
+  border: none; /* Remove border */
+  cursor: pointer; /* Pointer cursor */
+  color: #5CA7A1; /* Default color for buttons */
+  font-size: 1.5rem; /* Size of icons */
+  padding: 0; /* Remove padding */
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.iconButton:hover {
+  color: #007bff; /* Change color on hover */
+}
+
+.iconButton.edit {
+  color: green; /* Default color for edit button */
+}
+
+.iconButton.edit:hover {
+  color: #28a745; /* Darker green on hover */
+}
+
+.iconButton.delete {
+  color: #d9534f; /* Default color for delete button */
+}
+
+.iconButton.delete:hover {
+  color: #c9302c; /* Darker red on hover */
+}
+
+/* Error & Success Messages */
 .errorMessage {
-  color: #dc3545;
-  margin-bottom: 10px;
+  color: #d9534f; /* Red color for errors */
+  background-color: #f8d7da; /* Light red background */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
 .successMessage {
-  color: #28a745;
-  margin-bottom: 10px;
+  color: #28a745; /* Green color for success */
+  background-color: #d4edda; /* Light green background */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
 }

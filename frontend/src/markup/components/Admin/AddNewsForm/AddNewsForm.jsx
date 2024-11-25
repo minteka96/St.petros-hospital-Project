@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import newsService from "../../../../services/news.service"; // Adjust the path if necessary
+import newsService from "../../../../Services/news.service.js"; // Adjust the path if necessary
 import classes from "./AddNewsForm.module.css";
 
 const AddNewsForm = () => {
@@ -14,46 +14,45 @@ const AddNewsForm = () => {
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const formData = new FormData();
-  formData.append("news_title", newsTitle);
-  formData.append("news_detail", newsDetail);
-  formData.append("news_description", newsDescription);
-  formData.append("news_link", newsLink);
-  if (newsImageLink) {
-    formData.append("news_image", newsImageLink);
-  }
-
-  try {
-    const response = await newsService.createNews(formData);
-console.log("response", response);
-    if (response.error) {
-      setError(response.error);
-      setSuccess("");
-    } else {
-      setSuccess("News added successfully!");
-      setError("");
-
-      setNewsTitle("");
-      setNewsDetail("");
-      setNewsDescription("");
-      setNewsLink("");
-      setNewsImageLink(null);
-
-      setTimeout(() => {
-        navigate("/admin/news");
-      }, 2000);
+    const formData = new FormData();
+    formData.append("news_title", newsTitle);
+    formData.append("news_detail", newsDetail);
+    formData.append("news_description", newsDescription);
+    formData.append("news_link", newsLink);
+    if (newsImageLink) {
+      formData.append("news_image", newsImageLink);
     }
-  } catch (err) {
-    // Improved error handling
-    console.error("Error submitting news:", err);
-    // setError("Something went wrong while adding the news.");
-    // alert("Something went wrong while adding the news.");
-  }
-};
 
+    try {
+      const response = await newsService.createNews(formData);
+      console.log("response", response);
+      if (response.error) {
+        setError(response.error);
+        setSuccess("");
+      } else {
+        setSuccess("News added successfully!");
+        setError("");
+
+        setNewsTitle("");
+        setNewsDetail("");
+        setNewsDescription("");
+        setNewsLink("");
+        setNewsImageLink(null);
+
+        setTimeout(() => {
+          navigate("/admin/news");
+        }, 2000);
+      }
+    } catch (err) {
+      // Improved error handling
+      console.error("Error submitting news:", err);
+      // setError("Something went wrong while adding the news.");
+      // alert("Something went wrong while adding the news.");
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit} className={classes.formContainer}>
