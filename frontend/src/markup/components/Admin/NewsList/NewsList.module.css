@@ -93,33 +93,32 @@
   background: none; /* No background for icon buttons */
   border: none; /* Remove border */
   cursor: pointer; /* Pointer cursor */
-  color: #5CA7A1; /* Default color for buttons */
   font-size: 1.5rem; /* Size of icons */
-  padding: 0; /* Remove padding */
   transition: all 0.3s ease; /* Smooth transition */
+  padding: 5px;
 }
 
-.iconButton:hover {
-  color: #007bff; /* Change color on hover */
+.editIcon {
+  color: #34c759;
 }
 
-.iconButton.edit {
-  color: green; /* Default color for edit button */
+.deleteIcon {
+  color: #d9534f;
 }
 
-.iconButton.edit:hover {
-  color: #28a745; /* Darker green on hover */
+.editIcon:hover {
+  background-color: #218838;
 }
 
-.iconButton.delete {
-  color: #d9534f; /* Default color for delete button */
+.deleteIcon:hover {
+  background-color: #c82333;
 }
 
-.iconButton.delete:hover {
-  color: #c9302c; /* Darker red on hover */
+button:hover {
+  /* background-color:#071130 !important ; */
+  background-color: #00a99e !important ;
 }
 
-/* Error & Success Messages */
 .errorMessage {
   color: #d9534f; /* Red color for errors */
   background-color: #f8d7da; /* Light red background */
