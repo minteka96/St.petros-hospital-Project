@@ -32,38 +32,16 @@ import About from "./markup/pages/AboutPage/About";
 import Contact from "./markup/pages/Contact/Contact.jsx";
 import Cpd from "./markup/pages/CPD/cpd.jsx";
 import "./style/css/style.css";
-import News from "./markup/pages/News/News";
-import NewsDetails from "./markup/pages/News/NewsDetails";
 import AddTenderForm from "./markup/components/Admin/AddTenderForm/AddTenderForm.jsx";
 import TenderSubmitForm from "./markup/components/Admin/AddTenderForm/TenderSubmitForm.jsx";
 import TenderList from "./markup/components/Admin/AddTenderForm/TenderLists.jsx";
 import AllTenderFormDetails from "./markup/components/Admin/AddTenderForm/AllTenderFormDetails.jsx";
 import Vacancies from "./markup/pages/Jobs/Vacancies.jsx";
-import AdminDashboard from "./markup/pages/Admin/AdminDashboard.jsx";
 import ApplicationForm from "./markup/pages/Jobs/ApplicationForm.jsx";
 import HealthWorkerINfo from "./markup/pages/HealthWorkerEntertainment/HealthWorkerEntertainment .jsx";
-import Dashboard from "./markup/components/Dashbord/Dashboard.jsx";
-import AddNewsForm from "./markup/components/Dashbord/AddNewsForm";
-import AddNewsDetailForm from "./markup/components/Dashbord/AddNewsDetailForm";
-import VacancyList from "./markup/components/Dashbord/VacancyList";
-import ApplicationList from "./markup/components/Dashbord/ApplicationList";
-import NewsList from "./markup/components/Dashbord/NewsList";
-import AddVacancyForm from "./markup/components/Dashbord/AddVacancyForm";
-// import AddTenderForm from "./markup/components/Dashbord/AddTenderForm";
 import QulityResearch from "./markup/pages/qulity&research/qulityResearch.jsx";
-import VacancyApplicationForm from "./markup/components/Dashbord/VacancyApplicationForm";
 import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
-
-/* ************ My Task Start Here about news ********************  */
-import AddNews from "./markup/components/Dashbord/AddNewsForm.jsx";
-import Newss from "./markup/components/Dashbord/NewsList/NewsList.jsx";
-import EditNews from "./markup/components/Dashbord/NewsEditForm/NewsEditForm.jsx";
-// import AddNews from "./markup/pages/Admin/AddNews.jsx";
-// import EditNews from "./markup/pages/Admin/EditNews.jsx";
-// import Newss from "./markup/pages/Admin/News.jsx";
-import PrivateAuthRoute from "./markup/components/Auth/PrivateAuthRoute.jsx";
 import AdminRoute from "./markup/routes/AdminRoute.jsx";
-/* **************** My Task End Here about news  ******************/
 import ApplicationForms from "../src/markup/pages/testApplicant.jsx";
 import Login from "./markup/pages/Login/Login.jsx";
 
@@ -120,9 +98,6 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/qulity&research" element={<QulityResearch />} />
         <Route path="/researchpublication" element={<ResearchPublication />} />
-        {/* news page */}
-        <Route path="/news" element={<News />} />
-        <Route path="/newsDetails/:postId" element={<NewsDetails />} />
         <Route path="/tender-list" element={<TenderList />} />
         <Route path="/tender-form-submit" element={<TenderSubmitForm />} />
         <Route
@@ -134,24 +109,8 @@ function App() {
         <Route path="/Jobs" element={<Vacancies />} />
         <Route path="/admin/application-form" element={<ApplicationForm />} />
 
-        {/* Admin Dashboard with nested routes */}
         <Route path="/admin/*" element={<AdminRoute />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />}>
-          
-          {/******************* My Task Start Here ****************/}
-          <Route path="add-news" element={<AddNews />} />
-          <Route path="news" element={<Newss />} />
-          <Route path="news/edit/:news_id" element={<EditNews />} />
-          {/* ******************** My Task End Here *****************/}
 
-          <Route path="addnewsdetail" element={<AddNewsDetailForm />} />
-          <Route path="vacancy-list" element={<VacancyList />} />
-          <Route path="application-list" element={<ApplicationList />} />
-
-          <Route path="add-vacancy" element={<AddVacancyForm />} />
-          <Route path="add-tender" element={<AddTenderForm />} />
-          <Route path="applicationform" element={<VacancyApplicationForm />} />
-        </Route>
       </Routes>
       {["/login", "/admin"].some((path) =>
         window.location.pathname.startsWith(path)

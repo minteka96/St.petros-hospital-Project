@@ -1,67 +1,81 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import newsService from "../../../../Services/news.service"; // Adjust path if necessary
 import classes from "./EditNewsForm.module.css"; // Adjust path if necessary
 
 const EditNewsForm = () => {
-  // const { newsId } = useParams(); // Get the news ID from URL params
   const { news_id } = useParams(); // Extract `news_id` from the URL
+  const location = useLocation(); // Access state passed via navigate
+  const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    news_title: "",
-    news_detail: "",
-    news_description: "",
-    news_link: "",
-    news_image: "",
-  });
+  const [newsTitle, setNewsTitle] = useState("");
+  const [newsDetail, setNewsDetail] = useState("");
+  const [newsDescription, setNewsDescription] = useState("");
+  const [newsLink, setNewsLink] = useState("");
+  const [newsImageLink, setNewsImageLink] = useState(null);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchNewsDetails = async () => {
-      try {
-        const response = await newsService.getNewsById(news_id); // Fetch the news details by ID
-        const news = response.data;
-        console.log('news',news)
-        setFormData({
-          news_title: news.news_title || "",
-          news_detail: news.news_detail || "",
-          news_description: news.news_description || "",
-          news_link: news.news_link || "",
-          news_image: news.news_image_link || "",
-        });
-      } catch (err) {
-        setError("Failed to fetch news details.");
-      } finally {
+    const initializeFormData = async () => {
+      if (location.state?.news) {
+        // Use the news item from state
+        const news = location.state.news;
+        setNewsTitle(news.news_title || "");
+        setNewsDetail(news.news_detail || "");
+        setNewsDescription(news.news_description || "");
+        setNewsLink(news.news_link || "");
+        setNewsImageLink(news.news_image_link || null);
         setLoading(false);
+      } else {
+        // Fetch from API if no state is passed
+        try {
+          const response = await newsService.getNewsById(news_id);
+          const news = response.data;
+          setNewsTitle(news.news_title || "");
+          setNewsDetail(news.news_detail || "");
+          setNewsDescription(news.news_description || "");
+          setNewsLink(news.news_link || "");
+          setNewsImageLink(news.news_image_link || null);
+        } catch (err) {
+          setError("Failed to fetch news details.");
+        } finally {
+          setLoading(false);
+        }
       }
     };
 
-    fetchNewsDetails();
-  }, [news_id]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+    initializeFormData();
+  }, [news_id, location.state]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("news_title", newsTitle);
+    formData.append("news_detail", newsDetail);
+    formData.append("news_description", newsDescription);
+    formData.append("news_link", newsLink);
+    if (newsImageLink) {
+      formData.append("news_image", newsImageLink);
+    }
+
+    // Validation check for empty fields
+    if (!newsTitle || !newsDetail) {
+      setError("News title and detail are required.");
+      return;
+    }
+
     try {
       const response = await newsService.updateNews(news_id, formData);
-
       if (response.error) {
         setError(response.error);
         setSuccess("");
       } else {
         setSuccess("News updated successfully!");
         setError("");
-        // Add 2-second timeout before navigating
+
         setTimeout(() => {
           navigate("/admin/news");
         }, 2000);
@@ -75,7 +89,7 @@ const EditNewsForm = () => {
   if (loading) {
     return <p>Loading...</p>;
   }
-  console.log(formData);
+
   return (
     <form onSubmit={handleSubmit} className={classes.formContainer}>
       <h2>Edit News</h2>
@@ -84,42 +98,35 @@ const EditNewsForm = () => {
 
       <input
         type="text"
-        name="news_title"
-        value={formData.news_title}
-        onChange={handleChange}
         placeholder="News Title"
+        value={newsTitle}
+        onChange={(e) => setNewsTitle(e.target.value)}
         className={classes.inputField}
         required
       />
       <textarea
-        name="news_detail"
-        value={formData.news_detail}
-        onChange={handleChange}
         placeholder="News Detail"
+        value={newsDetail}
+        onChange={(e) => setNewsDetail(e.target.value)}
         className={classes.textareaField}
         required
       />
       <textarea
-        name="news_description"
-        value={formData.news_description}
-        onChange={handleChange}
         placeholder="News Description"
+        value={newsDescription}
+        onChange={(e) => setNewsDescription(e.target.value)}
         className={classes.textareaField}
       />
       <input
         type="text"
-        name="news_link"
-        value={formData.news_link}
-        onChange={handleChange}
         placeholder="News Link"
+        value={newsLink}
+        onChange={(e) => setNewsLink(e.target.value)}
         className={classes.inputField}
       />
       <input
         type="file"
-        name="news_image"
-        // value={formData.news_image_link}
-        onChange={handleChange}
-        // placeholder="Image URL"
+        onChange={(e) => setNewsImageLink(e.target.files[0])}
         className={classes.inputField}
       />
       <button type="submit" className={classes.submitButton}>

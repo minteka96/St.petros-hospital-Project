@@ -3,16 +3,15 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Applicants from "../components/Admin/Applicant/Applicant.jsx";
 import ApplicantDetails from "../components/Admin/Applicant/ApplicantDetail.jsx";
-import AdminMenu from "../components/Admin/AdminMenu copy/AdminMenu.jsx";
+import AdminMenu from "../components/Admin/AdminMenu/AdminMenu.jsx";
 import logo from "../../assets/img/logo copy.png";
-import Admin from "../components/Admin/AdminDashbord/Admin.jsx";
+import AdminDashbord from "../components/Admin/AdminDashbord/AdminDashbord.jsx";
 
-
-/* ************ My Task Start Here about news ********************  */
+/* ************ News Components Start Here about news ********************  */
 import AddNews from "../components/Admin/AddNewsForm/AddNewsForm.jsx";
 import EditNews from "../components/Admin/NewsEditForm/NewsEditForm.jsx";
-import Newss from "../pages/Admin/News.jsx";
-/* **************** My Task End Here about news  ******************/
+import Newss from "../components/Admin/NewsList/NewsList.jsx";
+/* **************** News Components End Here about news  ******************/
 
 const AdminRoute = () => {
   return (
@@ -60,21 +59,17 @@ const AdminRoute = () => {
             >
               <Routes>
                 {/****************** admin routes *************/}
-                <Route path="/" element={<Admin />} />
+                <Route path="/" element={<AdminDashbord />} />
                 {/***************** applicant routes ************/}
                 <Route path="/applicant" element={<Applicants />} />
                 <Route path="/applicant/:id" element={<ApplicantDetails />} />
                 {/************************ end *****************/}
 
-                {/******************* My Task Start Here ****************/}
+                {/******************* News Routes Start Here ****************/}
                 <Route path="/add-news" element={<AddNews />} />
                 <Route path="/news" element={<Newss />} />
-                <Route
-                  path="news/edit/:news_id"
-                  element={<EditNews />}
-                />
-                {/* ******************** My Task End Here *****************/}
-                {/* Add more admin routes here */}
+                <Route path="news/edit/:news_id" element={<EditNews />} />
+                {/* ******************** News Routes Start Here End Here *****************/}
               </Routes>
             </div>
           </div>

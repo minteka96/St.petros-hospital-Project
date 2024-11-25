@@ -88,43 +88,6 @@ const getNewsById = async (news_id) => {
   }
 };
 
-// Function to update a specific news item
-// const updateNews = async (news_id, formData) => {
-//   const requestOptions = {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//       // "x-access-token": token,
-//     },
-//     body: JSON.stringify(formData),
-//   };
-
-//   try {
-//     const response = await fetch(
-//       `${api_url}/api/news/${news_id}`,
-//       requestOptions
-//     );
-
-//     if (!response.ok) {
-//       const errorText = await response.text();
-//       throw new Error(
-//         `HTTP error! Status: ${response.status}, Details: ${errorText}`
-//       );
-//     }
-//     const data = await response.json();
-//     if (data.status === "success") {
-//       return data;
-//     } else {
-//       throw new Error(
-//         `Failed to update news: ${data.message || "Unknown error"}`
-//       );
-//     }
-//   } catch (error) {
-//     console.error("Error updating news:", error);
-//     throw error;
-//   }
-// };
-
 const updateNews = async (news_id, formData) => {
   const requestOptions = {
     method: "PUT",

@@ -49,9 +49,11 @@ background: linear-gradient(to right, #ffffff, #1F867E)
   color: #fff;
   font-weight: 600;
 }
-.admin-right-side{
-  /* width: 95%; */
-}
+
+/* .admin-right-side{
+  width: 95%;
+} */
+
 .admin-left-side .list-group-item {
 width: 90%;
   border-radius: 20px;

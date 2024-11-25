@@ -7,7 +7,7 @@ const AdminDashboard = () => {
   return (
     <div className="dashboardContainer">
       <div className="sidebar">
-        <div className="sec-title style-two">
+        <div className="sec-title style-two" style={{ textAlign:"center"}}>
           <h2>Admin Dashboard</h2>
           <div
             className="text"
