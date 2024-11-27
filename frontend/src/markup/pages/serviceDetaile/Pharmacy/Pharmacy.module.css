@@ -1,3 +1,4 @@
+/* Main Content */
 .mainContent {
   padding: 20px;
 }
@@ -12,12 +13,12 @@
 
 .pageTitleArea h1 {
   font-size: 2.5rem;
-  color:  #d84315;/* Dark green for the pharmacy theme */
+  color: #00796b;/* Dark green for the pharmacy theme */
 }
 
-.pageTitleArea p {
+.pageTitleArea li, p {
   font-size: 1.2rem;
-  color: #00796b;
+  
 }
 
 /* Department Area */
@@ -25,6 +26,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #00796b;
 }
 
 /* Department Gallery */
@@ -64,7 +66,7 @@
 
 .servicesItem {
   margin: 5px 0;
-  color:#00796b;/* Dark green text for services */
+  color: #000; /* Dark green text for services */
 }
 
 /* Head Of Department */
@@ -74,13 +76,21 @@
 
 .departmentHeadTitle {
   margin-bottom: 5px;
-  color:#00796b;
+  color: #00796b;
 }
 
 .departmentHeadName {
   margin: 5px 0;
   font-weight: bold;
-  color:#00796b;
+  color: #00796b;
+}
+
+/* Swiper Navigation Buttons */
+.swiper-button-prev, .swiper-button-next {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 10px;
+  border-radius: 50%;
 }
 
 /* Responsive Styles */
@@ -92,4 +102,40 @@
   .sidebarWrapper {
     margin-bottom: 40px;
   }
+
+  /* Mobile adjustments */
+  .swiper-container {
+    height: 300px; /* Adjust height for small screens */
+  }
+
+  .departmentGallery {
+    width: 100%;
+  }
+
+  .servicesList {
+    padding-left: 0;
+  }
+
+  .servicesItem {
+    font-size: 1rem; /* Adjust font size for mobile */
+  }
+
+  .headOfDepartment {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .departmentHeadName {
+    font-size: 1.1rem;
+  }
+}
+
+/* Styling for <strong> elements */
+strong {
+  color: #00796b; /* Set color of <strong> elements to green */
+}
+
+/* Ensuring consistency of black text color */
+body, .servicesItem, .departmentHeadName {
+  color: #000; /* Black text color */
 }

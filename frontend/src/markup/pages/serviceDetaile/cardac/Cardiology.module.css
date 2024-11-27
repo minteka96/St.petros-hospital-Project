@@ -10,7 +10,13 @@
   border-radius: 8px;
   text-align: center;
 }
-
+.pageTitleArea li, p {
+  font-size: 1.2rem;
+  
+}
+.pageTitleArea h1{
+color: #00796b;
+}
 /* Swiper Container */
 .swiperContainer {
   width: 100%;
@@ -31,11 +37,21 @@
 /* Content Section */
 .content {
   margin: 20px 0;
-  
 
 }
-.content h4{
-   color:#00A99E
+.pageTitleArea h4{
+   color:#00A99E;
+}
+
+.pageTitleArea h1{
+  color: #00796b;
+}
+.pageTitleArea{ 
+  font-size: 1.2rem;
+}
+.pageTitleArea h3,h4{ 
+ list-style-type: circle;
+ text-align: left;
 }
 .listStyle1 {
   list-style-type: disc;

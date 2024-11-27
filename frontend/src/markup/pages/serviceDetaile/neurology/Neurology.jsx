@@ -24,15 +24,17 @@ const Neurology = () => {
       <div className={classes.pageTitleArea}>
         <h1>Neurology Department</h1>
         <p>Comprehensive care for neurological conditions. <p>
-        The neurology department is specialized in the diagnosis and treatment of diseases of the nervous system, including stroke, movement problems, Parkinsons disease, epilepsy, and neuromuscular disorders. TGH provides the finest and most recent health care services in managing neurological disorders, such as:
+        The neurology department is specialized in the diagnosis and treatment of diseases of the nervous system, including stroke, movement problems, Parkinsons disease, epilepsy, and neuromuscular disorders. SPH provides the finest and most recent health care services in managing neurological disorders, such as:
       </p>
       <ul>
         <li>Nerve conduction studies (NCS)</li>
-        <li>Electromyogram (EMG)</li>
-        <li>Electroencephalogram (EEG)</li>
-        <li>Evoked potential (EP)</li>
-        <li>Blink Reflex</li>
-        <li>Repetitive Nerve Stimulation (RNS)</li>
+        <li>out patient follow up Service</li>
+        <li>Elective Surgary</li>
+          <li>Tumor Surgary</li>
+        <li>Peadiatric Neuro Surgical Care</li>
+          <li>mylomeningiocele caree</li>
+        
+        <li>Blink ReflexSpine SurgaryRepetitive Nerve Stimulation (RNS)</li>
       </ul></p>
       </div>
 

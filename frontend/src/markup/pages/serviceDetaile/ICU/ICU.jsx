@@ -68,11 +68,7 @@ const ICU = () => {
             </ul>
           </div>
 
-          <div className={classes.headOfDepartment} id="team">
-            <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>Dr. Emily Watson</h5>
-            <p>An expert in critical care medicine with extensive experience.</p>
-          </div>
+         
         </div>
       </div>
     </div>

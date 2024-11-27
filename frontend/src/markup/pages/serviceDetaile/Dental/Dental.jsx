@@ -3,8 +3,8 @@
 
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import img1 from '../../../../assets/img/photos/department-s2.jpg';
-import img2 from '../../../../assets/img/photos/department-s1.jpg';
+import img1 from '../../../../assets/img/slider/dental/dental.jpg';
+import img2 from '../../../../assets/img/slider/dental/dental.jpg';
 import classes from './Dental.module.css';
 // Correct imports for Swiper components and modules
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -56,54 +56,12 @@ function Dental() {
         <p>
           Kidus Petros Hospital Department of Dentistry offers a broad range of services, including:
         </p>
-        <ul className={classes.listStyle1}>
-          <li>Preventive Dental Care</li>
-          <li>Cosmetic Dentistry</li>
-          <li>Restorative Treatments</li>
-          <li>Dental Implants</li>
-        </ul>
-      </div>
-
-      {/* Price List for Services */}
-      <div className={classes.priceListCol2}>
-        <div className={classes.priceList}>
-          <h4>Cosmetic Dentistry</h4>
-          <ul>
-            <li>
-              <span className={classes.serviceName}>Teeth Whitening</span>
-              <span className={classes.servicePrice}>$300</span>
-            </li>
-            <li>
-              <span className={classes.serviceName}>Veneers</span>
-              <span className={classes.servicePrice}>$800</span>
-            </li>
-          </ul>
-        </div>
-        <div className={classes.priceList}>
-          <h4>Restorative Dentistry</h4>
-          <ul>
-            <li>
-              <span className={classes.serviceName}>Root Canal Treatment</span>
-              <span className={classes.servicePrice}>$1,200</span>
-            </li>
-            <li>
-              <span className={classes.serviceName}>Dental Implants</span>
-              <span className={classes.servicePrice}>$2,500</span>
-            </li>
-          </ul>
-        </div>
+      
       </div>
 
       {/* Head Of Department Section */}
-      <div className={classes.teamSingle}>
-        <h2 className={classes.title}>
-          <span>Head Of</span> Department
-        </h2>
-        <div className={classes.membrInfo}>
-          <h4 className={classes.departmentHeadName}>Dr. Sarah Mendez</h4>
-          <p>Dr. melkam has over 8 years of experience in dentistry.</p>
-        </div>
-      </div>
+    
+  
     </div>
   );
 }

@@ -1,102 +1,108 @@
+/* General Styling for the page */
 .mainContent {
   padding: 20px;
 }
 
 /* Page Title Area */
 .pageTitleArea {
-  background-color: #dbf1f1;
+  background-color: #f2f7f7;
   padding: 20px;
   border-radius: 8px;
-  text-align: center;
+  
 }
 
+.pageTitleArea h1 {
+  color: #00796b; /* Apply green color to h1 */
+}
+
+.pageTitleArea h4 {
+  color: #00796b; /* Apply green color to h4 */
+}
+.pageTitleArea h1{
+  color: #00796b;
+}
+.pageTitleArea{ 
+  font-size: 1.2rem;
+}
+.pageTitleArea h3,h4{ 
+ list-style-type: circle;
+ text-align: left;
+}
 /* Department Area */
 .departmentArea {
+  color: #004d40;
   display: flex;
 }
 
 /* Department Gallery */
 .departmentGallery {
   margin: 20px 0;
-  width: 80%;
-  max-width: 800px;
+  width: 90%;
+  max-width: 1400px;
   height: 500px;
   margin: auto;
 }
 
 .galleryTitle {
   margin-bottom: 10px;
-  color:#00796b;
+  color: #004d40;
 }
 
-.galleryImage {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 20px;
+.sliderTitle {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
 }
 
-/* ART Services */
-.artServices {
-  margin: 20px 0;
-}
-
+/* Services Section */
 .servicesTitle {
-  margin-bottom: 10px;
-  color:#00796b;
+  color: #00796b; /* Green color for service title */
 }
 
 .servicesList {
-  list-style-type: none;
-  padding: 0;
+  list-style-type: none; /* Remove default bullet points */
+  padding-left: 20px;
+  margin: 0;
 }
 
 .servicesItem {
-  margin: 5px 0;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #e0f2f1; /* Light teal background */
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
-/* Head Of Department */
+.servicesItem:hover {
+  background-color: #004d40; /* Dark green background on hover */
+  color: white; /* White text on hover */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.servicesItem::before {
+  content: "• "; /* Custom bullet for list items */
+  color: #00796b; /* Green bullet color */
+  font-size: 18px;
+}
+
+/* Head of Department */
 .headOfDepartment {
   margin: 20px 0;
 }
 
 .departmentHeadTitle {
-  margin-bottom: 5px;
-  color:#00796b;;
+  color: #00796b; /* Green color for department head title */
 }
 
 .departmentHeadName {
-  margin: 5px 0;
-}
-
-/* Appointment Form */
-.appointmentForm {
-  margin-top: 20px;
-}
-
-.formTitle {
-  margin-bottom: 10px;
-  color: #00796b;
-}
-.formInput,
-.formTextarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.submitButton {
-  background-color: #00796b;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.submitButton:hover {
-  background-color:#00796b;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 5px;
 }
 
 /* Responsive Styles */
@@ -107,5 +113,10 @@
 
   .sidebarWrapper {
     margin-bottom: 40px;
+  }
+
+  /* Adjust gallery height for small screens */
+  .departmentGallery {
+    height: 350px;
   }
 }

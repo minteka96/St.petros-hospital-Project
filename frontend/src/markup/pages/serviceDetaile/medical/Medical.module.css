@@ -9,7 +9,16 @@
   border-radius: 8px;
   text-align: center;
 }
-
+pageTitleArea h1{
+  color: #00796b;
+}
+.pageTitleArea{ 
+  font-size: 1.2rem;
+}
+.pageTitleArea li{ 
+ list-style-type: circle;
+ text-align: left;
+}
 /* Department Area */
 .departmentArea {
   display: flex;

@@ -26,7 +26,7 @@ const Toxicology = () => {
     Specialized care for the prevention, diagnosis, and treatment of poisoning and toxic exposures. 
   </p>
   <p>
-    The toxicology department provides comprehensive services to manage cases of exposure to various toxins, including chemical, biological, and environmental hazards. TGH offers state-of-the-art care and advanced treatment protocols in toxicology, such as:
+    The toxicology department provides comprehensive services to manage cases of exposure to various toxins, including chemical, biological, and environmental hazards. SPH offers state-of-the-art care and advanced treatment protocols in toxicology, such as:
   </p>
   <ul>
     <li>Poison management and antidote therapy</li>
@@ -95,14 +95,6 @@ const Toxicology = () => {
               <li className={classes.servicesItem}>Toxicology consultations</li>
               <li className={classes.servicesItem}>Support for patients and families</li>
             </ul>
-          </div>
-
-          {/* Head Of Department */}
-          <div className={classes.headOfDepartment} id="team">
-            <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>Dr. Ayele
-            </h5>
-            <p>A specialist in toxicology with extensive experience in emergency medicine.</p>
           </div>
         </div>
       </div>

@@ -4,9 +4,9 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Swiper from 'swiper';
-import img1 from '../../../../assets/img/slider/ENT/001.jpeg';
+import img1 from '../../../../assets/img/slider/ENT/ent.jpg';
 import img2 from '../../../../assets/img/slider/ENT/002.jpeg';
-import img3 from '../../../../assets/img/slider/ENT/002.jpeg';
+import img3 from '../../../../assets/img/slider/ENT/ent.jpg';
 import classes from './ENT.module.css';
 
 const ENT = () => {
@@ -23,20 +23,58 @@ const ENT = () => {
   return (
     <div className={classes.mainContent}>
       {/* Page Title Area */}
-      <div className={classes.pageTitleArea}>
-  <h1>ENT Department</h1>
-  <p>Comprehensive care for ear, nose, and throat conditions.</p>
-  <p>
-    The ENT department is specialized in the diagnosis and treatment of diseases related to the ear, nose, and throat, including hearing loss, sinus problems, throat disorders, and balance issues. TGH provides state-of-the-art medical services in managing ENT conditions, such as:
-  </p>
-  <ul>
-    <li>Hearing tests (audiometry)</li>
-    <li>Endoscopic sinus surgery</li>
-    <li>Tonsillectomy and adenoidectomy</li>
-    <li>Balance and dizziness evaluation</li>
-    <li>Cochlear implants</li>
-    <li>Allergy testing and treatment</li>
-  </ul>
+    <div className={classes.pageTitleArea}>
+  <div className={classes.mainContent}>
+    {/* Page Title Area */}
+    <h1>ENT Department</h1>
+    <p>Comprehensive care for ear, nose, and throat conditions.</p>
+    <p>
+      The ENT department specializes in the diagnosis and treatment of diseases related to the ear, nose, and throat, including hearing loss, sinus problems, throat disorders, and balance issues. TGH provides state-of-the-art medical services in managing ENT conditions, such as:
+    </p>
+
+    <h3>Key Services at SPH ENT Department:</h3>
+
+    <h4>24 Hours Emergency Care:</h4>
+    <p>
+      The ENT department offers emergency care for acute ENT conditions, such as severe ear infections or respiratory distress, with immediate intervention and treatment.
+    </p>
+
+    <h4>Tympanometry:</h4>
+    <p>
+      Tympanometry is used to test the condition of the middle ear and the mobility of the eardrum by measuring the response to pressure changes.
+    </p>
+
+    <h4>Rigid Laryngoscopy:</h4>
+    <p>
+      This procedure allows for direct visualization of the larynx (voice box) and is used to diagnose voice problems, throat conditions, or abnormalities.
+    </p>
+
+    <h4>Ear Irrigation:</h4>
+    <p>
+      Ear irrigation is performed to remove earwax buildup that may be causing hearing loss or discomfort.
+    </p>
+
+    <h4>Tonsillectomy and Adenoidectomy:</h4>
+    <p>
+      Surgical removal of the tonsils and/or adenoids to treat chronic infections or breathing difficulties related to these structures.
+    </p>
+
+
+    <h4>Outpatient Follow-Up Care:</h4>
+    <p>
+      Patients are provided with comprehensive follow-up care after their treatment to ensure proper recovery and long-term health.
+    </p>
+
+    <h4>Allergy Testing and Treatment:</h4>
+    <p>
+      The department offers allergy testing and provides treatments to manage symptoms of allergies related to the ear, nose, and throat.
+    </p>
+
+    <h4>Commitment to Comprehensive Care:</h4>
+    <p>
+    SPH is committed to providing holistic care for all ENT patients, combining the latest medical treatments with compassionate support to ensure optimal outcomes.
+    </p>
+  </div>
 </div>
 
       {/* Department Area */}
@@ -91,22 +129,7 @@ const ENT = () => {
           </div>
 
           {/* ENT Services */}
-          <div className={classes.entServices} id="services">
-            <h4 className={classes.servicesTitle}>Our Services</h4>
-            <ul className={classes.servicesList}>
-              <li className={classes.servicesItem}>Hearing evaluations and audiology services</li>
-              <li className={classes.servicesItem}>Sinus and allergy treatments</li>
-              <li className={classes.servicesItem}>Throat disorders and treatments</li>
-              <li className={classes.servicesItem}>Surgical interventions for ENT conditions</li>
-            </ul>
-          </div>
-
-          {/* Head Of Department */}
-          <div className={classes.headOfDepartment} id="team">
-            <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>Dr. Bilen</h5>
-            <p>A renowned ENT specialist with over 15 years of experience in treating complex cases.</p>
-          </div>
+        
         </div>
       </div>
     </div>

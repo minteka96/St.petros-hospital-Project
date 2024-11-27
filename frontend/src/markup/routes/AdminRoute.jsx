@@ -1,4 +1,4 @@
-// src/routes/AdminRoute.jsx
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Applicants from "../components/Admin/Applicant/Applicant.jsx";
@@ -12,7 +12,12 @@ import AddNews from "../components/Admin/AddNewsForm/AddNewsForm.jsx";
 import EditNews from "../components/Admin/NewsEditForm/NewsEditForm.jsx";
 import Newss from "../components/Admin/NewsList/NewsList.jsx";
 /* **************** News Components End Here about news  ******************/
-
+import HealthTipList from "../components/Admin/HealthTipList/HealthTipList.jsx";
+import AddHealthTipForm from "../components/Admin/addhealthtipForm/AddHealthTipForm.jsx";
+import EditHealthTip from "../components/Admin/EditHealthTipForm/EditHealthTipForm.jsx";
+//import AddTenderForm from "../components/Admin/AddTenderForm/AddTenderForm.jsx";
+import AddJobForm from "../components/Admin/AddJobsForm/AddJobsForm.jsx";
+import EditJobForm from '../components/Admin/JobsEditForm/EditJobForm.jsx'
 const AdminRoute = () => {
   return (
     <div>
@@ -70,7 +75,18 @@ const AdminRoute = () => {
                 <Route path="/news" element={<Newss />} />
                 <Route path="news/edit/:news_id" element={<EditNews />} />
                 {/* ******************** News Routes Start Here End Here *****************/}
-              </Routes>
+
+                {/******************* healthtip Routes Start Here ****************/}
+                <Route path="/add-healthtip" element={<AddHealthTipForm />} />
+                <Route path="/healthtipList" element={<HealthTipList />} />
+                <Route path="/healthtip/edit/:healthtip_id" element={<EditHealthTip />} />
+                {/* ******************** tender Routes Start Here End Here *****************/}
+
+{/* ********************add job post*********************************** */}
+ <Route path="/add-job" element={<AddJobForm/>} />
+                  {/* <Route path="/joblist" element={<JobList />} />  */}
+                 <Route path="/job/edit/:job_id" element={<EditJobForm />} />       
+                        </Routes>
             </div>
           </div>
         </div>

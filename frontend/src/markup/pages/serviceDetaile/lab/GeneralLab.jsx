@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import Swiper from 'swiper';
-import img1 from '../../../../assets/img/slider/lab/lab 01.jpg';
-import img2 from '../../../../assets/img/slider/lab/lab.jpg';
+import img1 from '../../../../assets/img/slider/lab/labroom.jpg';
+import img2 from '../../../../assets/img/slider/lab/lab-1.jpg';
 import classes from './GeneralLab.module.css';
 
 const GeneralLab = () => {
@@ -18,24 +18,24 @@ const GeneralLab = () => {
 
   return (
     <div className={classes.mainContent}>
-      <div className={classes.pageTitleArea}>
+    <div className={classes.pageTitleArea}>
   <h1>General Laboratory</h1>
-  <p>Comprehensive diagnostic services for accurate medical analysis.</p>
+  <p>Comprehensive diagnostic services for accurate reaiable  medical services.</p>
   <p>
-    The General Laboratory department is equipped to provide a wide range of diagnostic tests and services, supporting the diagnosis and treatment of various medical conditions. The laboratory services include the following:
+    The hospital Laboratory department is equipped to provide a wide range of diagnostic tests and services, supporting the diagnosis and treatment of various medical conditions.the laboratory were Accrditated by ISO 15189  internatinal Standard in two scope (AFB AND GENE X-PERT TEST ) The laboratory services include the following:
   </p>
   <ul>
-    <li>Hematology Analysis</li>
-    <li>Blood Chemistry Analysis</li>
-    <li>Microbiology Testing</li>
+    <li>Hematology& serological Testing</li>
+    <li>Blood Chemistry & hormonal Analysis</li>
+    <li>clinical bactrology Testing</li>
     <li>Pathology Examination</li>
-    <li>parapstology Testing</li>
-       <li>Parasitology Testing</li>
-        <li>AFB Culture (Acid-Fast Bacillus Culture)</li>
-    <li>Urinalysis</li>
+      <li>parapstology & urinalyisis Testing</li>
+       <li>TB daginostic and fowloup testing like</li>
+        <li>AFB,TB Culture, GenExpertand DST</li>
+        <li>Blood bank service </li>
+         
   </ul>
 </div>
-
       <div className={classes.departmentArea}>
         <div className={classes.contentWrapper}>
           <div className={`swiper-container department-gallery ${classes.departmentGallery}`} id="gallery">
@@ -57,21 +57,16 @@ const GeneralLab = () => {
             <div className="swiper-button-next"><i className="icofont-arrow-right"></i></div>
           </div>
 
-          <div className={classes.services} id="services">
+          {/* <div className={classes.services} id="services">
             <h4 className={classes.servicesTitle}>Our Services</h4>
-            <ul className={classes.servicesList}>
-              <li className={classes.servicesItem}>Blood Tests</li>
-              <li className={classes.servicesItem}>Urinalysis</li>
-              <li className={classes.servicesItem}>Microbiology Services</li>
-              <li className={classes.servicesItem}>Chemical Pathology</li>
-            </ul>
-          </div>
+            
+          </div> */}
 
-          <div className={classes.headOfDepartment} id="team">
+          {/* <div className={classes.headOfDepartment} id="team">
             <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>yonas</h5>
+            <h5 className={classes.departmentHeadName}>yonas Sebsebe </h5>
             <p>An expert in clinical laboratory sciences dedicated to quality testing.</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

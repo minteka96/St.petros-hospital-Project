@@ -23,7 +23,17 @@ const Urology = () => {
         <h1>Urology Department</h1>
         <p>In this department, you are in the hands of experts and have up-to-date medical services for your kidney problems ensuring that you have the most accurate and
 comprehensive care. Successful treatment starts with an accurate diagnosis by using the best innovative advanced imaging technologies and specialized medical expertise. Offering treatment modalities with meticulous follow-up for diseases like acute kidney injury, chronic kidney disease, hypertension,  glomerulonephritis, and urinary tract obstruction.</p>
+ <div className={classes.services} id="services">
+            <h4 className={classes.servicesTitle}>Our Services</h4>
+            <ul className={classes.servicesList}>
+              <li > tratment Urinary tract infections,Stricture surgary </li>
+              <li> Renal Stone Surgary </li>
+              <li>BPH Surgary  urological maliganacy Surgary & Treatment of prostate issues</li>
+              <li>Male infertility evaluation</li>
+            </ul>
+          </div>
       </div>
+ 
 
       <div className={classes.departmentArea}>
         <div className={classes.contentWrapper}>
@@ -51,21 +61,7 @@ comprehensive care. Successful treatment starts with an accurate diagnosis by us
             <div className="swiper-button-next"><i className="icofont-arrow-right"></i></div>
           </div>
 
-          <div className={classes.services} id="services">
-            <h4 className={classes.servicesTitle}>Our Services</h4>
-            <ul className={classes.servicesList}>
-              <li className={classes.servicesItem}>Urinary tract infections</li>
-              <li className={classes.servicesItem}>Kidney function tests</li>
-              <li className={classes.servicesItem}>Treatment of prostate issues</li>
-              <li className={classes.servicesItem}>Male infertility evaluation</li>
-            </ul>
-          </div>
-
-          <div className={classes.headOfDepartment} id="team">
-            <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>Dr. Wale</h5>
-            <p>A urology expert with extensive clinical experience.</p>
-          </div>
+        
         </div>
       </div>
     </div>
