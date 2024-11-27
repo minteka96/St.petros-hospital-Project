@@ -5,7 +5,7 @@
 /* Page Title Area */
 .pageTitleArea {
   background-color: #e3f2fd;
-  padding: 20px;
+  padding: 5px;
   border-radius: 8px;
   text-align: center;
 }
@@ -14,7 +14,20 @@
 .departmentArea {
   display: flex;
 }
-
+.pageTitleArea h1{
+  color: #00796b;
+}
+.pageTitleArea h4{
+  color: #00796b;
+}
+.pageTitleArea{ 
+  font-size: 1.2rem;
+}
+.pageTitleArea h3,h4{ 
+ list-style-type: circle;
+ text-align: left;
+ 
+}
 /* Department Gallery */
 .departmentGallery {
   margin: 20px 0;

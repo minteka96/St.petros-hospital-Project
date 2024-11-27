@@ -26,15 +26,19 @@ const Orthopedics = () => {
   <h1>Orthopedics Department</h1>
   <p>Comprehensive care for musculoskeletal conditions.</p>
   <p>
-    The orthopedics department specializes in the diagnosis and treatment of conditions affecting the musculoskeletal system, including fractures, joint pain, arthritis, sports injuries, and spinal disorders. TGH provides the finest and most recent health care services in managing orthopedic disorders, such as:
+    The orthopedics department specializes in the diagnosis and treatment of conditions affecting the musculoskeletal system, including fractures, joint pain, arthritis, sports injuries, and spinal disorders. SPH provides the finest and most recent health care services in managing orthopedic disorders, such as:
   </p>
   <ul>
+      <li>Out patient follow up Service</li>
+    
+   <li>Surgical and non surgicalFracture management and bone repair</li>
     <li>X-rays and imaging studies</li>
     <li>Joint injections</li>
     <li>Physical therapy order related to injury</li>
     <li>Surgical interventions </li>
     <li>Fracture repair</li>
-    <li>Joint replacement surgery</li>
+    <li>partial hip replacement surgery</li>
+     <li>Sports medicine and injury prevention</li>
   </ul>
 </div>
 
@@ -87,19 +91,16 @@ const Orthopedics = () => {
           <div className={classes.orthopedicsServices} id="services">
             <h4 className={classes.servicesTitle}>Our Services</h4>
             <ul className={classes.servicesList}>
+               <li className={classes.servicesItem}>out patient follow up Service</li>
               <li className={classes.servicesItem}>Fracture management and bone repair</li>
-              <li className={classes.servicesItem}>Joint replacement surgery</li>
+              <li className={classes.servicesItem}>partial hip replacement surgery</li>
               <li className={classes.servicesItem}>Sports medicine and injury prevention</li>
               <li className={classes.servicesItem}>Physical therapy and rehabilitation</li>
             </ul>
           </div>
 
           {/* Head Of Department */}
-          <div className={classes.headOfDepartment} id="team">
-            <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>Dr. Zerhun</h5>
-            <p>Renowned orthopedic surgeon with over 15 years of experience in joint surgery.</p>
-          </div>
+        
         </div>
       </div>
     </div>

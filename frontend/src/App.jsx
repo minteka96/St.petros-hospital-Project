@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { Routes, Route } from "react-router-dom";
@@ -6,7 +7,7 @@ import Footer from "./markup/components/Footer/Footer";
 import Home from "./markup/pages/Home/Home";
 import Services from "./markup/pages/servicepage/Services";
 import HealthTip from "./markup/components/Header/HealthTip.jsx";
-import ServiceDetail from "./markup/pages/serviceDetaile/ServiceDetail";
+import ServiceDetail from "./markup/pages/serviceDetaile/ServiceDetail.jsx";
 import Cardiology from "./markup/pages/serviceDetaile/cardac/Cardiology";
 import MCH from "./markup/pages/serviceDetaile/mch/MCH";
 import Neurology from "./markup/pages/serviceDetaile/neurology/Neurology";
@@ -15,7 +16,7 @@ import ART from "./markup/pages/serviceDetaile/ART/ART";
 import Dermatology from "./markup/pages/serviceDetaile/Dermatology/Dermatology";
 import DrTbTreatment from "./markup/pages/serviceDetaile/DR-TB/DR-TB Treatment";
 import Pediatrics from "./markup/pages/serviceDetaile/Pediatrics/Pediatrics";
-import ENT from "./markup/pages/serviceDetaile/ENT/ENT";
+import ENT from "./markup/pages/serviceDetaile/ENT/ENT.jsx";
 import Medical from "./markup/pages/serviceDetaile/medical/Medical";
 import Toxicology from "./markup/pages/serviceDetaile/Toxicology/Toxicology";
 import Surgery from "./markup/pages/serviceDetaile/Surgical/Surgery";

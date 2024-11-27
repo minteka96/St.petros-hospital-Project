@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import Swiper from 'swiper';
-import img1 from '../../../../assets/img/slider/ophthalmology_slide1.jpg';
+import img1 from '../../../../assets/img/slider/o';
 import img2 from '../../../../assets/img/slider/ophthalmology_slide2.jpg';
 import img3 from '../../../../assets/img/about/ophthalmology_about.jpg';
 import classes from './Ophthalmology.module.css';
@@ -75,6 +75,9 @@ const Ophthalmology = () => {
             <h4 className={classes.servicesTitle}>Our Services</h4>
             <ul className={classes.servicesList}>
               <li className={classes.servicesItem}>Comprehensive eye examinations</li>
+              <li className={classes.servicesItem}>optometry care</li>
+              <li className={classes.servicesItem}>Glaucoma care</li>
+              <li className={classes.servicesItem}>Retinopathy Screening</li>
               <li className={classes.servicesItem}>Management of eye diseases</li>
               <li className={classes.servicesItem}>Laser vision correction</li>
               <li className={classes.servicesItem}>Pediatric ophthalmology</li>
@@ -82,11 +85,7 @@ const Ophthalmology = () => {
           </div>
 
           {/* Head Of Department */}
-          <div className={classes.headOfDepartment} id="team">
-            <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>Dr. Emily White</h5>
-            <p>A renowned specialist in ophthalmology with over 15 years of experience.</p>
-          </div>
+         
         </div>
       </div>
     </div>

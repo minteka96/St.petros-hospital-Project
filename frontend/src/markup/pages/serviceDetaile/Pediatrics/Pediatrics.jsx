@@ -99,11 +99,7 @@ const Pediatrics = () => {
           </div>
 
           {/* Head Of Department */}
-          <div className={classes.headOfDepartment} id="team">
-            <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>Dr. Admadu</h5>
-            <p>A compassionate pediatrician with over 15 years of experience in child healthcare.</p>
-          </div>
+  
         </div>
       </div>
     </div>

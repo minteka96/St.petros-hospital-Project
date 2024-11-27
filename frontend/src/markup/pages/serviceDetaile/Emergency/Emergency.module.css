@@ -1,6 +1,7 @@
-/* Main Content */
-.mainContent {
-  padding: 20px;
+/* General styling for h4 */
+.mainContent h1,
+.mainContent h4 {
+  color: #00796b; /* Apply green color to both h1 and h4 */
 }
 
 /* Page Title Area */
@@ -8,17 +9,32 @@
   background-color: #dbf1f1;
   padding: 20px;
   border-radius: 8px;
-  text-align: center;
+  text-align:left;
+}
+
+.pageTitleArea{ 
+  font-size: 1.2rem;
+}
+.pageTitleArea li{ 
+ list-style-type: circle;
+ text-align: left;
+}
+.pageTitleArea h1 {
+  color: #00796b;
+}
+
+.pageTitleArea p {
+  color: #333;
 }
 
 /* Department Area */
 .departmentArea {
   display: flex;
+  color: #00796b;
 }
 
-/* Department Gallery */
 .departmentGallery {
- margin: 20px 0;
+  margin: 20px 0;
   width: 80%;
   max-width: 800px;
   height: 500px;
@@ -30,48 +46,55 @@
   color: #00796b;
 }
 
-.galleryImage {
+/* Styling for Swiper slides */
+.swiper-container {
   width: 100%;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  height: 100%;
 }
 
-/* DR-TB Services */
-.drTbServices {
-  margin: 20px 0;
+.swiper-slide {
+  background-size: cover;
+  background-position: center;
+  height: 100%;
 }
 
-.servicesTitle {
-  margin-bottom: 10px;
-  color: #00796b;
+.sliderTitle {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
 }
 
+.gallery-slider .swiper-slide {
+  position: relative;
+}
+
+/* Services List */
 .servicesList {
-  list-style-type: none;
-  padding: 0;
+  list-style-type: circle; /* Change bullet style */
+  padding-left: 20px;      /* Adds padding to left for circle bullets */
 }
 
 .servicesItem {
   margin: 5px 0;
 }
 
-/* Head Of Department */
+/* Head of Department */
 .headOfDepartment {
   margin: 20px 0;
 }
 
 .departmentHeadTitle {
   margin-bottom: 5px;
-  color:  #00796b;
+  color: #00796b;
 }
 
 .departmentHeadName {
   margin: 5px 0;
-}
-
-/* Swiper Navigation Buttons */
-.swiper-button-prev, .swiper-button-next {
-  color:  #00796b;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 /* Responsive Styles */

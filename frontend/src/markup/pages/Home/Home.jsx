@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 
 import banner1 from "../../../assets/img/slider/st.peter1jpg copy.png";
-import banner3 from "../../../assets/img/slider/kidus petros 2copy.jpg";
+import banner2 from '../../../assets/img/banner/banner2.jpg'
+import banner3 from "../../../assets/img/slider/lab/labroom.jpg";
 import team1 from "../../../assets/img/team/doc1.png";
 import team2 from "../../../assets/img/team/doc2.png";
 import team3 from "../../../assets/img/team/doc3.png";
@@ -90,6 +91,27 @@ const [SubSpecialist, setSubSpecialist] = useState(0);
           <div
             className="swiper-slide"
             style={{ backgroundImage: `url(${banner3})` }}
+          >
+            <div className="container">
+              <div className="row">
+                <div className="col-12">
+                  <div className="slider-content">
+                    <h5 className="title animated delay2">
+                      መኖራችን
+                      <span className="d-block">ለእርስዎ ነዉ!</span>
+                    </h5>
+                    <h2 className="title animated delay2">
+                      Our Existence is
+                      <span className="d-block">For You</span>
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+           <div
+            className="swiper-slide"
+            style={{ backgroundImage: `url(${banner2})` }}
           >
             <div className="container">
               <div className="row">

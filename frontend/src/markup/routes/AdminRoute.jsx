@@ -1,4 +1,4 @@
-// src/routes/AdminRoute.jsx
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Applicants from "../components/Admin/Applicant/Applicant.jsx";
@@ -17,6 +17,8 @@ const logOut = async () => {
   await localStorage.removeItem("access-token");
   window.location.href = "/";
 }
+
+
 const AdminRoute = () => {
   return (
     <div>
@@ -74,7 +76,18 @@ const AdminRoute = () => {
                 <Route path="/news" element={<Newss />} />
                 <Route path="news/edit/:news_id" element={<EditNews />} />
                 {/* ******************** News Routes Start Here End Here *****************/}
-              </Routes>
+
+                {/******************* healthtip Routes Start Here ****************/}
+                <Route path="/add-healthtip" element={<AddHealthTipForm />} />
+                <Route path="/healthtipList" element={<HealthTipList />} />
+                <Route path="/healthtip/edit/:healthtip_id" element={<EditHealthTip />} />
+                {/* ******************** tender Routes Start Here End Here *****************/}
+
+{/* ********************add job post*********************************** */}
+ <Route path="/add-job" element={<AddJobForm/>} />
+                  {/* <Route path="/joblist" element={<JobList />} />  */}
+                 <Route path="/job/edit/:job_id" element={<EditJobForm />} />       
+                        </Routes>
             </div>
           </div>
         </div>

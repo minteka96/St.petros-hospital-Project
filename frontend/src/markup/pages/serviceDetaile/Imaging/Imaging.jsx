@@ -95,11 +95,7 @@ const Imaging = () => {
           </div>
 
           {/* Head Of Department */}
-          <div className={classes.headOfDepartment} id="team">
-            <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>Dr. Girma</h5>
-            <p>A leading radiologist with over 15 years of experience in medical imaging.</p>
-          </div>
+      
         </div>
       </div>
     </div>
