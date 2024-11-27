@@ -1,9 +1,20 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import "./adminMenu.css";
+import { useAuth } from '../../../../contexts/AuthContext';
 
 function AdminMenu() {
+  const [role, setRole] = useState("");
+  const { user } = useAuth();
+  useEffect(() => {
+     const token = user ? user.token : null;
+     if (token) {
+       setRole(user.role);
+     }else{
+       setRole("");
+     }
+   }, []);
   return (
     <div>
       <div className="admin-menu">
@@ -33,9 +44,11 @@ function AdminMenu() {
         <Link to="/admin-dashboard/applicationform" className="list-group-item">
           Application
         </Link>
+        {role === "admin" && (
         <Link to="/admin/applicant" className="list-group-item">
           List of Applicants
         </Link>
+        )}
         <Link to="/admin-dashboard/add-tender" className="list-group-item">
           Add Tender
         </Link>
