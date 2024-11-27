@@ -12,12 +12,13 @@ import AddNews from "../components/Admin/AddNewsForm/AddNewsForm.jsx";
 import EditNews from "../components/Admin/NewsEditForm/NewsEditForm.jsx";
 import Newss from "../components/Admin/NewsList/NewsList.jsx";
 /* **************** News Components End Here about news  ******************/
-import HealthTipList from "../components/Admin/HealthTipList/HealthTipList.jsx";
-import AddHealthTipForm from "../components/Admin/addhealthtipForm/AddHealthTipForm.jsx";
-import EditHealthTip from "../components/Admin/EditHealthTipForm/EditHealthTipForm.jsx";
-//import AddTenderForm from "../components/Admin/AddTenderForm/AddTenderForm.jsx";
-import AddJobForm from "../components/Admin/AddJobsForm/AddJobsForm.jsx";
-import EditJobForm from '../components/Admin/JobsEditForm/EditJobForm.jsx'
+
+const logOut = async () => {
+  await localStorage.removeItem("access-token");
+  window.location.href = "/";
+}
+
+
 const AdminRoute = () => {
   return (
     <div>
@@ -33,13 +34,13 @@ const AdminRoute = () => {
             <img src={logo} className="logo" alt="" />
           </div>
           <div>
-            <a className="" href="">
+            <button onClick={logOut} className=" btn btn-danger" href="">
               <img
                 src="https://img.icons8.com/?size=100&id=26215&format=png&color=FFFFFF"
                 alt=""
                 style={{ width: "20px", height: "20px" }}
               />
-            </a>
+            </button>
             <img
               src="https://img.icons8.com/?size=100&id=65342&format=png&color=00a99e"
               alt=""

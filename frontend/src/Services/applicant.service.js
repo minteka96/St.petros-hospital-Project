@@ -3,11 +3,12 @@
 const api_url = import.meta.env.VITE_API_URL;
 
 // function to get all applications
-const getAllApplicants = async () => {
+const getAllApplicants = async (loggedInEmployeeToken) => {
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      "x-access-token": loggedInEmployeeToken,
     },
   };
 

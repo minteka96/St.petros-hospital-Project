@@ -2,25 +2,31 @@
 import { useEffect, useState } from "react";
 // import className from "./applicant.module.css"
 import applicantService from "../../../../Services/applicant.service";
+import { useAuth } from "../../../../contexts/AuthContext";
 import { useNavigate } from "react-router";
 
 const ApplicantsTable = () => {
+  const { user } = useAuth();
+  const token = user ? user.token : null;
+  
  const navigate = useNavigate();
   const [applicants, setApplicants] = useState([]);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
+     if (!token) {
+       navigate("/login");
+     }
     const fetchApplicants = async () => {
       try {
-        const response = await applicantService.getAllApplicants();
+        const response = await applicantService.getAllApplicants(token);
         setApplicants(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
     };
     fetchApplicants();
-  }, []);
+  }, [token]);
 
   const deleteAll=async()=>{
     if(confirmDelete){
@@ -30,7 +36,6 @@ const ApplicantsTable = () => {
         const response = await applicantService.getAllApplicants();
         setLoading(false);
         setApplicants(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -38,7 +43,6 @@ const ApplicantsTable = () => {
     }
     setConfirmDelete(!confirmDelete);
   }
-  console.log("Applicants:", applicants);
 
   return (
     <div className="p-4">
