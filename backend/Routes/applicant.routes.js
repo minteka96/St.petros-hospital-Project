@@ -1,8 +1,8 @@
 const express = require("express");
 const multer = require("multer");
-const path = require("path");
 const router = express.Router();
 const ApplicantController = require("../Controllers/applicant.controller");
+const authMiddleware = require("../Middlewares/auth.middleware");
 
 // Configure Multer for file uploads
 const storage = multer.diskStorage({
@@ -28,6 +28,7 @@ const upload = multer({ storage });
 // Route for creating an applicant with file uploads
 router.post(
   "/api/applicant",
+  [authMiddleware.verifyToken, authMiddleware.isAdmin],
   upload.fields([
     { name: "cv_file", maxCount: 1 },
     { name: "testimonials", maxCount: 1 },
@@ -35,7 +36,11 @@ router.post(
   ApplicantController.createApplicant
 );
 
-router.get("/api/applicants", ApplicantController.getAllApplicants);
+router.get(
+  "/api/applicants",
+  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  ApplicantController.getAllApplicants
+);
 router.get("/api/applicant/:id", ApplicantController.getApplicantById);
 // router.put("/api/applicant/:id", ApplicantController.updateApplicant);
 router.delete("/api/applicant/:id", ApplicantController.deleteApplicant);

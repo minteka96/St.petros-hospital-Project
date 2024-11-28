@@ -8,8 +8,12 @@ const installRouter = require("./install.routes");
 const jobsRouter = require("./jobs.routes.jsx");
 const healthtipRouter = require("./healthtip.routes");
 const applicantRouter = require("./applicant.routes");
+const loginRouter = require("./logIn.routes");
+const userRouter = require("./user.routes");
 // Import the news router
 const newsRoutes = require("./news.routes");
+router.use(loginRouter);
+router.use(userRouter);
 router.use(applicantRouter);
 // Add the install router to the main router
 router.use(installRouter);

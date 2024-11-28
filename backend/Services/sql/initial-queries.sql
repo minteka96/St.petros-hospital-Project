@@ -10,12 +10,13 @@ CREATE TABLE IF NOT EXISTS `Users` (
 ) ENGINE=InnoDB;
 
 -- Insert default admin user
-INSERT INTO `Users` (`username`, `email`, `password_hashed`)
+INSERT INTO `Users` (`username`, `email`, `password_hashed`, `role`)
 VALUES 
-    ('admin', 'admin@admin.com', '$2b$10$DX9eZK099SgsYXIWOyYDTef4Z/7emhCt9MsMVxyqUyDIlIZ1oRkE6') 
+    ('admin', 'admin@admin.com', '$2b$10$DX9eZK099SgsYXIWOyYDTef4Z/7emhCt9MsMVxyqUyDIlIZ1oRkE6', 'admin')
 ON DUPLICATE KEY UPDATE 
-    `username` = VALUES(`username`), 
-    `email` = VALUES(`email`);
+    `password_hashed` = VALUES(`password_hashed`), 
+    `role` = VALUES(`role`);
+
 
 -- Create News Table
 CREATE TABLE IF NOT EXISTS `News` (
