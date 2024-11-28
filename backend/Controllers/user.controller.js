@@ -58,6 +58,49 @@ async function getAllUsers(req, res) {
   }
 }
 
+// Update a user by ID
+async function updateUserById(req, res) {
+  try {
+    const userId = req.params.id;
+    const formData = req.body;
+    const updatedUser = await applicantService.updateUserById(userId, formData);
+    if (!updatedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.status(200).json({ data: updatedUser ,  message: "User updated successfully" });
+  } catch (error) {
+    console.error("Error:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
+//get user by id
+async function getUserById(req, res) {
+  try {
+    const userId = req.params.id;
+    const user = await applicantService.getUserById(userId);
+    
+    res.status(200).json({ data: user });
+  } catch (error) {
+    console.error("Error:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+// Delete a user by ID
+async function deleteUserById(req, res) {
+  try {
+    const userId = req.params.id;
+    const deletedUser = await applicantService.deleteUserById(userId);
+    if (!deletedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Error:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
 // Export the create user function
 
-module.exports = { createUser, getAllUsers, getUserByEmail };
+module.exports = { createUser, getAllUsers, getUserByEmail, getUserById, updateUserById, deleteUserById };

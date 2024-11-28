@@ -30,6 +30,7 @@ async function logIn(req, res) {
       email: user.email,
       role: user.role,
     };
+    // set expiration time 1 minute
     const token = jwt.sign(payload, jwtSecret, { expiresIn: "24h" });
 
     return res.status(200).json({
