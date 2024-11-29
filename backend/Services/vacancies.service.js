@@ -50,7 +50,9 @@ const getAllJobs = async () => {
 
 const deleteJobById = async (jobId) => {
   try {
+    console.log(jobId);
     await db.query("DELETE FROM vacancy WHERE id = ?", [jobId]);
+
     return { message: "Job deleted successfully" };
   } catch (err) {
     throw new Error("Error deleting job: " + err.message);
