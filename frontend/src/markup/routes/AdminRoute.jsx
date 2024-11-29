@@ -23,6 +23,7 @@ import AdminManagement from "../pages/Admin/AdminManagement.jsx";
 import AddAdmin from "../pages/Admin/AddAdmin.jsx";
 
 const AdminRoute = () => {
+
   const navigate = useNavigate();
 
   const logOut =  () => {
@@ -53,6 +54,7 @@ const AdminRoute = () => {
       // window.location.href = "/login";
     }
   }, [navigate]);
+
   return (
     <div style={{ margin: 0, padding: 0, backgroundColor: "white" }}>
       {/* Fixed Header */}
@@ -67,12 +69,14 @@ const AdminRoute = () => {
         className="w-100 gradientCustom px-3 d-flex align-items-center justify-content-between"
       >
         <div>
+
           <Link to="/">
             <img src={logo} className="logo" alt="Logo" />
           </Link>
         </div>
         <div className="d-flex align-items-center justify-content-end">
           <h2 className=" m-0 text-white pr-3">Welcom: {user?.username}</h2>
+
           <button onClick={logOut} className="btn btn-danger">
             <img
               src="https://img.icons8.com/?size=100&id=26215&format=png&color=FFFFFF"
@@ -106,6 +110,7 @@ const AdminRoute = () => {
           </div>
         </div>
 
+
         {/* Main Content Area */}
         <div
           className="col-md-9 admin-right-side p-0"
@@ -121,6 +126,7 @@ const AdminRoute = () => {
               <Route path="/" element={<AdminDashbord />} />
               <Route path="/admins" element={<AdminManagement />} />
               <Route path="/new" element={<AddAdmin />} />
+
 
               <Route path="/applicant" element={<Applicants />} />
               <Route path="/applicant/:id" element={<ApplicantDetails />} />
