@@ -24,6 +24,18 @@ function AdminMenu() {
         <Link to="/admin" className="list-group-item">
           Dashboard
         </Link>
+
+        {role === "admin" && (
+          <Link to="/admin/admins" className="list-group-item">
+            List of Admins
+          </Link>
+        )}
+
+        {role === "admin" && (
+          <Link to="/admin/new" className="list-group-item">
+            Add New Admin
+          </Link>
+        )}
         
         {role === "admin" && (
           <Link to="/admin/add-news" className="list-group-item">
