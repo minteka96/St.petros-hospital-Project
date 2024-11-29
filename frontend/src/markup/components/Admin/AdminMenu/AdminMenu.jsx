@@ -1,20 +1,20 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./adminMenu.css";
-import { useAuth } from '../../../../contexts/AuthContext';
+import { useAuth } from "../../../../contexts/AuthContext";
 
 function AdminMenu() {
   const [role, setRole] = useState("");
   const { user } = useAuth();
   useEffect(() => {
-     const token = user ? user.token : null;
-     if (token) {
-       setRole(user.role);
-     }else{
-       setRole("");
-     }
-   }, []);
+    const token = user ? user.token : null;
+    if (token) {
+      setRole(user.role);
+    } else {
+      setRole("");
+    }
+  }, []);
   return (
     <div>
       <div className="admin-menu p-3">
@@ -24,9 +24,13 @@ function AdminMenu() {
         <Link to="/admin" className="list-group-item">
           Dashboard
         </Link>
-        <Link to="/admin/add-news" className="list-group-item">
-          Add News
-        </Link>
+        
+        {role === "admin" && (
+          <Link to="/admin/add-news" className="list-group-item">
+            Add News
+          </Link>
+        )}
+
         <Link to="/admin/news" className="list-group-item">
           List of News
         </Link>
