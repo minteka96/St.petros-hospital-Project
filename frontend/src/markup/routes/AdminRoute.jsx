@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import Applicants from "../components/Admin/Applicant/Applicant.jsx";
 import ApplicantDetails from "../components/Admin/Applicant/ApplicantDetail.jsx";
 import AdminMenu from "../components/Admin/AdminMenu/AdminMenu.jsx";
@@ -18,12 +18,43 @@ import EditHealthTip from "../components/Admin/EditHealthTipForm/EditHealthTipFo
 //import AddTenderForm from "../components/Admin/AddTenderForm/AddTenderForm.jsx";
 import AddJobForm from "../components/Admin/AddJobsForm/AddJobsForm.jsx";
 import EditJobForm from "../components/Admin/JobsEditForm/EditJobForm.jsx";
-const logOut = async () => {
-  await localStorage.removeItem("access-token");
-  window.location.href = "/";
-};
+import { useAuth } from "../../contexts/AuthContext.jsx";
+import AdminManagement from "../pages/Admin/AdminManagement.jsx";
+import AddAdmin from "../pages/Admin/AddAdmin.jsx";
 
 const AdminRoute = () => {
+
+  const navigate = useNavigate();
+
+  const logOut =  () => {
+     sessionStorage.removeItem("access-token");
+    window.location.href = "/";
+  };
+
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const token = user ? user.token : null;
+    if (!token) {
+      navigate("/login");
+    }
+    const isTokenExpired = () => {
+      if (token) {
+        const decodedToken = JSON.parse(atob(token.split(".")[1]));
+        const expirationTime = decodedToken.exp;
+        const currentTime = Date.now() / 1000;
+        return expirationTime < currentTime;
+      }
+      return true;
+    };
+
+    if (isTokenExpired()) {
+      sessionStorage.removeItem("access-token");
+      navigate("/login");
+      // window.location.href = "/login";
+    }
+  }, [navigate]);
+
   return (
     <div style={{ margin: 0, padding: 0, backgroundColor: "white" }}>
       {/* Fixed Header */}
@@ -38,9 +69,14 @@ const AdminRoute = () => {
         className="w-100 gradientCustom px-3 d-flex align-items-center justify-content-between"
       >
         <div>
-          <img src={logo} className="logo" alt="Logo" />
+
+          <Link to="/">
+            <img src={logo} className="logo" alt="Logo" />
+          </Link>
         </div>
-        <div>
+        <div className="d-flex align-items-center justify-content-end">
+          <h2 className=" m-0 text-white pr-3">Welcom: {user?.username}</h2>
+
           <button onClick={logOut} className="btn btn-danger">
             <img
               src="https://img.icons8.com/?size=100&id=26215&format=png&color=FFFFFF"
@@ -74,6 +110,7 @@ const AdminRoute = () => {
           </div>
         </div>
 
+
         {/* Main Content Area */}
         <div
           className="col-md-9 admin-right-side p-0"
@@ -87,6 +124,10 @@ const AdminRoute = () => {
           <div className="m-3 normalBg">
             <Routes>
               <Route path="/" element={<AdminDashbord />} />
+              <Route path="/admins" element={<AdminManagement />} />
+              <Route path="/new" element={<AddAdmin />} />
+
+
               <Route path="/applicant" element={<Applicants />} />
               <Route path="/applicant/:id" element={<ApplicantDetails />} />
               <Route path="/add-news" element={<AddNews />} />
