@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 import "./adminMenu.css";
 
 function AdminMenu() {
@@ -29,10 +29,7 @@ function AdminMenu() {
         <Link to="/admin-dashboard/add-vacancy" className="list-group-item">
           Job Post
         </Link>
-        <Link
-          to="/admin-dashboard/list-of-vacancies"
-          className="list-group-item"
-        >
+        <Link to="/admin/list-of-vacancies" className="list-group-item">
           List of Jobs
         </Link>
         <Link to="/admin-dashboard/applicationform" className="list-group-item">

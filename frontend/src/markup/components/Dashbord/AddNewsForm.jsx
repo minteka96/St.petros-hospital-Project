@@ -1,127 +1,175 @@
-import React, { useState } from 'react';
-import { addNews } from '../../../Util/api/api';
-import classes from './AddNewsForm.module.css';
+import React, { useState } from "react";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { addNews } from "../../../Util/api/api";
 
 const AddNewsForm = () => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [image, setImage] = useState('');
-  const [alt, setAlt] = useState('');
-  const [detailsLink, setDetailsLink] = useState('');
-  const [categoryLink, setCategoryLink] = useState('');
-  const [category, setCategory] = useState('');
-  const [date, setDate] = useState('');
-  const [author, setAuthor] = useState('');
-  const [authorLink, setAuthorLink] = useState('');
+  const [formData, setFormData] = useState({
+    title: "",
+    content: "",
+    image: "",
+    alt: "",
+    detailsLink: "",
+    categoryLink: "",
+    category: "",
+    date: "",
+    author: "",
+    authorLink: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addNews({
-        title,
-        content,
-        image,
-        alt,
-        detailsLink,
-        categoryLink,
-        category,
-        date,
-        author,
-        authorLink,
-      });
+      await addNews(formData);
       // Clear the form fields
-      setTitle('');
-      setContent('');
-      setImage('');
-      setAlt('');
-      setDetailsLink('');
-      setCategoryLink('');
-      setCategory('');
-      setDate('');
-      setAuthor('');
-      setAuthorLink('');
+      setFormData({
+        title: "",
+        content: "",
+        image: "",
+        alt: "",
+        detailsLink: "",
+        categoryLink: "",
+        category: "",
+        date: "",
+        author: "",
+        authorLink: "",
+      });
     } catch (error) {
-      console.error('Error adding news:', error);
+      console.error("Error adding news:", error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className={classes.formContainer}>
-      <h2>Add News</h2>
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className={classes.inputField}
-        required
-      />
-      <textarea
-        placeholder="Content"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        className={classes.textareaField}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Image URL"
-        value={image}
-        onChange={(e) => setImage(e.target.value)}
-        className={classes.inputField}
-      />
-      <input
-        type="text"
-        placeholder="Image Alt Text"
-        value={alt}
-        onChange={(e) => setAlt(e.target.value)}
-        className={classes.inputField}
-      />
-      <input
-        type="text"
-        placeholder="Details Link"
-        value={detailsLink}
-        onChange={(e) => setDetailsLink(e.target.value)}
-        className={classes.inputField}
-      />
-      <input
-        type="text"
-        placeholder="Category Link"
-        value={categoryLink}
-        onChange={(e) => setCategoryLink(e.target.value)}
-        className={classes.inputField}
-      />
-      <input
-        type="text"
-        placeholder="Category"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        className={classes.inputField}
-      />
-      <input
-        type="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-        className={classes.inputField}
-      />
-      <input
-        type="text"
-        placeholder="Author"
-        value={author}
-        onChange={(e) => setAuthor(e.target.value)}
-        className={classes.inputField}
-      />
-      <input
-        type="text"
-        placeholder="Author Link"
-        value={authorLink}
-        onChange={(e) => setAuthorLink(e.target.value)}
-        className={classes.inputField}
-      />
-      <button type="submit" className={classes.submitButton}>
-        Add News
-      </button>
-    </form>
+    <Container className="my-5">
+      <Row className="justify-content-center">
+        <Col md={8} lg={6}>
+          <div className="p-4 shadow-lg rounded bg-light">
+            <h2 className="text-center mb-4">Add News</h2>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3" controlId="formTitle">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="title"
+                  placeholder="Enter news title"
+                  value={formData.title}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formContent">
+                <Form.Label>Content</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={4}
+                  name="content"
+                  placeholder="Enter news content"
+                  value={formData.content}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formImage">
+                <Form.Label>Image URL</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="image"
+                  placeholder="Enter image URL"
+                  value={formData.image}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formAlt">
+                <Form.Label>Image Alt Text</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="alt"
+                  placeholder="Enter image alt text"
+                  value={formData.alt}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formDetailsLink">
+                <Form.Label>Details Link</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="detailsLink"
+                  placeholder="Enter details link"
+                  value={formData.detailsLink}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formCategoryLink">
+                <Form.Label>Category Link</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="categoryLink"
+                  placeholder="Enter category link"
+                  value={formData.categoryLink}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formCategory">
+                <Form.Label>Category</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="category"
+                  placeholder="Enter news category"
+                  value={formData.category}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formDate">
+                <Form.Label>Date</Form.Label>
+                <Form.Control
+                  type="date"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formAuthor">
+                <Form.Label>Author</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="author"
+                  placeholder="Enter author name"
+                  value={formData.author}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formAuthorLink">
+                <Form.Label>Author Link</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="authorLink"
+                  placeholder="Enter author link"
+                  value={formData.authorLink}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+
+              <Button variant="primary" type="submit" className="w-100">
+                Add News
+              </Button>
+            </Form>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

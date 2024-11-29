@@ -45,7 +45,7 @@ import HealthWorkerINfo from "./markup/pages/HealthWorkerEntertainment/HealthWor
 import Dashboard from "./markup/components/Dashbord/Dashboard.jsx";
 import AddNewsForm from "./markup/components/Dashbord/AddNewsForm";
 import AddNewsDetailForm from "./markup/components/Dashbord/AddNewsDetailForm";
-import VacancyList from "./markup/components/Dashbord/VacancyList";
+import VacancyList from "./markup/pages/Admin/VacancyList.jsx";
 import ApplicationList from "./markup/components/Dashbord/ApplicationList";
 import NewsList from "./markup/components/Dashbord/NewsList";
 import AddVacancyForm from "./markup/components/Dashbord/AddVacancyForm";
@@ -67,8 +67,7 @@ import Login from "./markup/pages/Login/Login.jsx";
 function App() {
   // check if thr route is '/login' or not
   if (window.location.pathname === "/login") {
-    
-  } 
+  }
   return (
     <div>
       {["/login", "/admin"].some((path) =>
@@ -84,6 +83,8 @@ function App() {
         <Route path="/admin/news" element={<Newss />} />
         <Route path="/admin/news/edit/:news_id" element={<EditNews />} />
         {/* ******************** My Task End Here *****************/}
+
+        <Route path="/admin/list-of-vacancies" element={<VacancyList />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/test" element={<ApplicationForms />} />
@@ -143,7 +144,6 @@ function App() {
         <Route path="/admin-dashboard" element={<AdminDashboard />}>
           <Route path="addnews" element={<AddNewsForm />} />
           <Route path="addnewsdetail" element={<AddNewsDetailForm />} />
-          <Route path="vacancy-list" element={<VacancyList />} />
           <Route path="application-list" element={<ApplicationList />} />
           <Route path="news-list" element={<NewsList />} />
           <Route path="add-vacancy" element={<AddVacancyForm />} />

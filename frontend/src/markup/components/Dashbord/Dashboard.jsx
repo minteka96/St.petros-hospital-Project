@@ -1,21 +1,21 @@
 /* eslint-disable no-unused-vars */
 // src/components/Dashboard.jsx
 
-import React from 'react';
-import UserList from './UserList';
-import AddUserForm from './AddUserForm';
-import VacancyList from './VacancyList';
-import AddVacancyForm from './AddVacancyForm';
-import ApplicationList from './ApplicationList';
-import NewsList from './NewsList';
-import AddNewsForm from './AddNewsForm';
-import classes from './Dashboard.module.css'; // Import CSS module as "classes"
+import React from "react";
+import UserList from "./UserList";
+import AddUserForm from "./AddUserForm";
+import VacancyList from "./VacancyLists";
+import AddVacancyForm from "./AddVacancyForm";
+import ApplicationList from "./ApplicationList";
+import NewsList from "./NewsList";
+import AddNewsForm from "./AddNewsForm";
+import classes from "./Dashboard.module.css"; // Import CSS module as "classes"
 
 const Dashboard = () => {
   return (
     <div className={classes.dashboardContainer}>
       <h1 className={classes.title}>Admin Dashboard</h1>
-      
+
       <div className={classes.userManagement}>
         <h2 className={classes.sectionTitle}>User Management</h2>
         <AddUserForm />

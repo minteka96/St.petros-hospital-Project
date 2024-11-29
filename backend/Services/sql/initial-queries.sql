@@ -42,20 +42,19 @@ CREATE TABLE IF NOT EXISTS `Health_Tips` (
 
 
 CREATE TABLE IF NOT EXISTS `Vacancy` (
-    `vacancy_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `job_title` VARCHAR(255) NOT NULL,
-    `job_description` TEXT NOT NULL,
-    `job_requirements` TEXT NOT NULL,
-    `qualifications` TEXT NOT NULL, 
-    `job_grade` VARCHAR(50),        
-    `terms` TEXT,                   
-    `salary` VARCHAR(100),          
-    `address` VARCHAR(255),         
-    `application_link` VARCHAR(255),
-    `deadline` DATE NOT NULL,
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `job_title` VARCHAR(255) NOT NULL,
+  `qualifications` TEXT,
+  `job_experience` TEXT,
+  `job_grade` VARCHAR(50),
+  `terms` VARCHAR(50),
+  `salary` VARCHAR(50),
+  `address` VARCHAR(255),
+  `application_link` TEXT,
+  `location` VARCHAR(255),
+  `deadline` DATE
 ) ENGINE=InnoDB;
+
 
 CREATE TABLE IF NOT EXISTS `Applicant` ( 
     `id` INT AUTO_INCREMENT PRIMARY KEY, 
