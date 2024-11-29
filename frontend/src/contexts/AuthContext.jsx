@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 // Import auth utilities
-import userAuthHeader from "../util/auth";
+import userAuthHeader from "../Util/auth.js";
 
 // Create the AuthContext
 const AuthContext = React.createContext();

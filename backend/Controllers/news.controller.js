@@ -5,10 +5,8 @@ const createNews = async (req, res) => {
     // Extract data from the request body
     const { news_title, news_detail, news_description, news_link } = req.body;
     // Validate required fields
-    if (!news_title || !news_detail) {
-      return res
-        .status(400)
-        .json({ error: "News title and detail are required" });
+    if (!news_title || !news_detail||!news_description||!news_link) {
+      return res.status(400).json({ error: "All fields are required" });
     }
     // Get the file path for the uploaded image
     const news_image_link = req.files.news_image // Fixed field name here
@@ -87,10 +85,8 @@ const updateNews = async (req, res) => {
     const newsId = req.params.id;
     const { news_title, news_detail, news_description, news_link } = req.body;
 
-    if (!news_title || !news_detail) {
-      return res
-        .status(400)
-        .json({ error: "News title and detail are required" });
+    if (!news_title || !news_detail||!news_description||!news_link) {
+      return res.status(400).json({ error: "All fields are required" });
     }
 
     const news_image_link = req.files?.news_image

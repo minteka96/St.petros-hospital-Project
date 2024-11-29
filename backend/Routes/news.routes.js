@@ -1,9 +1,9 @@
 const express = require("express");
 const multer = require("multer");
+const authMiddleware = require("../Middlewares/auth.middleware");
 const newsController = require("../Controllers/news.controller");
 const fs = require("fs");
 const path = require("path");
-
 // Initialize router
 const router = express.Router();
 
@@ -33,21 +33,36 @@ const upload = multer({ storage });
 
 // Route to create a news entry
 router.post(
-  "/api/news", // Added leading slash
-  upload.fields([{ name: "news_image", maxCount: 1 }]), // Corrected field name
-  newsController.createNews
+  "/api/news",
+  upload.fields([{ name: "news_image", maxCount: 1 }]), // multer middleware
+  [authMiddleware.verifyToken, authMiddleware.isAdmin], // authentication/authorization
+  newsController.createNews // controller
 );
 
-router.get("/api/news/:id", newsController.getNewsById);
-router.get("/api/news", newsController.getAllNews);
+router.get(
+  "/api/news",
+  [authMiddleware.verifyToken, authMiddleware.isAdmin], // authentication/authorization only
+  newsController.getAllNews
+);
+
+router.get(
+  "/api/news/:id",
+  [authMiddleware.verifyToken, authMiddleware.isAdmin], // authentication/authorization only
+  newsController.getNewsById
+);
 
 router.put(
   "/api/news/:id",
-  upload.fields([{ name: "news_image", maxCount: 1 }]),
-  newsController.updateNews
+  upload.fields([{ name: "news_image", maxCount: 1 }]), // multer middleware
+  [authMiddleware.verifyToken, authMiddleware.isAdmin], // authentication/authorization
+  newsController.updateNews // controller
 );
 
-router.delete("/api/news/:id", newsController.deleteNews);
+router.delete(
+  "/api/news/:id",
+  [authMiddleware.verifyToken, authMiddleware.isAdmin], // authentication/authorization only
+  newsController.deleteNews
+);
 // Exporting the router to be used in the main application file
 
 module.exports = router;
