@@ -39,7 +39,7 @@ function Login() {
       if (response?.status === "success") {
         const token = response.data.token;
 
-        localStorage.setItem("access-token", token);
+        sessionStorage.setItem("access-token", token);
         window.location.href = "/admin";
       } else {
         console.error("Login failed:", response.message || "Unexpected error.");

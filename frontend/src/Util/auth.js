@@ -1,6 +1,6 @@
 const userAuthHeader = async () => {
   try {
-    const token = localStorage.getItem("access-token");
+    const token = sessionStorage.getItem("access-token");
 
     if (token) {
       const decodedToken = decodeTokenPayload(token);
