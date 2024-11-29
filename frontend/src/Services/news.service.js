@@ -1,8 +1,16 @@
 const api_url = import.meta.env.VITE_API_URL;
 
-const createNews = async (formData) => {
+const createNews = async (formData, loggedInUserToken) => {
   const requestOptions = {
     method: "POST",
+
+    // ****
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": loggedInUserToken,
+    },
+    // ****
+    
     body: formData,
   };
 
@@ -18,23 +26,27 @@ const createNews = async (formData) => {
     return data;
   } catch (error) {
     console.error("Error creating news:", error);
-    throw error;  // Throw error to be caught in the component
+    throw error; // Throw error to be caught in the component
   }
 };
-
 // export default { createNews };
 
 
-
-
 // A function to send GET request to get all news entries
-const getAllNews = async () => {
+const getAllNews = async (loggedInUserToken) => {
   const requestOptions = {
     method: "GET",
+    // headers: {
+    //   "Content-Type": "application/json",
+    //   // "x-access-token": token,
+    // },
+
+    // *****
     headers: {
       "Content-Type": "application/json",
-      // "x-access-token": token,
+      "x-access-token": loggedInUserToken,
     },
+    // ******
   };
 
   try {
@@ -56,13 +68,20 @@ const getAllNews = async () => {
 };
 
 // A function to send GET request to get a specific news item by its ID
-const getNewsById = async (news_id) => {
+const getNewsById = async (news_id, loggedInUserToken) => {
   const requestOptions = {
     method: "GET",
+    // headers: {
+    //   "Content-Type": "application/json",
+    //   // "x-access-token": token,
+    // },
+
+    // *****
     headers: {
       "Content-Type": "application/json",
-      // "x-access-token": token,
+      "x-access-token": loggedInUserToken,
     },
+    // ******
   };
   try {
     const response = await fetch(
@@ -88,9 +107,15 @@ const getNewsById = async (news_id) => {
   }
 };
 
-const updateNews = async (news_id, formData) => {
+const updateNews = async (news_id, formData, loggedInUserToken) => {
   const requestOptions = {
     method: "PUT",
+    // *****
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": loggedInUserToken,
+    },
+    // ******
     body: formData, // FormData includes files and text data
   };
   try {
@@ -113,15 +138,21 @@ const updateNews = async (news_id, formData) => {
 };
 
 
-
 // A function to send DELETE request to delete a specific news item
-const deleteNews = async (news_id) => {
+const deleteNews = async (news_id, loggedInUserToken) => {
   const requestOptions = {
     method: "DELETE",
+    // headers: {
+    //   "Content-Type": "application/json",
+    //   // "x-access-token": token,
+    // },
+
+    // *****
     headers: {
       "Content-Type": "application/json",
-      // "x-access-token": token,
+      "x-access-token": loggedInUserToken,
     },
+    // ******
   };
 
   try {
