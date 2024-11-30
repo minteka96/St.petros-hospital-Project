@@ -12,6 +12,7 @@ import AddNews from "../components/Admin/AddNewsForm/AddNewsForm.jsx";
 import EditNews from "../components/Admin/NewsEditForm/NewsEditForm.jsx";
 import Newss from "../components/Admin/NewsList/NewsList.jsx";
 /* **************** News Components End Here about news  ******************/
+/* ************ Health Tip Components Start Here ********************  */
 import HealthTipList from "../components/Admin/HealthTipList/HealthTipList.jsx";
 import AddHealthTipForm from "../components/Admin/addhealthtipForm/AddHealthTipForm.jsx";
 import EditHealthTip from "../components/Admin/EditHealthTipForm/EditHealthTipForm.jsx";
@@ -53,6 +54,7 @@ const AdminRoute = () => {
       navigate("/login");
       // window.location.href = "/login";
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
   return (

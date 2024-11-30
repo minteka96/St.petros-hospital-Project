@@ -10,41 +10,52 @@
   border-radius: 8px;
   text-align: center;
 }
-.pageTitleArea h1{
+.pageTitleArea h1 {
   color: #00796b;
 }
-.pageTitleArea{ 
-  font-size: 1.2rem;
+.pageTitleArea p {
+  font-size: 1rem;
+  color: #333;
 }
-.pageTitleArea li{ 
- 
- list-style-type: circle;
- text-align: left;
+.pageTitleArea ul {
+  padding-left: 20px;
 }
+.pageTitleArea li {
+  list-style-type: circle;
+  text-align: left;
+  color: #555;
+}
+
 /* Department Area */
 .departmentArea {
   display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 /* Department Gallery */
 .departmentGallery {
-   margin: 20px 0;
+  margin: 20px 0;
   width: 80%;
   max-width: 800px;
   height: 500px;
   margin: auto;
-
+  position: relative;
 }
 
 .galleryTitle {
   margin-bottom: 10px;
   color: #00796b;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .galleryImage {
   width: 100%;
   border-radius: 8px;
   margin-bottom: 20px;
+  object-fit: cover;
 }
 
 /* DR-TB Services */
@@ -55,6 +66,8 @@
 .servicesTitle {
   margin-bottom: 10px;
   color: #00796b;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .servicesList {
@@ -74,20 +87,41 @@
 .departmentHeadTitle {
   margin-bottom: 5px;
   color: #00796b;
+  font-size: 1.5rem;
 }
 
 .departmentHeadName {
   margin: 5px 0;
+  font-weight: bold;
+  color: #00796b;
 }
 
 /* Swiper Navigation Buttons */
-.swiper-button-prev, .swiper-button-next {
+.swiper-button-prev,
+.swiper-button-next {
   color: #00796b;
+  font-size: 24px;
+  z-index: 10;
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
   .departmentArea {
     flex-direction: column;
+    align-items: center; /* Center content for small screens */
+  }
+
+  .departmentGallery {
+    width: 100%;
+    height: auto;
+  }
+
+  .galleryTitle {
+    font-size: 1.2rem; /* Make title smaller on mobile */
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    font-size: 18px; /* Smaller navigation buttons for mobile */
   }
 }

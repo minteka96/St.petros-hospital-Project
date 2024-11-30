@@ -14,6 +14,7 @@ function AdminMenu() {
     } else {
       setRole("");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div>

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import classes from './Cardiology.module.css';
-import img1 from '../../../../assets/img/servicedetail/r01.jpg';
-import img2 from '../../../../assets/img/slider/Icu/ICU2.jpg';
+import img1 from '../../../../assets/img/slider/catlab/19.JPG';
+import img2 from '../../../../assets/img/slider/catlab/catlab20.JPG';
 // Correct imports for Swiper components and modules
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
