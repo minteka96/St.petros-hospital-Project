@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import healthTipService from "../../../Services/healthtip.service";
+import healthTipService from "../../../../Services/healthtip.service";
 import { Link } from "react-router-dom";
 import classes from "./HealthTipList.module.css";
 

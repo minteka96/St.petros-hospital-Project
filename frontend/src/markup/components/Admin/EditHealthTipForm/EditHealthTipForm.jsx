@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import healthTipService from "../../../Services/healthtip.service";
+import healthTipService from "../../../../Services/healthtip.service";
 import classes from "./EditHealthTipForm.module.css";
 
 const EditHealthTipForm = () => {
