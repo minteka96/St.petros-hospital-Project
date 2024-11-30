@@ -12,7 +12,17 @@
 .departmentArea {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  
+}
+.pageTitleArea h1{
+  color: #00796b;
+}
+.servicesList{ 
+  font-size: 1.2rem;
+}
+.servicesList li{ 
+ list-style-type: circle;
+ text-align: left;
 }
 
 .contentWrapper {

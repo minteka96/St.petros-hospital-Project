@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import newsService from "../../../../Services/news.service.js"; // Adjust the path if necessary
+import newsService from "../../../Services/news.service"; // Adjust the path if necessary
 import classes from "./AddNewsForm.module.css";
 
 const AddNewsForm = () => {

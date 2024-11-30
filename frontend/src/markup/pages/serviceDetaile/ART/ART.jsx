@@ -26,23 +26,60 @@ const ART = () => {
   return (
     <div className={classes.mainContent}>
       {/* Page Title Area */}
-    <div className={classes.pageTitleArea}>
-  <h1>Anti-Retroviral Therapy (ART)</h1>
-  <p>
-    Comprehensive care for individuals living with HIV.
-  </p>
-  <p>
-    The ART department specializes in the diagnosis and treatment of HIV/AIDS through effective anti-retroviral therapies. TGH provides the latest health care services in managing HIV, ensuring that patients receive comprehensive care, support, and access to the following services:
-  </p>
-  <ul>
-    <li>HIV Testing and Counseling</li>
-    <li>Antiretroviral Therapy (ART)</li>
-    <li>Regular Monitoring and Viral Load Testing</li>
-    <li>Adherence Support Programs</li>
-    <li>Prevention of Mother-to-Child Transmission (PMTCT)</li>
-    <li>Psychosocial Support Services</li>
-  </ul>
-</div>
+   <h1>Anti-Retroviral Therapy (ART)</h1>
+<p>Comprehensive care for individuals living with HIV.</p>
+<p>
+  The ART department specializes in the diagnosis and treatment of HIV/AIDS through effective anti-retroviral therapies. The SPH HIV Care Center was launched in 1998, and free ART services started in 2006 EC. Since its inception, approximately 8,000 HIV-infected clients have been enrolled in the ART clinic, with 2,448 currently receiving ART. SPH provides the latest healthcare services for managing HIV, ensuring that patients receive comprehensive care, support, and access to the following services:
+</p>
+
+
+<h2>Key Services at SPH HIV Care Center:</h2>
+
+<h4>HIV Testing and Counseling:</h4>
+<p>
+  SPH provides HIV testing and counseling services, helping individuals understand their HIV status and supporting them in making informed decisions about their health and treatment options.
+</p>
+
+<h4>Antiretroviral Therapy (ART):</h4>
+<p>
+  The center offers ART to people living with HIV, which helps suppress the virus, improve immune function, and prevent the transmission of HIV. ART is provided free of charge to eligible patients.
+</p>
+
+<h4>Regular Monitoring (CD4 and Viral Load Testing):</h4>
+<p>
+  Regular monitoring through CD4 count and viral load testing is crucial for assessing the immune system’s health and tracking the effectiveness of ART. This allows healthcare providers to adjust treatment as necessary for optimal results.
+</p>
+
+<h4>Adherence Support Programs:</h4>
+<p>
+  SPH offers adherence support programs to ensure the effectiveness of ART. These programs help patients stay consistent with their medication regimens, which is essential for viral suppression and overall health improvement.
+</p>
+
+<h4>Prevention of Mother-to-Child Transmission (PMTCT):</h4>
+<p>
+  SPH provides services aimed at preventing the transmission of HIV from mother to child during pregnancy, labor, and breastfeeding. This includes the administration of ART to pregnant women living with HIV to protect both the mother and the baby.
+</p>
+
+<h4>Psychosocial Support Services:</h4>
+<p>
+  The HIV Care Center offers comprehensive psychosocial support, including counseling and mental health services, to help patients cope with the emotional, psychological, and social challenges that come with living with HIV.
+</p>
+
+<h4>Counseling for Cervical Cancer Screening and Linkage:</h4>
+<p>
+  SPH offers counseling for women living with HIV regarding the importance of cervical cancer screening. This service helps to identify women at higher risk and facilitates timely referrals for screening and follow-up care.
+</p>
+
+<h4>Voluntary Counseling and Testing (VCT):</h4>
+<p>
+  Voluntary counseling and testing (VCT) is provided to encourage individuals to get tested for HIV in a confidential and supportive environment. This allows individuals to make informed decisions regarding their health and take early steps in HIV care if needed.
+</p>
+
+<h4>Commitment to Comprehensive Care:</h4>
+<p>
+  By providing these essential services, SPH is committed to delivering holistic and comprehensive care to people living with HIV. The center ensures that patients have access to the necessary medical, psychological, and social support to live healthier lives.
+</p>
+
       {/* Department Area */}
       <div className={classes.departmentArea}>
         {/* Main Content Area */}
@@ -88,23 +125,7 @@ const ART = () => {
             </div>
           </div>
 
-          {/* ART Services */}
-          <div className={classes.artServices} id="services">
-            <h4 className={classes.servicesTitle}>Our Services</h4>
-            <ul className={classes.servicesList}>
-              <li className={classes.servicesItem}>HIV diagnosis and management</li>
-              <li className={classes.servicesItem}>Provision of antiretroviral medications</li>
-              <li className={classes.servicesItem}>Ongoing counseling and support services</li>
-              <li className={classes.servicesItem}>Viral load monitoring and CD4 count management</li>
-            </ul>
-          </div>
-
-          {/* Head Of Department */}
-          <div className={classes.headOfDepartment} id="team">
-            <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>Dr.Addisu Adeyemi</h5>
-            <p>A leading expert in HIV/AIDS care with over 15 years of experience in ART management and research.</p>
-          </div>
+          
         </div>
       </div>
     </div>

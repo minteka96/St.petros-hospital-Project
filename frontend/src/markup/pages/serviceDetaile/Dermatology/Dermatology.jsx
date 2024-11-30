@@ -4,8 +4,8 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Swiper from 'swiper';
 import img1 from '../../../../assets/img/slider/derma/002.jpg';
-import img2 from '../../../../assets/img/slider/derma/images.jpeg';
-import img3 from '../../../../assets/img/slider/slide1.jpg';
+import img2 from '../../../../assets/img/slider/derma/001.avif';
+// import img3 from '../../../../assets/img/slider/slide1.jpg';
 import classes from './Dermatology.module.css';
 
 const Dermatology = () => {
@@ -22,23 +22,21 @@ const Dermatology = () => {
   return (
     <div className={classes.mainContent}>
       {/* Page Title Area */}
-     <div className={classes.pageTitleArea}>
+     <div className={classes.pageTitleArea}> 
   <h1>Dermatology Department</h1>
   <p>Comprehensive care for skin conditions.</p>
   <p>
     The dermatology department specializes in the diagnosis and treatment of diseases of the skin, hair, and nails, including conditions such as acne, eczema, psoriasis, skin cancer, and dermatitis. TGH provides the finest and most recent health care services in managing dermatological disorders, such as:
   </p>
   <ul>
-    <li>Skin cancer screenings</li>
-    <li>Acne treatment</li>
-    <li>Eczema management</li>
-    <li>Psoriasis therapy</li>
-    <li>Dermatopathology</li>
-    <li>Laser treatments</li>
+    <li><strong>Skin cancer screenings</strong>: Early detection of skin cancer through routine screenings, offering the best chance for effective treatment.</li>
+    <li><strong>Acne treatment</strong>: Comprehensive treatment options, including topical therapies, oral medications, and laser therapy for effective acne management.</li>
+    <li><strong>Eczema management</strong>: Care plans tailored to manage eczema flare-ups, alleviate symptoms, and prevent future outbreaks.</li>
+    <li><strong>Psoriasis therapy</strong>: Treatments that focus on managing the symptoms of psoriasis, including topical treatments, phototherapy, and systemic therapies.</li>
+    <li><strong>Dermatopathology</strong>: Specialized diagnostic services that involve analyzing skin biopsies to accurately diagnose various skin disorders.</li>
+    <li><strong>Laser treatments</strong>: Advanced laser therapies for conditions like acne scars, pigmentation disorders, and skin resurfacing.</li>
   </ul>
 </div>
-
-
       {/* Department Area */}
       <div className={classes.departmentArea}>
         {/* Main Content Area */}
@@ -67,16 +65,17 @@ const Dermatology = () => {
                 </div>
               </div>
 
-              {/* Slide 3 */}
-              <div className="swiper-slide" style={{ backgroundImage: `url(${img3})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+              {/* Slide 3
+              <div className="swiper-slide" style={{ backgroundImage: `url(${img3})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+              >
                 <div className="slider-content">
                   <h6 className="title">
                     <span className="">
-                        {/* Personalized Skincare Plans */}
+                     
                         </span>
                   </h6>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Swiper Navigation Buttons */}
@@ -88,23 +87,7 @@ const Dermatology = () => {
             </div>
           </div>
 
-          {/* Dermatology Services */}
-          <div className={classes.dermatologyServices} id="services">
-            <h4 className={classes.servicesTitle}>Our Services</h4>
-            <ul className={classes.servicesList}>
-              <li className={classes.servicesItem}>Acne treatment and skincare consultations</li>
-              <li className={classes.servicesItem}>Laser therapy for skin conditions</li>
-              <li className={classes.servicesItem}>Cosmetic dermatology services</li>
-              <li className={classes.servicesItem}>Skin cancer screenings</li>
-            </ul>
-          </div>
-
-          {/* Head Of Department */}
-          <div className={classes.headOfDepartment} id="team">
-            <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>Dr. selam</h5>
-            <p>Expert in dermatology and cosmetic skincare with over 20 years of experience.</p>
-          </div>
+        
         </div>
       </div>
     </div>

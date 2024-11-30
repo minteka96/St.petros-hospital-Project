@@ -101,12 +101,7 @@ const Medical = () => {
             </ul>
           </div>
 
-          {/* Head Of Department */}
-          <div className={classes.headOfDepartment} id="team">
-            <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>Dr.solomon</h5>
-            <p>A dedicated physician with over 15 years of experience in comprehensive healthcare.</p>
-          </div>
+         
         </div>
       </div>
     </div>

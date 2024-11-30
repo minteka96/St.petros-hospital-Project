@@ -1,38 +1,69 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import classes from './Cardiology.module.css';
-import img1 from '../../../../assets/img/servicedetail/r01.jpg';
-import img2 from '../../../../assets/img/slider/Icu/ICU2.jpg';
-
-
-
-
+import img1 from '../../../../assets/img/slider/catlab/19.JPG';
+import img2 from '../../../../assets/img/slider/catlab/catlab20.JPG';
 // Correct imports for Swiper components and modules
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
+// Adjust this import as needed
 function Cardiology() {
   return (
     <div className={classes.departmentContent}>
       {/* Page Title Area */}
       <div className={classes.pageTitleArea}>
-  <h1>Cardiology Department</h1>
-  <p>Comprehensive care for cardiovascular conditions.</p>
-  <p>
-    The cardiology department specializes in the diagnosis and treatment of diseases of the heart and blood vessels, including coronary artery disease, heart failure, arrhythmias, and valvular heart diseases. TGH provides the finest and most recent health care services in managing cardiovascular disorders, such as:
-  </p>
-  <ul>
-    <li>Electrocardiogram (ECG)</li>
-    <li>Echocardiogram</li>
-    <li>Stress Testing</li>
-    <li>Holter Monitoring</li>
-    <li>Cardiac Catheterization</li>
-    <li>Coronary Angioplasty</li>
-  </ul>
-</div>
+        <div className={classes.mainContent}>
+          {/* Page Title Area */}
+          <h1>Cardiology Department</h1>
+          <p>Comprehensive care for cardiovascular conditions.</p>
+          <p>
+            The cardiology department specializes in the diagnosis and treatment of diseases of the heart and blood vessels, including coronary artery disease, heart failure, arrhythmias, and valvular heart diseases.SPH provides the finest and most recent healthcare services in managing cardiovascular disorders, such as:
+          </p>
+
+          <h3>Key Services at SPH Cardiology Department:</h3>
+
+          <h4>Electrocardiogram (ECG):</h4>
+          <p>
+            ECG is used to measure the electrical activity of the heart, helping diagnose arrhythmias and other heart conditions.
+          </p>
+
+          <h4>Echocardiogram:</h4>
+          <p>
+            An echocardiogram uses ultrasound to produce images of the hearts structure and function, allowing for the detection of heart defects and diseases.
+          </p>
+
+          <h4>Surgical Management of Cardiothoracic Malignancies:</h4>
+          <p>
+            The cardiology department offers surgical treatment for malignancies affecting<br/>  the heart and lungs, improving patient outcomes through expert surgical interventions.
+          </p>
+
+          <h4>Outpatient Follow-Up Care:</h4>
+          <p>
+            Patients are provided with comprehensive follow-up care after their initial treatment, ensuring continuous monitoring of their heart health.
+          </p>
+
+          <h4>Cardiac Catheterization:</h4>
+          <p>
+            This procedure involves inserting a catheter into the hearts blood vessels to diagnose<br/>  and treat cardiovascular diseases,such as blockages or structural abnormalities.
+          </p>
+
+          <h4>Emergency Care:</h4>
+          <p>
+            The department provides emergency care for patients experiencing acute cardiovascular events, such as heart attacks and arrhythmias, with immediate intervention and support.
+          </p>
+
+          <h4>Commitment to Comprehensive Care:</h4>
+          <p>
+           SPH is dedicated to offering holistic care for all cardiovascular patients, combining advanced medical treatments with compassionate support to ensure long-term heart health.
+          </p>
+        </div>
+      </div>
+    
+    
+
 
       {/* Swiper Carousel for Gallery */}
       <Swiper
@@ -51,60 +82,8 @@ function Cardiology() {
         </SwiperSlide>
       </Swiper>
 
-      {/* Cardiology Services */}
-      <div className={classes.content}>
-        <h4>Our Services</h4>
-        <p>
-          Kidus Petros Hospital Department of Cardiology offers a broad range of services, including:
-        </p>
-        <ul className={classes.listStyle1}>
-          <li>Preventive Cardiac Care</li>
-          <li>Cholesterol Screening</li>
-          <li>Cardiac Rehabilitation</li>
-          <li>Heart Health Education for Pregnant Patients</li>
-        </ul>
-      </div>
-
-      {/* Price List for Services */}
-      <div className={classes.priceListCol2}>
-        <div className={classes.priceList}>
-          <h4>Cosmetic Cardiology</h4>
-          <ul>
-            <li>
-              <span className={classes.serviceName}>Cardiac Stent Procedure</span>
-              <span className={classes.servicePrice}>$5000</span>
-            </li>
-            <li>
-              <span className={classes.serviceName}>Coronary Bypass Surgery</span>
-              <span className={classes.servicePrice}>$15,000</span>
-            </li>
-          </ul>
-        </div>
-        <div className={classes.priceList}>
-          <h4>Restorative Cardiology</h4>
-          <ul>
-            <li>
-              <span className={classes.serviceName}>Angioplasty</span>
-              <span className={classes.servicePrice}>$2,500</span>
-            </li>
-            <li>
-              <span className={classes.serviceName}>Heart Transplant</span>
-              <span className={classes.servicePrice}>$50,000</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      {/* Head Of Department Section */}
-      <div className={classes.teamSingle}>
-        <h2 className={classes.title}>
-          <span>Head Of</span> Department
-        </h2>
-        <div className={classes.membrInfo}>
-          <h4 className={classes.departmentHeadName}>Dr. Genoveva Leannon</h4>
-          <p>Dr. Genoveva Leannon has over 6 years of experience in cardiology.</p>
-        </div>
-      </div>
+     
+    
     </div>
   );
 }

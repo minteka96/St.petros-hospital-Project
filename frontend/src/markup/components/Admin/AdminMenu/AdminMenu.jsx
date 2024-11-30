@@ -20,25 +20,28 @@ function AdminMenu() {
         <Link to="/admin/news" className="list-group-item">
           List of News
         </Link>
-
-        <Link to="/admin-dashboard/add-vacancy" className="list-group-item">
+ <Link to="/admin/add-healthtip" className="list-group-item">
+          Add Health tip
+        </Link>
+        <Link to="/admin/healthtiplist" className="list-group-item">
+          List of Health tip
+        </Link>
+        <Link to="/admin/add-job" className="list-group-item" >
           Job Post
         </Link>
         <Link
-          to="/admin-dashboard/list-of-vacancies"
+          to="/admin/joblist"
           className="list-group-item"
         >
           List of Jobs
         </Link>
-        <Link to="/admin-dashboard/applicationform" className="list-group-item">
-          Application
-        </Link>
         <Link to="/admin/applicant" className="list-group-item">
           List of Applicants
         </Link>
-        <Link to="/admin-dashboard/add-tender" className="list-group-item">
-          Add Tender
-        </Link>
+       {/* <Link to="/add-tender" className="list-group-item">
+  Add Tender
+</Link> */}
+
       </div>
     </div>
   );

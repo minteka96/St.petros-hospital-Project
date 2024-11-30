@@ -99,13 +99,6 @@ const MCH = () => {
               <li className={classes.servicesItem}>Nutritional support for mothers and children</li>
             </ul>
           </div>
-
-          {/* Head Of Department */}
-          <div className={classes.headOfDepartment} id="team">
-            <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>Dr. Tobia</h5>
-            <p>Specialist in maternal and child health with over 15 years of experience.</p>
-          </div>
         </div>
       </div>
     </div>
