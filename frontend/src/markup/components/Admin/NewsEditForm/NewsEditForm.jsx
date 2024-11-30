@@ -1,10 +1,12 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import newsService from "../../../../Services/news.service"; // Adjust path if necessary
 import classes from "./EditNewsForm.module.css"; // Adjust path if necessary
+import { useAuth } from "../../../../contexts/AuthContext.jsx";
 
 const EditNewsForm = () => {
+  const { user } = useAuth();
+  const token = user ? user.token : null;
   const { news_id } = useParams(); // Extract `news_id` from the URL
   const location = useLocation(); // Access state passed via navigate
   const navigate = useNavigate();
@@ -69,7 +71,7 @@ const EditNewsForm = () => {
     }
 
     try {
-      const response = await newsService.updateNews(news_id, formData);
+      const response = await newsService.updateNews(news_id, formData, token);
       if (response.error) {
         setError(response.error);
         setSuccess("");

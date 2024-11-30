@@ -1,5 +1,6 @@
 const express = require("express");
 const multer = require("multer");
+const authMiddleware = require("../Middlewares/auth.middleware");
 const newsController = require("../Controllers/news.controller");
 const fs = require("fs");
 const path = require("path");
@@ -35,6 +36,7 @@ const upload = multer({ storage });
 router.post(
   "/api/news", // Added leading slash
   upload.fields([{ name: "news_image", maxCount: 1 }]), // Corrected field name
+  [authMiddleware.verifyToken, authMiddleware.isAdmin], // authentication/authorization
   newsController.createNews
 );
 
@@ -44,10 +46,15 @@ router.get("/api/news", newsController.getAllNews);
 router.put(
   "/api/news/:id",
   upload.fields([{ name: "news_image", maxCount: 1 }]),
+  [authMiddleware.verifyToken, authMiddleware.isAdmin], // authentication/authorization
   newsController.updateNews
 );
 
-router.delete("/api/news/:id", newsController.deleteNews);
+router.delete(
+  "/api/news/:id",
+  [authMiddleware.verifyToken, authMiddleware.isAdmin], // authentication/authorization
+  newsController.deleteNews
+);
 // Exporting the router to be used in the main application file
 
 module.exports = router;

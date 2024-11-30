@@ -1,8 +1,12 @@
 const api_url = import.meta.env.VITE_API_URL;
+const createNews = async (formData, token) => {
+  if (!token) throw new Error("Token is missing.");
 
-const createNews = async (formData) => {
   const requestOptions = {
     method: "POST",
+    headers: {
+      "x-access-token": token, // Don't manually set Content-Type for FormData
+    },
     body: formData,
   };
 
@@ -14,18 +18,12 @@ const createNews = async (formData) => {
         `HTTP error! Status: ${response.status}, Details: ${errorText}`
       );
     }
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     console.error("Error creating news:", error);
-    throw error;  // Throw error to be caught in the component
+    throw error;
   }
 };
-
-// export default { createNews };
-
-
-
 
 // A function to send GET request to get all news entries
 const getAllNews = async () => {
@@ -88,9 +86,15 @@ const getNewsById = async (news_id) => {
   }
 };
 
-const updateNews = async (news_id, formData) => {
+const updateNews = async (news_id, formData, token) => {
   const requestOptions = {
     method: "PUT",
+    // ****
+    headers: {
+      // "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+    // ****
     body: formData, // FormData includes files and text data
   };
   try {
@@ -112,16 +116,16 @@ const updateNews = async (news_id, formData) => {
   }
 };
 
-
-
 // A function to send DELETE request to delete a specific news item
-const deleteNews = async (news_id) => {
+const deleteNews = async (news_id, token) => {
   const requestOptions = {
     method: "DELETE",
+    // ****
     headers: {
-      "Content-Type": "application/json",
-      // "x-access-token": token,
+      // "Content-Type": "application/json",
+      "x-access-token": token,
     },
+    // ****
   };
 
   try {

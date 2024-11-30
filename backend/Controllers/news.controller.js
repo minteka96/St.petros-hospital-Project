@@ -82,15 +82,14 @@ async function getAllNews(req, res, next) {
     });
   }
 }
+
 const updateNews = async (req, res) => {
   try {
     const newsId = req.params.id;
     const { news_title, news_detail, news_description, news_link } = req.body;
 
-    if (!news_title || !news_detail) {
-      return res
-        .status(400)
-        .json({ error: "News title and detail are required" });
+    if (!news_title || !news_detail || !news_description || !news_link) {
+      return res.status(400).json({ error: "All fields are required" });
     }
 
     const news_image_link = req.files?.news_image
@@ -123,6 +122,7 @@ const updateNews = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 // Function to delete a news entry by its ID
 const deleteNews = async (req, res) => {

@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import newsService from "../../../../Services/news.service.js"; // Adjust the path if necessary
 import classes from "./AddNewsForm.module.css";
+import { useAuth } from "../../../../contexts/AuthContext.jsx";
 
 const AddNewsForm = () => {
+    const { user } = useAuth();
+    const token = user ? user.token : null;
   // State variables for the form
   const [newsTitle, setNewsTitle] = useState("");
   const [newsDetail, setNewsDetail] = useState("");
@@ -27,7 +30,7 @@ const AddNewsForm = () => {
     }
 
     try {
-      const response = await newsService.createNews(formData);
+      const response = await newsService.createNews(formData, token);
       console.log("response", response);
       if (response.error) {
         setError(response.error);
