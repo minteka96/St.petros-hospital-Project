@@ -64,7 +64,6 @@ const updateNews = async (newsId, data) => {
     throw new Error("Error updating news: " + err.message);
   }
 };
-
 const deleteNews = async (newsId) => {
   try {
     await db.query(`DELETE FROM News WHERE news_id = ?`, [newsId]);
