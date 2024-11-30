@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./adminMenu.css";
 import { useAuth } from "../../../../contexts/AuthContext";
-
+// AdminMenu component
 function AdminMenu() {
   const [role, setRole] = useState("");
   const { user } = useAuth();
