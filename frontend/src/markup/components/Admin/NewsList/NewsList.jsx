@@ -1,3 +1,5 @@
+// API URL from environment variables
+const api_url = import.meta.env.VITE_API_URL;
 // Import statements
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -5,11 +7,11 @@ import newsService from "../../../../Services/news.service";
 import classes from "./NewsList.module.css";
 import { format } from "date-fns";
 import { FaEdit, FaTrash } from "react-icons/fa"; // Import icons from react-icons
-
-// API URL from environment variables
-const api_url = import.meta.env.VITE_API_URL;
+import { useAuth } from "../../../../contexts/AuthContext.jsx";
 
 const NewsList = () => {
+  const { user } = useAuth();
+  const token = user ? user.token : null;
   // State variables
   const [newsList, setNewsList] = useState([]);
   const [error, setError] = useState("");
@@ -37,7 +39,7 @@ const NewsList = () => {
     }
 
     try {
-      await newsService.deleteNews(newsId);
+      await newsService.deleteNews(newsId, token);
       setNewsList(newsList.filter((news) => news.news_id !== newsId));
       setSuccess("News deleted successfully!");
     } catch (err) {
