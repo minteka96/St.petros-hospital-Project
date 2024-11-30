@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import Swiper from 'swiper';
-import img1 from '../../../../assets/img/servicedetail/r01.jpg';
-import img2 from '../../../../assets/img/slider/surgical/10002.jpg';
-import img3 from '../../../../assets/img/slider/surgical/surgical3.jpg';
+import img1 from '../../../../assets/img/slider/surgical/surgical.jpg';
+import img2 from '../../../../assets/img/slider/surgical/surgical26.jpg';
+import img3 from '../../../../assets/img/slider/surgical/surgical (2).jpg';
 import classes from './Surgery.module.css';
 
 const Surgery = () => {

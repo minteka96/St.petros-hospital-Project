@@ -31,16 +31,7 @@ const ART = () => {
 <p>
   The ART department specializes in the diagnosis and treatment of HIV/AIDS through effective anti-retroviral therapies. The SPH HIV Care Center was launched in 1998, and free ART services started in 2006 EC. Since its inception, approximately 8,000 HIV-infected clients have been enrolled in the ART clinic, with 2,448 currently receiving ART. SPH provides the latest healthcare services for managing HIV, ensuring that patients receive comprehensive care, support, and access to the following services:
 </p>
-{/* <ul>
-  <li>HIV Testing and Counseling</li>
-  <li>Antiretroviral Therapy (ART)</li>
-  <li>Regular Monitoring (CD4 and Viral Load Testing)</li>
-  <li>Adherence Support Programs</li>
-  <li>Prevention of Mother-to-Child Transmission (PMTCT)</li>
-  <li>Psychosocial Support Services</li>
-  <li>Counseling for Cervical Cancer Screening and Linkage</li>
-  <li>Voluntary Counseling and Testing (VCT)</li>
-</ul> */}
+
 
 <h2>Key Services at SPH HIV Care Center:</h2>
 

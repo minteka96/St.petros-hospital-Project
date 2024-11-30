@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import healthTipService from "../../../../Services/healthtip.service"; // Adjust path if necessary
-import classes from "./EditHealthTipForm.module.css"; // Adjust path if necessary
+import healthTipService from "../../../../Services/healthtip.service";
+import classes from "./EditHealthTipForm.module.css";
 
 const EditHealthTipForm = () => {
-  const { health_tip_id } = useParams(); // Extract `health_tip_id` from the URL
-  const location = useLocation(); // Access state passed via navigate
+  const { health_tip_id } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
 
   const [healthTipTitle, setHealthTipTitle] = useState("");
@@ -21,7 +21,6 @@ const EditHealthTipForm = () => {
   useEffect(() => {
     const initializeFormData = async () => {
       if (location.state?.healthTip) {
-        // Use the health tip item from state
         const healthTip = location.state.healthTip;
         setHealthTipTitle(healthTip.health_tip_title || "");
         setHealthTipDetail(healthTip.health_tip_detail || "");
@@ -30,7 +29,6 @@ const EditHealthTipForm = () => {
         setHealthTipImageLink(healthTip.health_tip_image_link || null);
         setLoading(false);
       } else {
-        // Fetch from API if no state is passed
         try {
           const response = await healthTipService.getHealthTipById(health_tip_id);
           const healthTip = response.data;
@@ -62,7 +60,6 @@ const EditHealthTipForm = () => {
       formData.append("health_tip_image", healthTipImageLink);
     }
 
-    // Validation check for empty fields
     if (!healthTipTitle || !healthTipDetail) {
       setError("Health tip title and detail are required.");
       return;
@@ -83,7 +80,6 @@ const EditHealthTipForm = () => {
       }
     } catch (err) {
       setError("Something went wrong while updating the health tip.");
-      setSuccess("");
     }
   };
 
@@ -96,7 +92,6 @@ const EditHealthTipForm = () => {
       <h2>Edit Health Tip</h2>
       {error && <div className={classes.errorMessage}>{error}</div>}
       {success && <div className={classes.successMessage}>{success}</div>}
-
       <input
         type="text"
         placeholder="Health Tip Title"
