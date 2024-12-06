@@ -62,7 +62,7 @@ const AboutUs = () => {
   <div className="row">
     {/* Left Side: History and Expansion */}
     <div className="col-md-6">
-      <h2 style={{ fontSize: 'xx-large' }}>እንቅስቃሴ (History & Expansion)</h2>
+      <h2 style={{ fontSize: 'xx-large' }}> (History & Expansion)</h2>
       <p>
         St. Peter Hospital became a national leader in multidrug-resistant tuberculosis (MDR-TB) care when it treated Ethiopias first MDR-TB patient in 2001 EC. With strong support from USAID, the hospital has since been recognized as a center of excellence in MDR-TB diagnosis and treatment. That same year, St. Peters Hospital introduced DR-TB treatment in Ethiopia, with the FMoH, GHC, and other partners. Since then, it has become the national referral center for DR-TB treatment, training healthcare workers across the country and providing technical support for the expansion of treatment programs to regional centers. This pivotal work was led by Dr. Daniel Meressa, an internal medicine specialist.
       </p>
@@ -73,7 +73,7 @@ const AboutUs = () => {
 
     {/* Right Side: Milestones and Recent Developments */}
     <div className="col-md-6">
-      <h2 style={{ fontSize: 'xx-large' }}>ምርት እና ሐሳብ (Milestones & Developments)</h2>
+      <h2 style={{ fontSize: 'xx-large' }}>(Milestones & Developments)</h2>
       <p>
         In 2008 EC, during Ato Yakob Seman’s tenure as Chief Executive Officer, the hospital further expanded to offer Cesarean section (C/S) surgeries, broadening its surgical capabilities to include general surgery. By 2010 EC, comprehensive outpatient services were introduced, solidifying its role as a multi-specialty hospital. A major milestone was the construction of the hospital’s seven-story main building, designed to accommodate the growing demand for healthcare services. It now houses 300 inpatient beds, including 12 ICU beds, 13 operating rooms including two emergency ORs, and state-of-the-art facilities such as a Cath Lab for cardiac care and adult and pediatric emergency departments.
       </p>
@@ -93,7 +93,7 @@ const AboutUs = () => {
           <div className="row">
             {/* Left Side: Vision Section */}
             <div className="col-md-6">
-              <h2 style={{ fontSize: 'xx-large' }}>መርሐ ግብር (Vision)</h2>
+              <h2 style={{ fontSize: 'xx-large' }}> (Vision)</h2>
               <p>
                By 2022, we envision transforming the hospital into a center of excellence for research, education, and clinical care, dedicated to improving health outcomes and providing compassionate services to our community.
                         </p>
@@ -102,7 +102,7 @@ const AboutUs = () => {
 
             {/* Right Side: Mission Section */}
             <div className="col-md-6">
-              <h2 style={{ fontSize: 'xx-large' }}>ተልዕኮ (Mission)</h2>
+              <h2 style={{ fontSize: 'xx-large' }}> (Mission)</h2>
               <p>
                 St. Peter Hospital is committed to providing high-quality, affordable, and patient-centered healthcare services, with a focus on specialized TB treatment and other essential health services.
               </p>
