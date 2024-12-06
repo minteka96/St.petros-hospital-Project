@@ -27,3 +27,6 @@
     width: 100%; /* Responsive image */
     height: auto;
 }
+ .statistics {
+        gap: 10px; /* Reduces the gap between stats for smaller screens */
+    }

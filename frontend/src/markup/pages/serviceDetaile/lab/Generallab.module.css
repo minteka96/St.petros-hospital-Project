@@ -35,7 +35,7 @@
 }
 
 /* Department Gallery */
-.departmentGallery {
+.contentWrapper {
   margin: 20px 0;
   width: 80%;
   max-width: 800px;
@@ -55,45 +55,8 @@
   width: 100%;
   border-radius: 8px;
   margin-bottom: 20px;
-  object-fit: cover;
-}
-
-/* DR-TB Services */
-.drTbServices {
-  margin: 20px 0;
-}
-
-.servicesTitle {
-  margin-bottom: 10px;
-  color: #00796b;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.servicesList {
-  list-style-type: none;
-  padding: 0;
-}
-
-.servicesItem {
-  margin: 5px 0;
-}
-
-/* Head Of Department */
-.headOfDepartment {
-  margin: 20px 0;
-}
-
-.departmentHeadTitle {
-  margin-bottom: 5px;
-  color: #00796b;
-  font-size: 1.5rem;
-}
-
-.departmentHeadName {
-  margin: 5px 0;
-  font-weight: bold;
-  color: #00796b;
+  object-fit: cover; /* Ensures images cover the area nicely */
+  height: 100%; /* Ensures images fill the gallery space */
 }
 
 /* Swiper Navigation Buttons */

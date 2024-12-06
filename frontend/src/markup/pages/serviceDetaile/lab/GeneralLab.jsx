@@ -2,10 +2,9 @@
 import React, { useEffect } from 'react';
 import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css'; // Correct import for Swiper styles
- // Correct for Swiper v7 and above
-// Import Swiper styles
-import img1 from '../../../../assets/img/slider/lab/labroom.jpg';
-import img2 from '../../../../assets/img/slider/lab/lab miro58.JPG';
+// Correct for Swiper v7 and above
+import img1 from '../../../../assets/img/slider/lab/lab 55.JPG';
+import img2 from '../../../../assets/img/slider/lab/lab.jpg';
 import classes from './GeneralLab.module.css';
 
 const GeneralLab = () => {
@@ -30,12 +29,12 @@ const GeneralLab = () => {
           standards in two scopes (AFB and Gene X-pert Test). The laboratory services include the following:
         </p>
         <ul>
-          <li>Hematology & serological Testing</li>
+          <li>Hematology & Serological Testing</li>
           <li>Blood Chemistry & Hormonal Analysis</li>
           <li>Clinical Bacteriology Testing</li>
           <li>Pathology Examination</li>
           <li>Parasitology & Urinalysis Testing</li>
-          <li>TB diagnostic and follow-up testing (AFB, TB Culture, GenExpert, DST)</li>
+          <li>TB Diagnostic and Follow-up Testing (AFB, TB Culture, GenExpert, DST)</li>
           <li>Blood Bank Service</li>
         </ul>
       </div>
@@ -47,12 +46,12 @@ const GeneralLab = () => {
             <div className="swiper-wrapper gallery-slider">
               <div className="swiper-slide" style={{ backgroundImage: `url(${img1})` }}>
                 <div className="slider-content">
-                  <h5 className="title" style={{ fontSize: '50px', color: '#00796b' }}>Microbiology & Other Sample Tests</h5>
+                  <h5 className="title"></h5>
                 </div>
               </div>
               <div className="swiper-slide" style={{ backgroundImage: `url(${img2})` }}>
                 <div className="slider-content">
-                  <h6 className="title" style={{ fontSize: '50px', color: '#00796b' }}>Blood Tests</h6>
+                  <h6 className="title">Blood Tests</h6>
                 </div>
               </div>
             </div>

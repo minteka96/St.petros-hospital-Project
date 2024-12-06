@@ -35,10 +35,10 @@
 }
 
 /* Department Gallery */
-.departmentGallery {
+.contentWrapper{
   margin: 20px 0;
   width: 90%;
-  max-width: 1400px;
+  max-width: 800px;
   height: 500px;
   margin: auto;
 }

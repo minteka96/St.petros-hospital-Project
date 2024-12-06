@@ -16,17 +16,14 @@
 .pageTitleArea{ 
   font-size: 1.2rem;
 }
-.pageTitleArea li{ 
- list-style-type: circle;
- text-align: left;
-}
 /* Department Area */
 .departmentArea {
   display: flex;
+  flex-direction: column; /* Adjust layout for mobile responsiveness */
 }
 
 /* Department Gallery */
-.departmentGallery {
+.contentWrapper{
   margin: 20px 0;
   width: 80%;
   max-width: 800px;
@@ -34,15 +31,18 @@
   margin: auto;
 }
 
-.galleryTitle {
-  margin-bottom: 10px;
-    color: #00796b;
+/* Swiper Navigation Buttons */
+.swiper-button-prev, .swiper-button-next {
+  color: #00796b;
+  font-size: 24px; /* Make arrows larger */
 }
 
-.galleryImage {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 20px;
+.swiper-button-prev {
+  left:250px;
+}
+
+.swiper-button-next {
+  right: 0;
 }
 
 /* Toxicology Services */
@@ -56,34 +56,30 @@
 }
 
 .servicesList {
+  font-size: 1.2rem;
   list-style-type: none;
-  padding: 0;
+  padding-left: 0;
 }
 
 .servicesItem {
-  margin: 5px 0;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
 }
 
-/* Head Of Department */
-.headOfDepartment {
-  margin: 20px 0;
+.servicesItem::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background-color: #00796b;
+  border-radius: 50%;
 }
 
-.departmentHeadTitle {
-  margin-bottom: 5px;
-  color:   #00796b;
-}
-
-.departmentHeadName {
-  margin: 5px 0;
-}
-
-/* Swiper Navigation Buttons */
-.swiper-button-prev, .swiper-button-next {
-  color: #00796b;
-}
-
-/* Responsive Styles */
 @media (max-width: 768px) {
   .departmentArea {
     flex-direction: column;

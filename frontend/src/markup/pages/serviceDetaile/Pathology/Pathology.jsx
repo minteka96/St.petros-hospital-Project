@@ -1,8 +1,10 @@
+
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import Swiper from 'swiper';
-import img1 from '../../../../assets/img/slider/slide1.jpg';
-import img2 from '../../../../assets/img/slider/slide2.jpg';
+import img1 from '../../../../assets/img/slider/lab/lab 51.JPG';
+import img2 from '../../../../assets/img/slider/lab/lab.jpg';
+import img3 from '../../../../assets/img/slider/lab/lab miro58.JPG';
 import classes from './Pathology.module.css';
 
 const Pathology = () => {
@@ -18,23 +20,26 @@ const Pathology = () => {
 
   return (
     <div className={classes.mainContent}>
-     <div className={classes.pageTitleArea}>
-  <h1>Pathology Department</h1>
-  <p>Expert diagnosis and management of diseases.</p>
-  <p>
-    The pathology department specializes in the diagnosis of diseases through the examination of tissues, cells, and body fluids. TGH provides comprehensive and advanced laboratory services in pathology, including:
-  </p>
-  <ul>
-    <li>Anatomical pathology</li>
-    <li>Cytopathology</li>
-    <li>Clinical pathology</li>
-    <li>Hematology</li>
-    <li>Microbiology</li>
-    <li>Molecular diagnostics</li>
-  </ul>
-</div>
+      {/* Page Title Area */}
+      <div className={classes.pageTitleArea}>
+        <h1>Pathology Service</h1>
+        <p>Expert diagnosis and management of diseases.</p>
+        <p>
+          The pathology service is an integral part of the general lab work, specializing in the diagnosis of diseases through the examination of tissues, cells, and body fluids. We provide comprehensive and advanced laboratory services in pathology, including:
+        </p>
+        <ul>
+          <li>Biopsy Services</li>
+          <li>Cytopathology</li>
+          <li>Fluid Analysis</li>
+          <li>FNAC (Fine Needle Aspiration Cytology)</li>
+          <li>Microbiology</li>
+        </ul>
+        <p>
+          Our pathology team is committed to delivering accurate diagnoses and working closely with medical professionals for optimal patient care.
+        </p>
+      </div>
 
-
+      {/* Department Area */}
       <div className={classes.departmentArea}>
         <div className={classes.contentWrapper}>
           <div className={`swiper-container department-gallery ${classes.departmentGallery}`} id="gallery">
@@ -42,34 +47,23 @@ const Pathology = () => {
             <div className="swiper-wrapper gallery-slider">
               <div className="swiper-slide" style={{ backgroundImage: `url(${img1})` }}>
                 <div className="slider-content">
-                  <h5 className="title">Lab Testing</h5>
+                  <h5 className="title"></h5>
                 </div>
               </div>
               <div className="swiper-slide" style={{ backgroundImage: `url(${img2})` }}>
                 <div className="slider-content">
-                  <h6 className="title">Biopsy test</h6>
+                  <h5 className="title"></h5>
+                </div>
+              </div>
+              <div className="swiper-slide" style={{ backgroundImage: `url(${img3})` }}>
+                <div className="slider-content">
+                  <h5 className="title"></h5>
                 </div>
               </div>
             </div>
 
             <div className="swiper-button-prev"><i className="icofont-arrow-left"></i></div>
             <div className="swiper-button-next"><i className="icofont-arrow-right"></i></div>
-          </div>
-
-          <div className={classes.services} id="services">
-            <h4 className={classes.servicesTitle}>Our Services</h4>
-            <ul className={classes.servicesList}>
-              <li className={classes.servicesItem}>Diagnostic Testing</li>
-              <li className={classes.servicesItem}>Biopsy Services</li>
-              <li className={classes.servicesItem}>Histopathology</li>
-              <li className={classes.servicesItem}>Cytology Services</li>
-            </ul>
-          </div>
-
-          <div className={classes.headOfDepartment} id="team">
-            <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>Dr. Hayat</h5>
-            <p>A dedicated pathologist committed to precise diagnoses.</p>
           </div>
         </div>
       </div>

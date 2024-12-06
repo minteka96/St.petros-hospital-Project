@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import Swiper from 'swiper';
-import img1 from '../../../../assets/img/slider/Emergancy/emergancy.jpg';
-import img2 from '../../../../assets/img/slider/Emergancy/emergancy2.jpg';
+import img1 from '../../../../assets/img/slider/Emergancy/emergancy2.jpg';
+import img2 from '../../../../assets/img/slider/Emergancy/emergancy.jpg';
 import img3 from '../../../../assets/img/slider/Emergancy/emergancy2.jpg';
 
 import classes from './Emergency.module.css';

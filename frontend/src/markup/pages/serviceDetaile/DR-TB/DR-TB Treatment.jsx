@@ -57,9 +57,8 @@ const DrTbTreatment = () => {
 
       {/* Department Area */}
       <div className={classes.departmentArea}>
-        {/* Main Content Area */}
+        {/* Department Gallery with Background Image Swiper */}
         <div className={classes.contentWrapper}>
-          {/* Department Gallery with Background Image Swiper */}
           <div className={`swiper-container department-gallery ${classes.departmentGallery}`} id="gallery">
             <h2 className={classes.galleryTitle}>Department Gallery</h2>
             <div className="swiper-wrapper gallery-slider">
@@ -74,9 +73,7 @@ const DrTbTreatment = () => {
               >
                 <div className="slider-content">
                   <h6 className="title">
-                    <span className="d-block">
-                 
-                      </span>
+                    <span className="d-block"></span>
                   </h6>
                 </div>
               </div>
@@ -92,10 +89,7 @@ const DrTbTreatment = () => {
               >
                 <div className="slider-content">
                   <h6 className="title">
-                    <span className="d-block">
-               
-
-                    </span>
+                    <span className="d-block"></span>
                   </h6>
                 </div>
               </div>
@@ -110,9 +104,7 @@ const DrTbTreatment = () => {
                 }}
               >
                 <div className="slider-content">
-                  <h6 className="title">
-                    {/* <span className="d-block">DR-TB Department Slide 3</span> */}
-                  </h6>
+                  <h6 className="title"></h6>
                 </div>
               </div>
             </div>
@@ -132,13 +124,11 @@ const DrTbTreatment = () => {
               <li className={classes.servicesItem}>Drug susceptibility testing</li>
               <li className={classes.servicesItem}>Second-line anti-TB drug therapy</li>
               <li className={classes.servicesItem}>Individualized patient care and monitoring</li>
-              <li className={classes.servicesItem}>Comprehensive counseling and  pscho social support </li>
+              <li className={classes.servicesItem}>Comprehensive counseling and psychosocial support</li>
               <li className={classes.servicesItem}>Outreach programs and community support</li>
               <li className={classes.servicesItem}>Advanced diagnostic imaging and laboratory facilities</li>
             </ul>
           </div>
-
-         
         </div>
       </div>
     </div>

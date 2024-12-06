@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Swiper from 'swiper';
-import img1 from '../../../../assets/img/slider/peadi/pedi.jpg';
+import img1 from '../../../../assets/img/slider/peadi/pedi 10.JPG';
 import img2 from '../../../../assets/img/slider/peadi/pedi2.jpg';
 import img3 from '../../../../assets/img/slider/peadi/pedi4.jpg';
 import classes from './Pediatrics.module.css';

@@ -22,11 +22,13 @@
 }
 /* Swiper Container */
 .swiperContainer {
-  width: 100%;
-  max-width: 600px;
-  height: auto; /* Let the height adjust based on the image size */
+ margin:0px 0;
+  width: 80%;
+  max-width: 800px;
+  height: 500px;
   margin: auto;
 }
+
 
 /* Gallery Slider */
 .gallerySlider img {
