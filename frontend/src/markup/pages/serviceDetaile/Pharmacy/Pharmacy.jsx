@@ -3,10 +3,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import Swiper from 'swiper';
-import img1 from '../../../../assets/img/slider/pharmacy/pharmacy.jpg';
-import img2 from '../../../../assets/img/slider/pharmacy/190248resizie.jpg';
+import img1 from '../../../../assets/img/slider/pharmacy/pharma.JPG';
+import img2 from '../../../../assets/img/slider/pharmacy/pharma47.jpg';
 
-import img3 from '../../../../assets/img/slider/slide1.jpg';
+import img3 from '../../../../assets/img/slider/pharmacy/190248resizie.jpg';
 import classes from './Pharmacy.module.css';
 
 const Pharmacy = () => {

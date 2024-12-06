@@ -1,83 +1,74 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
-import Swiper from 'swiper';
-import img1 from '../../../../assets/img/slider/slide1.jpg';
-import img2 from '../../../../assets/img/slider/slide1.jpg';
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react'; // Correct import for Swiper and SwiperSlide
+import 'swiper/swiper-bundle.css'; // Correct Swiper styles import
+import img1 from '../../../../assets/img/slider/toxico/13.JPG';
+import img2 from '../../../../assets/img/slider/toxico/13.JPG';
 import img3 from '../../../../assets/img/about/001.jpg';
 import classes from './Toxicology.module.css';
 
 const Toxicology = () => {
-  useEffect(() => {
-    new Swiper('.swiper-container', {
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      loop: true,
-    });
-  }, []);
+  const galleryItems = [
+    { image: img1, title: '' },
+    { image: img2, title: 'Toxic Substance Exposure' },
+    { image: img3, title: 'Critical Care & Support' },
+  ];
+
+  const services = [
+    'Toxicology emergency care, including decontamination of patients with acute poisoning',
+    'Critical care and mechanical ventilation for poisoned patients requiring intensive care',
+    'Routine care for toxicology patients in the toxicology ward',
+    'Acceptance of toxicology patients from any facility, based on service availability',
+    'Psychiatric consultations to address mental health aspects of poisoned patients',
+    'Outpatient follow-up care for toxicology patients',
+    'On-call consultation and guidance for remote healthcare providers',
+    'Community education on poison prevention and control',
+  ];
 
   return (
     <div className={classes.mainContent}>
-      {/* Page Title Area */}
       <div className={classes.pageTitleArea}>
-  <h1>Toxicology Department</h1>
-  <p>
-    Specialized care for the prevention, diagnosis, and treatment of poisoning and toxic exposures. 
-  </p>
-  <p>
-    The toxicology department provides comprehensive services to manage cases of exposure to various toxins, including chemical, biological, and environmental hazards. SPH offers state-of-the-art care and advanced treatment protocols in toxicology, such as:
-  </p>
-  <ul>
-    <li>Poison management and antidote therapy</li>
-    <li>Environmental and occupational toxicology</li>
-    <li>Drug overdose treatment</li>
-    <li>Heavy metal toxicity testing and treatment</li>
-    <li>Chemical exposure evaluation</li>
-    <li>Biohazard incident response</li>
-  </ul>
-</div>
+        <h1>Toxicology Department</h1>
+        <p>
+          The Toxicology Department provides specialized care for the prevention, diagnosis, and treatment of poisoning and toxic exposures. It plays a crucial role in addressing emerging public health concerns, including chemical, biological, and environmental hazards.
+        </p>
+        <p>
+          The department was established in 2017 and is Ethiopia’s pioneering national poison center, showcasing the hospitals commitment to the International Health Regulations (IHR) of 2005. The center has treated over 1,200 poisoned patients, aiming to enhance the quality and accessibility of its services to better meet community demands.
+        </p>
+      </div>
 
-
-      {/* Department Area */}
       <div className={classes.departmentArea}>
-        {/* Main Content Area */}
         <div className={classes.contentWrapper}>
-          {/* Department Gallery with Background Image Swiper */}
-          <div className={`swiper-container department-gallery ${classes.departmentGallery}`} id="gallery">
-            <h2 className={classes.galleryTitle}>Department Gallery</h2>
-            <div className="swiper-wrapper gallery-slider">
-              {/* Slide 1 */}
-              <div className="swiper-slide" style={{ backgroundImage: `url(${img1})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                <div className="slider-content">
-                  <p className="title">
-                    <span className="d-block">
-                        Toxic 
-                        </span>
-                  </p>
-                </div>
-              </div>
-
-              {/* Slide 2 */}
-              <div className="swiper-slide" style={{ backgroundImage: `url(${img2})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                <div className="slider-content">
-                  <p className="title">
-                    <span className="d-block"> Substance </span>
-                  </p>
-                </div>
-              </div>
-
-              {/* Slide 3 */}
-              <div className="swiper-slide" style={{ backgroundImage: `url(${img3})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                <div className="slider-content">
-                  <p className="title">
-                    <span className="d-block">Management </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Swiper Navigation Buttons */}
+          <h2 className={classes.galleryTitle}>Department Gallery</h2>
+          <div className={classes.departmentGallery}> {/* Apply the correct class */}
+            <Swiper
+              spaceBetween={50}
+              slidesPerView={1}
+              loop={true}
+              navigation={{
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+              }}
+            >
+              {galleryItems.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <div
+                    style={{
+                      backgroundImage: `url(${item.image})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      height: '300px',
+                    }}
+                  >
+                    <div className="slider-content">
+                      <p className="title">
+                        <span className="d-block">{item.title}</span>
+                      </p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
             <div className="swiper-button-prev">
               <i className="icofont-arrow-left"></i>
             </div>
@@ -86,14 +77,14 @@ const Toxicology = () => {
             </div>
           </div>
 
-          {/* Toxicology Services */}
-          <div className={classes.toxicologyServices} id="services">
+          <div className={classes.toxicologyServices}>
             <h4 className={classes.servicesTitle}>Our Services</h4>
             <ul className={classes.servicesList}>
-              <li className={classes.servicesItem}>Diagnosis and treatment of poisoning</li>
-              <li className={classes.servicesItem}>Management of toxic exposures</li>
-              <li className={classes.servicesItem}>Toxicology consultations</li>
-              <li className={classes.servicesItem}>Support for patients and families</li>
+              {services.map((service, index) => (
+                <li className={classes.servicesItem} key={index}>
+                  {service}
+                </li>
+              ))}
             </ul>
           </div>
         </div>

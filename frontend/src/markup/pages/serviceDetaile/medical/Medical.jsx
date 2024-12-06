@@ -3,8 +3,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Swiper from 'swiper';
-import img1 from '../../../../assets/img/slider/slide1.jpg';
-import img2 from '../../../../assets/img/slider/slide2.jpg';
+import img1 from '../../../../assets/img/slider//Emergancy/emergancy.jpg';
+import img2 from '../../../../assets/img/slider/Emergancy/emergancy.jpg';
 import img3 from '../../../../assets/img/slider/10002.jpg';
 import classes from './Medical.module.css';
 
@@ -53,7 +53,7 @@ const Medical = () => {
                 <div className="slider-content">
                   <h5 className="title">
                     <span className="d-block">
-                         Medical Services</span>
+                       </span>
                   </h5>
                 </div>
               </div>

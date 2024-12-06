@@ -50,14 +50,6 @@ function Dental() {
         </SwiperSlide>
       </Swiper>
 
-      {/* Dental Services */}
-      <div className={classes.content}>
-        <h4>Our Services</h4>
-        <p>
-          Kidus Petros Hospital Department of Dentistry offers a broad range of services, including:
-        </p>
-      
-      </div>
 
       {/* Head Of Department Section */}
     

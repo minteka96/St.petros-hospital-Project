@@ -2,8 +2,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import Swiper from 'swiper';
-import img1 from '../../../../assets/img/slider/slide1.jpg';
-import img2 from '../../../../assets/img/slider/slide2.jpg';
+import img1 from '../../../../assets/img/slider/Icu/ICU2.jpg';
+import img2 from '../../../../assets/img/slider/Icu/ICU.jpg';
 
 import classes from './ICU.module.css';
 
