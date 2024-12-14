@@ -22,6 +22,7 @@ function AdminMenu() {
   const isAdminOrHigher = isSuperAdmin || role === "Admin";
   const isComm = isAdminOrHigher || role === "Comm";
   const isHR = isAdminOrHigher || role === "HR";
+  const isHE = isAdminOrHigher || role === "HE";
 
   return (
     <div className="pb-4">
@@ -58,12 +59,16 @@ function AdminMenu() {
         )}
 
         {/* Health tips (visible to all roles) */}
-        <Link to="/admin/add-healthtip" className="list-group-item">
-          Add Health Tip
-        </Link>
-        <Link to="/admin/healthtiplist" className="list-group-item">
-          List of Health Tips
-        </Link>
+        {isHE && (
+          <>
+            <Link to="/admin/add-healthtip" className="list-group-item">
+              Add Health Tip
+            </Link>
+            <Link to="/admin/healthtiplist" className="list-group-item">
+              List of Health Tips
+            </Link>
+          </>
+        )}
 
         {/* HR roles */}
         {isHR && (

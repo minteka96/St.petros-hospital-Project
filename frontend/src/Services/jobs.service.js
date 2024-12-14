@@ -28,12 +28,13 @@ const getAllJobs = async () => {
 };
 
 // Function to create a new job
-const createJob = async (jobData) => {
+const createJob = async (jobData, token) => {
   const requestOptions = {
     method: "POST",
     body: JSON.stringify(jobData),
     headers: {
       "Content-Type": "application/json",
+      "x-access-token": token,
     },
   };
 
