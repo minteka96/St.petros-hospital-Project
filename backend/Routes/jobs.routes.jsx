@@ -1,4 +1,5 @@
 const express = require("express");
+const authMiddleware = require("../Middlewares/auth.middleware");
 
 // Create a router instance
 const router = express.Router();
@@ -10,7 +11,10 @@ const jobsController = require("../Controllers/jobs.controller");
 router.post(
   "/api/vacancies",
   // Uncomment the following line to enable authentication middleware
-  // [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.checkRoles(["superadmin", "Admin", "HR"]),
+  ],
   jobsController.createJob
 );
 // Define a route to get all jobs
@@ -19,6 +23,13 @@ router.get("/api/vacancies", jobsController.getAllJobs);
 // Define a route to get a job by ID
 router.get("/api/vacancies/:id", jobsController.getJobById);
 // Define a route to delete a job
-router.delete("/api/vacancies/:id", jobsController.deleteJob);
+router.delete(
+  "/api/vacancies/:id",
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.checkRoles(["superadmin", "Admin", "HR"]),
+  ],
+  jobsController.deleteJob
+);
 // Export the router
 module.exports = router;

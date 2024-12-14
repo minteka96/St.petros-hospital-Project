@@ -6,13 +6,27 @@ const multer = require("multer");
 const path = require("path");
 
 // Setup Multer for file upload
+// Configure multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/images"); // Folder where images will be stored
+    const folder =
+      file.fieldname === "health_tip_image" ? "uploads/news" : "uploads";
+    // Ensure the folder exists, create it if not
+    const dir = path.join(__dirname, `../${folder}`);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    cb(null, dir);
   },
+  // uniqueName
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
+    const uniqueName = `${Date.now()}_${file.originalname}`;
+    cb(null, uniqueName);
   },
+
+  // filename: (req, file, cb) => {
+  //   cb(null, file.originalname);
+  // },
 });
 
 const upload = multer({ storage });
@@ -20,29 +34,25 @@ const upload = multer({ storage });
 // Route to create a new health tip
 router.post(
   "/api/health-tips",
-  [authMiddleware.verifyToken, authMiddleware.isAdmin], // Ensure only admin users can create health tips
-  upload.single('image'), // Handle image upload
+  upload.fields([{ name: "health_tip_image", maxCount: 1 }]), // Handle image upload
   healthTipController.createHealthTip
 );
 
 // Route to fetch all health tips
 router.get(
   "/api/health-tips",
-  [authMiddleware.verifyToken], // Optional: you can add more middleware for access control
   healthTipController.getAllHealthTips
 );
 
 // Route to fetch a single health tip by ID
 router.get(
   "/api/health-tips/:id",
-  [authMiddleware.verifyToken], // Optional: you can add more middleware for access control
   healthTipController.getHealthTipById
 );
 
 // Route to update a health tip by ID
 router.put(
   "/api/health-tips/:id",
-  [authMiddleware.verifyToken, authMiddleware.isAdmin], // Ensure only admin users can update health tips
   upload.single('image'), // Handle image upload
   healthTipController.updateHealthTip
 );
@@ -50,7 +60,6 @@ router.put(
 // Route to delete a health tip by ID
 router.delete(
   "/api/health-tips/:id",
-  [authMiddleware.verifyToken, authMiddleware.isAdmin], // Ensure only admin users can delete health tips
   healthTipController.deleteHealthTip
 );
 

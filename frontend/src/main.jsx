@@ -5,6 +5,7 @@ import "./style/css/style.css";
 import "./assets/css/flaticon.css";
 import "./style/customeCSS/custome.css";
 import "./assets/css/icofont.css";
+import "./index.css"
 // import ImageUploader from './markup/components/ImageUploader.jsx'; 
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext.jsx";

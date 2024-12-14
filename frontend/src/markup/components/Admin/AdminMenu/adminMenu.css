@@ -40,6 +40,14 @@ background: linear-gradient(to right, #ffffff, #1F867E)
   display: block;
   text-decoration: none;
 }
+
+.badge {
+  background-color: #f26524;
+}
+.badge-success {
+  background-color: #00a99e;
+}
+
 .list-group {
   width: 90%;
   margin-top: 10%;

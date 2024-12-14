@@ -1,6 +1,33 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
+@media print {
+  #printable-area, #printable-area * {
+    visibility: visible;
+  }
+  #printable-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  /* show table title on the */
+  .print-title::before {
+    content: "All Applicants";
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+  }
+
+
+  .btn {
+    display: none; 
+  }
+ th:last-child {
+    display: none;
+  }
+  td:last-child {
+    display: none;
+  }
+}
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

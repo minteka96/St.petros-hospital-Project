@@ -1,10 +1,13 @@
 const api_url = import.meta.env.VITE_API_URL;
 
 // A function to send POST request to create a new health tip
-const createHealthTip = async (formData) => {
+const createHealthTip = async (formData, token) => {
   const requestOptions = {
     method: "POST",
     body: formData,
+    headers: {
+      "x-access-token": token, // Don't manually set Content-Type for FormData
+    },
   };
 
   try {

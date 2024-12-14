@@ -22,6 +22,7 @@ import EditJobForm from "../components/Admin/JobsEditForm/EditJobForm.jsx";
 import { useAuth } from "../../contexts/AuthContext.jsx";
 import AdminManagement from "../pages/Admin/AdminManagement.jsx";
 import AddAdmin from "../pages/Admin/AddAdmin.jsx";
+import JobsListPage from "../components/Admin/JobList/JobList.jsx";
 
 const AdminRoute = () => {
 
@@ -142,6 +143,7 @@ const AdminRoute = () => {
                 element={<EditHealthTip />}
               />
               <Route path="/add-job" element={<AddJobForm />} />
+              <Route path="/all-job" element={<JobsListPage/>} />
               <Route path="/job/edit/:job_id" element={<EditJobForm />} />
             </Routes>
           </div>

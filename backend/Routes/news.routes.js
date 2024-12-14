@@ -36,7 +36,10 @@ const upload = multer({ storage });
 router.post(
   "/api/news", // Added leading slash
   upload.fields([{ name: "news_image", maxCount: 1 }]), // Corrected field name
-  [authMiddleware.verifyToken, authMiddleware.isAdmin], // authentication/authorization
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.checkRoles(["superadmin", "Admin", "Comm"]),
+  ],
   newsController.createNews
 );
 
@@ -46,13 +49,19 @@ router.get("/api/news", newsController.getAllNews);
 router.put(
   "/api/news/:id",
   upload.fields([{ name: "news_image", maxCount: 1 }]),
-  [authMiddleware.verifyToken, authMiddleware.isAdmin], // authentication/authorization
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.checkRoles(["superadmin", "Admin", "Comm"]),
+  ],
   newsController.updateNews
 );
 
 router.delete(
   "/api/news/:id",
-  [authMiddleware.verifyToken, authMiddleware.isAdmin], // authentication/authorization
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.checkRoles(["superadmin", "Admin", "Comm"]),
+  ],
   newsController.deleteNews
 );
 // Exporting the router to be used in the main application file

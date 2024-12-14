@@ -1,26 +1,28 @@
 const conn = require("../Config/db.config");
 
-
 // create a new applicant
 async function createApplicant(formData) {
-  const sql = `INSERT INTO Applicant (first_name, last_name, email_address, position_applied_for, additional_information, cv_file_path, other_testimonials) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+  const sql = `INSERT INTO Applicant ( vacancy_id	,first_name, last_name, email_address, phone_number, position_applied_for, additional_information, cv_file_path, other_testimonials) VALUES (?, ?, ?, ?, ?, ?, ? , ?, ?)`;
   const {
+    vacancy_id,
     first_name,
     last_name,
     email_address,
+    phone_number,
     position_applied_for,
     additional_information,
     cv_file_path,
     other_testimonials,
   } = formData;
-
   const connection = await conn.pool.getConnection();
   try {
     await connection.beginTransaction();
     const [result] = await connection.query(sql, [
+      vacancy_id,
       first_name,
       last_name,
       email_address,
+      phone_number,
       position_applied_for,
       additional_information,
       cv_file_path,
@@ -85,7 +87,7 @@ async function getApplicantById(applicantId) {
 //       last_name,
 //       email_address,
 //       position_applied_for,
-//       additional_information, 
+//       additional_information,
 //       cv_file_path,
 //       other_testimonials,
 //       applicantId,
@@ -134,5 +136,10 @@ async function deleteAllApplicants() {
   }
 }
 
-
-module.exports = { createApplicant, getAllApplicants, getApplicantById, deleteApplicant, deleteAllApplicants };
+module.exports = {
+  createApplicant,
+  getAllApplicants,
+  getApplicantById,
+  deleteApplicant,
+  deleteAllApplicants,
+};
