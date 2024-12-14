@@ -66,7 +66,7 @@ const HealthTipList = () => {
       {healthTips.length === 0 ? (
         <p>No health tips available at the moment.</p>
       ) : (
-        <table className={classes.healthTipTable}>
+        <table className="table table-bordered table-hover">
           <thead>
             <tr>
               <th>Title</th>

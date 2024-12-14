@@ -42,12 +42,13 @@ const upload = multer({ storage });
 
 // Route to create a health tip
 router.post(
-
   "/api/healthtips", // Corrected route path
   upload.fields([{ name: "health_tip_image", maxCount: 1 }]), // Field name 'health_tip_image' as is
-  [authMiddleware.verifyToken, authMiddleware.isAdmin], // Authentication/authorization middleware
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.checkRoles(["superadmin", "Admin", "HE"]),
+  ], // Authentication/authorization middleware
   healthTipController.createHealthTip // Controller action to create a health tip
-
 );
 
 // Route to get a single health tip by ID
@@ -68,18 +69,22 @@ router.get(
 
 // Route to update an existing health tip
 router.put(
-
   "/api/healthtips/:id", // Corrected route path
   upload.fields([{ name: "health_tip_image", maxCount: 1 }]), // Field name 'health_tip_image' as is
-  [authMiddleware.verifyToken, authMiddleware.isAdmin], // Authentication/authorization middleware
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.checkRoles(["superadmin", "Admin", "HE"]),
+  ], // Authentication/authorization middleware
   healthTipController.updateHealthTip // Controller action to update a health tip
 );
 
 // Route to delete a health tip
 router.delete(
-
   "/api/healthtips/:id", // Corrected route path
-  [authMiddleware.verifyToken, authMiddleware.isAdmin], // Authentication/authorization middleware
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.checkRoles(["superadmin", "Admin", "HE"]),
+  ], // Authentication/authorization middleware
   healthTipController.deleteHealthTip // Controller action to delete a health tip
 );
 
