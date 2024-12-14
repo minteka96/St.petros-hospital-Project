@@ -46,6 +46,11 @@ import AdminRoute from "./markup/routes/AdminRoute.jsx";
 import ApplicationForms from "../src/markup/pages/testApplicant.jsx";
 import Login from "./markup/pages/Login/Login.jsx";
 
+// ***************************News Client Side ********************
+import News from "../src/markup/pages/News/News.jsx";
+import NewsDetails from "../src/markup/pages/News/NewsDetails.jsx";
+import newsList from "./markup/components/Admin/NewsList/NewsList.jsx";
+
 function App() {
   // check if thr route is '/login' or not
   if (window.location.pathname === "/login") {
@@ -60,6 +65,14 @@ function App() {
       )}
 
       <Routes>
+        {/* *************************News Client Side Start Here*********************** */}
+        <Route path="/news" element={<News />} />
+        {/* <Route path="/newsDetails" element={<NewsDetails />} /> */}
+        <Route
+          path="/newsDetails/:newsId"
+          element={<NewsDetails newsList={newsList} />}
+        />
+        {/* **************************News Client Side End Here********************** */}
         <Route path="/login" element={<Login />} />
         <Route path="/test" element={<ApplicationForms />} />
         <Route path="/" element={<Home />} />
@@ -111,7 +124,6 @@ function App() {
         <Route path="/admin/application-form" element={<ApplicationForm />} />
 
         <Route path="/admin/*" element={<AdminRoute />} />
-
       </Routes>
       {["/login", "/admin"].some((path) =>
         window.location.pathname.startsWith(path)

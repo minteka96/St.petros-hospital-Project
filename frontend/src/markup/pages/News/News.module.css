@@ -1,0 +1,139 @@
+/* General Styling */
+.blogArea {
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+}
+
+.title {
+  font-size: 24pt;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.errorMessage {
+  color: #d9534f;
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* Row and Post Items Container */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.postItem {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.postItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Thumbnail Image */
+.imageContainer {
+  flex: 1;
+  max-width: 40%; /* Adjust image width */
+  overflow: hidden;
+  cursor: pointer; /* Make the image clickable */
+}
+
+.thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+/* Image Hover Effect */
+.thumb:hover {
+  opacity: 0.8; /* Slight opacity change on hover */
+}
+
+/* Content Styling */
+.content {
+  flex: 2;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.category {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.category:hover {
+  text-decoration: underline;
+}
+
+.title a {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+
+.title a:hover {
+  color: #007bff;
+}
+
+.description {
+  font-size: 20px;
+  color: #666;
+  margin: 10px 0;
+}
+
+.meta {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.author {
+  font-weight: bold;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.author:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .postItem {
+    flex-direction: column; /* Stack image and content vertically */
+    align-items: center;
+    text-align: center;
+  }
+
+  .imageContainer {
+    max-width: 100%; /* Make image full-width */
+  }
+
+  .thumb {
+    height: auto; /* Adjust height to fit content */
+  }
+
+  .content {
+    padding: 10px;
+  }
+}

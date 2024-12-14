@@ -17,7 +17,6 @@ ON DUPLICATE KEY UPDATE
     `password_hashed` = VALUES(`password_hashed`), 
     `role` = VALUES(`role`);
 
-
 -- Create News Table
 CREATE TABLE IF NOT EXISTS `News` (
     `news_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -34,15 +33,18 @@ CREATE TABLE IF NOT EXISTS `News` (
 CREATE TABLE IF NOT EXISTS `Health_Tips` (
     `health_tip_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `health_tip_title` VARCHAR(255) NOT NULL,
-    `health_tip_description` TEXT NOT NULL,
     `health_tip_detail` VARCHAR(255),
-    `image_link` VARCHAR(255),
-    `video_link` VARCHAR(255),
+    `health_tip_description` TEXT NOT NULL,
+    `health_tip_link` VARCHAR(255),
+    `health_tip_video_link` VARCHAR(255),
+    `health_tip_image` VARCHAR(255),
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
 
+
+-- Create Vacancy Table
 CREATE TABLE IF NOT EXISTS `Vacancy` (
     `vacancy_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `job_title` VARCHAR(255) NOT NULL,
@@ -59,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `Vacancy` (
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
+-- Create Applicant Table
 CREATE TABLE IF NOT EXISTS `Applicant` ( 
     `id` INT AUTO_INCREMENT PRIMARY KEY, 
     `vacancy_id` INT NOT NULL,
@@ -75,8 +78,7 @@ CREATE TABLE IF NOT EXISTS `Applicant` (
     FOREIGN KEY (vacancy_id) REFERENCES Vacancy(vacancy_id)
 ) ENGINE=InnoDB;
 
-
--- Create the video_embeds table
+-- Create the video_embeds Table
 CREATE TABLE IF NOT EXISTS `video_embeds` (
     `video_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `title` VARCHAR(255) NOT NULL,         

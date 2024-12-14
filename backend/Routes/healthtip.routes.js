@@ -1,27 +1,36 @@
 const express = require("express");
-const router = express.Router();
-const healthTipController = require("../Controllers/healthtip.controller");
-const authMiddleware = require("../Middlewares/auth.middleware");
 const multer = require("multer");
+const authMiddleware = require("../Middlewares/auth.middleware");
+const healthTipController = require("../Controllers/healthtip.controller");
+const fs = require("fs");
 const path = require("path");
 
-// Setup Multer for file upload
+
+// Initialize router
+const router = express.Router();
+
 // Configure multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    // Folder destination based on the field name 'health_tip_image'
     const folder =
-      file.fieldname === "health_tip_image" ? "uploads/news" : "uploads";
+      file.fieldname === "health_tip_image" ? "uploads/healthtips" : "uploads";
+
+
     // Ensure the folder exists, create it if not
     const dir = path.join(__dirname, `../${folder}`);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
-    cb(null, dir);
+
+    cb(null, dir); // specify where to store the file
   },
-  // uniqueName
+
+  // Unique filename for the uploaded files
   filename: (req, file, cb) => {
-    const uniqueName = `${Date.now()}_${file.originalname}`;
-    cb(null, uniqueName);
+    const uniqueName = `${Date.now()}_${file.originalname}`; // Adding timestamp to the filename for uniqueness
+    cb(null, uniqueName); // use unique filename
+
   },
 
   // filename: (req, file, cb) => {
@@ -31,36 +40,48 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Route to create a new health tip
+// Route to create a health tip
 router.post(
-  "/api/health-tips",
-  upload.fields([{ name: "health_tip_image", maxCount: 1 }]), // Handle image upload
-  healthTipController.createHealthTip
+
+  "/api/healthtips", // Corrected route path
+  upload.fields([{ name: "health_tip_image", maxCount: 1 }]), // Field name 'health_tip_image' as is
+  [authMiddleware.verifyToken, authMiddleware.isAdmin], // Authentication/authorization middleware
+  healthTipController.createHealthTip // Controller action to create a health tip
+
 );
 
-// Route to fetch all health tips
+// Route to get a single health tip by ID
 router.get(
-  "/api/health-tips",
-  healthTipController.getAllHealthTips
-);
 
-// Route to fetch a single health tip by ID
-router.get(
-  "/api/health-tips/:id",
+  "/api/healthtips/:id",
+  // [authMiddleware.verifyToken],
   healthTipController.getHealthTipById
 );
 
-// Route to update a health tip by ID
+// Route to get all health tips
+router.get(
+
+  "/api/healthtips",
+  // [authMiddleware.verifyToken],
+  healthTipController.getAllHealthTips
+);
+
+// Route to update an existing health tip
 router.put(
-  "/api/health-tips/:id",
-  upload.single('image'), // Handle image upload
-  healthTipController.updateHealthTip
+
+  "/api/healthtips/:id", // Corrected route path
+  upload.fields([{ name: "health_tip_image", maxCount: 1 }]), // Field name 'health_tip_image' as is
+  [authMiddleware.verifyToken, authMiddleware.isAdmin], // Authentication/authorization middleware
+  healthTipController.updateHealthTip // Controller action to update a health tip
 );
 
-// Route to delete a health tip by ID
+// Route to delete a health tip
 router.delete(
-  "/api/health-tips/:id",
-  healthTipController.deleteHealthTip
+
+  "/api/healthtips/:id", // Corrected route path
+  [authMiddleware.verifyToken, authMiddleware.isAdmin], // Authentication/authorization middleware
+  healthTipController.deleteHealthTip // Controller action to delete a health tip
 );
 
+// Export the router to be used in the main application
 module.exports = router;
