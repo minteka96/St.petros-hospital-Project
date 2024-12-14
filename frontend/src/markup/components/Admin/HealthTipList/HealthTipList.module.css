@@ -1,91 +1,125 @@
-.newsListContainer {
-  padding: 15px;
+/* Container Styling */
+.healthTipListContainer {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.newsListContainer h2 {
+/* Title Styling */
+h2 {
   font-size: 1.8rem;
+  color: #333;
   text-align: center;
   margin-bottom: 20px;
-  color: #444;
-  text-transform: uppercase;
-  font-weight: bold;
 }
 
-.newsTable {
+/* Success and Error Messages */
+.successMessage {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.errorMessage {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+/* Table Styling */
+.healthTipTable {
   width: 100%;
   border-collapse: collapse;
-  margin: 0 auto;
+  margin-top: 20px;
   background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.newsTable th,
-.newsTable td {
-  padding: 10px;
+.healthTipTable th,
+.healthTipTable td {
+  padding: 12px 15px;
   text-align: left;
-  border: 1px solid #ddd;
-  font-size: 0.9rem;
-  color: #444;
+  border-bottom: 1px solid #ddd;
 }
 
-.newsTable th {
-  background-color: #f5f5f5;
-  font-weight: bold;
+.healthTipTable th {
+  background-color: #F5F5F5;
+  color:black;
   text-transform: uppercase;
+  font-size: 0.9rem;
 }
 
-.link{
-  color:#00A99E ;
+.healthTipTable tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
-button:hover{
-  background-color:#00A99E ;
+
+.healthTipTable tr:hover {
+  background-color: #f1f8ff;
 }
+
+/* Link Styling */
+.link {
+  color: #007bff;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Icon Button Styling */
 .iconButton {
-  background: none;
+  background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 1rem;
+  padding: 5px;
+  margin: 0 5px;
+}
+
+.iconButton:focus {
+  outline: none;
 }
 
 .editIcon {
-  color: #34c759;
-  margin-right: 5px;
+  color: #28a745;
+  font-size: 1.2rem;
 }
 
 .deleteIcon {
-  color: #d9534f;
+  color: #dc3545;
+  font-size: 1.2rem;
 }
 
-@media (max-width: 768px) {
-  .newsTable {
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .healthTipTable th,
+  .healthTipTable td {
+    font-size: 0.85rem;
+  }
+
+  .healthTipListContainer {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .healthTipTable {
     display: block;
-  }
-
-  .newsTable thead {
-    display: none;
-  }
-
-  .newsTable tr {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-  }
-
-  .newsTable td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: none;
-    padding: 8px 0;
-  }
-
-  .newsTable td::before {
-    content: attr(data-label); 
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #444;
-    margin-right: 10px;
-    flex-shrink: 0;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 }

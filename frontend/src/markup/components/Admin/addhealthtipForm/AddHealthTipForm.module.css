@@ -1,4 +1,4 @@
-/* src/components/AddNewsForm.module.css */
+/* src/components/AddHealthTipForm.module.css */
 
 .formContainer {
   max-width: 600px;
@@ -51,5 +51,5 @@
 }
 
 .submitButton:hover {
-  background-color:  #00A99E;
+  background-color: #009C91;
 }
