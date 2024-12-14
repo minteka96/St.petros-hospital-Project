@@ -2,9 +2,9 @@
 const express = require("express");
 // Call the router method from express to create the router
 const router = express.Router();
-// Import the install router
+
+// Import the necessary routers
 const installRouter = require("./install.routes");
-// Import the jobs router
 const jobsRouter = require("./jobs.routes.jsx");
 const healthtipRouter = require("./healthtip.routes");
 const applicantRouter = require("./applicant.routes");
@@ -12,6 +12,8 @@ const loginRouter = require("./logIn.routes");
 const userRouter = require("./user.routes");
 // Import the news router
 const newsRoutes = require("./news.routes");
+
+// Use the routers in the main router
 router.use(loginRouter);
 router.use(userRouter);
 router.use(applicantRouter);
@@ -21,6 +23,8 @@ router.use(installRouter);
 router.use(jobsRouter);
 // Add the news routes to the main router
 router.use(newsRoutes);
+// Add the health tip routes to the main router
 router.use(healthtipRouter);
-// Export the router
+
+// Export the router to be used in the main application file
 module.exports = router;

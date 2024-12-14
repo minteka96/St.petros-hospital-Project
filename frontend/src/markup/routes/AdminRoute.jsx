@@ -71,7 +71,6 @@ const AdminRoute = () => {
         className="w-100 gradientCustom px-3 d-flex align-items-center justify-content-between"
       >
         <div>
-
           <Link to="/">
             <img src={logo} className="logo" alt="Logo" />
           </Link>
@@ -112,7 +111,6 @@ const AdminRoute = () => {
           </div>
         </div>
 
-
         {/* Main Content Area */}
         <div
           className="col-md-9 admin-right-side p-0"
@@ -129,7 +127,6 @@ const AdminRoute = () => {
               <Route path="/admins" element={<AdminManagement />} />
               <Route path="/new" element={<AddAdmin />} />
 
-
               <Route path="/applicant" element={<Applicants />} />
               <Route path="/applicant/:id" element={<ApplicantDetails />} />
               <Route path="/add-news" element={<AddNews />} />
@@ -138,7 +135,7 @@ const AdminRoute = () => {
               <Route path="/add-healthtip" element={<AddHealthTipForm />} />
               <Route path="/healthtipList" element={<HealthTipList />} />
               <Route
-                path="/healthtip/edit/:healthtip_id"
+                path="/healthtiplist/edit/:health_tip_id"
                 element={<EditHealthTip />}
               />
               <Route path="/add-job" element={<AddJobForm />} />

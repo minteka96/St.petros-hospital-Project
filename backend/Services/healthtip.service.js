@@ -1,66 +1,130 @@
 const db = require("../Config/db.config");
 
+// Function to create a health tip in the database
 const createHealthTip = async (data) => {
-  const { healthTipTitle, healthTipDescription, imageLink, videoLink } = data;
+  const {
+    healthTipTitle,
+    healthTipDetail,
+    healthTipDescription,
+    healthTipLink,
+    healthTipVideoLink,
+    healthTipImageLink,
+  } = data;
 
   try {
+    // The INSERT query should return an array with the result at index 0
     const result = await db.query(
-      `INSERT INTO Health_Tips (health_tip_title, health_tip_description, image_link, video_link)
-      VALUES (?, ?, ?, ?)`,
-      [healthTipTitle, healthTipDescription, imageLink || null, videoLink || null]
+      `INSERT INTO Health_Tips (health_tip_title,health_tip_detail, health_tip_description, health_tip_link, health_tip_video_link, health_tip_image )
+      VALUES (?, ?, ?, ?, ?, ?)`,
+      [
+        healthTipTitle,
+        healthTipDetail,
+        healthTipDescription,
+        healthTipLink,
+        healthTipVideoLink,
+        healthTipImageLink,
+      ]
     );
 
-    return { id: result.insertId };
+    // Return the inserted ID and other details
+    return {
+      healthTipTitle,
+      healthTipDetail,
+      healthTipDescription,
+      healthTipLink,
+      healthTipVideoLink,
+      healthTipImageLink,
+    };
   } catch (err) {
-    console.error("Error creating healthTip:", err);
-    throw new Error("Error creating healthTip: " + err.message);
+    console.error("Error creating health tip:", err);
+    throw new Error("Error creating health tip: " + err.message);
   }
 };
 
+// Function to fetch a health tip by ID
 const getHealthTipById = async (healthTipId) => {
   try {
     const result = await db.query(
       `SELECT * FROM Health_Tips WHERE health_tip_id = ?`,
       [healthTipId]
     );
-    return result[0];
+
+    // Return the health tip if found, otherwise null
+    return result[0] || null;
   } catch (err) {
-    throw new Error("Error fetching healthTip: " + err.message);
+    console.error("Error fetching health tip by ID:", err);
+    throw new Error("Error fetching health tip by ID: " + err.message);
   }
 };
 
+// Function to fetch all health tips
 const getAllHealthTips = async () => {
   try {
     const result = await db.query(`SELECT * FROM Health_Tips`);
     return result;
   } catch (err) {
-    throw new Error("Error fetching healthTips: " + err.message);
+    console.error("Error fetching health tips:", err);
+    throw new Error("Error fetching health tips: " + err.message);
   }
 };
 
+// Function to update a health tip by ID
 const updateHealthTip = async (healthTipId, data) => {
-  const { healthTipTitle, healthTipDescription, imageLink, videoLink } = data;
+  const {
+    healthTipTitle,
+    healthTipDetail,
+    healthTipDescription,
+    healthTipLink,
+    healthTipVideoLink,
+    healthTipImageLink,
+  } = data;
 
   try {
+
     const result = await db.query(
       `UPDATE Health_Tips
-       SET health_tip_title = ?, health_tip_description = ?, image_link = ?, video_link = ?, updated_at = CURRENT_TIMESTAMP
-       WHERE health_tip_id = ?`,
-      [healthTipTitle, healthTipDescription, imageLink || null, videoLink || null, healthTipId]
+      SET health_tip_title = ?, health_tip_detail= ?, health_tip_description= ?, health_tip_link= ?, health_tip_video_link= ?, health_tip_image = ?
+      WHERE health_tip_id = ?`,
+      [
+        healthTipTitle,
+        healthTipDetail,
+        healthTipDescription,
+        healthTipLink,
+        healthTipVideoLink,
+        healthTipImageLink,
+        healthTipId,
+      ]
     );
 
-    return result.affectedRows > 0;
+    // Check if any rows were affected
+    if (result.affectedRows === 0) {
+      return false; // No health tip found with the given ID
+    }
+
+    return true; // Successful update
   } catch (err) {
-    throw new Error("Error updating healthTip: " + err.message);
+    console.error("Error updating health tip:", err);
+    throw new Error("Error updating health tip: " + err.message);
   }
 };
 
+// Function to delete a health tip by ID
 const deleteHealthTip = async (healthTipId) => {
   try {
-    await db.query(`DELETE FROM Health_Tips WHERE health_tip_id = ?`, [healthTipId]);
-    return { message: "Health tip deleted successfully" };
+    const result = await db.query(
+      `DELETE FROM Health_Tips WHERE health_tip_id = ?`,
+      [healthTipId]
+    );
+
+    // Check if any rows were affected
+    if (result.affectedRows === 0) {
+      return false; // No health tip found with the given ID
+    }
+
+    return true; // Successful deletion
   } catch (err) {
-    throw new Error("Error deleting healthTip: " + err.message);
+    console.error("Error deleting health tip:", err);
+    throw new Error("Error deleting health tip: " + err.message);
   }
 };
 
