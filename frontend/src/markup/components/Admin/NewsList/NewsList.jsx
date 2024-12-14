@@ -105,7 +105,7 @@ const NewsList = () => {
                     }
                   >
                     <img
-                      style={{ width: "90%", borderRadius: "5%" }}
+                      style={{ width: "150px", borderRadius: "5%" }}
                       src={
                         news.news_image_link
                           ? `${api_url}${news.news_image_link}`
