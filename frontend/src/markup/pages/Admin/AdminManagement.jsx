@@ -6,8 +6,10 @@ import { useAuth } from "../../../contexts/AuthContext";
 const api_url = import.meta.env.VITE_API_URL;
 
 const AdminManagement = () => {
-   const { user } = useAuth();
-   const token = user ? user.token : null;
+  const { user } = useAuth();
+  const token = user ? user.token : null;
+  const role = user ? user.role : null;
+  console.log("role", role);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
   const [editingUserId, setEditingUserId] = useState(null); // Track the user being edited
@@ -23,9 +25,8 @@ const AdminManagement = () => {
       navigate("/login");
       return;
     }
-    
-    const fetchUsers = async () => {
 
+    const fetchUsers = async () => {
       try {
         const response = await axios.get(
           `${api_url}/api/users`,
@@ -42,7 +43,10 @@ const AdminManagement = () => {
 
   // Handle user deletion
   const handleDelete = async (userId) => {
-   
+    if (!window.confirm("Are you sure you want to delete this user?")) {
+      return;
+    }
+
     try {
       await axios.delete(`${api_url}/api/user/${userId}`, requestOptions);
       setUsers(users.filter((user) => user.user_id !== userId));
@@ -53,7 +57,6 @@ const AdminManagement = () => {
 
   // Fetch user data for UpdateUser
   const fetchUserData = async (userId) => {
-    
     const response = await axios.get(
       `${api_url}/api/users/${userId}`,
       requestOptions
@@ -88,7 +91,7 @@ const AdminManagement = () => {
 
       {editingUserId ? (
         <UpdateAdmin
-        cancelEditing={setEditingUserId}
+          cancelEditing={setEditingUserId}
           userId={editingUserId}
           fetchUserData={fetchUserData}
           onSubmit={handleUpdate}
@@ -97,7 +100,6 @@ const AdminManagement = () => {
         <table className="table table-bordered">
           <thead className="thead-light">
             <tr>
-            
               <th scope="col">Username</th>
               <th scope="col">Email</th>
               <th scope="col">Role</th>
@@ -108,7 +110,6 @@ const AdminManagement = () => {
           <tbody>
             {users.map((user) => (
               <tr key={user.user_id}>
-               
                 <td>{user.username}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
@@ -122,12 +123,14 @@ const AdminManagement = () => {
                   </span>
                 </td>
                 <td>
-                  <button
-                    className="btn btn-danger btn-sm me-2"
-                    onClick={() => handleDelete(user.user_id)}
-                  >
-                    Delete
-                  </button>
+                  {user.role !== "superadmin" && (
+                    <button
+                      className="btn btn-danger btn-sm me-2"
+                      onClick={() => handleDelete(user.user_id)}
+                    >
+                      Delete
+                    </button>
+                  )}
                   <button
                     className="btn btn-primary btn-sm"
                     onClick={() => setEditingUserId(user.user_id)} // Set editing user
@@ -138,6 +141,25 @@ const AdminManagement = () => {
               </tr>
             ))}
           </tbody>
+          <div className="mt-4 " style={{ fontSize: "12px" }}>
+            <h5 style={{ fontSize: "16px", padding: 0, margin: 0 }}>
+              Role Access definition
+            </h5>
+            <div>
+              <p style={{ fontSize: "12px", padding: 0 }}>
+                Admin : <span>access all without admin Management</span>
+              </p>
+              <p style={{ fontSize: "12px", padding: 0 }}>
+                HR : <span>access only Job and Applicant </span>
+              </p>
+              <p style={{ fontSize: "12px", padding: 0 }}>
+                Health Literacy : <span>access only Health-Tip </span>
+              </p>
+              <p style={{ fontSize: "12px", padding: 0 }}>
+                Communication : <span>access only News</span>
+              </p>
+            </div>
+          </div>
         </table>
       )}
     </div>

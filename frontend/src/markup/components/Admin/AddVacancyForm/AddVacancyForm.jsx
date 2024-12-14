@@ -1,49 +1,58 @@
 /* eslint-disable no-unused-vars */
 // src/components/AddVacancyForm.jsx
 
-import React, { useState } from 'react';
-import { addVacancy } from '../../../Util/api/api';
-import classes from './AddVacancyForm.module.css';
+import React, { useState } from "react";
+import { addVacancy } from "../../../Util/api/api";
+import classes from "./AddVacancyForm.module.css";
 
 const AddVacancyForm = () => {
-  const [jobTitle, setJobTitle] = useState('');
-  const [qualification, setQualification] = useState('');
-  const [experience, setExperience] = useState('');
-  const [jobGrade, setJobGrade] = useState('');
-  const [salary, setSalary] = useState('');
-  const [address, setAddress] = useState('');
-  const [howToApply, setHowToApply] = useState('');
-  const [location, setLocation] = useState('');
-  const [type, setType] = useState('full-time');
+  const [jobTitle, setJobTitle] = useState("");
+  const [qualification, setQualification] = useState("");
+  const [experience, setExperience] = useState("");
+  const [jobGrade, setJobGrade] = useState("");
+  const [salary, setSalary] = useState("");
+  const [address, setAddress] = useState("");
+  const [howToApply, setHowToApply] = useState("");
+  const [location, setLocation] = useState("");
+  const [type, setType] = useState("full-time");
+  const [deadline, setDeadline] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formattedData = {
+      jobTitle: jobTitle.trim(),
+      qualification: qualification.trim(),
+      experience: experience.trim(),
+      jobGrade: jobGrade.trim(),
+      salary: salary.trim(),
+      address: address.trim(),
+      howToApply: howToApply.trim(),
+      type,
+      location: location.trim(),
+      deadline,
+    };
+
+    console.log("Submitting data:", formattedData);
+
     try {
-      await addVacancy({
-        job_title: jobTitle,
-        qualification,
-        experience,
-        job_grade: jobGrade,
-        salary,
-        address,
-        type,
-         location,
-        how_to_apply: howToApply,
-       
-        
-      });
-      // Reset form fields
-      setJobTitle('');
-      setQualification('');
-      setExperience('');
-      setJobGrade('');
-      setSalary('');
-      setAddress('');
-      setHowToApply('');
-      setLocation('');
-      setType('full-time');
+      await addVacancy(formattedData);
+      alert("Vacancy added successfully!");
+
+      // Reset the form
+      setJobTitle("");
+      setQualification("");
+      setExperience("");
+      setJobGrade("");
+      setSalary("");
+      setAddress("");
+      setHowToApply("");
+      setLocation("");
+      setType("full-time");
+      setDeadline("");
     } catch (error) {
-      console.error('Error adding vacancy:', error);
+      console.error("Error adding vacancy:", error);
+      alert("Failed to add vacancy. Please try again.");
     }
   };
 
@@ -84,7 +93,7 @@ const AddVacancyForm = () => {
         onChange={(e) => setSalary(e.target.value)}
         className={classes.inputField}
       />
-       <select
+      <select
         value={type}
         onChange={(e) => setType(e.target.value)}
         className={classes.selectField}
@@ -93,7 +102,6 @@ const AddVacancyForm = () => {
         <option value="part-time">Part-Time</option>
         <option value="contract">Contract</option>
       </select>
-      
       <input
         type="text"
         placeholder="Address"
@@ -109,14 +117,22 @@ const AddVacancyForm = () => {
         className={classes.inputField}
         required
       />
-     
       <textarea
         placeholder="How to Apply"
         value={howToApply}
         onChange={(e) => setHowToApply(e.target.value)}
         className={classes.textareaField}
       />
-      
+      <label className={classes.labelField}>
+        Application Deadline:
+        <input
+          type="date"
+          value={deadline}
+          onChange={(e) => setDeadline(e.target.value)}
+          className={classes.inputField}
+          required
+        />
+      </label>
       <button type="submit" className={classes.submitButton}>
         Add Vacancy
       </button>

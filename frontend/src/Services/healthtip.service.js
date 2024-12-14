@@ -1,5 +1,6 @@
 const api_url = import.meta.env.VITE_API_URL;
 
+
 // Function to send POST request to create a new health tip
 const createHealthTip = async (formData, token) => {
   if (!token) throw new Error("Token is missing.");
@@ -10,6 +11,9 @@ const createHealthTip = async (formData, token) => {
       "x-access-token": token, // Avoid setting Content-Type for FormData
     },
     body: formData,
+    headers: {
+      "x-access-token": token, // Don't manually set Content-Type for FormData
+    },
   };
 
   try {

@@ -1,0 +1,66 @@
+.jobsListContainer {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.loading {
+  font-size: 18px;
+  color: #555;
+  text-align: center;
+}
+
+.errorMessage {
+  font-size: 16px;
+  color: red;
+  text-align: center;
+}
+
+.jobsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.jobItem {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.jobItem h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #007acc;
+}
+
+.jobItem p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.jobItem strong {
+  color: #333;
+}
+
+.jobItem a {
+  color: #007acc;
+  text-decoration: none;
+}
+
+.jobItem a:hover {
+  text-decoration: underline;
+}

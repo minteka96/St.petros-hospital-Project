@@ -29,37 +29,43 @@ const verifyToken = async (req, res, next) => {
   });
 };
 
-// A function to check if the user is an admin
-const isAdmin = async (req, res, next) => {
-  const email = req.email;
-  const user = await userService.getUserByEmail(email);
-  if (user.role === "admin") {
-    next();
-  } else {
-    return res.status(403).send({
-      status: "fail",
-      error: "Not an Admin!",
-    });
-  }
+const checkRoles = (allowedRoles) => {
+  return async (req, res, next) => {
+    try {
+      const email = req.email;
+      const user = await userService.getUserByEmail(email);
+
+      if (!user || !user.active_status) {
+        return res.status(403).send({
+          status: "fail",
+          message: "User not active or not found!",
+        });
+      }
+
+      // Check if the user's role is in the allowedRoles array
+      if (!allowedRoles.includes(user.role)) {
+        return res.status(403).send({
+          status: "fail",
+          message: `Access denied for role: ${user.role}`,
+        });
+      }
+
+      next();
+    } catch (error) {
+      console.error("Error checking roles:", error);
+      return res.status(500).send({
+        status: "error",
+        message: "Internal server error",
+      });
+    }
+  };
 };
-// A function to check if the user is a manager
-const isManager = async (req, res, next) => {
-  const email = req.email;
-  const user = await userService.getUserByEmail(email);
-  if (user.role === "manager") {
-    next();
-  } else {
-    return res.status(403).send({
-      status: "fail",
-      error: "Not an manager"
-    });
-  }
-};
+
 
 const authMiddleware = {
   verifyToken,
-  isAdmin,
-  isManager,
+ 
+  checkRoles,
 };
 
 module.exports = authMiddleware;

@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
 -- Insert default admin user
 INSERT INTO `Users` (`username`, `email`, `password_hashed`, `role`)
 VALUES 
-    ('admin', 'admin@admin.com', '$2b$10$DX9eZK099SgsYXIWOyYDTef4Z/7emhCt9MsMVxyqUyDIlIZ1oRkE6', 'admin')
+    ('admin', 'admin@admin.com', '$2b$10$DX9eZK099SgsYXIWOyYDTef4Z/7emhCt9MsMVxyqUyDIlIZ1oRkE6', 'superadmin')
 ON DUPLICATE KEY UPDATE 
     `password_hashed` = VALUES(`password_hashed`), 
     `role` = VALUES(`role`);
@@ -64,15 +64,18 @@ CREATE TABLE IF NOT EXISTS `Vacancy` (
 -- Create Applicant Table
 CREATE TABLE IF NOT EXISTS `Applicant` ( 
     `id` INT AUTO_INCREMENT PRIMARY KEY, 
+    `vacancy_id` INT NOT NULL,
     `first_name` VARCHAR(50) NOT NULL, 
     `last_name` VARCHAR(50) NOT NULL, 
     `email_address` VARCHAR(100) NOT NULL, 
+    `phone_number` VARCHAR(20),
     `position_applied_for` VARCHAR(100), 
     `additional_information` TEXT NOT NULL, 
     `cv_file_path` VARCHAR(255) NOT NULL, 
     `other_testimonials` VARCHAR(255) NOT NULL, 
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
+    FOREIGN KEY (vacancy_id) REFERENCES Vacancy(vacancy_id)
 ) ENGINE=InnoDB;
 
 -- Create the video_embeds Table

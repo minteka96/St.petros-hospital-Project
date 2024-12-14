@@ -28,7 +28,6 @@ const upload = multer({ storage });
 // Route for creating an applicant with file uploads
 router.post(
   "/api/applicant",
-  [authMiddleware.verifyToken, authMiddleware.isAdmin],
   upload.fields([
     { name: "cv_file", maxCount: 1 },
     { name: "testimonials", maxCount: 1 },
@@ -38,12 +37,36 @@ router.post(
 
 router.get(
   "/api/applicants",
-  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.checkRoles(["superadmin", "Admin", "HR"]),
+  ],
   ApplicantController.getAllApplicants
 );
-router.get("/api/applicant/:id", ApplicantController.getApplicantById);
+router.get(
+  "/api/applicant/:id",
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.checkRoles(["superadmin", "Admin", "HR"]),
+  ],
+  ApplicantController.getApplicantById
+);
 // router.put("/api/applicant/:id", ApplicantController.updateApplicant);
-router.delete("/api/applicant/:id", ApplicantController.deleteApplicant);
-router.delete("/api/applicants", ApplicantController.deleteAllApplicants);
+router.delete(
+  "/api/applicant/:id",
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.checkRoles(["superadmin", "Admin", "HR"]),
+  ],
+  ApplicantController.deleteApplicant
+);
+router.delete(
+  "/api/applicants",
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.checkRoles(["superadmin", "Admin", "HR"]),
+  ],
+  ApplicantController.deleteAllApplicants
+);
 
 module.exports = router;

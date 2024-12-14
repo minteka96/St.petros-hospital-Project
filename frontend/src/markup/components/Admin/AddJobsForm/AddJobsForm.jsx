@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import jobsservice from '../../../../Services/jobs.service.js';
+import jobsservice from "../../../../Services/jobs.service.js";
+import classes from "./AddJobForm.module.css";
 
-import classes from'./AddJobForm.module.css';
 const AddJobForm = () => {
   const [jobTitle, setJobTitle] = useState("");
   const [jobDescription, setJobDescription] = useState("");
@@ -22,7 +22,19 @@ const AddJobForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!jobTitle || !jobDescription || !jobRequirements || !qualifications || !jobGrade || !terms || !salary || !address || !applicationLink || !deadline) {
+    // Validate all fields
+    if (
+      !jobTitle ||
+      !jobDescription ||
+      !jobRequirements ||
+      !qualifications ||
+      !jobGrade ||
+      !terms ||
+      !salary ||
+      !address ||
+      !applicationLink ||
+      !deadline
+    ) {
       setError("All fields are required.");
       return;
     }
@@ -38,11 +50,11 @@ const AddJobForm = () => {
         salary,
         address,
         application_link: applicationLink,
-        deadline
+        deadline,
       };
 
       const response = await jobsservice.createJob(jobData);
-      
+
       if (response.error) {
         setError(response.error);
         setSuccess("");
@@ -51,7 +63,7 @@ const AddJobForm = () => {
         setError("");
 
         setTimeout(() => {
-          navigate("/admin/jobs"); // Navigate to job listings page after success
+          navigate("/admin/all-job"); // Navigate to job listings page after success
         }, 2000);
       }
     } catch (err) {
@@ -62,93 +74,95 @@ const AddJobForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={classes.formContainer}>
-      <h2>Add Job</h2>
-      {error && <div className={classes.errorMessage}>{error}</div>}
-      {success && <div className={classes.successMessage}>{success}</div>}
+    <div className="p-4">
+      <form onSubmit={handleSubmit} className={classes.formContainer}>
+        <h2>Add Job</h2>
+        {error && <div className={classes.errorMessage}>{error}</div>}
+        {success && <div className={classes.successMessage}>{success}</div>}
 
-      <input
-        type="text"
-        placeholder="Job Title"
-        value={jobTitle}
-        onChange={(e) => setJobTitle(e.target.value)}
-        className={classes.inputField}
-        required
-      />
-      <textarea
-        placeholder="Job Description"
-        value={jobDescription}
-        onChange={(e) => setJobDescription(e.target.value)}
-        className={classes.textareaField}
-        required
-      />
-      <textarea
-        placeholder="Job Requirements"
-        value={jobRequirements}
-        onChange={(e) => setJobRequirements(e.target.value)}
-        className={classes.textareaField}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Qualifications"
-        value={qualifications}
-        onChange={(e) => setQualifications(e.target.value)}
-        className={classes.inputField}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Job Grade"
-        value={jobGrade}
-        onChange={(e) => setJobGrade(e.target.value)}
-        className={classes.inputField}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Terms"
-        value={terms}
-        onChange={(e) => setTerms(e.target.value)}
-        className={classes.inputField}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Salary"
-        value={salary}
-        onChange={(e) => setSalary(e.target.value)}
-        className={classes.inputField}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Address"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-        className={classes.inputField}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Application Link"
-        value={applicationLink}
-        onChange={(e) => setApplicationLink(e.target.value)}
-        className={classes.inputField}
-        required
-      />
-      <input
-        type="date"
-        placeholder="Deadline"
-        value={deadline}
-        onChange={(e) => setDeadline(e.target.value)}
-        className={classes.inputField}
-        required
-      />
-      <button type="submit" className={classes.submitButton}>
-        Add Job
-      </button>
-    </form>
+        <input
+          type="text"
+          placeholder="Job Title"
+          value={jobTitle}
+          onChange={(e) => setJobTitle(e.target.value)}
+          className={classes.inputField}
+          required
+        />
+        <textarea
+          placeholder="Job Description"
+          value={jobDescription}
+          onChange={(e) => setJobDescription(e.target.value)}
+          className={classes.textareaField}
+          required
+        />
+        <textarea
+          placeholder="Job Requirements"
+          value={jobRequirements}
+          onChange={(e) => setJobRequirements(e.target.value)}
+          className={classes.textareaField}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Qualifications"
+          value={qualifications}
+          onChange={(e) => setQualifications(e.target.value)}
+          className={classes.inputField}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Job Grade"
+          value={jobGrade}
+          onChange={(e) => setJobGrade(e.target.value)}
+          className={classes.inputField}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Terms"
+          value={terms}
+          onChange={(e) => setTerms(e.target.value)}
+          className={classes.inputField}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Salary (e.g., $40,000/year)"
+          value={salary}
+          onChange={(e) => setSalary(e.target.value)}
+          className={classes.inputField}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          className={classes.inputField}
+          required
+        />
+        <input
+          type="url"
+          placeholder="Application Link"
+          value={applicationLink}
+          onChange={(e) => setApplicationLink(e.target.value)}
+          className={classes.inputField}
+          required
+        />
+        <input
+          type="date"
+          placeholder="Deadline"
+          value={deadline}
+          onChange={(e) => setDeadline(e.target.value)}
+          className={classes.inputField}
+          required
+        />
+        <button type="submit" className={classes.submitButton}>
+          Add Job
+        </button>
+      </form>
+    </div>
   );
 };
 

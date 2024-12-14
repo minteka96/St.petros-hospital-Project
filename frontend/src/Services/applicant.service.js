@@ -2,6 +2,35 @@
 
 const api_url = import.meta.env.VITE_API_URL;
 
+//function to post applications
+const postApplicant = async (formDataToSend, token) => {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "x-access-token": token, // Do not set Content-Type; fetch handles it for FormData
+    },
+    body: formDataToSend, // FormData object
+  };
+
+  try {
+    const response = await fetch(`${api_url}/api/applicant`, requestOptions);
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(
+        `Failed to submit application. Status: ${response.status}. Message: ${
+          errorResponse.message || "Unknown error"
+        }`
+      );
+    }
+
+    return await response.json(); // Return parsed JSON response
+  } catch (error) {
+    console.error("Error submitting application:", error.message);
+    throw error; // Rethrow for further handling by the caller
+  }
+};
+
 // function to get all applications
 const getAllApplicants = async (loggedInEmployeeToken) => {
   const requestOptions = {
@@ -31,11 +60,12 @@ const getAllApplicants = async (loggedInEmployeeToken) => {
 };
 
 //function to get applications by id
-const getApplicantById = async (id) => {
+const getApplicantById = async (id, token) => {
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      "x-access-token": token,
     },
   };
 
@@ -121,6 +151,7 @@ const deleteAllApplicants = async () => {
 };
 
 const applicantService = {
+  postApplicant,
   getAllApplicants,
   getApplicantById,
   deleteApplicant,

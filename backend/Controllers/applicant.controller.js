@@ -1,20 +1,22 @@
 const applicantService = require("../Services/applicant.service");
 
+
 async function createApplicant(req, res) {
   try {
     const {
       first_name,
       last_name,
       email_address,
+      phone_number,
       position_applied_for,
       additional_information,
     } = req.body;
-
     // Validate required fields
     if (
       !first_name ||
       !last_name ||
       !email_address ||
+      !phone_number ||
       !position_applied_for ||
       !additional_information
     ) {
@@ -27,13 +29,16 @@ async function createApplicant(req, res) {
       : null;
     const other_testimonials = req.files.testimonials
       ? `/uploads/testimonials/${req.files.testimonials[0].filename}`
-      : null;
+      : "";
+      const vacancy_id="4"
 
     // Prepare applicant data
     const applicantData = {
+      vacancy_id,
       first_name,
       last_name,
       email_address,
+      phone_number,
       position_applied_for,
       additional_information,
       cv_file_path,
@@ -42,7 +47,7 @@ async function createApplicant(req, res) {
 
     // Create applicant in the database
     await applicantService.createApplicant(applicantData);
-    res.status(201).json({ message: "Applicant created successfully" });
+    res.status(201).json({ message: "Applicant created successfully",status:201 });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal Server Error" });

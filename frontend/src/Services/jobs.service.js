@@ -1,5 +1,32 @@
 const api_url = import.meta.env.VITE_API_URL;
 
+
+const getAllJobs = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const response = await fetch(`${api_url}/api/vacancies`, requestOptions);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `HTTP error! Status: ${response.status}, Details: ${errorText}`
+      );
+    }
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error fetching jobs:", error);
+    throw new Error("Unable to retrieve job listings. Please try again later.");
+  }
+};
+
 // Function to create a new job
 const createJob = async (jobData) => {
   const requestOptions = {
@@ -11,7 +38,7 @@ const createJob = async (jobData) => {
   };
 
   try {
-    const response = await fetch(`${api_url}/api/jobs`, requestOptions);
+    const response = await fetch(`${api_url}/api/vacancies`, requestOptions);
     if (!response.ok) {
       const errorText = await response.text();
       throw new Error(
@@ -27,32 +54,8 @@ const createJob = async (jobData) => {
 };
 
 // Function to get all job listings
-const getAllJobs = async () => {
-  const requestOptions = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      // "x-access-token": token, // Uncomment and set token if needed
-    },
-  };
+// "x-access-token": token, // Uncomment and set token if needed
 
-  try {
-    const response = await fetch(`${api_url}/api/jobs`, requestOptions);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    if (data.status !== "success") {
-      throw new Error(
-        "Failed to fetch jobs: " + (data.message || "Unknown error")
-      );
-    }
-    return data;
-  } catch (error) {
-    console.error("Error fetching jobs:", error);
-    throw error;
-  }
-};
 
 // Function to get a specific job by its ID
 const getJobById = async (job_id) => {
@@ -65,7 +68,7 @@ const getJobById = async (job_id) => {
   };
   try {
     const response = await fetch(
-      `${api_url}/api/jobs/${job_id}`,
+      `${api_url}/api/vacancies/${job_id}`,
       requestOptions
     );
     if (!response.ok) {
@@ -99,7 +102,7 @@ const updateJob = async (job_id, jobData) => {
 
   try {
     const response = await fetch(
-      `${api_url}/api/jobs/${job_id}`,
+      `${api_url}/api/vacancies/${job_id}`,
       requestOptions
     );
     if (!response.ok) {
@@ -117,34 +120,30 @@ const updateJob = async (job_id, jobData) => {
 };
 
 // Function to delete a job
+// "x-access-token": token, // Uncomment and set token if needed
 const deleteJob = async (job_id) => {
   const requestOptions = {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      // "x-access-token": token, // Uncomment and set token if needed
     },
   };
 
   try {
     const response = await fetch(
-      `${api_url}/api/jobs/${job_id}`,
+      `${api_url}/api/vacancies/${job_id}`,
       requestOptions
     );
+
     if (!response.ok) {
       const errorText = await response.text();
       throw new Error(
         `HTTP error! Status: ${response.status}, Details: ${errorText}`
       );
     }
+
     const data = await response.json();
-    if (data.status === "success") {
-      return data;
-    } else {
-      throw new Error(
-        `Failed to delete job: ${data.message || "Unknown error"}`
-      );
-    }
+    return data;
   } catch (error) {
     console.error("Error deleting job:", error);
     throw error;

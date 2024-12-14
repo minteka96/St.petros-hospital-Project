@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import healthTipService from "../../../../Services/healthtip.service.js"; // Adjust the path if necessary
 import classes from "./AddHealthTipForm.module.css"; // Adjust the path if necessary
 import { useAuth } from "../../../../contexts/AuthContext"; // Adjust the path if necessary
@@ -19,7 +20,6 @@ const AddHealthTipForm = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -34,6 +34,7 @@ const AddHealthTipForm = () => {
     }
 
     try {
+
       const response = await healthTipService.createHealthTip(formData, token);
       if (response.error) {
         setError(response.error);

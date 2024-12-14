@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"; // import useParams to get the URL parameters
 import applicantService from "../../../../Services/applicant.service";
+import { useAuth } from "../../../../contexts/AuthContext";
 const api_url = import.meta.env.VITE_API_URL;
 
 function ApplicantDetail() {
+   const { user } = useAuth();
+   const token = user ? user.token : null;
   const [applicant, setApplicant] = useState({});
   const [loading, setLoading] = useState(false);
   const { id } = useParams(); // useParams to extract the 'id' from the URL
@@ -13,7 +16,7 @@ function ApplicantDetail() {
     // Get applicant by id
     const fetchApplicant = async () => {
       try {
-        const response = await applicantService.getApplicantById(id);
+        const response = await applicantService.getApplicantById(id, token);
         setApplicant(response.data);
       } catch (error) {
         console.error("Error fetching applicant data:", error);
@@ -22,71 +25,22 @@ function ApplicantDetail() {
     fetchApplicant();
   }, [id]); // Make sure the effect runs when the id changes
 
-  const handlePrint = () => {
-    const printWindow = window.open("", "_blank");
-    const printableContent = `
-      <html>
-      <head>
-        <title>Print Applicant Details</title>
-        <style>
-          body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-          }
-          .section {
-            margin-bottom: 20px;
-          }
-          .section h5 {
-            margin-bottom: 10px;
-          }
-          .link {
-            text-decoration: none;
-            color: blue;
-          }
-        </style>
-      </head>
-      <body>
-        <h1>${applicant.first_name} ${applicant.last_name}'s Details</h1>
-        <div class="section">
-          <h5>Personal Details</h5>
-          <p><strong>Email:</strong> ${applicant.email_address || "N/A"}</p>
-          <p><strong>Position:</strong> ${applicant.position_applied_for || "N/A"}</p>
-        </div>
-        <div class="section">
-          <h5>CV File</h5>
-          ${
-            applicant.cv_file_path
-              ? `<a class="link" href="${api_url}${applicant.cv_file_path}" target="_blank">View CV</a>`
-              : "Not attached"
-          }
-        </div>
-        <div class="section">
-          <h5>Other Testimonials</h5>
-          ${
-            applicant.other_testimonials
-              ? `<a class="link" href="${api_url}${applicant.other_testimonials}" target="_blank">View Testimonials</a>`
-              : "Not attached"
-          }
-        </div>
-      </body>
-      </html>
-    `;
-
-    printWindow.document.open();
-    printWindow.document.write(printableContent);
-    printWindow.document.close();
-    printWindow.print();
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      setLoading(true);
-      await applicantService.deleteApplicant(id);
-      navigate("/admin/applicant"); // Redirect to the applicants page after deletion
-    } catch (error) {
-      console.error("Error deleting applicant:", error);
+  // use delete comfirmation alert
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this applicant?"
+    );
+    if (confirmDelete) {
+      try {
+        setLoading(true);
+        await applicantService.deleteApplicant(id);
+        navigate("/admin/applicant"); // Redirect to the applicants page after deletion
+      } catch (error) {
+        console.error("Error deleting applicant:", error);
+      }
     }
   };
+
 
   return (
     <div className="container py-5">
@@ -100,6 +54,9 @@ function ApplicantDetail() {
           <h5>Personal Details</h5>
           <p>
             <strong>Email:</strong> {applicant.email_address}
+          </p>
+          <p>
+            <strong>Phone:</strong> {applicant.phone_number}
           </p>
           <p>
             <strong>Position:</strong> {applicant.position_applied_for}
@@ -139,9 +96,6 @@ function ApplicantDetail() {
         </div>
         <div className="card-footer text-end">
           <div className="d-flex gap-2">
-            <button onClick={handlePrint} className="btn">
-              Print
-            </button>
             <button onClick={() => handleDelete(applicant.id)} className="btn">
               {loading ? "Deleting..." : "Delete"}
               
