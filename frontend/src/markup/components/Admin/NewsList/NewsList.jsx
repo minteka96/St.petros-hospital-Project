@@ -98,6 +98,7 @@ const NewsList = () => {
                 </td>
                 <td data-label="Image Link" style={{ textAlign: "center" }}>
                   <a
+                      target="_blank"
                     href={
                       news.news_image_link
                         ? `${api_url}${news.news_image_link}`

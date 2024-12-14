@@ -112,7 +112,7 @@ const AdminManagement = () => {
               <tr key={user.user_id}>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
-                <td>{user.role}</td>
+                <td>{user.role === "superadmin" ? "Super Admin" : user.role==="Admin" ? "Admin" : user.role==="HR" ? "HR" : user.role==="HE" ? "Health Literacy" : "Communication"}</td>
                 <td>
                   <span
                     className={`badge ${

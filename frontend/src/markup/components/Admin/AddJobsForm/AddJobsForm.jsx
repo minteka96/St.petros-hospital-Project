@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jobsservice from "../../../../Services/jobs.service.js";
 import classes from "./AddJobForm.module.css";
+import { useAuth } from "../../../../contexts/AuthContext.jsx";
 
 const AddJobForm = () => {
   const [jobTitle, setJobTitle] = useState("");
@@ -18,7 +19,8 @@ const AddJobForm = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
-
+ const { user } = useAuth();
+ const token = user ? user.token : null;
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -53,7 +55,7 @@ const AddJobForm = () => {
         deadline,
       };
 
-      const response = await jobsservice.createJob(jobData);
+      const response = await jobsservice.createJob(jobData, token);
 
       if (response.error) {
         setError(response.error);
