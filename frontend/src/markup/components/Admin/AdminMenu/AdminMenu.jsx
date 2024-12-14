@@ -84,6 +84,9 @@ function AdminMenu() {
             </Link>
           </>
         )}
+            <Link to="/admin/video" className="list-group-item">
+              Video
+            </Link>
       </div>
     </div>
   );

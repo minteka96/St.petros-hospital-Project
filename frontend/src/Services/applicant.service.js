@@ -91,11 +91,12 @@ const getApplicantById = async (id, token) => {
 };
 
 //function to delete applications by id
-const deleteApplicant = async (id) => {
+const deleteApplicant = async (id, token) => {
   const requestOptions = {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      "x-access-token": token,
     },
   };
 
