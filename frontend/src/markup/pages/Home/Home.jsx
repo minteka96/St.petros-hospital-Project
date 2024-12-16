@@ -69,7 +69,8 @@ const [SubSpecialist, setSubSpecialist] = useState(0);
               <div className="mt-5 pl-5">
                 <div className="play_btn">
                   <Link
-                    to="https://www.youtube.com/watch?v=T8VqfQACMbM&t=511s"
+                    to="/videos"
+                        //  to="https://www.youtube.com/watch?v=T8VqfQACMbM&t=511s"
                     className="overlay-link lightbox-image video-fancybox ripple"
                     target="_blank"
                   >

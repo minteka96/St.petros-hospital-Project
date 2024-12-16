@@ -23,6 +23,10 @@ import { useAuth } from "../../contexts/AuthContext.jsx";
 import AdminManagement from "../pages/Admin/AdminManagement.jsx";
 import AddAdmin from "../pages/Admin/AddAdmin.jsx";
 import JobsListPage from "../components/Admin/JobList/JobList.jsx";
+// video route
+import AddVideoForm from "../components/Admin/AddVideoForm/AddVideoForm";
+import EditVideoForm from "../components/Admin/EditVideoForm/EditVideoForm";
+import VideoList from "../components/Admin/VideoList/VideoList";
 
 const AdminRoute = () => {
 
@@ -142,6 +146,10 @@ const AdminRoute = () => {
               <Route path="/add-job" element={<AddJobForm />} />
               <Route path="/all-job" element={<JobsListPage/>} />
               <Route path="/job/edit/:job_id" element={<EditJobForm />} />
+              // Video routes
+              <Route path="/add-video" element={<AddVideoForm />} />
+              <Route path="/videos" element={<VideoList />} />
+              <Route path="videos/edit/:video_id" element={<EditVideoForm />} />
             </Routes>
           </div>
         </div>

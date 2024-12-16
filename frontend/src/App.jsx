@@ -51,6 +51,11 @@ import News from "../src/markup/pages/News/News.jsx";
 import NewsDetails from "../src/markup/pages/News/NewsDetails.jsx";
 import newsList from "./markup/components/Admin/NewsList/NewsList.jsx";
 
+// ***************************Video Client Side ********************
+import VideoList from "./markup/components/Admin/VideoList/VideoList";
+import VideoDetails from "../src/markup/pages/Videos/VideoDetails";
+
+
 function App() {
   // check if thr route is '/login' or not
   if (window.location.pathname === "/login") {
@@ -122,6 +127,10 @@ function App() {
         <Route path="/tender-form-post" element={<AddTenderForm />} />
         <Route path="/Jobs" element={<Vacancies />} />
         <Route path="/admin/application-form" element={<ApplicationForm />} />
+        {/* *************************video Client Side Start Here***********************  */}
+        <Route path="/videos" element={<VideoList />} />
+        <Route path="/videoDetails/:videoId" element={<VideoDetails />} />
+        {/* **************************Video Client Side End Here********************** */}
 
         <Route path="/admin/*" element={<AdminRoute />} />
       </Routes>

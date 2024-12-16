@@ -84,6 +84,28 @@ function AdminMenu() {
             </Link>
           </>
         )}
+
+        {/* Add Video Management links under Comm roles */}
+        {isComm && (
+          <>
+            {/* Existing Comm role links */}
+            <Link to="/admin/add-news" className="list-group-item">
+              Add News
+            </Link>
+            <Link to="/admin/news" className="list-group-item">
+              List of News
+            </Link>
+            
+            {/* New Video Management links */}
+            <Link to="/admin/add-video" className="list-group-item">
+              Add Video
+            </Link>
+            <Link to="/admin/videos" className="list-group-item">
+              List of Videos
+            </Link>
+          </>
+        )}
+        
       </div>
     </div>
   );
