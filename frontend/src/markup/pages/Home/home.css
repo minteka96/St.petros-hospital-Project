@@ -1,32 +1,3 @@
 .about-area {
     padding: 60px 0;
 }
-
-.statistics {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.stat-item {
-    flex: 1 1 24%; /* Responsive width */
-    text-align: center;
-    margin: 20px 0; /* Spacing between items */
-}
-
-.stat-item h3 {
-    font-size: 2.5rem; /* Adjust size as needed */
-    color: lightseagreen; /* Example color */
-}
-
-.related-post {
-    margin-top: 30px;
-}
-
-.post-item img {
-    width: 100%; /* Responsive image */
-    height: auto;
-}
- .statistics {
-        gap: 10px; /* Reduces the gap between stats for smaller screens */
-    }
