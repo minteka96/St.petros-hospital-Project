@@ -11,34 +11,6 @@ import './Home.css'
 import LatestNews from "../News/LatestNews.jsx";
 
 const Home = () => {
-  const [yearsInService, setYearsInService] = useState(0);
-  const [departments, setDepartments] = useState(0);
-  const [healthProfessionals, setHealthProfessionals] = useState(0);
-  const [Addmintritivestaff, setAddmintritivestaff] = useState(0);
-  const [Specialist, setSpecialist] = useState(0);
-const [SubSpecialist, setSubSpecialist] = useState(0);
-  const countUp = (target, setter, duration) => {
-    let start = 0;
-    const increment = Math.ceil(target / (duration / 100));
-    
-    const interval = setInterval(() => {
-      if (start < target) {
-        start += increment;
-        setter(Math.min(start, target));
-      } else {
-        clearInterval(interval);
-      }
-    }, 100);
-  };
-
-  useEffect(() => {
-    countUp(64, setYearsInService, 2000);
-    countUp(21, setDepartments, 2000);
-    countUp(930, setHealthProfessionals, 2000);
-    countUp(306, setAddmintritivestaff, 2000);
-    countUp(83,setSpecialist, 2000);
-     countUp(8, setSubSpecialist, 2000);
-  }, []);
   return (
     <>
       <div className="wrapper home-default-wrapper">
@@ -674,7 +646,7 @@ const [SubSpecialist, setSubSpecialist] = useState(0);
             </div>
           </section>
 
-          <section
+          {/* <section
             className="team-area team-default-area"
             data-bg-color="#f3f3f3"
             style={{ backgroundColor: "rgb(243, 243, 243)" }}
@@ -753,40 +725,7 @@ const [SubSpecialist, setSubSpecialist] = useState(0);
                 </div>
               </div>
             </div>
-          </section>
-          
-          {/* Statistics Section */}
-          <div className="statistics-section">
-            <h5 className="title">
-              Current Statistics on Staff and Departments
-            </h5>
-            <div className="statistics">
-              <div className="stat-item">
-                <h3 className="count">{yearsInService}</h3>
-                <p>Years in Service</p>
-              </div>
-              <div className="stat-item">
-                <h3 className="count">{departments}</h3>
-                <p>Departments</p>
-              </div>
-              <div className="stat-item">
-                <h3 className="count">{healthProfessionals}</h3>
-                <p>Health Professionals</p>
-              </div>
-              <div className="stat-item">
-                <h3 className="count">{Addmintritivestaff}</h3>
-                <p>Addmintritive staff</p>
-              </div>
-              <div className="stat-item">
-                <h3 className="count">{Specialist}</h3>
-                <p>Specialist</p>
-              </div>
-              <div className="stat-item">
-                <h3 className="count">{SubSpecialist}</h3>
-                <p> Sub Specialist</p>
-              </div>
-            </div>
-          </div>
+          </section> */}
 
           {/* Add the LatestNews component */}
           {/* *******Start */}

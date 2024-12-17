@@ -19,7 +19,6 @@ const AddNewsForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("news_title", newsTitle);
     formData.append("news_detail", newsDetail);
