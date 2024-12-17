@@ -151,11 +151,41 @@ const deleteAllApplicants = async () => {
   }
 };
 
+const deleteApplicantsByVacancyId = async (vacancyId, token) => {
+  const requestOptions = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+  };
+
+  try {
+    const response = await fetch(
+      `${api_url}/api/applicants/${vacancyId}`,
+      requestOptions
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    if (response.status === 200) {
+      return data;
+    }
+    throw new Error(
+      "Failed to fetch applications: " + (data.message || "Unknown error")
+    );    
+  } catch (error) {
+    console.error("Error fetching applications:", error);
+    throw error;    
+  }
+}
 const applicantService = {
   postApplicant,
   getAllApplicants,
   getApplicantById,
   deleteApplicant,
+  deleteApplicantsByVacancyId,
   deleteAllApplicants,
 };
 export default applicantService;
