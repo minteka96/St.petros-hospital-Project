@@ -35,7 +35,7 @@ const NewsDetails = () => {
     <section className={styles["blog-detail-area"]}>
       <div className="container">
         <div className="row">
-          <div className="col-lg-8">
+          <div className="col-lg-12">
             <div className={styles["post-item-detail"]}>
               <div className={styles.thumb}>
                 <img

@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
     `role` VARCHAR(50) NOT NULL,
     `active_status` TINYINT(1) NOT NULL DEFAULT 1,
     `added_date` DATETIME DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+) ENGINE=InnoDB;
 
 -- Insert default admin user
 INSERT INTO `Users` (`username`, `email`, `password_hashed`, `role`)
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `News` (
     `news_image_link` VARCHAR(255),
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+) ENGINE=InnoDB;
 
 -- Create Health Tips Table
 CREATE TABLE IF NOT EXISTS `Health_Tips` (
@@ -40,7 +40,9 @@ CREATE TABLE IF NOT EXISTS `Health_Tips` (
     `health_tip_image` VARCHAR(255),
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+) ENGINE=InnoDB;
+
+
 
 -- Create Vacancy Table
 CREATE TABLE IF NOT EXISTS `Vacancy` (
@@ -57,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `Vacancy` (
     `deadline` DATE NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+) ENGINE=InnoDB;
 
 -- Create Applicant Table
 CREATE TABLE IF NOT EXISTS `Applicant` ( 
@@ -74,15 +76,15 @@ CREATE TABLE IF NOT EXISTS `Applicant` (
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
     FOREIGN KEY (vacancy_id) REFERENCES Vacancy(vacancy_id)
-) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+) ENGINE=InnoDB;
 
 -- Create the video_embeds Table
 CREATE TABLE IF NOT EXISTS `video_embeds` (
     `video_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    -- `title` VARCHAR(255) NOT NULL,         
-    -- `description` TEXT,                    
+    `title` VARCHAR(255) NOT NULL,         
+    `description` TEXT,                    
     `video_link` VARCHAR(255) NOT NULL,   
-    -- `thumbnail_link` VARCHAR(255),      
+    `thumbnail_link` VARCHAR(255),      
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
-) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+) ENGINE=InnoDB;
