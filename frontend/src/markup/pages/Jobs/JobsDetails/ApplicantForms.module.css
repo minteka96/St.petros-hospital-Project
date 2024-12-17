@@ -1,0 +1,30 @@
+.formContainer {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.formBox {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.cvForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fileUploadBox {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.fileUploadBox:hover {
+  border-color: #007bff;
+}
+

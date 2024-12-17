@@ -1,88 +1,214 @@
-/* eslint-disable no-unused-vars */
-import React from "react";
-import "./JobsDetails/ApplicationForm.css";
+import React, { useState } from "react";
+import { Form, Button } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
+import classes from "../ApplicantForms.module.css"; // Import module CSS
+import { useAuth } from "../../../contexts/AuthContext";
+import applicantService from "../../../Services/applicant.service";
 
-const VacancyApplicationForm = () => {
+const ApplicantForms = () => {
+  const { user } = useAuth();
+  const token = user ? user.token : null;
+  const location = useLocation();
+
+  // Extract query parameters
+  const queryParams = new URLSearchParams(location.search);
+  const vacancyId = queryParams.get("vacancy_id");
+  const title = queryParams.get("title");
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    vacancy_id: vacancyId,
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone_number: "",
+    position: title,
+    additionalInfo: "",
+    cvFile: null,
+    testimonials: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: files[0],
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Create a new FormData instance
+    const formDataToSend = new FormData();
+
+    formDataToSend.append("vacancy_id", formData.vacancy_id);
+    formDataToSend.append("first_name", formData.firstName);
+    formDataToSend.append("last_name", formData.lastName);
+    formDataToSend.append("email_address", formData.email);
+    formDataToSend.append("phone_number", formData.phone_number);
+    formDataToSend.append("position_applied_for", formData.position);
+    formDataToSend.append("additional_information", formData.additionalInfo);
+    if (formData.cvFile) formDataToSend.append("cv_file", formData.cvFile);
+    if (formData.testimonials)
+      formDataToSend.append("testimonials", formData.testimonials);
+
+    try {
+      // Use your applicantService to send the data
+      const response = await applicantService.postApplicant(
+        formDataToSend,
+        token
+      );
+      if (response.status === 201) {
+        alert("CV submitted successfully!");
+        // Clear form fields after successful submission
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone_number: "",
+          position: "",
+          additionalInfo: "",
+          cvFile: null,
+          testimonials: "",
+        });
+        navigate("/");
+      } else {
+        alert("Failed to submit CV. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting CV:", error);
+    }
+  };
+
   return (
-    <div className="form-container">
-      <h2>Application Form - Professional Nurse</h2>
-      <p>
-        Please submit your CVs and credentials in person to the Hospital, the
-        hospital relocated to its current site, situated above the former Amha
-        Desta school, below Kuskuam church.. OR attach your CV and credentials
-        on our website.
-      </p>
+    <div className={`container my-5 ${classes.formContainer}`}>
+      <div className={classes.formBox}>
+        <h2 className="text-center">{title} Position CV Submission</h2>
+        <p className="text-center">
+          Do you want to work with us? Please fill in your details below.
+        </p>
+        <Form onSubmit={handleSubmit} className={classes.cvForm}>
+          <Form.Group className="mb-3" controlId="formFirstName">
+            <Form.Label>
+              First Name <span className="text-danger">*</span>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter your first name"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
 
-      <form className="application-form">
-        <div className="form-group">
-          <label>Your Name</label>
-          <input type="text" placeholder="Your Name" />
-        </div>
+          <Form.Group className="mb-3" controlId="formLastName">
+            <Form.Label>
+              Last Name <span className="text-danger">*</span>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter your last name"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
 
-        <div className="form-group">
-          <label>Fathers Name</label>
-          <input type="text" placeholder="Father Name" />
-        </div>
+          <Form.Group className="mb-3" controlId="formEmail">
+            <Form.Label>
+              Email Address <span className="text-danger">*</span>
+            </Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter your email address"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
 
-        <div className="form-group">
-          <label>Marital Status</label>
-          <select>
-            <option value="single">Single</option>
-            <option value="married">Married</option>
-          </select>
-        </div>
+          <Form.Group className="mb-3" controlId="formEmail">
+            <Form.Label>
+              Phone <span className="text-danger">*</span>
+            </Form.Label>
+            <Form.Control
+              type="tel"
+              placeholder="Enter your phone number"
+              name="phone_number"
+              value={formData.phone_number}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
 
-        <div className="form-group">
-          <label>Your Phone</label>
-          <input type="tel" placeholder="(09) 00000000" />
-        </div>
+          <Form.Group className="mb-3" controlId="formPosition">
+            <Form.Label>Position Applying For</Form.Label>
+            <Form.Control
+              type="text"
+              disabled
+              name="position"
+              value={formData.position}
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-        <div className="form-group">
-          <label>Alternative Phone</label>
-          <input type="tel" placeholder="(09) 00000000" />
-        </div>
+          <Form.Group className="mb-3" controlId="formAdditionalInfo">
+            <Form.Label>
+              Additional Information <span className="text-danger">*</span>
+            </Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="Enter additional information"
+              name="additionalInfo"
+              value={formData.additionalInfo}
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-        <div className="form-group">
-          <label>Birth Date</label>
-          <input type="date" placeholder="mm/dd/yyyy" />
-        </div>
+          <Form.Group className="mb-3" controlId="formCVFile">
+            <Form.Label>
+              Upload your CV Here <span className="text-danger">*</span>
+            </Form.Label>
+            <div className={classes.fileUploadBox}>
+              <Form.Control
+                type="file"
+                name="cvFile"
+                onChange={handleFileChange}
+                required
+              />
+            </div>
+          </Form.Group>
 
-        <div className="form-group">
-          <label>Email</label>
-          <input type="email" placeholder="Email" />
-        </div>
+          <Form.Group className="mb-3" controlId="formTestimonials">
+            <Form.Label>Other Testimonials (e.g. Certificates)</Form.Label>
+            <div className={classes.fileUploadBox}>
+              <Form.Control
+                type="file"
+                name="testimonials"
+                onChange={handleFileChange}
+              />
+            </div>
+          </Form.Group>
 
-        <div className="form-group">
-          <label>Your Photo</label>
-          <input type="file" />
-        </div>
-
-        <div className="form-group">
-          <label>Your Address</label>
-          <textarea placeholder="Your Address"></textarea>
-        </div>
-
-        <div className="form-group">
-          <label>Education Background</label>
-          <textarea placeholder="Education Background"></textarea>
-        </div>
-
-        <div className="form-group">
-          <label>Working Experience</label>
-          <textarea placeholder="Working Experience"></textarea>
-        </div>
-
-        <div className="form-group">
-          <label>Your CV</label>
-          <input type="file" />
-        </div>
-
-        <button type="submit" className="submit-button">
-          Submit Application
-        </button>
-      </form>
+          <Button variant="success" type="submit" className="w-100">
+            Submit CV
+          </Button>
+        </Form>
+      </div>
     </div>
   );
 };
 
-export default VacancyApplicationForm;
+export default ApplicantForms;
