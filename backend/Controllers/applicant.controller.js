@@ -4,6 +4,7 @@ const applicantService = require("../Services/applicant.service");
 async function createApplicant(req, res) {
   try {
     const {
+      vacancy_id,
       first_name,
       last_name,
       email_address,
@@ -14,11 +15,11 @@ async function createApplicant(req, res) {
     // Validate required fields
     if (
       !first_name ||
+      !vacancy_id ||
       !last_name ||
       !email_address ||
       !phone_number ||
-      !position_applied_for ||
-      !additional_information
+      !position_applied_for
     ) {
       return res.status(400).json({ error: "All fields are required" });
     }
@@ -30,7 +31,6 @@ async function createApplicant(req, res) {
     const other_testimonials = req.files.testimonials
       ? `/uploads/testimonials/${req.files.testimonials[0].filename}`
       : "";
-      const vacancy_id="4"
 
     // Prepare applicant data
     const applicantData = {
@@ -79,6 +79,22 @@ async function getApplicantById(req, res) {
   }
 }
 
+//controller to delete an applicant by vacancy_id
+async function deleteApplicantByVacancyId(req, res) {
+  try {
+    const deletedApplicant = await applicantService.deleteApplicantByVacancyId(
+      req.params.vacancy_id
+    );
+    if (!deletedApplicant) {
+      return res.status(404).json({ error: "Applicant not found" });
+    }
+    res.status(200).json({ message: "Applicant deleted successfully" });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
 // Controller to delete an applicant by ID
 async function deleteApplicant(req, res) {
   try {
@@ -112,6 +128,7 @@ module.exports = {
   getAllApplicants,
   getApplicantById,
   deleteApplicant,
+  deleteApplicantByVacancyId,
   deleteAllApplicants,
   
 };

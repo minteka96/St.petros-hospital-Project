@@ -61,6 +61,14 @@ router.delete(
   ApplicantController.deleteApplicant
 );
 router.delete(
+  "/api/applicants/:id",
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.checkRoles(["superadmin", "Admin", "HR"]),
+  ],
+  ApplicantController.deleteApplicant
+);
+router.delete(
   "/api/applicants",
   [
     authMiddleware.verifyToken,

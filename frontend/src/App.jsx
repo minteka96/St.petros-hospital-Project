@@ -50,6 +50,7 @@ import Login from "./markup/pages/Login/Login.jsx";
 import News from "../src/markup/pages/News/News.jsx";
 import NewsDetails from "../src/markup/pages/News/NewsDetails.jsx";
 import newsList from "./markup/components/Admin/NewsList/NewsList.jsx";
+import ApplicantForms from "./markup/pages/Jobs/ApplicationForm.jsx";
 
 function App() {
   // check if thr route is '/login' or not
@@ -108,6 +109,7 @@ function App() {
           <Route path="imaging" element={<Imaging />} />
         </Route>
 
+        <Route path="/application/form" element={<ApplicantForms />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/qulity&research" element={<QulityResearch />} />

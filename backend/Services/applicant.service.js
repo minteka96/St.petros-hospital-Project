@@ -66,49 +66,30 @@ async function getApplicantById(applicantId) {
   }
 }
 
-// update applicant by id
-// async function updateApplicant(applicantId, formData) {
-//   const sql = `UPDATE Applicant SET first_name = ?, last_name = ?, email_address = ?, position_applied_for = ?, additional_information = ?, cv_file_path = ?, other_testimonials = ? WHERE id = ?`;
-//   const {
-//     first_name,
-//     last_name,
-//     email_address,
-//     position_applied_for,
-//     additional_information,
-//     cv_file_path,
-//     other_testimonials,
-//   } = formData;
-
-//   const connection = await conn.pool.getConnection();
-//   try {
-//     await connection.beginTransaction();
-//     const [result] = await connection.query(sql, [
-//       first_name,
-//       last_name,
-//       email_address,
-//       position_applied_for,
-//       additional_information,
-//       cv_file_path,
-//       other_testimonials,
-//       applicantId,
-//     ]);
-//     await connection.commit();
-//     return result;
-//   } catch (error) {
-//     await connection.rollback();
-//     throw error;
-//   } finally {
-//     await connection.release();
-//   }
-// }
-
 // delete applicant by id
 async function deleteApplicant(applicantId) {
-  const sql = `DELETE FROM Applicant WHERE id = ?`;
+  const sql = `DELETE FROM Applicant WHERE vacancy_id = ?`;
   const connection = await conn.pool.getConnection();
   try {
     await connection.beginTransaction();
     const [result] = await connection.query(sql, [applicantId]);
+    await connection.commit();
+    return result.affectedRows > 0;
+  } catch (error) {
+    await connection.rollback();
+    throw error;
+  } finally {
+    await connection.release();
+  }
+}
+
+//delete applicant by vacancy_id
+async function deleteApplicantByVacancyId(vacancyId) {
+  const sql = `DELETE FROM Applicant WHERE vacancy_id = ?`;
+  const connection = await conn.pool.getConnection();
+  try {
+    await connection.beginTransaction();
+    const [result] = await connection.query(sql, [vacancyId]);
     await connection.commit();
     return result.affectedRows > 0;
   } catch (error) {
@@ -141,5 +122,6 @@ module.exports = {
   getAllApplicants,
   getApplicantById,
   deleteApplicant,
+  deleteApplicantByVacancyId,
   deleteAllApplicants,
 };

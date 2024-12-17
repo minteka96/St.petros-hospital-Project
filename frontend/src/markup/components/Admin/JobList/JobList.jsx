@@ -64,7 +64,11 @@ const JobsListPage = () => {
             {jobs.map((job) => (
               <div>
                 <li key={job.id} className={classes.jobItem}>
-                  <h3>{job.job_title}</h3>
+                  <h3>
+                    {" "}
+                    <strong>Job Title:</strong>
+                    {job.job_title}
+                  </h3>
                   <p>
                     <strong>Description:</strong> {job.job_description}
                   </p>
@@ -87,18 +91,18 @@ const JobsListPage = () => {
                     <strong>Address:</strong> {job.address}
                   </p>
                   <p>
-                    <strong>Application Link:</strong> 
+                    <strong>Application Link:</strong>
                     {job.application_link ? (
-                    <a
-                      href={job.application_link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      attached
-                    </a>
-                    ):(
+                      <a
+                        href={job.application_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        attached
+                      </a>
+                    ) : (
                       <p>Not Available</p>
-                    )}  
+                    )}
                   </p>
                   <p>
                     <strong>Deadline:</strong> {formatDate(job.deadline)}

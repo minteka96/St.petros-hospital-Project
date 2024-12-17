@@ -9,60 +9,150 @@ const ApplicantsTable = () => {
   const navigate = useNavigate();
   const [applicants, setApplicants] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [uniquePosition, setUniquePosition] = useState([]);
+  const [filteredApplicants, setFilteredApplicants] = useState([]);
+  const[refresh, setRefresh] = useState(false);
 
+  // Fetch all applicants
   useEffect(() => {
     if (!token) {
       navigate("/login");
+      return;
     }
+
     const fetchApplicants = async () => {
       try {
         const response = await applicantService.getAllApplicants(token);
         setApplicants(response.data);
+        setFilteredApplicants(response.data);
+
+        const uniquePositions = response.data.map(
+          (applicant) => applicant?.position_applied_for
+        );
+        setUniquePosition([...new Set(uniquePositions)]);
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching applicants:", error);
       }
     };
-    fetchApplicants();
-  }, [token]);
 
+    fetchApplicants();
+  }, [token, navigate, refresh]);
+
+  // Decide deletion option
+  const deleteOption = (option) => {
+    if (option.length === applicants.length) {
+      deleteAll();
+    } else {
+      deleteApplicantsByVacancyId(option[0].vacancy_id);
+    }
+  };
+
+  // Delete all applicants
   const deleteAll = async () => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete all applicants?"
     );
     if (confirmDelete) {
+      setLoading(true);
       try {
-        await applicantService.deleteAllApplicants();
-        const response = await applicantService.getAllApplicants();
-        setLoading(false);
+        await applicantService.deleteAllApplicants(token);
+        const response = await applicantService.getAllApplicants(token);
         setApplicants(response.data);
+        setFilteredApplicants(response.data);
+        setRefresh(!refresh);
+
       } catch (error) {
-        console.error(error);
+        console.error("Error deleting all applicants:", error);
+      } finally {
+        setLoading(false);
       }
     }
   };
 
+  // Delete applicants by vacancy ID
+  const deleteApplicantsByVacancyId = async (vacancyId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete applicants for this position?"
+    );
+    if (confirmDelete) {
+      setLoading(true);
+      try {
+        await applicantService.deleteApplicantsByVacancyId(vacancyId, token);
+        const response = await applicantService.getAllApplicants(token);
+        setApplicants(response.data);
+        setFilteredApplicants(response.data);
+        setRefresh(!refresh);
+      } catch (error) {
+        console.error("Error deleting applicants by vacancy ID:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  // Filter applicants by position
+  const filterApplicants = (position) => {
+    const filtered = applicants.filter(
+      (applicant) => applicant.position_applied_for === position
+    );
+    setFilteredApplicants(filtered);
+  };
+
+  // Print functionality
   const handlePrint = () => {
     const printContent = document.getElementById("printable-area").innerHTML;
     const originalContent = document.body.innerHTML;
     document.body.innerHTML = printContent;
     window.print();
     document.body.innerHTML = originalContent;
-    window.location.reload(); // Reload to reset the original view
+    window.location.reload(); // Reset view after print
   };
 
   return (
     <div className="p-4">
       <h2 className="text-gray">Applicants</h2>
-      <div className="d-flex justify-content-end mb-3">
+      <div className="d-flex justify-content-between mb-3">
+        <div>
+          <button
+            className="btn me-2"
+            style={{
+              width: "150px",
+              color: "black",
+              fontSize: "14px",
+              backgroundColor: "#DFEEED",
+              border: "1px solid #2A8C84",
+            }}
+            onClick={() => setFilteredApplicants(applicants)}
+          >
+            All Applicants
+          </button>
+          {uniquePosition?.length > 1 &&
+            uniquePosition.map((position) => (
+              <button
+                key={position}
+                className="btn me-2"
+                style={{
+                  width: "150px",
+                  color: "black",
+                  fontSize: "14px",
+                  backgroundColor: "#DFEEED",
+                  border: "1px solid #2A8C84",
+                }}
+                onClick={() => filterApplicants(position)}
+              >
+                {position}
+              </button>
+            ))}
+        </div>
         <button className="btn btn-primary" onClick={handlePrint}>
           Print Report
         </button>
       </div>
       <div id="printable-area">
-        <h3 className="print-title"></h3>
         <table className="table table-bordered table-hover">
           <thead className="table-light">
             <tr>
+              <th>No.</th>
               <th>Name</th>
               <th>Email</th>
               <th>Phone Number</th>
@@ -73,8 +163,9 @@ const ApplicantsTable = () => {
             </tr>
           </thead>
           <tbody>
-            {applicants.map((applicant) => (
+            {filteredApplicants.map((applicant, index) => (
               <tr key={applicant.id}>
+                <td>{index + 1}</td>
                 <td>
                   {applicant.first_name} {applicant.last_name}
                 </td>
@@ -105,17 +196,15 @@ const ApplicantsTable = () => {
                 </td>
               </tr>
             ))}
-            {applicants.length === 0 && (
-              <tr>
-                <td colSpan="7">No Applicants Found</td>
-              </tr>
-            )}
           </tbody>
         </table>
       </div>
-      {applicants.length !== 0 && (
-        <button onClick={deleteAll} className="btn btn-danger mt-3">
-          {loading ? "Loading.." : "Delete All Applicants"}
+      {filteredApplicants.length > 0 && (
+        <button
+          onClick={() => deleteOption(filteredApplicants)}
+          className="btn btn-danger mt-3"
+        >
+          {loading ? "Loading..." : "Delete Selected Applicants"}
         </button>
       )}
     </div>
