@@ -3,8 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./markup/components/Header/Header";
 import Footer from "./markup/components/Footer/Footer";
 import Home from "./markup/pages/Home/Home";
+// ***************************servicesdetail Client Side ********************
 import Services from "./markup/pages/servicepage/Services";
-import HealthTip from "./markup/components/Header/HealthTip.jsx";
 import ServiceDetail from "./markup/pages/serviceDetaile/ServiceDetail.jsx";
 import Cardiology from "./markup/pages/serviceDetaile/cardac/Cardiology";
 import MCH from "./markup/pages/serviceDetaile/mch/MCH";
@@ -31,6 +31,7 @@ import About from "./markup/pages/AboutPage/About";
 import Contact from "./markup/pages/Contact/Contact.jsx";
 import Cpd from "./markup/pages/CPD/cpd.jsx";
 import "./style/css/style.css";
+
 import AddTenderForm from "./markup/components/Admin/AddTenderForm/AddTenderForm.jsx";
 import TenderSubmitForm from "./markup/components/Admin/AddTenderForm/TenderSubmitForm.jsx";
 import TenderList from "./markup/components/Admin/AddTenderForm/TenderLists.jsx";
@@ -49,6 +50,10 @@ import News from "../src/markup/pages/News/News.jsx";
 import NewsDetails from "../src/markup/pages/News/NewsDetails.jsx";
 import newsList from "./markup/components/Admin/NewsList/NewsList.jsx";
 
+// ***************************healthtip Client Side ********************
+import HealthTip from "./markup/pages/healthtips/HealthTip.jsx";
+import HealthTipDetail from "./markup/pages/healthtips/healthtipdetail/healthtipdetail.jsx";
+import HealthTipList from "./markup/components/Admin/HealthTipList/HealthTipList.jsx";
 function App() {
   // check if thr route is '/login' or not
   if (window.location.pathname === "/login") {
@@ -70,6 +75,13 @@ function App() {
           path="/newsDetails/:newsId"
           element={<NewsDetails newsList={newsList} />}
         />
+        <Route path="/healthtip" element={<HealthTip />} />
+        {/* <Route path="/newsDetails" element={<NewsDetails />} /> */}
+        <Route
+          path="/healthTipDetails/:healthTipId"
+          element={<HealthTipDetail HealthTipList={HealthTipList} />}
+        />
+ 
         {/* **************************News Client Side End Here********************** */}
         <Route path="/login" element={<Login />} />
         <Route path="/test" element={<ApplicationForms />} />

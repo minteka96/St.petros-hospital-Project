@@ -79,10 +79,10 @@ CREATE TABLE IF NOT EXISTS `Applicant` (
 -- Create the video_embeds Table
 CREATE TABLE IF NOT EXISTS `video_embeds` (
     `video_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `title` VARCHAR(255) NOT NULL,         
-    `description` TEXT,                    
+    -- `title` VARCHAR(255) NOT NULL,         
+    -- `description` TEXT,                    
     `video_link` VARCHAR(255) NOT NULL,   
-    `thumbnail_link` VARCHAR(255),      
+    -- `thumbnail_link` VARCHAR(255),      
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

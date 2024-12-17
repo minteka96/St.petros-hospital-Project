@@ -33,7 +33,7 @@ function ApplicantDetail() {
     if (confirmDelete) {
       try {
         setLoading(true);
-        await applicantService.deleteApplicant(id);
+        await applicantService.deleteApplicant(id, token);
         navigate("/admin/applicant"); // Redirect to the applicants page after deletion
       } catch (error) {
         console.error("Error deleting applicant:", error);
