@@ -1,41 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import newsService from "../../../Services/news.service";
-import styles from "./News.module.css";
+import styles from "./News.module.css"; // Import the CSS module
 
-const News = () => {
-  const [newsList, setNewsList] = useState([]);
+const LatestNews = () => {
+  const [latestNews, setLatestNews] = useState([]);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchNews = async () => {
+    const fetchLatestNews = async () => {
       try {
         const response = await newsService.getAllNews();
-        const newsData = (response.data || []).map((news) => ({
-          ...news,
-          category: "News", // Default category
-          categoryLink: "/category/news", // Default category link
-          authorLink: `/author/${
-            news.author?.toLowerCase().replace(/\s+/g, "-") || "admin"
-          }`, // Dynamic author link
-          author: news.author || "Admin (ቅ.ጴ.ስ.ሆ)", // Default author
-        }));
-        setNewsList(newsData);
+        // Take only the latest 4 news items and add dynamic properties
+        const newsData = (response.data || [])
+          .slice(0, 4) // Take only the latest 4
+          .map((news) => ({
+            ...news,
+            category: "News", // Default category
+            categoryLink: "/category/news", // Default category link
+            authorLink: `/author/${
+              news.author?.toLowerCase().replace(/\s+/g, "-") || "admin"
+            }`, // Dynamic author link
+            author: news.author || "Admin (ቅ.ጴ.ስ.ሆ)", // Default author
+          }));
+        setLatestNews(newsData);
       } catch (err) {
-        setError("Failed to fetch news data!");
+        setError("Failed to fetch latest news!");
       }
     };
 
-    fetchNews();
+    fetchLatestNews();
   }, []);
 
-  const handleImageClick = (newsId) => {
-    navigate(`/newsDetails/${newsId}`, { state: { newsList } });
-  };
-
-  const handleTitleClick = (newsId) => {
-    navigate(`/newsDetails/${newsId}`, { state: { newsList } });
+  const handleNewsClick = (newsId) => {
+    // Pass the latestNews list as state when navigating
+    navigate(`/newsDetails/${newsId}`, { state: { newsList: latestNews } });
   };
 
   const formatDate = (dateString) => {
@@ -46,17 +46,18 @@ const News = () => {
   return (
     <section className={styles.blogArea}>
       <div className="container">
-        <h2 className={styles.title}>News</h2>
+        <h2 className={styles.title}>Latest News</h2>
         {error && <p className={styles.errorMessage}>{error}</p>}
         <div className={styles.row}>
-          {newsList.length === 0 ? (
+          {latestNews.length === 0 ? (
             <p>No news available!</p>
           ) : (
-            newsList.map((news) => (
+            latestNews.map((news) => (
               <div key={news.news_id} className={styles.postItem}>
+                {/* Image Clickable */}
                 <div
                   className={styles.imageContainer}
-                  onClick={() => handleImageClick(news.news_id)}
+                  onClick={() => handleNewsClick(news.news_id)}
                 >
                   <img
                     src={`${import.meta.env.VITE_API_URL}${
@@ -67,30 +68,30 @@ const News = () => {
                     title={`http://localhost:5173/newsDetails/${news.news_id}`} // Display URL on hover
                   />
                 </div>
-                
                 <div className={styles.content}>
+                  {/* Category Link */}
                   <a className={styles.category} href={news.categoryLink}>
                     {news.category}
                   </a>
-                  
-                    <h2 className={styles.title}>
-                      <a
-                        href={`/newsDetails/${news.news_id}`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleTitleClick(news.news_id);
-                        }}
-                      >
-                        {news.news_title}
-                      </a>
-                    </h2>
-
+                  {/* Title Clickable */}
+                  <h2 className={styles.title}>
+                    <a
+                      href={`/newsDetails/${news.news_id}`}
+                      onClick={(e) => {
+                        e.preventDefault(); // Prevent default anchor link behavior
+                        handleNewsClick(news.news_id); // Navigate programmatically
+                      }}
+                    >
+                      {news.news_title}
+                    </a>
+                  </h2>
                   <div>
                     <p className={styles.description}>
-                      {news.news_description}
+                      {news.news_description.length > 100
+                        ? `${news.news_description.substring(0, 100)}...`
+                        : news.news_description}
                     </p>
                   </div>
-
                   <div className={styles.meta}>
                     {formatDate(news.created_at)} by{" "}
                     <a className={styles.author} href={news.authorLink}>
@@ -107,4 +108,4 @@ const News = () => {
   );
 };
 
-export default News;
+export default LatestNews;

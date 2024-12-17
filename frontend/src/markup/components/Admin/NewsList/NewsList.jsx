@@ -48,7 +48,7 @@ const NewsList = () => {
   };
 
   // Helper to truncate long text
-  const truncateText = (text, maxLength = 100) => {
+  const truncateText = (text, maxLength = 15) => {
     if (!text) return "";
     return text.length > maxLength
       ? `${text.substring(0, maxLength)}...`
