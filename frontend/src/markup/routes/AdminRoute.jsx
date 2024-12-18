@@ -6,7 +6,7 @@ import ApplicantDetails from "../components/Admin/Applicant/ApplicantDetail.jsx"
 import AdminMenu from "../components/Admin/AdminMenu/AdminMenu.jsx";
 import logo from "../../assets/img/logo copy.png";
 import AdminDashbord from "../components/Admin/AdminDashbord/AdminDashbord.jsx";
-
+import VideoEmbeds from '../components/Admin/VideoEmbeds/videos.jsx';
 /* ************ News Components Start Here about news ********************  */
 import AddNews from "../components/Admin/AddNewsForm/AddNewsForm.jsx";
 import EditNews from "../components/Admin/NewsEditForm/NewsEditForm.jsx";
@@ -124,6 +124,8 @@ const AdminRoute = () => {
         >
           <div className="m-3 normalBg">
             <Routes>
+              <Route path="/video" element={<VideoEmbeds />} />
+
               <Route path="/" element={<AdminDashbord />} />
               <Route path="/admins" element={<AdminManagement />} />
               <Route path="/new" element={<AddAdmin />} />
@@ -140,7 +142,7 @@ const AdminRoute = () => {
                 element={<EditHealthTip />}
               />
               <Route path="/add-job" element={<AddJobForm />} />
-              <Route path="/all-job" element={<JobsListPage/>} />
+              <Route path="/all-job" element={<JobsListPage />} />
               <Route path="/job/edit/:job_id" element={<EditJobForm />} />
             </Routes>
           </div>
