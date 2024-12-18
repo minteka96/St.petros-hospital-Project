@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+// import { useNavigate, useParams } from "react-router-dom";
 import videoService from "../../../../Services/videos.service.js"; // Adjust path if necessary
 import { useAuth } from "../../../../contexts/AuthContext.jsx";
 import classes from "./EditDeleteVideoForm.module.css";
@@ -7,14 +7,13 @@ import classes from "./EditDeleteVideoForm.module.css";
 const EditDeleteVideoForm = () => {
   const { user } = useAuth();
   const token = user ? user.token : null; // Token from user context
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [videoId, setvideoId] = useState("");
   const [videoLink, setVideoLink] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
-  // console.log(videoId,title,videoLink);
   
   useEffect(() => {
     const fetchVideo = async () => {
@@ -67,14 +66,15 @@ const EditDeleteVideoForm = () => {
     try {
       const response = await videoService.updateVideoEmbed(
         updatedData,
+
         // videoId
         // { title, video_link: videoLink },
-        // token
+        token
       );
       if (response.status === "success") {
         setSuccess("Video updated successfully!");
         setError("");
-        setTimeout(() => navigate("/admin/videos"), 2000);
+        setTimeout(() => setSuccess(""), 2000);
       } else {
         setError(response.message || "Failed to update video.");
       }
@@ -86,26 +86,26 @@ const EditDeleteVideoForm = () => {
     }
   };
 
-  const handleDelete = async () => {
-    if (!window.confirm("Are you sure you want to delete this video?")) return;
+  // const handleDelete = async () => {
+  //   if (!window.confirm("Are you sure you want to delete this video?")) return;
 
-    setLoading(true);
-    try {
-      const response = await videoService.deleteVideoEmbed(id, token);
-      if (response.status === "success") {
-        setSuccess("Video deleted successfully!");
-        setError("");
-        setTimeout(() => navigate("/admin/videos"), 2000);
-      } else {
-        setError(response.message || "Failed to delete video.");
-      }
-    } catch (err) {
-      console.error("Error deleting video:", err);
-      setError("An error occurred while deleting the video.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  //   setLoading(true);
+  //   try {
+  //     const response = await videoService.deleteVideoEmbed(id, token);
+  //     if (response.status === "success") {
+  //       setSuccess("Video deleted successfully!");
+  //       setError("");
+  //       setTimeout(() => navigate("/admin/videos"), 2000);
+  //     } else {
+  //       setError(response.message || "Failed to delete video.");
+  //     }
+  //   } catch (err) {
+  //     console.error("Error deleting video:", err);
+  //     setError("An error occurred while deleting the video.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <form onSubmit={handleEdit} className={classes.formContainer}>
@@ -141,14 +141,14 @@ const EditDeleteVideoForm = () => {
         >
           {loading ? "Updating..." : "Update Video"}
         </button>
-        <button
+        {/* <button
           type="button"
           className={classes.deleteButton}
           onClick={handleDelete}
           disabled={loading}
         >
           {loading ? "Deleting..." : "Delete Video"}
-        </button>
+        </button> */}
       </div>
     </form>
   );

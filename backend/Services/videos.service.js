@@ -1,28 +1,28 @@
 const db = require("../Config/db.config");
 
 // Function to create a video embed entry in the database
-const createVideoEmbed = async (data) => {
-  const { title, videoLink } = data;
+// const createVideoEmbed = async (data) => {
+//   const { title, videoLink } = data;
 
-  try {
-    // Insert query with placeholders for parameters
-    const result = await db.query(
-      `INSERT INTO video_embeds (title, video_link)
-      VALUES (?, ?)`,
-      [title, videoLink]
-    );
+//   try {
+//     // Insert query with placeholders for parameters
+//     const result = await db.query(
+//       `INSERT INTO video_embeds (title, video_link)
+//       VALUES (?, ?)`,
+//       [title, videoLink]
+//     );
 
-    // Return the created video embed details including the generated ID
-    return {
-      id: result.insertId,
-      title,
-      videoLink,
-    };
-  } catch (err) {
-    console.error("Error creating video embed:", err);
-    throw new Error("Error creating video embed: " + err.message);
-  }
-};
+//     // Return the created video embed details including the generated ID
+//     return {
+//       id: result.insertId,
+//       title,
+//       videoLink,
+//     };
+//   } catch (err) {
+//     console.error("Error creating video embed:", err);
+//     throw new Error("Error creating video embed: " + err.message);
+//   }
+// };
 
 // Function to fetch a single video embed by ID
 const getVideoById = async (videoId) => {
@@ -83,36 +83,36 @@ const updateVideoEmbed = async (videoId, data) => {
 };
 
 // Function to delete a video embed by ID
-const deleteVideoEmbed = async (videoId) => {
-  try {
-    // Validate videoId type before proceeding
-    if (isNaN(videoId)) {
-      throw new Error("Invalid video ID format.");
-    }
+// const deleteVideoEmbed = async (videoId) => {
+//   try {
+//     // Validate videoId type before proceeding
+//     if (isNaN(videoId)) {
+//       throw new Error("Invalid video ID format.");
+//     }
 
-    const result = await db.query(
-      `DELETE FROM video_embeds WHERE video_id = ?`,
-      [videoId]
-    );
+//     const result = await db.query(
+//       `DELETE FROM video_embeds WHERE video_id = ?`,
+//       [videoId]
+//     );
 
-    // Check if any rows were deleted
-    if (result.affectedRows === 0) {
-      return false; // Return false if no video was deleted
-    }
+//     // Check if any rows were deleted
+//     if (result.affectedRows === 0) {
+//       return false; // Return false if no video was deleted
+//     }
 
-    // Return true if the video embed was deleted successfully
-    return true;
-  } catch (err) {
-    console.error("Error deleting video embed:", err);
-    throw new Error("Error deleting video embed: " + err.message);
-  }
-};
+//     // Return true if the video embed was deleted successfully
+//     return true;
+//   } catch (err) {
+//     console.error("Error deleting video embed:", err);
+//     throw new Error("Error deleting video embed: " + err.message);
+//   }
+// };
 
 // Export all service functions
 module.exports = {
-  createVideoEmbed,
+  // createVideoEmbed,
   getVideoById,
   getAllVideos,
   updateVideoEmbed,
-  deleteVideoEmbed,
+  // deleteVideoEmbed,
 };

@@ -9,8 +9,30 @@ import React, { useEffect, useState } from "react";
 import { Link, Routes,Route } from "react-router-dom";
 import './Home.css'
 import LatestNews from "../News/LatestNews.jsx";
+import videoService from "../../../Services/videos.service.js";
 
 const Home = () => {
+  const [title, setTitle] = useState("");
+  const [videoLink, setVideoLink] = useState("");
+  
+    console.log("title", title);
+  useEffect(() => {
+    const fetchVideo = async () => {
+      try {
+        const response = await videoService.getAllVideos();
+        console.log("response", response);
+        if (response) {
+          setTitle(response.title);
+          setVideoLink(response.video_link);
+        } 
+      } catch (err) {
+        console.error("Error fetching video:", err);
+      } 
+    };
+
+    fetchVideo();
+  }, []);
+  
   return (
     <>
       <div className="wrapper home-default-wrapper">
@@ -34,23 +56,23 @@ const Home = () => {
                       </div>
                     </div>
                     <div className="mt-5 pl-5">
-                      <div className="play_btn">
-                        <Link
-                          to="https://www.youtube.com/watch?v=T8VqfQACMbM&t=511s"
-                          className="overlay-link lightbox-image video-fancybox ripple"
-                          target="_blank"
-                        >
-                          <div className="play-icon">
-                            <div className="play-button">
-                              <div className="triangle"></div>
+                      {title && title !== "stop" && (
+                        <div className="play_btn">
+                          <Link
+                            to={videoLink}
+                            className="overlay-link lightbox-image video-fancybox ripple"
+                            target="_blank"
+                          >
+                            <div className="play-icon">
+                              <div className="play-button">
+                                <div className="triangle"></div>
+                              </div>
                             </div>
-                          </div>
-                        </Link>
+                          </Link>
 
-                        <div className="text">
-                          Watch intro video <br /> <span>About us</span>
+                          <div className="text">{title}</div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -17,15 +17,12 @@ const handleResponse = async (response) => {
   return isJSON ? await response.json() : null;
 };
 
-const getAllVideos = async (token) => {
+const getAllVideos = async () => {
   // if (!video_id) throw new Error("Video ID is missing.");
-  if (!token) throw new Error("Token is missing.");
 
   const requestOptions = {
     method: "GET",
-    headers: {
-      "x-access-token": token,
-    },
+    
   };
 
   try {
@@ -40,20 +37,18 @@ const getAllVideos = async (token) => {
 // *****
 // Function to update a video embed
 const updateVideoEmbed = async (updatedData, token) => {
-  // if (!videoId) throw new Error("Video ID is missing.");
   if (!updatedData) throw new Error("Updated data is missing.");
-  // if (!token) throw new Error("Token is missing.");
-// console.log(updatedData)
+  const { videoId } = updatedData;
+
   const requestOptions = {
     method: "PUT",
     headers: {
-      // "Content-Type": "application/json",
+      "Content-Type": "application/json", // Ensure the server understands JSON
       "x-access-token": token,
-      // "id":videoId
     },
-    body: updatedData,
+    body: JSON.stringify(updatedData), // Serialize the body as JSON
   };
-  const { videoId } = updatedData;
+
   try {
     const response = await fetch(
       `${api_url}/api/videos/${videoId}`,
@@ -66,6 +61,7 @@ const updateVideoEmbed = async (updatedData, token) => {
     throw error;
   }
 };
+
 
 // Function to delete a specific video
 const deleteVideoEmbed = async (videoId, token) => {
