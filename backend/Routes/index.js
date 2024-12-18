@@ -12,7 +12,8 @@ const loginRouter = require("./logIn.routes");
 const userRouter = require("./user.routes");
 // Import the news router
 const newsRoutes = require("./news.routes");
-
+// Import the video router
+const videoRouter = require("./videos.routes");
 // Use the routers in the main router
 router.use(loginRouter);
 router.use(userRouter);
@@ -23,6 +24,8 @@ router.use(installRouter);
 router.use(jobsRouter);
 // Add the news routes to the main router
 router.use(newsRoutes);
+// Add the video routes to the main router
+router.use(videoRouter);
 // Add the health tip routes to the main router
 router.use(healthtipRouter);
 
