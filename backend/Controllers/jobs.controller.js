@@ -11,7 +11,6 @@ async function createJob(req, res) {
       terms,
       salary,
       address,
-      application_link,
       deadline,
     } = req.body;
 
@@ -25,7 +24,6 @@ async function createJob(req, res) {
       !terms ||
       !salary ||
       !address ||
-      !application_link ||
       !deadline
     ) {
       return res.status(400).json({

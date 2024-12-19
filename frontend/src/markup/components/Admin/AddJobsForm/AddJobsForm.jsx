@@ -14,7 +14,6 @@ const AddJobForm = () => {
   const [terms, setTerms] = useState("");
   const [salary, setSalary] = useState("");
   const [address, setAddress] = useState("");
-  const [applicationLink, setApplicationLink] = useState("");
   const [deadline, setDeadline] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -34,7 +33,6 @@ const AddJobForm = () => {
       !terms ||
       !salary ||
       !address ||
-      !applicationLink ||
       !deadline
     ) {
       setError("All fields are required.");
@@ -51,7 +49,6 @@ const AddJobForm = () => {
         terms,
         salary,
         address,
-        application_link: applicationLink,
         deadline,
       };
 
@@ -141,14 +138,6 @@ const AddJobForm = () => {
           placeholder="Address"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
-          className={classes.inputField}
-          required
-        />
-        <input
-          type="url"
-          placeholder="Application Link"
-          value={applicationLink}
-          onChange={(e) => setApplicationLink(e.target.value)}
           className={classes.inputField}
           required
         />

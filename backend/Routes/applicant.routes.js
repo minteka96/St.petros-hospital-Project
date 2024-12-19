@@ -61,12 +61,12 @@ router.delete(
   ApplicantController.deleteApplicant
 );
 router.delete(
-  "/api/applicants/:id",
+  "/api/applicants/:title",
   [
     authMiddleware.verifyToken,
     authMiddleware.checkRoles(["superadmin", "Admin", "HR"]),
   ],
-  ApplicantController.deleteApplicant
+  ApplicantController.deleteApplicantBJobTitle
 );
 router.delete(
   "/api/applicants",

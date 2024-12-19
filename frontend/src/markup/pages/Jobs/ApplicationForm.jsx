@@ -12,11 +12,9 @@ const ApplicantForms = () => {
 
   // Extract query parameters
   const queryParams = new URLSearchParams(location.search);
-  const vacancyId = queryParams.get("vacancy_id");
   const title = queryParams.get("title");
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    vacancy_id: vacancyId,
     firstName: "",
     lastName: "",
     email: "",
@@ -49,7 +47,6 @@ const ApplicantForms = () => {
     // Create a new FormData instance
     const formDataToSend = new FormData();
 
-    formDataToSend.append("vacancy_id", formData.vacancy_id);
     formDataToSend.append("first_name", formData.firstName);
     formDataToSend.append("last_name", formData.lastName);
     formDataToSend.append("email_address", formData.email);

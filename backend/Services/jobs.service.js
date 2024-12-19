@@ -11,9 +11,8 @@ async function createJob(jobData) {
         terms,
         salary,
         address,
-        application_link,
         deadline) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
   const {
     job_title,
@@ -24,7 +23,6 @@ async function createJob(jobData) {
     terms,
     salary,
     address,
-    application_link,
     deadline,
   } = jobData;
 
@@ -41,7 +39,6 @@ async function createJob(jobData) {
       terms,
       salary,
       address,
-      application_link,
       deadline,
     ]);
 

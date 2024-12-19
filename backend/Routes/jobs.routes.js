@@ -17,11 +17,13 @@ router.post(
   ],
   jobsController.createJob
 );
+
 // Define a route to get all jobs
 router.get("/api/vacancies", jobsController.getAllJobs);
 
 // Define a route to get a job by ID
 router.get("/api/vacancies/:id", jobsController.getJobById);
+
 // Define a route to delete a job
 router.delete(
   "/api/vacancies/:id",
@@ -31,5 +33,6 @@ router.delete(
   ],
   jobsController.deleteJob
 );
+
 // Export the router
 module.exports = router;

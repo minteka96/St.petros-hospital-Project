@@ -104,8 +104,14 @@ const Vacancies = () => {
                     Please submit your CVs and credentials in person to the
                     hospital, or apply online{" "}
                     <Link
-                      style={{ color: "blue", textDecoration: "underline", cursor: "pointer", fontWeight: "bold" ,hover: "underline" }}
-                      to={`/application/form?vacancy_id=${job.vacancy_id}&title=${job.job_title}`}
+                      style={{
+                        color: "blue",
+                        textDecoration: "underline",
+                        cursor: "pointer",
+                        fontWeight: "bold",
+                        hover: "underline",
+                      }}
+                      to={`/application/form?title=${job.job_title}`}
                     >
                       here
                     </Link>

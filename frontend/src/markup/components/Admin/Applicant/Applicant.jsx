@@ -11,8 +11,7 @@ const ApplicantsTable = () => {
   const [loading, setLoading] = useState(false);
   const [uniquePosition, setUniquePosition] = useState([]);
   const [filteredApplicants, setFilteredApplicants] = useState([]);
-  const[refresh, setRefresh] = useState(false);
-
+  const [refresh, setRefresh] = useState(false);
   // Fetch all applicants
   useEffect(() => {
     if (!token) {
@@ -43,7 +42,7 @@ const ApplicantsTable = () => {
     if (option.length === applicants.length) {
       deleteAll();
     } else {
-      deleteApplicantsByVacancyId(option[0].vacancy_id);
+      deleteApplicantByJobTitle(option[0].position_applied_for);
     }
   };
 
@@ -60,7 +59,6 @@ const ApplicantsTable = () => {
         setApplicants(response.data);
         setFilteredApplicants(response.data);
         setRefresh(!refresh);
-
       } catch (error) {
         console.error("Error deleting all applicants:", error);
       } finally {
@@ -70,14 +68,14 @@ const ApplicantsTable = () => {
   };
 
   // Delete applicants by vacancy ID
-  const deleteApplicantsByVacancyId = async (vacancyId) => {
+  const deleteApplicantByJobTitle = async (jobTitle) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete applicants for this position?"
     );
     if (confirmDelete) {
       setLoading(true);
       try {
-        await applicantService.deleteApplicantsByVacancyId(vacancyId, token);
+        await applicantService.deleteApplicantByJobTitle(jobTitle, token);
         const response = await applicantService.getAllApplicants(token);
         setApplicants(response.data);
         setFilteredApplicants(response.data);

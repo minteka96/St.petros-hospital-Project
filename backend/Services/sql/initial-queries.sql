@@ -53,7 +53,6 @@ CREATE TABLE IF NOT EXISTS `Vacancy` (
     `terms` TEXT,                   
     `salary` VARCHAR(100),          
     `address` VARCHAR(255),         
-    `application_link` VARCHAR(255),
     `deadline` DATE NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -61,8 +60,7 @@ CREATE TABLE IF NOT EXISTS `Vacancy` (
 
 -- Create Applicant Table
 CREATE TABLE IF NOT EXISTS `Applicant` ( 
-    `id` INT AUTO_INCREMENT PRIMARY KEY, 
-    `vacancy_id` INT NOT NULL,
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
     `first_name` VARCHAR(50) NOT NULL, 
     `last_name` VARCHAR(50) NOT NULL, 
     `email_address` VARCHAR(100) NOT NULL, 
@@ -72,17 +70,14 @@ CREATE TABLE IF NOT EXISTS `Applicant` (
     `cv_file_path` VARCHAR(255) NOT NULL, 
     `other_testimonials` VARCHAR(255) NOT NULL, 
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
-    FOREIGN KEY (vacancy_id) REFERENCES Vacancy(vacancy_id)
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Create the video_embeds Table
 CREATE TABLE IF NOT EXISTS `video_embeds` (
     `video_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `title` VARCHAR(255) NOT NULL,         
-    -- `description` TEXT,                    
     `video_link` VARCHAR(255) NOT NULL,   
-    -- `thumbnail_link` VARCHAR(255),      
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

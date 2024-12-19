@@ -2,9 +2,8 @@ const conn = require("../Config/db.config");
 
 // create a new applicant
 async function createApplicant(formData) {
-  const sql = `INSERT INTO Applicant ( vacancy_id	,first_name, last_name, email_address, phone_number, position_applied_for, additional_information, cv_file_path, other_testimonials) VALUES (?, ?, ?, ?, ?, ?, ? , ?, ?)`;
+  const sql = `INSERT INTO Applicant ( first_name, last_name, email_address, phone_number, position_applied_for, additional_information, cv_file_path, other_testimonials) VALUES (?,  ?, ?, ?, ?, ? , ?, ?)`;
   const {
-    vacancy_id,
     first_name,
     last_name,
     email_address,
@@ -18,7 +17,6 @@ async function createApplicant(formData) {
   try {
     await connection.beginTransaction();
     const [result] = await connection.query(sql, [
-      vacancy_id,
       first_name,
       last_name,
       email_address,
@@ -67,12 +65,12 @@ async function getApplicantById(applicantId) {
 }
 
 // delete applicant by id
-async function deleteApplicant(applicantId) {
-  const sql = `DELETE FROM Applicant WHERE vacancy_id = ?`;
+async function deleteApplicant(id) {
+  const sql = `DELETE FROM Applicant WHERE id = ?`;
   const connection = await conn.pool.getConnection();
   try {
     await connection.beginTransaction();
-    const [result] = await connection.query(sql, [applicantId]);
+    const [result] = await connection.query(sql, [id]);
     await connection.commit();
     return result.affectedRows > 0;
   } catch (error) {
@@ -83,13 +81,13 @@ async function deleteApplicant(applicantId) {
   }
 }
 
-//delete applicant by vacancy_id
-async function deleteApplicantByVacancyId(vacancyId) {
-  const sql = `DELETE FROM Applicant WHERE vacancy_id = ?`;
+//delete applicant by job title
+async function deleteApplicantByVacancyId(jobTitle) {
+  const sql = `DELETE FROM Applicant WHERE position_applied_for = ?`;
   const connection = await conn.pool.getConnection();
   try {
     await connection.beginTransaction();
-    const [result] = await connection.query(sql, [vacancyId]);
+    const [result] = await connection.query(sql, [jobTitle]);
     await connection.commit();
     return result.affectedRows > 0;
   } catch (error) {

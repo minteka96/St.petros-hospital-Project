@@ -4,7 +4,6 @@ const applicantService = require("../Services/applicant.service");
 async function createApplicant(req, res) {
   try {
     const {
-      vacancy_id,
       first_name,
       last_name,
       email_address,
@@ -15,7 +14,6 @@ async function createApplicant(req, res) {
     // Validate required fields
     if (
       !first_name ||
-      !vacancy_id ||
       !last_name ||
       !email_address ||
       !phone_number ||
@@ -34,7 +32,6 @@ async function createApplicant(req, res) {
 
     // Prepare applicant data
     const applicantData = {
-      vacancy_id,
       first_name,
       last_name,
       email_address,
@@ -79,11 +76,11 @@ async function getApplicantById(req, res) {
   }
 }
 
-//controller to delete an applicant by vacancy_id
-async function deleteApplicantByVacancyId(req, res) {
+//controller to delete an applicant by job title
+async function deleteApplicantBJobTitle(req, res) {
   try {
     const deletedApplicant = await applicantService.deleteApplicantByVacancyId(
-      req.params.vacancy_id
+      req.params.title
     );
     if (!deletedApplicant) {
       return res.status(404).json({ error: "Applicant not found" });
@@ -128,7 +125,6 @@ module.exports = {
   getAllApplicants,
   getApplicantById,
   deleteApplicant,
-  deleteApplicantByVacancyId,
+  deleteApplicantBJobTitle,
   deleteAllApplicants,
-  
 };

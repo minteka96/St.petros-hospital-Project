@@ -92,12 +92,13 @@ const getJobById = async (job_id) => {
 };
 
 // Function to update an existing job
-const updateJob = async (job_id, jobData) => {
+const updateJob = async (job_id, jobData, token) => {
   const requestOptions = {
     method: "PUT",
     body: JSON.stringify(jobData), // send job data in request body
     headers: {
       "Content-Type": "application/json",
+      "x-access-token": token,
     },
   };
 
@@ -122,17 +123,17 @@ const updateJob = async (job_id, jobData) => {
 
 // Function to delete a job
 // "x-access-token": token, // Uncomment and set token if needed
-const deleteJob = async (job_id) => {
+const deleteJob = async (jobId, token) => {
   const requestOptions = {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      "x-access-token": token,
     },
   };
-
   try {
     const response = await fetch(
-      `${api_url}/api/vacancies/${job_id}`,
+      `${api_url}/api/vacancies/${jobId}`,
       requestOptions
     );
 

@@ -2,8 +2,11 @@
 import React, { useEffect, useState } from "react";
 import jobsservice from "../../../../Services/jobs.service.js";
 import classes from "./JobsListPage.module.css";
+import { useAuth } from "../../../../contexts/AuthContext.jsx";
 
 const JobsListPage = () => {
+  const { user } = useAuth();
+  const token = user ? user.token : null;
   const [jobs, setJobs] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -13,7 +16,6 @@ const JobsListPage = () => {
     const fetchJobs = async () => {
       try {
         const response = await jobsservice.getAllJobs();
-        console.log("response", response);
         if (response.error) {
           setError(response.error);
         } else {
@@ -31,8 +33,11 @@ const JobsListPage = () => {
   }, [fetchData]);
 
   const handleDelete = async (jobId) => {
+    if (!window.confirm("Are you sure you want to delete this job?")) {
+      return;
+    }
     try {
-      await jobsservice.deleteJob(jobId);
+      await jobsservice.deleteJob(jobId, token);
       setFetchData(!fetchData);
     } catch (err) {
       console.error("Error deleting job:", err);
@@ -89,20 +94,6 @@ const JobsListPage = () => {
                   </p>
                   <p>
                     <strong>Address:</strong> {job.address}
-                  </p>
-                  <p>
-                    <strong>Application Link:</strong>
-                    {job.application_link ? (
-                      <a
-                        href={job.application_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        attached
-                      </a>
-                    ) : (
-                      <p>Not Available</p>
-                    )}
                   </p>
                   <p>
                     <strong>Deadline:</strong> {formatDate(job.deadline)}

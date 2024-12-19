@@ -151,7 +151,7 @@ const deleteAllApplicants = async () => {
   }
 };
 
-const deleteApplicantsByVacancyId = async (vacancyId, token) => {
+const deleteApplicantByJobTitle = async (jobTitle, token) => {
   const requestOptions = {
     method: "DELETE",
     headers: {
@@ -159,10 +159,9 @@ const deleteApplicantsByVacancyId = async (vacancyId, token) => {
       "x-access-token": token,
     },
   };
-
   try {
     const response = await fetch(
-      `${api_url}/api/applicants/${vacancyId}`,
+      `${api_url}/api/applicants/${jobTitle}`,
       requestOptions
     );
     if (!response.ok) {
@@ -174,18 +173,18 @@ const deleteApplicantsByVacancyId = async (vacancyId, token) => {
     }
     throw new Error(
       "Failed to fetch applications: " + (data.message || "Unknown error")
-    );    
+    );
   } catch (error) {
     console.error("Error fetching applications:", error);
-    throw error;    
+    throw error;
   }
-}
+};
 const applicantService = {
   postApplicant,
   getAllApplicants,
   getApplicantById,
   deleteApplicant,
-  deleteApplicantsByVacancyId,
+  deleteApplicantByJobTitle,
   deleteAllApplicants,
 };
 export default applicantService;

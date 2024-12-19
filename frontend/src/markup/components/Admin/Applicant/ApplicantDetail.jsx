@@ -61,6 +61,10 @@ function ApplicantDetail() {
           <p>
             <strong>Position:</strong> {applicant.position_applied_for}
           </p>
+          
+          <p>
+            <strong>Additional Information:</strong> {applicant.additional_information}
+          </p>
 
           <h5 className="mt-4">CV File</h5>
           <p>

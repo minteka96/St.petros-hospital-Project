@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Import the necessary routers
 const installRouter = require("./install.routes");
-const jobsRouter = require("./jobs.routes.jsx");
+const jobsRouter = require("./jobs.routes.js");
 const healthtipRouter = require("./healthtip.routes");
 const applicantRouter = require("./applicant.routes");
 const loginRouter = require("./logIn.routes");
