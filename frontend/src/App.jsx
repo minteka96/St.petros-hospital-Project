@@ -42,7 +42,6 @@ import HealthWorkerINfo from "./markup/pages/HealthWorkerEntertainment/HealthWor
 import QulityResearch from "./markup/pages/qulity&research/qulityResearch.jsx";
 import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
 import AdminRoute from "./markup/routes/AdminRoute.jsx";
-import ApplicationForms from "../src/markup/pages/testApplicant.jsx";
 import Login from "./markup/pages/Login/Login.jsx";
 
 // ***************************News Client Side ********************
@@ -85,7 +84,6 @@ function App() {
  
         {/* **************************News Client Side End Here********************** */}
         <Route path="/login" element={<Login />} />
-        <Route path="/test" element={<ApplicationForms />} />
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/cpd" element={<Cpd />} />

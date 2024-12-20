@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import classes from "../ApplicantForms.module.css"; // Import module CSS
+import classes from "./JobsDetails/ApplicantForms.module.css"; // Import module CSS
 import { useAuth } from "../../../contexts/AuthContext";
 import applicantService from "../../../Services/applicant.service";
 
