@@ -22,119 +22,7 @@ const Header = () => {
     <>
       <header className="header">
         {/* Header Top Start */}
-        <div
-          className={`header-top ${classes.header_top_bg} d-none d-lg-block`}
-        >
-          <div className="container">
-            <div className={`${classes.header_top_hover} row row-cols-2 `}>
-              <div className="col-3 d-flex align-items-center">
-                <ul className={`media-wrap d-none d-lg-flex`}>
-                  <li className="media media-list d-flex">
-                    <span className="media-icon">
-                      <i
-                        className="icofont-google-map"
-                        style={{ fontSize: "30px" }}
-                      ></i>
-                    </span>
-                    <div className="d-flex ">
-                      <span className="media-sub-heading mr-3">
-                        <strong style={{ color: "white" }}>
-                          {/* ADDRESS */}
-                          </strong>
-                      </span>
-                      <span
-                        className="media-heading"
-                        style={{ color: "white" }}
-                      >
-                        {/* WOREDA 01,GULELE KIFLE KETEMA, SHIROMEDA TO ENTOTO PARK.  */}
-                      </span>
-                    </div>
-                  </li> 
-                </ul>
-              </div>
-              <div className="col-7 d-flex align-items-center">
-                <ul className={`media-wrap d-none d-lg-flex`}>
-                  {/* <li className="media media-list d-flex">
-                    <span className="media-icon">
-                      <i className="icofont-clock-time"></i>
-                    </span>
-                    <div className={` ${classes.media_wrapper} media-content`}>
-                      <span className="media-sub-heading">
-                        working hours
-                        </span>
-                      <span className="media-heading">
-                         MON - FRI: 8:00AM - 5:00PM 
-                      </span>
-                    </div>
-                  </li> */}
-                  {/* <li
-                    className={`${classes.media_wrapper} media media-list d-flex`}
-                  >
-                    <span className="media-icon">
-                      <i className="icofont-ui-call"></i>
-                    </span>
-                    <div className={`${classes.media_wrapper} media-content`}>
-                      <span className="media-sub-heading">hotline 24/7</span>
-                      <span className="media-heading" to="tel:+251111541746">
-                         +251111541746 
-                      </span>
-                    </div>
-                  </li> */}
-                  {/* <li className="media media-list d-flex">
-                    <span className="media-icon">
-                      <i className="icofont-envelope"></i>
-                    </span>
-                    <div className={`${classes.media_wrapper} media-content`}>
-                      <span className="media-sub-heading">
-                         email us 
-                        </span>
-                      <Link
-                        className="media-heading"
-                        to="mailto: info@kpsh.gov.et"
-                      >
-                        info@kpsh.gov.et 
-                      </Link>
-                    </div>
-                  </li> */}
-                  {/* <!-- media-list end --> */}
-                </ul>
-              </div>
-              <div className="col-2 d-flex align-items-center">
-                <ul className="social-links text-end">
-                  <li>
-                    <Link to="https://t.me/spsh1955" target="_blank">
-                      <i className="icofont-telegram"></i>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="https://www.instagram.com/kiduspetroshospital?igsh=ZjB0bHUzZGUwanRx"
-                      target="_blank"
-                    >
-                      <i className="icofont-instagram"></i>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="https://www.facebook.com/profile.php?id=61555827683411"
-                      target="_blank"
-                    >
-                      <i className="icofont-facebook"></i>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="https://youtube.com/@stpetershospital3127?si=0eJXeauhP6v0dQ72"
-                      target="_blank"
-                    >
-                      <i className="icofont-youtube"></i>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+
         {/* Header Top End */}
 
         {/* Header Middle Start */}
@@ -204,7 +92,7 @@ const Header = () => {
                     </li>
                     <li>
                       <Link className="main-menu-link" to="/news">
-                      News
+                        News
                       </Link>
                       <ul className="sub-menu">
                         <li>
@@ -219,7 +107,7 @@ const Header = () => {
                         </li>
                       </ul>
                     </li>
-                      {/* <Link className="main-menu-link" to="/News">
+                    {/* <Link className="main-menu-link" to="/News">
                         News
                       </Link>
                     </li> */}
@@ -288,24 +176,30 @@ const Header = () => {
                        Research & Qulity
                       </Link>
                     </li> */}
-                        <li>
+                    <li>
                       <Link className="main-menu-link" to="/qulity&research">
                         Research & Qulity
                       </Link>
                       <ul className="sub-menu">
                         <li>
                           <Link className="sub-menu-link" to="/qulity&research">
-                           Research ,Qulity  & free Traning Site Page
+                            Research ,Qulity & free Traning Site Page
                           </Link>
                         </li>
                         <li>
-                          <Link className="sub-menu-link" to="/HealthWorkerEntertainment">
+                          <Link
+                            className="sub-menu-link"
+                            to="/HealthWorkerEntertainment"
+                          >
                             Health Worker Information Referance page
                           </Link>
                         </li>
-                         <li>
-                          <Link className="sub-menu-link" to="/researchpublication">
-                          Research Publication
+                        <li>
+                          <Link
+                            className="sub-menu-link"
+                            to="/researchpublication"
+                          >
+                            Research Publication
                           </Link>
                         </li>
                       </ul>
