@@ -14,19 +14,19 @@
 .departmentArea {
   display: flex;
 }
-.pageTitleArea h1{
+.pageTitleArea h1 {
   color: #00796b;
 }
-.pageTitleArea h4{
+.pageTitleArea h4 {
   color: #00796b;
 }
-.pageTitleArea{ 
+.pageTitleArea {
   font-size: 1.2rem;
 }
-.pageTitleArea h3,h4{ 
- list-style-type: circle;
- text-align: left;
- 
+.pageTitleArea h3,
+h4 {
+  list-style-type: circle;
+  text-align: left;
 }
 /* Department Gallery */
 .contentWrapper {
@@ -35,7 +35,6 @@
   max-width: 800px;
   height: 500px;
   margin: auto;
-
 }
 
 .galleryTitle {
@@ -75,7 +74,7 @@
 
 .departmentHeadTitle {
   margin-bottom: 5px;
-  color:  #00796b;
+  color: #00796b;
 }
 
 .departmentHeadName {
@@ -89,7 +88,7 @@
 
 .formTitle {
   margin-bottom: 10px;
-  color:  #00796b;
+  color: #00796b;
 }
 
 .formInput,
@@ -102,7 +101,7 @@
 }
 
 .submitButton {
-  background-color:  #00796b;
+  background-color: #00796b;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -111,7 +110,7 @@
 }
 
 .submitButton:hover {
-  background-color:  #00796b;
+  background-color: #00796b;
 }
 
 /* Responsive Styles */
@@ -123,4 +122,77 @@
   .sidebarWrapper {
     margin-bottom: 40px;
   }
+}
+.mainContent {
+  font-family: "Arial", sans-serif;
+  color: #333;
+}
+
+.pageTitleArea {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f4f4f4;
+}
+
+.pageTitleArea h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.pageTitleArea p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.departmentGallery {
+  position: relative;
+  width: 100%;
+}
+
+.carousel-item {
+  height: 100%;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.sliderContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.4
+  ); /* Semi-transparent background for better text visibility */
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.galleryTitle {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.departmentArea {
+  margin-top: 40px;
+}
+
+.contentWrapper {
+  width: 80%;
+  margin: 0 auto;
 }

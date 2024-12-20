@@ -10,10 +10,10 @@
   border-radius: 8px;
   text-align: center;
 }
-.pageTitleArea h1{
+.pageTitleArea h1 {
   color: #00796b;
 }
-.pageTitleArea{ 
+.pageTitleArea {
   font-size: 1.2rem;
 }
 /* Department Area */
@@ -23,7 +23,7 @@
 }
 
 /* Department Gallery */
-.contentWrapper{
+.contentWrapper {
   margin: 20px 0;
   width: 80%;
   max-width: 800px;
@@ -32,13 +32,14 @@
 }
 
 /* Swiper Navigation Buttons */
-.swiper-button-prev, .swiper-button-next {
+.swiper-button-prev,
+.swiper-button-next {
   color: #00796b;
   font-size: 24px; /* Make arrows larger */
 }
 
 .swiper-button-prev {
-  left:250px;
+  left: 250px;
 }
 
 .swiper-button-next {
@@ -69,7 +70,7 @@
 }
 
 .servicesItem::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 50%;
@@ -84,4 +85,95 @@
   .departmentArea {
     flex-direction: column;
   }
+}
+.mainContent {
+  font-family: "Arial", sans-serif;
+  color: #333;
+}
+
+.pageTitleArea {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f4f4f4;
+}
+
+.pageTitleArea h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.pageTitleArea p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.departmentGallery {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+.carousel-item {
+  height: 100%;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.textOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.4
+  ); /* Semi-transparent background for better text visibility */
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.carouselText {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.galleryTitle {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.toxicologyServices {
+  margin-top: 40px;
+}
+
+.servicesTitle {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.servicesList {
+  list-style: none;
+  padding: 0;
+}
+
+.servicesItem {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.servicesItem:hover {
+  background-color: #f1f1f1;
 }

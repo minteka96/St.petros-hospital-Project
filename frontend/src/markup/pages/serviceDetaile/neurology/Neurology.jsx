@@ -1,104 +1,96 @@
-
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Swiper from 'swiper';
-import img1 from '../../../../assets/img/slider/neuro/nurology.jpg';
-import img2 from '../../../../assets/img/slider/neuro/923530Dr Felke WMichael Neurosurgeon.jpg';
-import img3 from '../../../../assets/img/slider/st.peter1jpg copy.png';
-import classes from './Neurology.module.css';
-const Neurology = () => {
-  useEffect(() => {
-    new Swiper('.swiper-container', {
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      loop: true,
-    });
-  }, [])
+import React from "react";
+import { Carousel } from "react-bootstrap";
+import img1 from "../../../../assets/img/slider/neuro/nurology.jpg";
+import img2 from "../../../../assets/img/slider/neuro/923530Dr Felke WMichael Neurosurgeon.jpg";
+import img3 from "../../../../assets/img/slider/st.peter1jpg copy.png";
+import classes from "./Neurology.module.css";
 
+const Neurology = () => {
   return (
     <div className={classes.mainContent}>
       {/* Page Title Area */}
       <div className={classes.pageTitleArea}>
         <h1>Neurology Department</h1>
-        <p>Comprehensive care for neurological conditions. <p>
-        The neurology department is specialized in the diagnosis and treatment of diseases of the nervous system, including stroke, movement problems, Parkinsons disease, epilepsy, and neuromuscular disorders. SPH provides the finest and most recent health care services in managing neurological disorders, such as:
-      </p>
-      <ul>
-        <li>Nerve conduction studies (NCS)</li>
-        <li>out patient follow up Service</li>
-        <li>Elective Surgary</li>
-          <li>Tumor Surgary</li>
-        <li>Peadiatric Neuro Surgical Care</li>
-          <li>mylomeningiocele caree</li>
-        
-        <li>Blink ReflexSpine SurgaryRepetitive Nerve Stimulation (RNS)</li>
-      </ul></p>
+        <p>
+          Comprehensive care for neurological conditions. The neurology
+          department is specialized in the diagnosis and treatment of diseases
+          of the nervous system, including stroke, movement problems,
+          Parkinson's disease, epilepsy, and neuromuscular disorders. SPH
+          provides the finest and most recent healthcare services in managing
+          neurological disorders, such as:
+        </p>
+        <ul>
+          <li>Nerve conduction studies (NCS)</li>
+          <li>Outpatient follow-up services</li>
+          <li>Elective Surgery</li>
+          <li>Tumor Surgery</li>
+          <li>Pediatric Neurosurgical Care</li>
+          <li>Myelomeningocele care</li>
+          <li>
+            Blink Reflex, Spine Surgery, Repetitive Nerve Stimulation (RNS)
+          </li>
+        </ul>
       </div>
 
       {/* Department Area */}
       <div className={classes.departmentArea}>
-        
-
         {/* Main Content Area */}
         <div className={classes.contentWrapper}>
-          {/* Department Gallery with Background Image Swiper */}
-         <div className={`swiper-container department-gallery ${classes.departmentGallery}`} id="gallery">
-
+          {/* Carousel for Department Gallery */}
+          <div className={classes.departmentGallery}>
             <h2 className={classes.galleryTitle}>Department Gallery</h2>
-            <div className="swiper-wrapper gallery-slider">
-              {/* Slide 1 */}
-              <div className="swiper-slide" style={{ backgroundImage: `url(${img1})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                <div className="slider-content">
-                  <h5 className="title">
-                    <span className="d-block">
-                      {/* State-of-the-Art Facility */}
-                      </span>
-                  </h5>
-                </div>
-              </div>
-
-              {/* Slide 2 */}
-              <div className="swiper-slide" style={{ backgroundImage: `url(${img2})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                <div className="slider-content">
-                  <h6 className="title">
-                   <span className="d-block"></span>
-                  </h6>
-                </div>
-              </div>
-
-              {/* Slide 3 */}
-              <div className="swiper-slide" style={{ backgroundImage: `url(${img3})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                <div className="slider-content">
-                  <p className="title">
-                    {/* Compassionate Care */}
-                     <span className="d-block">
-                      {/* For Every Patient */}
-                      </span>
-                  </p>
-                </div>
-              </div> 
-            </div>
-
-            {/* Swiper Navigation Buttons */}
-            <div className="swiper-button-prev">
-              <i className="icofont-arrow-left"></i>
-            </div>
-            <div className="swiper-button-next">
-              <i className="icofont-arrow-right"></i>
-            </div>
+            <Carousel>
+              <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src={img1}
+                  alt="Neurology Department"
+                  style={{ maxHeight: "400px", objectFit: "cover" }}
+                />
+                <Carousel.Caption>
+                  <h5>State-of-the-Art Facility</h5>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src={img2}
+                  alt="Dr. Felke WMichael Neurosurgeon"
+                  style={{ maxHeight: "400px", objectFit: "cover" }}
+                />
+                <Carousel.Caption>
+                  <h5>Expert Neurological Care</h5>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src={img3}
+                  alt="SPH Neurology Department"
+                  style={{ maxHeight: "400px", objectFit: "cover" }}
+                />
+                <Carousel.Caption>
+                  <h5>Compassionate Care</h5>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
           </div>
 
           {/* Neurology Services */}
           <div className={classes.neurologyServices} id="services">
             <h4 className={classes.servicesTitle}>Our Services</h4>
             <ul className={classes.servicesList}>
-              <li className={classes.servicesItem}>Diagnosis and treatment of neurological disorders</li>
+              <li className={classes.servicesItem}>
+                Diagnosis and treatment of neurological disorders
+              </li>
               <li className={classes.servicesItem}>EEG and EMG services</li>
-              <li className={classes.servicesItem}>Neurological consultations</li>
-              <li className={classes.servicesItem}>Neuropsychological assessments</li>
+              <li className={classes.servicesItem}>
+                Neurological consultations
+              </li>
+              <li className={classes.servicesItem}>
+                Neuropsychological assessments
+              </li>
             </ul>
           </div>
 
@@ -106,7 +98,10 @@ const Neurology = () => {
           <div className={classes.headOfDepartment} id="team">
             <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
             <h5 className={classes.departmentHeadName}>Dr. Jane Doe</h5>
-            <p>Specializing in pediatric neurology with over 15 years of experience.</p>
+            <p>
+              Specializing in pediatric neurology with over 15 years of
+              experience.
+            </p>
           </div>
         </div>
       </div>
@@ -115,4 +110,3 @@ const Neurology = () => {
 };
 
 export default Neurology;
-
