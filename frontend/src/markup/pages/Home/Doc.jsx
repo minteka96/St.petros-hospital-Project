@@ -21,8 +21,8 @@ function Doc() {
               data-aos-duration="1100"
             >
               <h2 className="title">
-                <span className="text-primary">Why Choose</span> Kidus Petros
-                Hospital
+                <span style={{ color: "#f26524" }}>Why Choose</span> Kidus
+                Petros Hospital
               </h2>
             </div>
           </div>
@@ -66,10 +66,10 @@ function Doc() {
                     "Our team is committed to delivering compassionate and comprehensive care to all patients.",
                 },
               ].map((service, index) => (
-                <div className="col-md-6 mb-4" key={index}>
-                  <div className="icon-box-item p-4 bg-light border rounded">
-                    <div className="icon text-primary fs-2 mb-3">
-                      <i className={service.icon}></i>
+                <div className="col-md-6 mb-4 " key={index}>
+                  <div className="icon-box-item p-4 bg-light border rounded flex-1 h-100">
+                    <div className="color1 icon fs-2 mb-3">
+                      <i className={service.icon} style={{ color: "#f26524" }}></i>
                     </div>
                     <div className="content">
                       <h5 className="title fw-bold">{service.title}</h5>

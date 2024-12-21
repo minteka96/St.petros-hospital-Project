@@ -392,23 +392,6 @@ const Home = () => {
                         <span className="d-block">Serving Since 1953</span>
                       </h5>
                     </div>
-                    {title && title !== "stop" && (
-                      <div className="play_btn mt-4">
-                        <a
-                          href={videoLink}
-                          className="overlay-link lightbox-image video-fancybox ripple"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <div className="play-icon">
-                            <div className="play-button">
-                              <div className="triangle"></div>
-                            </div>
-                          </div>
-                        </a>
-                        <div className="text">{title}</div>
-                      </div>
-                    )}
                   </div>
                 </div>
               </Carousel.Item>
@@ -463,6 +446,25 @@ const Home = () => {
                 </div>
               </Carousel.Item>
             </Carousel>
+            <div>
+              {title && title !== "stop" && (
+                <div className="play_btn mt-4">
+                  <a
+                    href={videoLink}
+                    className="overlay-link lightbox-image video-fancybox ripple"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="play-icon">
+                      <div className="play-button">
+                        <div className="triangle"></div>
+                      </div>
+                    </div>
+                  </a>
+                  <div className="text">{title}</div>
+                </div>
+              )}
+            </div>
           </section>
           <section
             className="service-area"

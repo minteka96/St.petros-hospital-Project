@@ -8,10 +8,11 @@
 }
 
 .play_btn {
+  z-index: 1;
   position: absolute;
   left: 10px;
   bottom: 50px;
-  margin: 50px; /* Optional: Add spacing from the edges */
+  margin: 50px; 
 }
 
 .play-icon {

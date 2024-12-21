@@ -28,6 +28,19 @@
   }
 }
 
+.color1 {
+  color: #f26524;
+}
+.color2 {
+  color: #00a99e;
+}
+.bg1 {
+  background-color: #f26524;
+}
+.bg2 {
+  background-color: #00a99e;
+}
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
