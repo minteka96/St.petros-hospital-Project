@@ -80,7 +80,10 @@ const Header = () => {
                   className={`${classes.main_menu_wrapper} d-flex flex-wrap align-items-center justify-content-between`}
                 >
                   <ul className="main-menu">
-                    <div className="header-logo mr-5">
+                    <div
+                      className="header-logo mr-5"
+                      style={{ marginRight: "50px" }}
+                    >
                       <Link to="/">
                         <img src={logo} alt="Logo" className={classes.logo} />
                       </Link>
@@ -130,7 +133,7 @@ const Header = () => {
                       </ul>
                     </li>
 
-                    <li>
+                    {/* <li>
                       <Link className="main-menu-link" to="/cpd">
                         CPD
                       </Link>
@@ -141,7 +144,7 @@ const Header = () => {
                           </Link>
                         </li>
                       </ul>
-                    </li>
+                    </li> */}
 
                     <li>
                       <Link className="main-menu-link" to="/about">
@@ -153,7 +156,7 @@ const Header = () => {
                         Jobs
                       </Link>
                     </li>
-                    <li>
+                    {/* <li>
                       <Link className="main-menu-link" to="/tender">
                         Tender
                       </Link>
@@ -170,7 +173,7 @@ const Header = () => {
                           </Link>
                         </li>
                       </ul>
-                    </li>
+                    </li> */}
                     {/* <li>
                       <Link className="main-menu-link" to="/qulity&research">
                        Research & Qulity
@@ -235,7 +238,10 @@ const Header = () => {
                   className={`${classes.main_menu_wrapper} d-flex flex-wrap align-items-center justify-content-between`}
                 >
                   <ul className="main-menu">
-                    <div className="header-logo mr-5">
+                    <div
+                      className="header-logo mr-5"
+                      style={{ marginRight: "50px" }}
+                    >
                       <Link to="index.html">
                         <img src={logo} alt="Logo" className={classes.logo} />
                       </Link>
@@ -246,9 +252,21 @@ const Header = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link className="main-menu-link" to="/News">
+                      <Link className="main-menu-link" to="/news">
                         News
                       </Link>
+                      <ul className="sub-menu">
+                        <li>
+                          <Link className="sub-menu-link" to="/news">
+                            News
+                          </Link>
+                        </li>
+                        <li>
+                          <Link className="sub-menu-link" to="/healhtip">
+                            Health Tip
+                          </Link>
+                        </li>
+                      </ul>
                     </li>
                     <li>
                       <Link className="main-menu-link" to="/services">
@@ -268,7 +286,7 @@ const Header = () => {
                       </ul>
                     </li>
 
-                    <li>
+                    {/* <li>
                       <Link className="main-menu-link" to="/cpd">
                         CPD
                       </Link>
@@ -279,7 +297,7 @@ const Header = () => {
                           </Link>
                         </li>
                       </ul>
-                    </li>
+                    </li> */}
 
                     <li>
                       <Link className="main-menu-link" to="/about">
@@ -291,7 +309,7 @@ const Header = () => {
                         Jobs
                       </Link>
                     </li>
-                    <li>
+                    {/* <li>
                       <Link className="main-menu-link" to="about.html">
                         Tender
                       </Link>
@@ -308,7 +326,7 @@ const Header = () => {
                           </Link>
                         </li>
                       </ul>
-                    </li>
+                    </li> */}
 
                     <li>
                       <Link className="main-menu-link" to="/contact">
