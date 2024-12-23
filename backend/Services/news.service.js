@@ -38,9 +38,20 @@ const getNewsById = async (newsId) => {
   }
 };
 
+// const getAllNews = async () => {
+//   try {
+//     const result = await db.query(`SELECT * FROM News`);
+//     return result;
+//   } catch (err) {
+//     throw new Error("Error fetching news: " + err.message);
+//   }
+// };
+
 const getAllNews = async () => {
   try {
-    const result = await db.query(`SELECT * FROM News`);
+    const result = await db.query(
+      `SELECT * FROM News ORDER BY created_at DESC` // Sort by created_at in descending order
+    );
     return result;
   } catch (err) {
     throw new Error("Error fetching news: " + err.message);
