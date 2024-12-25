@@ -6,8 +6,8 @@ import { useAuth } from "../../../../contexts/AuthContext";
 
 function AdminMenu() {
   const [role, setRole] = useState("");
-  const { user } = useAuth();
-
+  const { user, privileges } = useAuth();
+  console.log(user);
   useEffect(() => {
     const token = user ? user.token : null;
     if (token) {
@@ -15,15 +15,18 @@ function AdminMenu() {
     } else {
       setRole("");
     }
-  }, []);
+  }, [user]);
 
   // Helper functions for role-based visibility
   const isSuperAdmin = role === "superadmin";
   const isAdminOrHigher = isSuperAdmin || role === "Admin";
-  const isComm = isAdminOrHigher || role === "Comm";
+  const isComm = isAdminOrHigher || role === "Communication";
   const isHR = isAdminOrHigher || role === "HR";
   const isHE = isAdminOrHigher || role === "HE";
-
+  // "Post Vacancy",
+  // "Approve Applicants",
+  // "Screen Applicants",
+  // "Archive Vacancy",
   return (
     <div className="pb-4">
       <div className="admin-menu p-3">
@@ -47,18 +50,25 @@ function AdminMenu() {
         )}
 
         {/* Comm roles */}
-        {isComm && (
+        {isComm && privileges && (
           <>
-            <Link to="/admin/add-news" className="list-group-item">
-              Add News
-            </Link>
+            {privileges.includes("Post News") && (
+              <Link to="/admin/add-news" className="list-group-item">
+                Add News
+              </Link>
+            )}
+
+            {privileges.includes("Approve News") && (
+              <Link to="/admin/Approve-News" className="list-group-item">
+                Approve News
+              </Link>
+            )}
             <Link to="/admin/news" className="list-group-item">
               List of News
             </Link>
           </>
         )}
 
-        {/* Health tips (visible to all roles) */}
         {isHE && (
           <>
             <Link to="/admin/add-healthtip" className="list-group-item">
@@ -71,22 +81,44 @@ function AdminMenu() {
         )}
 
         {/* HR roles */}
-        {isHR && (
+        {isHR && privileges && (
           <>
-            <Link to="/admin/add-job" className="list-group-item">
-              Job Post
-            </Link>
+            {privileges.includes("Archive Vacancy") && (
+              <Link to="/admin/JobArchivePage" className="list-group-item">
+                Archive Vacancy
+              </Link>
+            )}
+
+            {privileges.includes("Post Vacancy") && (
+              <Link to="/admin/add-job" className="list-group-item">
+                Post Vacancy
+              </Link>
+            )}
+            {privileges.includes("Screen Applicants") && (
+              <Link to="/admin/applicant" className="list-group-item">
+                Screen Applicants
+              </Link>
+            )}
+            {privileges.includes("Manage Applicants") && (
+              <Link to="/admin/HRManagerApplicants" className="list-group-item">
+                Manager Applicants
+              </Link>
+            )}
+
             <Link to="/admin/all-job" className="list-group-item">
               List of Jobs
             </Link>
-            <Link to="/admin/applicant" className="list-group-item">
-              List of Applicants
-            </Link>
+            {privileges.includes("Show Applicants") && (
+              <Link to="/admin/applicant" className="list-group-item">
+                List of Applicants
+              </Link>
+            )}
           </>
         )}
-            <Link to="/admin/video" className="list-group-item">
-              Video
-            </Link>
+
+        <Link to="/admin/video" className="list-group-item">
+          Video
+        </Link>
       </div>
     </div>
   );

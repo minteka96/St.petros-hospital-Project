@@ -1,7 +1,6 @@
 // import { v4 as uuidv4 } from "uuid"; ;
-const conn = require("../Config/db.config")
+const conn = require("../Config/db.config");
 const bcrypt = require("bcrypt");
-
 
 // Check if the user already exists by email
 async function checkIfUserExists(email) {
@@ -16,38 +15,60 @@ async function checkIfUserExists(email) {
 
 // Create a new user
 async function createUser(user) {
+  const connection = await conn.pool.getConnection();
   try {
+    // Hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(user.password_hashed, salt);
 
-    // Generate a UUID for the user_id
-   
+    // Begin a transaction
+    await connection.beginTransaction();
 
-    const sql = `INSERT INTO Users (username, email, password_hashed, role, active_status) VALUES (?, ?, ?, ?, ?)`;
-    const connection = await conn.pool.getConnection();
+    // Insert user into Users table
+    const userInsertQuery = `
+      INSERT INTO Users (username, email, password_hashed, role, active_status)
+      VALUES (?, ?, ?, ?, ?)
+    `;
+    const [result] = await connection.query(userInsertQuery, [
+      user.username,
+      user.email,
+      hashedPassword,
+      user.department, // Assuming `user.department` is used for the role field
+      user.active_status,
+    ]);
 
-    try {
-      await connection.beginTransaction();
-      const [result] = await connection.query(sql, [
-        user.username,
-        user.email,
-        hashedPassword,
-        user.role,
-        user.active_status,
+    const userId = result.insertId;
+
+    // Insert user privileges
+    const privileges = user.privileges; // Ensure privileges come from the user object
+    if (privileges && privileges.length > 0) {
+      const privilegeInsertQuery = `
+        INSERT INTO user_privileges (user_id, privilege)
+        VALUES ?
+      `;
+      const privilegeValues = privileges.map((privilege) => [
+        userId,
+        privilege,
       ]);
-      await connection.commit();
-      return { ...user, password_hashed: hashedPassword }; // Return the UUID instead of insertId
-    } catch (error) {
-      await connection.rollback();
-      throw error;
-    } finally {
-      connection.release();
+
+      await connection.query(privilegeInsertQuery, [privilegeValues]);
     }
+
+    // Commit the transaction
+    await connection.commit();
+
+    // Return the created user without the raw password
+    return { ...user, user_id: userId, password_hashed: hashedPassword };
   } catch (error) {
-    throw error;
+    // Rollback transaction in case of error
+    await connection.rollback();
+    console.error("Error creating user:", error.message);
+    throw new Error("Failed to create user.");
+  } finally {
+    // Release the connection back to the pool
+    connection.release();
   }
 }
-
 
 //get all users
 async function getAllUsers() {
@@ -65,15 +86,44 @@ async function getAllUsers() {
 
 // get user by email
 async function getUserByEmail(email) {
-  const sql = `SELECT * FROM Users WHERE email = ?`;
+  const sql = `
+    SELECT 
+      u.user_id,
+      u.username,
+      u.email,
+      u.password_hashed,
+      u.role,
+      u.active_status,
+      GROUP_CONCAT(up.privilege) AS privileges
+    FROM 
+      Users u
+    LEFT JOIN 
+      user_privileges up 
+    ON 
+      u.user_id = up.user_id
+    WHERE 
+      u.email = ?
+    GROUP BY 
+      u.user_id
+  `;
+
   const connection = await conn.pool.getConnection();
   try {
     const [rows] = await connection.query(sql, [email]);
-    return rows[0];
+    if (rows.length === 0) {
+      return null; // No user found with the given email
+    }
+
+    // Parse the privileges into an array
+    const user = rows[0];
+    user.privileges = user.privileges ? user.privileges.split(",") : [];
+
+    return user;
   } catch (error) {
-    throw error;
+    console.error("Error fetching user by email:", error.message);
+    throw new Error("Failed to fetch user.");
   } finally {
-    await connection.release();
+    connection.release();
   }
 }
 
@@ -189,4 +239,12 @@ async function updatePasswordByEmail(email, newPassword) {
 
 
 // export the functions
-module.exports = { createUser, getAllUsers, getUserByEmail, checkIfUserExists, getUserById, updateUserById, deleteUserById, updatePasswordByEmail };
+module.exports = {
+  createUser,
+  getAllUsers,
+  getUserByEmail,
+  checkIfUserExists,
+  getUserById,
+  updateUserById,
+  deleteUserById,
+};

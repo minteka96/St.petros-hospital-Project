@@ -106,10 +106,30 @@ async function deleteJob(vacancy_id) {
     await connection.release();
   }
 }
+async function updateStatus(jobId) {
+  const status = 0;
+  console.log(jobId);
+  const updateStatusQuery = `UPDATE vacancy SET status = ? WHERE vacancy_id = ?`;
+
+  const connection = await conn.pool.getConnection();
+  try {
+    await connection.beginTransaction();
+    const [result] = await connection.query(updateStatusQuery, [status, jobId]);
+    await connection.commit();
+    return result.affectedRows > 0; // Return true if the status was successfully updated
+  } catch (error) {
+    await connection.rollback();
+    throw error; // Rethrow the error for higher-level handling
+  } finally {
+    connection.release(); // Release the connection back to the pool
+  }
+}
+
 // Export the function
 module.exports = {
   createJob,
   getAllJobs,
   getJobById,
   deleteJob,
+  updateStatus,
 };

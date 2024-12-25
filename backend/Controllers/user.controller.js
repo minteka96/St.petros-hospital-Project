@@ -4,14 +4,21 @@ const bcrypt = require("bcrypt");
 // Create a new user
 async function createUser(req, res) {
   try {
-    const { username, email, password_hashed, role, active_status } = req.body;
+    const {
+      username,
+      email,
+      password_hashed,
+      active_status,
+      department,
+      privileges,
+    } = req.body;
 
     // Validate required fields
     if (
       !username ||
       !email ||
       !password_hashed ||
-      !role ||
+      !department ||
       active_status == null
     ) {
       return res.status(400).json({ error: "All fields are required" });

@@ -29,6 +29,9 @@ import AddAdmin from "../pages/Admin/AddAdmin.jsx";
 import JobsListPage from "../components/Admin/JobList/JobList.jsx";
 import { updatePasswordSchema } from "../../Schemas/validationSchemas.js";
 const api_url = import.meta.env.VITE_API_URL;
+import ApplicantsPage from "../components/Admin/Applicant/ApplicantsPage.jsx";
+import HRManagerApplicants from "../components/Admin/Applicant/HRManagerApplicants.jsx";
+import JobArchivePage from "../components/Admin/Applicant/JobArchivePage.jsx";
 
 const AdminRoute = () => {
   const navigate = useNavigate();
@@ -229,6 +232,12 @@ const AdminRoute = () => {
               <Route path="/" element={<AdminDashbord />} />
               <Route path="/admins" element={<AdminManagement />} />
               <Route path="/new" element={<AddAdmin />} />
+              <Route path="/ApplicantsPage" element={<ApplicantsPage />} />
+              <Route path="/JobArchivePage" element={<JobArchivePage />} />
+              <Route
+                path="/HRManagerApplicants"
+                element={<HRManagerApplicants />}
+              />
 
               <Route path="/applicant" element={<Applicants />} />
               <Route path="/applicant/:id" element={<ApplicantDetails />} />

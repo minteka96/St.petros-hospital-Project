@@ -1,6 +1,5 @@
 const api_url = import.meta.env.VITE_API_URL;
 
-
 const getAllJobs = async () => {
   const requestOptions = {
     method: "GET",
@@ -50,13 +49,12 @@ const createJob = async (jobData, token) => {
     return data;
   } catch (error) {
     console.error("Error creating job:", error);
-    throw error;  // Throw error to be caught in the component
+    throw error; // Throw error to be caught in the component
   }
 };
 
 // Function to get all job listings
 // "x-access-token": token, // Uncomment and set token if needed
-
 
 // Function to get a specific job by its ID
 const getJobById = async (job_id) => {
@@ -152,6 +150,34 @@ const deleteJob = async (jobId, token) => {
   }
 };
 
+const archiveJob = async (jobId, token) => {
+  const requestOptions = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+  };
+  try {
+    const response = await fetch(
+      `${api_url}/api/vacancies/${jobId}`,
+      requestOptions
+    );
+    console.log(response);
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `HTTP error! Status: ${response.status}, Details: ${errorText}`
+      );
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error deleting job:", error);
+    throw error;
+  }
+};
 // Export all the functions
 const jobService = {
   createJob,
@@ -159,6 +185,7 @@ const jobService = {
   getJobById,
   updateJob,
   deleteJob,
+  archiveJob,
 };
 
 export default jobService;
