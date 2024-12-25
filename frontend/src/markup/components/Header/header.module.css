@@ -91,3 +91,9 @@
   font-size: 17px;
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  #offcanvas-mobile-menu {
+    max-width: 300px;
+  }
+}

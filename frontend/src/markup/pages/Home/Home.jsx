@@ -25,7 +25,7 @@
 //   };
 
 //   return (
-//     <div style={{ marginTop: "1px", height: "90vh" }}>
+//     <div style={{ marginTop: "1px", height: "80vh" }}>
 //       {/* YouTube Video Modal */}
 //       <Modal
 //         show={showModal}
@@ -95,7 +95,7 @@
 //             className="d-block w-100"
 //             src={banner1}
 //             alt="First slide"
-//             style={{ height: "90vh", objectFit: "cover" }}
+//             style={{ height: "80vh", objectFit: "cover" }}
 //           />
 //           <Carousel.Caption>
 //             <div
@@ -151,7 +151,7 @@
 //             className="d-block w-100"
 //             src={banner2}
 //             alt="Second slide"
-//             style={{ height: "90vh", objectFit: "cover" }}
+//             style={{ height: "80vh", objectFit: "cover" }}
 //           />
 //           <Carousel.Caption>
 //             <div
@@ -234,7 +234,7 @@
 //             className="d-block w-100"
 //             src={banner3}
 //             alt="Third slide"
-//             style={{ height: "90vh", objectFit: "cover" }}
+//             style={{ height: "80vh", objectFit: "cover" }}
 //           />
 //           <Carousel.Caption>
 //             <div
@@ -367,7 +367,7 @@ const Home = () => {
     <>
       <div className="wrapper home-default-wrapper">
         <main className="main-content site-wrapper-reveal">
-          <section className="hero-slider play_btn-wrapper">
+          <section className="hero-slider play_btn-wrapper" style={{height:"80vh"}}>
             <Carousel
               controls={true}
               indicators={true}
@@ -382,7 +382,7 @@ const Home = () => {
                     backgroundImage: `url(${banner1})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    height: "100vh",
+                    height: "80vh",
                   }}
                 >
                   <div className="container d-flex flex-column justify-content-center h-100 text-white">
@@ -404,7 +404,7 @@ const Home = () => {
                     backgroundImage: `url(${banner2})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    height: "100vh",
+                    height: "80vh",
                   }}
                 >
                   <div className="container d-flex flex-column justify-content-center h-100 text-white">
@@ -429,7 +429,7 @@ const Home = () => {
                     backgroundImage: `url(${banner3})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    height: "100vh",
+                    height: "80vh",
                   }}
                 >
                   <div className="container d-flex flex-column justify-content-center h-100 text-white">

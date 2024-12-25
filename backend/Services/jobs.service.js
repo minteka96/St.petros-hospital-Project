@@ -1,9 +1,13 @@
 const conn = require("../Config/db.config");
+const { v4: uuidv4 } = require("uuid");
 
 async function createJob(jobData) {
+  const vacancy_id = uuidv4();
   const insertVacancyQuery = `
         INSERT INTO Vacancy 
-        (job_title,
+        (
+        vacancy_id,
+        job_title,
         job_description,
         job_requirements,
         qualifications,
@@ -12,7 +16,7 @@ async function createJob(jobData) {
         salary,
         address,
         deadline) 
-        VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )`;
 
   const {
     job_title,
@@ -31,6 +35,7 @@ async function createJob(jobData) {
     await connection.beginTransaction();
 
     const [resultIdentifier] = await connection.query(insertVacancyQuery, [
+      vacancy_id,
       job_title,
       job_description,
       job_requirements,

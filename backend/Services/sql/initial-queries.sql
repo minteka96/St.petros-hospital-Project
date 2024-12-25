@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `Health_Tips` (
 
 -- Create Vacancy Table
 CREATE TABLE IF NOT EXISTS `Vacancy` (
-    `vacancy_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `vacancy_id` VARCHAR(36) NOT NULL PRIMARY KEY,
     `job_title` VARCHAR(255) NOT NULL,
     `job_description` TEXT NOT NULL,
     `job_requirements` TEXT NOT NULL,
@@ -97,3 +97,95 @@ VALUES
     ('test', 'https://www.youtube.com/watch?v=T8VqfQACMbM&t=511s')
 ON DUPLICATE KEY UPDATE 
     `video_link` = VALUES(`video_link`);
+
+
+-- Create cpd_trainings Table
+CREATE TABLE IF NOT EXISTS `cpd_trainings` (
+    `training_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `course_name` VARCHAR(255) NOT NULL UNIQUE,
+    `course_level` VARCHAR(255) NOT NULL,
+    `pri_test` VARCHAR(255) NOT NULL,
+    `pri_test_duration` VARCHAR(255) NOT NULL,
+    `post_test` VARCHAR(255) NOT NULL,
+    `post_test_duration` VARCHAR(255) NOT NULL,
+    `minimum_score` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- Create training schedule Table
+CREATE TABLE IF NOT EXISTS `training_schedule` (
+    `schedule_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `training_id` INT NOT NULL,
+    `course_name` VARCHAR(255) NOT NULL,
+    `registration_start_date` DATE NOT NULL,
+    `registration_end_date` DATE NOT NULL,
+    `course_start_date` DATE NOT NULL,
+    `course_end_date` DATE NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    FOREIGN KEY (training_id) REFERENCES cpd_trainings(training_id)
+) ENGINE=InnoDB;
+
+-- Create cpd_news Table
+CREATE TABLE IF NOT EXISTS `cpd_news` (
+    `news_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `news_title` VARCHAR(255) NOT NULL,
+    `news_description` TEXT,
+    `expiry_date` DATE,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- Create trainees Table
+CREATE TABLE IF NOT EXISTS `trainees` (
+    `trainee_id` varchar(36) NOT NULL PRIMARY KEY,
+    `email` varchar(255) NOT NULL,
+    `password` varchar(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+) ENGINE=InnoDB;
+
+-- Create trainees_info Table
+CREATE TABLE IF NOT EXISTS `trainees_info` (
+    `id` varchar(36) NOT NULL PRIMARY KEY,
+    `trainee_id` varchar(36) NOT NULL,
+    `first_name` varchar(255) NOT NULL,
+    `middle_name` varchar(255),
+    `last_name` varchar(255) NOT NULL,
+    `sex` varchar(255) NOT NULL,
+    `phone` varchar(255) NOT NULL,
+    `profession` varchar(255),
+    `account_number` varchar(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP    
+    FOREIGN KEY (trainee_id) REFERENCES trainees(trainee_id) 
+) ENGINE=InnoDB;
+
+-- Create courses Table
+CREATE TABLE IF NOT EXISTS `courses` (
+    `course_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `trainee_id` varchar(36) NOT NULL,
+    `course_name` varchar(255) NOT NULL,
+    `pri_score` varchar(255) NOT NULL,
+    `post_score` varchar(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    FOREIGN KEY (trainee_id) REFERENCES trainees(trainee_id)
+    FOREIGN KEY (course_name) REFERENCES cpd_trainings(course_name)
+) ENGINE=InnoDB;
+
+-- Create trainees status Table
+CREATE TABLE IF NOT EXISTS `trainees_status` (
+    `status_id` varchar(36) NOT NULL PRIMARY KEY,
+    `trainee_id` varchar(36) NOT NULL,
+    `course_name` varchar(255) NOT NULL,
+    `registration` varchar(255) NOT NULL,
+    `pri_test` varchar(255) NOT NULL,
+    `post_test` varchar(255) NOT NULL,
+    `certificate` varchar(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (trainee_id) REFERENCES trainees(trainee_id),
+    FOREIGN KEY (course_name) REFERENCES cpd_trainings(course_name)
+) ENGINE=InnoDB;

@@ -14,6 +14,7 @@ router.post(
   [
     authMiddleware.verifyToken,
     authMiddleware.checkRoles(["superadmin", "Admin", "HR"]),
+    
   ],
   jobsController.createJob
 );
