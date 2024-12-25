@@ -161,5 +161,32 @@ async function deleteUserById(userId) {
     await connection.release();
   }
 }
+
+//update password by email
+async function updatePasswordByEmail(email, newPassword) {
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    const sql = `UPDATE Users SET password_hashed = ? WHERE email = ?`;
+    const connection = await conn.pool.getConnection();
+
+    try {
+      await connection.beginTransaction();
+      const [result] = await connection.query(sql, [hashedPassword, email]);
+      await connection.commit();
+      return result.affectedRows > 0;
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      await connection.release();
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
+
 // export the functions
-module.exports = { createUser, getAllUsers, getUserByEmail, checkIfUserExists, getUserById, updateUserById, deleteUserById };
+module.exports = { createUser, getAllUsers, getUserByEmail, checkIfUserExists, getUserById, updateUserById, deleteUserById, updatePasswordByEmail };

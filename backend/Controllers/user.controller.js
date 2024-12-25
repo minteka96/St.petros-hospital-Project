@@ -1,4 +1,6 @@
 const applicantService = require("../Services/user.service");
+const userService = require("../Services/user.service");
+const bcrypt = require("bcrypt");
 // Create a new user
 async function createUser(req, res) {
   try {
@@ -67,7 +69,9 @@ async function updateUserById(req, res) {
     if (!updatedUser) {
       return res.status(404).json({ error: "User not found" });
     }
-    res.status(200).json({ data: updatedUser ,  message: "User updated successfully" });
+    res
+      .status(200)
+      .json({ data: updatedUser, message: "User updated successfully" });
   } catch (error) {
     console.error("Error:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
@@ -79,7 +83,7 @@ async function getUserById(req, res) {
   try {
     const userId = req.params.id;
     const user = await applicantService.getUserById(userId);
-    
+
     res.status(200).json({ data: user });
   } catch (error) {
     console.error("Error:", error.message);
@@ -101,6 +105,66 @@ async function deleteUserById(req, res) {
   }
 }
 
+//update password by email
+async function updatePasswordByEmail(req, res) {
+  try {
+    const email = req.params.email;
+    const { newPassword, currentPassword } = req.body;
+
+    // Validate inputs
+    if (!email || !newPassword || !currentPassword) {
+      return res
+        .status(400)
+        .json({
+          error: "Email, current password, and new password are required",
+        });
+    }
+
+    // Retrieve user by email
+    const user = await userService.getUserByEmail(email);
+    
+    if (email !== user?.email) {
+      return res.status(403).json({ error: "Email is not correct" });
+    }
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Verify current password
+    const isPasswordCorrect = await bcrypt.compare(
+      currentPassword,
+      user.password_hashed
+    );
+    if (!isPasswordCorrect) {
+      return res.status(401).json({ error: "Incorrect current password" });
+    }
+
+    // Update password
+    const updatedUser = await applicantService.updatePasswordByEmail(
+      email,
+      newPassword
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: "Failed to update password" });
+    }
+
+    res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    console.error("Error:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
+
 // Export the create user function
 
-module.exports = { createUser, getAllUsers, getUserByEmail, getUserById, updateUserById, deleteUserById };
+module.exports = {
+  createUser,
+  updatePasswordByEmail,
+  getAllUsers,
+  getUserByEmail,
+  getUserById,
+  updateUserById,
+  deleteUserById,
+};

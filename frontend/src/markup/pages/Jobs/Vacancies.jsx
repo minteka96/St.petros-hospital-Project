@@ -9,7 +9,9 @@ const Vacancies = () => {
   const [jobs, setJobs] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
-
+  const [closedJobs, setClosedJobs] = useState([]);
+  const [openJobs, setOpenJobs] = useState([]);
+  const [searchTerm, setSearchTerm] = useState([]);
   const toggleDetails = (id) => {
     setShowDetails((prev) => {
       const newSet = new Set(prev);
@@ -26,6 +28,7 @@ const Vacancies = () => {
     const fetchJobs = async () => {
       try {
         const response = await jobsservice.getAllJobs();
+        response.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         setJobs(response);
       } catch (err) {
         setError("Something went wrong while fetching jobs.");
@@ -36,6 +39,22 @@ const Vacancies = () => {
 
     fetchJobs();
   }, []);
+
+  const compareDate = (deadline) => {
+    const currentDate = new Date(new Date().toISOString()).getTime();
+    const unixTimestamp = new Date(deadline).getTime();
+    return unixTimestamp > currentDate;
+  };
+
+  // filter jobs by status
+  useEffect(() => {
+    const open = jobs.filter((job) => compareDate(job.deadline));
+    const closed = jobs.filter((job) => !compareDate(job.deadline));
+    setOpenJobs(open);
+    setClosedJobs(closed);
+    setSearchTerm(open);
+  }, [jobs]);
+
 
   const dateFormat = (dateString) => {
     const date = new Date(dateString);
@@ -50,6 +69,31 @@ const Vacancies = () => {
         If you aspire to be part of a dedicated, multi-disciplinary team that
         works together to improve our patients' lives, come join us.
       </p>
+      {/* {jobs.length > 0 && (
+        <p className="vacancy-count">
+          {jobs.length} vacancy{jobs.length > 1 ? "s" : ""}
+        </p>
+      )} */}
+      <div className="d-flex justify-content-around ">
+        <button
+          className="btn active flex-fill mx-2"
+          onClick={() => setSearchTerm(jobs)}
+        >
+          All Jobs
+        </button>
+        <button
+          className="btn active flex-fill mx-2"
+          onClick={() => setSearchTerm(openJobs)}
+        >
+          {openJobs.length} Open Job{openJobs.length > 1 ? "s" : ""}
+        </button>
+        <button
+          className="btn active flex-fill mx-2"
+          onClick={() => setSearchTerm(closedJobs)}
+        >
+          {closedJobs.length} Closed Job{closedJobs.length > 1 ? "s" : ""}
+        </button>
+      </div>
 
       {error && <p className="error-message">{error}</p>}
 
@@ -59,13 +103,29 @@ const Vacancies = () => {
         <p>No jobs available at the moment.</p>
       ) : (
         <div>
-          {jobs.map((job) => (
+          {searchTerm.map((job) => (
             <div className="vacancy" key={job.vacancy_id}>
               <div className="vacancy-header">
                 <h2 className="vacancy-position">Position: {job.job_title}</h2>
-                <p className="vacancy-subtitle">{job.job_description}</p>
+                <p
+                  style={{ fontWeight: "bold" }}
+                  className="vacancy-subtitle my-2"
+                >
+                  {job.job_description}
+                </p>
+                <span className="vacancy-details">
+                  <p className="vacancy-subtitle m-0">
+                    <span style={{ fontWeight: "bold" }}>Opening Date:</span>{" "}
+                    {dateFormat(job.created_at)}
+                  </p>
+                  <p className="vacancy-subtitle m-0 ">|</p>
+                  <p className="vacancy-subtitle">
+                    <span style={{ fontWeight: "bold" }}>Closing Date:</span>{" "}
+                    {dateFormat(job.deadline)}
+                  </p>
+                </span>
                 <p className="vacancy-subtitle">
-                  Closing Date: {dateFormat(job.deadline)} | Place of Work:{" "}
+                  <span style={{ fontWeight: "bold" }}>Place of Work:</span>
                   {job.address}
                 </p>
               </div>
@@ -105,17 +165,31 @@ const Vacancies = () => {
                     hospital, or apply online{" "}
                     <Link
                       style={{
-                        color: "blue",
+                        color: compareDate(job.deadline) ? "blue" : "gray",
                         textDecoration: "underline",
-                        cursor: "pointer",
+                        cursor: compareDate(job.deadline)
+                          ? "pointer"
+                          : "not-allowed",
                         fontWeight: "bold",
-                        hover: "underline",
                       }}
-                      to={`/application/form?title=${job.job_title}`}
+                      to={
+                        compareDate(job.deadline)
+                          ? `/application/form?undfjw=${job.vacancy_id}`
+                          : "#"
+                      }
+                      title={
+                        compareDate(job.deadline)
+                          ? ""
+                          : "the deadline has passed"
+                      }
+                      onClick={(e) => {
+                        if (!compareDate(job.deadline)) {
+                          e.preventDefault();
+                        }
+                      }}
                     >
                       here
                     </Link>
-                    .
                   </li>
                 </ul>
               )}

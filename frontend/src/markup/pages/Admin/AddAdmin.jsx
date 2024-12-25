@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { updatePasswordSchema } from "../../../Schemas/validationSchemas";
-
+const api_url = import.meta.env.VITE_API_URL;
 // Password validation schema
 
 const AddAdmin = () => {
@@ -50,7 +50,7 @@ const AddAdmin = () => {
       }
 
       // Simulate an API call
-      await axios.post("http://localhost:3001/api/user", formData);
+      await axios.post(`${api_url}/api/users`, formData);
 
       setSuccess("User added successfully!");
       setTimeout(() => {
