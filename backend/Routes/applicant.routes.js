@@ -77,4 +77,13 @@ router.delete(
   ApplicantController.deleteAllApplicants
 );
 
+router.put(
+  "/api/applicant/:id",
+
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.checkRoles(["superadmin", "Admin", "HR"]),
+  ],
+  ApplicantController.updateApplicant
+);
 module.exports = router;

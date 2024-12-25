@@ -2,14 +2,21 @@ const applicantService = require("../Services/user.service");
 // Create a new user
 async function createUser(req, res) {
   try {
-    const { username, email, password_hashed, role, active_status } = req.body;
+    const {
+      username,
+      email,
+      password_hashed,
+      active_status,
+      department,
+      privileges,
+    } = req.body;
 
     // Validate required fields
     if (
       !username ||
       !email ||
       !password_hashed ||
-      !role ||
+      !department ||
       active_status == null
     ) {
       return res.status(400).json({ error: "All fields are required" });
@@ -67,7 +74,9 @@ async function updateUserById(req, res) {
     if (!updatedUser) {
       return res.status(404).json({ error: "User not found" });
     }
-    res.status(200).json({ data: updatedUser ,  message: "User updated successfully" });
+    res
+      .status(200)
+      .json({ data: updatedUser, message: "User updated successfully" });
   } catch (error) {
     console.error("Error:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
@@ -79,7 +88,7 @@ async function getUserById(req, res) {
   try {
     const userId = req.params.id;
     const user = await applicantService.getUserById(userId);
-    
+
     res.status(200).json({ data: user });
   } catch (error) {
     console.error("Error:", error.message);
@@ -103,4 +112,11 @@ async function deleteUserById(req, res) {
 
 // Export the create user function
 
-module.exports = { createUser, getAllUsers, getUserByEmail, getUserById, updateUserById, deleteUserById };
+module.exports = {
+  createUser,
+  getAllUsers,
+  getUserByEmail,
+  getUserById,
+  updateUserById,
+  deleteUserById,
+};

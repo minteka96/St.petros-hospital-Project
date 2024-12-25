@@ -6,7 +6,7 @@ import ApplicantDetails from "../components/Admin/Applicant/ApplicantDetail.jsx"
 import AdminMenu from "../components/Admin/AdminMenu/AdminMenu.jsx";
 import logo from "../../assets/img/logo copy.png";
 import AdminDashbord from "../components/Admin/AdminDashbord/AdminDashbord.jsx";
-import VideoEmbeds from '../components/Admin/VideoEmbeds/videos.jsx';
+import VideoEmbeds from "../components/Admin/VideoEmbeds/videos.jsx";
 /* ************ News Components Start Here about news ********************  */
 import AddNews from "../components/Admin/AddNewsForm/AddNewsForm.jsx";
 import EditNews from "../components/Admin/NewsEditForm/NewsEditForm.jsx";
@@ -23,13 +23,15 @@ import { useAuth } from "../../contexts/AuthContext.jsx";
 import AdminManagement from "../pages/Admin/AdminManagement.jsx";
 import AddAdmin from "../pages/Admin/AddAdmin.jsx";
 import JobsListPage from "../components/Admin/JobList/JobList.jsx";
+import ApplicantsPage from "../components/Admin/Applicant/ApplicantsPage.jsx";
+import HRManagerApplicants from "../components/Admin/Applicant/HRManagerApplicants.jsx";
+import JobArchivePage from "../components/Admin/Applicant/JobArchivePage.jsx";
 
 const AdminRoute = () => {
-
   const navigate = useNavigate();
 
-  const logOut =  () => {
-     sessionStorage.removeItem("access-token");
+  const logOut = () => {
+    sessionStorage.removeItem("access-token");
     window.location.href = "/";
   };
 
@@ -55,7 +57,7 @@ const AdminRoute = () => {
       navigate("/login");
       // window.location.href = "/login";
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
   return (
@@ -129,6 +131,12 @@ const AdminRoute = () => {
               <Route path="/" element={<AdminDashbord />} />
               <Route path="/admins" element={<AdminManagement />} />
               <Route path="/new" element={<AddAdmin />} />
+              <Route path="/ApplicantsPage" element={<ApplicantsPage />} />
+              <Route path="/JobArchivePage" element={<JobArchivePage />} />
+              <Route
+                path="/HRManagerApplicants"
+                element={<HRManagerApplicants />}
+              />
 
               <Route path="/applicant" element={<Applicants />} />
               <Route path="/applicant/:id" element={<ApplicantDetails />} />

@@ -9,6 +9,14 @@ CREATE TABLE IF NOT EXISTS `Users` (
     `added_date` DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+
+CREATE TABLE IF NOT EXISTS `user_privileges` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `user_id` INT NOT NULL,
+    `privilege` VARCHAR(255) NOT NULL,
+    FOREIGN KEY (`user_id`) REFERENCES `Users`(`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- Insert default admin user
 INSERT INTO `Users` (`username`, `email`, `password_hashed`, `role`)
 VALUES 
@@ -69,6 +77,7 @@ CREATE TABLE IF NOT EXISTS `Applicant` (
     `additional_information` TEXT NOT NULL, 
     `cv_file_path` VARCHAR(255) NOT NULL, 
     `other_testimonials` VARCHAR(255) NOT NULL, 
+    `Status` VARCHAR(255) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

@@ -13,7 +13,6 @@ async function logIn(req, res) {
         message: "Email and password are required",
       });
     }
-   
 
     // Attempt login via service
     const loginResponse = await loginService.logIn({ email, password });
@@ -21,25 +20,45 @@ async function logIn(req, res) {
     if (loginResponse.status === "fail") {
       return res.status(403).json(loginResponse);
     }
+
     // Generate JWT token upon successful login
     const user = loginResponse.data;
 
+    // Check if the user is active
+    if (!user.active_status) {
+      return res.status(403).json({
+        status: "fail",
+        message: "Your account is inactive. Please contact support.",
+      });
+    }
+
     const payload = {
-      id: user.id,
+      id: user.user_id,
       username: user.username,
       email: user.email,
       role: user.role,
-      active_status: user.active_status
+      privileges: user.privileges, // Include privileges in the token payload
     };
-    // set expiration time 1 minute
+
+    console.log(payload);
+
+    // Set token expiration time (e.g., 24 hours)
     const token = jwt.sign(payload, jwtSecret, { expiresIn: "24h" });
 
     return res.status(200).json({
       status: "success",
       message: "User logged in successfully",
-      data: { token },
+      data: {
+        token,
+        user: {
+          id: user.user_id,
+          username: user.username,
+          email: user.email,
+          role: user.role,
+          privileges: user.privileges,
+        },
+      },
     });
-    
   } catch (error) {
     console.error("Login Error:", error);
     res.status(500).json({
