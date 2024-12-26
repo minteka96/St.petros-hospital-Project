@@ -97,7 +97,7 @@ const AddAdmin = () => {
       }
 
       // Simulate an API call
-      await axios.post(`${api_url}/api/users`, formData);
+      await axios.post(`${api_url}/api/user`, formData);
 
       setSuccess("User added successfully!");
       setTimeout(() => {
