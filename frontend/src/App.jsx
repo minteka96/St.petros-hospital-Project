@@ -4,7 +4,7 @@ import Header from "./markup/components/Header/Header";
 import Footer from "./markup/components/Footer/Footer";
 import Home from "./markup/pages/Home/Home";
 // ***************************servicesdetail Client Side ********************
-import Services from "./markup/pages/servicepage/Services";
+import Services from "./markup/pages/servicepage/Services.jsx";
 import ServiceDetail from "./markup/pages/serviceDetaile/ServiceDetail.jsx";
 import Cardiology from "./markup/pages/serviceDetaile/cardac/Cardiology";
 import MCH from "./markup/pages/serviceDetaile/mch/MCH";
@@ -54,6 +54,7 @@ import ApplicantForms from "./markup/pages/Jobs/ApplicationForm.jsx";
 import HealthTip from "./markup/pages/healthtips/HealthTip.jsx";
 import HealthTipDetail from "./markup/pages/healthtips/healthtipdetail/healthtipdetail.jsx";
 import HealthTipList from "./markup/components/Admin/HealthTipList/HealthTipList.jsx";
+import CpdNews from "./markup/pages/CPD/Cpdnews.jsx";
 function App() {
   // check if thr route is '/login' or not
   if (window.location.pathname === "/login") {
@@ -70,6 +71,7 @@ function App() {
       <Routes>
         {/* *************************News Client Side Start Here*********************** */}
         <Route path="/news" element={<News />} />
+           <Route path="/cpd-news" element={<CpdNews />} />
         {/* <Route path="/newsDetails" element={<NewsDetails />} /> */}
         <Route
           path="/newsDetails/:newsId"

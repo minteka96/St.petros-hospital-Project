@@ -1,7 +1,7 @@
 const db = require("../Config/db.config");
 
-const createCpdNews = async (data) => {
-  const { newsTitle, newsDescription, expiryDate } = data;
+
+const createCpdNews = async ({ newsTitle, newsDescription, expiryDate }) => {
 
   try {
     const result = await db.query(
@@ -14,12 +14,20 @@ const createCpdNews = async (data) => {
       id: result.insertId,
       newsTitle,
       newsDescription,
-      expiryDate
+
+      expiryDate,
+
     };
   } catch (err) {
     throw new Error("Error creating CPD news: " + err.message);
   }
 };
+
+
+module.exports = {
+  createCpdNews
+};
+
 
 const getCpdNewsById = async (newsId) => {
   try {

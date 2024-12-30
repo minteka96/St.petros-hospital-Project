@@ -1,34 +1,29 @@
-const cpdNewsService = require("../Services/cpd_news.service");
+
+const cpd_NewsService = require("../Services/cpd_news.service");
 
 const createCpdNews = async (req, res) => {
+  const { newsTitle, newsDescription, expiryDate } = req.body;
+
+  if (!newsTitle || !newsDescription) {
+    return res.status(400).json({ error: "Title and description are required" });
+  }
+
   try {
-    const { news_title, news_description, expiry_date } = req.body;
-
-    if (!news_title || !news_description) {
-      return res.status(400).json({ error: "Title and description are required" });
-    }
-
-    const newsData = {
-      newsTitle: news_title,
-      newsDescription: news_description,
-      expiryDate: expiry_date
-    };
-
-    const result = await cpdNewsService.createCpdNews(newsData);
-
-    res.status(201).json({
-      message: "CPD News created successfully",
-      data: result
-    });
+    const news = await cpd_NewsService.createCpdNews({ newsTitle, newsDescription, expiryDate });
+    return res.status(201).json(news);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("Error creating CPD news:", err);
+    return res.status(500).json({ error: "Internal Server Error" });
+
   }
 };
 
 const getCpdNewsById = async (req, res) => {
   try {
     const newsId = req.params.id;
-    const news = await cpdNewsService.getCpdNewsById(newsId);
+
+    const news = await cpd_NewsService.getCpdNewsById(newsId);
+
     
     if (!news) {
       return res.status(404).json({ error: "CPD News not found" });
@@ -42,7 +37,9 @@ const getCpdNewsById = async (req, res) => {
 
 const getAllCpdNews = async (req, res) => {
   try {
-    const newsList = await cpdNewsService.getAllCpdNews();
+
+    const newsList = await cpd_NewsService.getAllCpdNews();
+
     
     if (!newsList) {
       return res.status(400).json({ error: "Failed to fetch CPD news entries!" });
@@ -66,7 +63,8 @@ const updateCpdNews = async (req, res) => {
       return res.status(400).json({ error: "Title and description are required" });
     }
 
-    const existingNews = await cpdNewsService.getCpdNewsById(newsId);
+    const existingNews = await cpd_NewsService.getCpdNewsById(newsId);
+
     if (!existingNews) {
       return res.status(404).json({ error: "CPD News not found" });
     }
@@ -77,7 +75,8 @@ const updateCpdNews = async (req, res) => {
       expiryDate: expiry_date
     };
 
-    const result = await cpdNewsService.updateCpdNews(newsId, updatedData);
+    const result = await cpd_NewsService.updateCpdNews(newsId, updatedData);
+
 
     if (!result) {
       return res.status(404).json({ error: "Failed to update CPD news" });
@@ -95,7 +94,9 @@ const updateCpdNews = async (req, res) => {
 const deleteCpdNews = async (req, res) => {
   try {
     const newsId = req.params.id;
-    const result = await cpdNewsService.deleteCpdNews(newsId);
+
+    const result = await cpd_NewsService.deleteCpdNews(newsId);
+
 
     if (!result) {
       return res.status(404).json({ error: "CPD News not found" });
