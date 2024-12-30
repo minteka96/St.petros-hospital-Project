@@ -1,80 +1,34 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { updatePasswordSchema } from "../../../Schemas/validationSchemas";
-const api_url = import.meta.env.VITE_API_URL;
+
 // Password validation schema
-import {
-  Container,
-  Card,
-  Form,
-  Button,
-  Alert,
-  Row,
-  Col,
-} from "react-bootstrap";
 
 const AddAdmin = () => {
   const navigate = useNavigate();
-
-  // Form state management
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password_hashed: "",
+    role: "User",
     active_status: true,
-    department: "",
-    privileges: [],
   });
 
-  // Error and success state
   const [error, setError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Department privileges map
-  const privilegesMap = {
-    Admin: ["Access All Privileges"],
-    HR: [
-      "Post Vacancy",
-      "Manage Applicants",
-      "Screen Applicants",
-      "Archive Vacancy",
-    ],
-    "Health Literacy": ["Post Health Tip", "Approve Post"],
-    Communication: ["Post News", "Approve News"],
-  };
-
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
       [name]: type === "checkbox" ? checked : value,
     });
-
-    // Update privileges based on department selection
-    if (name === "department") {
-      setFormData({
-        ...formData,
-        department: value,
-        privileges: [], // Reset privileges when department changes
-      });
-    }
   };
 
-  // Handle privilege checkbox changes
-  const handlePrivilegeChange = (e) => {
-    const { value, checked } = e.target;
-    setFormData((prevState) => {
-      const updatedPrivileges = checked
-        ? [...prevState.privileges, value]
-        : prevState.privileges.filter((privilege) => privilege !== value);
-      return { ...prevState, privileges: updatedPrivileges };
-    });
-  };
-
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -82,6 +36,7 @@ const AddAdmin = () => {
     setSuccess("");
 
     // Validate password
+   
     const passwordValidation = updatePasswordSchema.safeParse({
       password: formData.password_hashed,
     });
@@ -91,27 +46,26 @@ const AddAdmin = () => {
     }
 
     try {
-      if (!formData.username || !formData.email || !formData.department) {
+      if (!formData.username || !formData.email) {
         setError("Please fill in all required fields.");
         return;
       }
 
       // Simulate an API call
-      await axios.post(`${api_url}/api/user`, formData);
+      await axios.post("http://localhost:3001/api/user", formData);
 
       setSuccess("User added successfully!");
       setTimeout(() => {
         navigate("/admin/admins");
       }, 2000);
 
-      // Reset form state
+      // Reset form data
       setFormData({
         username: "",
         email: "",
         password_hashed: "",
+        role: "User",
         active_status: true,
-        department: "",
-        privileges: [],
       });
     } catch (err) {
       setError("Failed to add user. Please try again.");
@@ -119,110 +73,110 @@ const AddAdmin = () => {
   };
 
   return (
-    <Container className="py-5">
-      <Card className="shadow-sm">
-        <Card.Header className="bg-primary text-white">
-          <h3>Add New Admin</h3>
-        </Card.Header>
-        <Card.Body>
-          {error && <Alert variant="danger">{error}</Alert>}
-          {passwordError && <Alert variant="danger">{passwordError}</Alert>}
-          {success && <Alert variant="success">{success}</Alert>}
+    <div className="container py-5">
+      <div className="card shadow-sm border-rounded">
+        <div className="card-header text-white">
+          <h3 className="mb-0">Add New Admin</h3>
+        </div>
+        <div className="card-body">
+          {error && <div className="alert alert-danger">{error}</div>}
+          {passwordError && (
+            <div className="alert alert-danger" aria-live="polite">
+              {passwordError}
+            </div>
+          )}
+          {success && <div className="alert alert-success">{success}</div>}
 
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="username" className="form-label">
+                Username
+              </label>
+              <input
                 type="text"
+                className="form-control"
+                id="username"
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                placeholder="Enter username"
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <input
                 type="email"
+                className="form-control"
+                id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Enter email"
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
+            <div className="mb-3">
+              <label htmlFor="password_hashed" className="form-label">
+                Password
+              </label>
+              <input
                 type="password"
+                className="form-control"
+                id="password_hashed"
                 name="password_hashed"
                 value={formData.password_hashed}
                 onChange={handleChange}
-                placeholder="Enter password"
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Department</Form.Label>
-              <Form.Select
-                name="department"
-                value={formData.department}
+            <div className="mb-3">
+              <label htmlFor="role" className="form-label">
+                Role
+              </label>
+              <select
+                className="form-select"
+                id="role"
+                name="role"
+                value={formData.role}
                 onChange={handleChange}
-                required
               >
-                <option value="">Select Department</option>
-                {Object.keys(privilegesMap).map((department) => (
-                  <option key={department} value={department}>
-                    {department}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
+                <option value="User">Select Role</option>
+                <option value="Admin">Admin</option>
+                <option value="HR">HR</option>
+                <option value="HE">Health Literacy</option>
+                <option value="Comm">Communication</option>
+                <option value="Comm">CPD Traning</option>
+              </select>
+           
+            </div>
 
-            {formData.department && privilegesMap[formData.department] && (
-              <Form.Group className="mb-3">
-                <Form.Label>Privileges</Form.Label>
-                <Row>
-                  {privilegesMap[formData.department].map((privilege) => (
-                    <Col xs={6} key={privilege}>
-                      <Form.Check
-                        type="checkbox"
-                        id={privilege}
-                        label={privilege}
-                        value={privilege}
-                        checked={formData.privileges.includes(privilege)}
-                        onChange={handlePrivilegeChange}
-                      />
-                    </Col>
-                  ))}
-                </Row>
-              </Form.Group>
-            )}
-
-            <Form.Group className="mb-3">
-              <Form.Check
+            <div className="mb-3 form-check">
+              <input
                 type="checkbox"
+                className="form-check-input"
                 id="active_status"
                 name="active_status"
                 checked={formData.active_status}
                 onChange={handleChange}
-                label="Active"
               />
-            </Form.Group>
-
-            <div className="text-end">
-              <Button type="submit" variant="primary">
-                Add User
-              </Button>
+              <label htmlFor="active_status" className="form-check-label">
+                Active
+              </label>
             </div>
-          </Form>
-        </Card.Body>
-      </Card>
-    </Container>
+
+            <div className="d-flex justify-content-end">
+              <button type="submit" className="btn btn-primary">
+                Add User
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 
