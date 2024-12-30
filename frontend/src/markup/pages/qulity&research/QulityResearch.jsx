@@ -1,68 +1,70 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import classes from './QulityResearch.module.css';
+import { Carousel } from "react-bootstrap";
+import img3 from "../../../assets/img/about/008.jpeg";
+import img4 from "../../../assets/img/about/question-signs.jpg";
+import img5 from "../../../assets/img/about/elaerning-825x510.jpg";
 
-import img3 from '../../../assets/img/about/question-signs.jpg';
-import img4 from '../../../assets/img/about/008.jpeg';
-import img5 from '../../../assets/img/about/elaerning-825x510.jpg';
+
 
 const QulityResearch = () => {
   return (
-    <div className="wrapper home-default-wrapper">
-      <main className="main-content site-wrapper-reveal">
-        <section className="hero-slider">
-          <div className="swiper-container">
-            <div className="swiper-wrapper">
-              <div className="swiper-slide" style={{ backgroundImage: `url(${img3})` }}>
-                <div className="container">
-                  <div className="row">
-                    <div className="col-12">
-                      <div className="slider-content">
-                        <h5 className="title animated delay2">መኖራችን <span className="d-block">ለእርስዎ ነዉ!</span></h5>
-                        <h2 className="title animated delay2">Our Existence is <span className="d-block">For You</span></h2>
-                        <a href="#" className="btn btn-danger me-3 animated delay1">Quality & Research Free Training Site</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+    <div
+      className="qulity-research-container"
+   
+    >
+      {/* Carousel Section */}
+      <div className="carousel-section">
+        <Carousel interval={3000} controls={true} indicators={true} fade>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src={img3}
+              alt="First slide"
+              style={{ height: "90vh", objectFit: "cover" }}
+            />
+            <Carousel.Caption>
+              <div className="carousel-caption-content">
+                <h5 className="carousel-title">
+                  መኖራችን <span className="d-block">ለእርስዎ ነዉ!</span>
+                </h5>
+                <h2 className="carousel-subtitle">
+                  Our Existence is <span className="d-block">For You</span>
+                </h2>
+                <a
+                  href="#"
+                  className="btn btn-danger me-3 carousel-button"
+                >
+                  Quality & Research Free Training Site
+                </a>
               </div>
-
-              <div className="swiper-slide" style={{ backgroundImage: `url(${img4})` }}>
-                <div className="container">
-                  <div className="row">
-                    <div className="col-12">
-                      <div className="slider-content">
-                        <h5 className="title animated delay2">መኖራችን <span className="d-block">ለእርስዎ ነዉ!</span></h5>
-                        <h2 className="title animated delay2">Our Existence is <span className="d-block">For You</span></h2>
-                        <a href="#" className="btn btn-danger me-3 animated delay1">Quality & Research Free Training Site</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="swiper-slide" style={{ backgroundImage: `url(${img5})` }}>
-                <div className="container">
-                  <div className="row">
-                    <div className="col-12">
-                      <div className="slider-content">
-                        <h5 className="title animated delay2">መኖራችን <span className="d-block">ለእርስዎ ነዉ!</span></h5>
-                        <h2 className="title animated delay2">Our Existence is <span className="d-block">For You</span></h2>
-                        <a href="#" className="btn btn-danger me-3 animated delay1">Quality & Research Free Training Site</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="swiper-button-prev">
-              <i className="icofont-arrow-left"></i>
-            </div>
-            <div className="swiper-button-next">
-              <i className="icofont-arrow-right"></i>
-            </div>
-          </div>
-        </section>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src={img4}
+              alt="Second slide"
+              style={{ height: "90vh", objectFit: "cover" }}
+            />
+            <Carousel.Caption>
+              <h3>Comprehensive Training for Healthcare Professionals</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src={img5}
+              alt="Third slide"
+              style={{ height: "90vh", objectFit: "cover" }}
+            />
+            <Carousel.Caption>
+              <h3>Access Valuable Resources and Improve Quality Standards</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
+      </div>
 
         <div className={classes.container}>
           <h2 className={classes.heading}>Research Publications and Quality Improvement</h2>
@@ -181,7 +183,7 @@ const QulityResearch = () => {
             </ul>
           </section>
         </div>
-      </main>
+     
     </div>
   );
 };

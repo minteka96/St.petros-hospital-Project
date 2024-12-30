@@ -4,7 +4,7 @@ import Header from "./markup/components/Header/Header";
 import Footer from "./markup/components/Footer/Footer";
 import Home from "./markup/pages/Home/Home";
 // ***************************servicesdetail Client Side ********************
-import Services from "./markup/pages/servicepage/Services";
+import Services from "./markup/pages/servicepage/Services.jsx";
 import ServiceDetail from "./markup/pages/serviceDetaile/ServiceDetail.jsx";
 import Cardiology from "./markup/pages/serviceDetaile/cardac/Cardiology";
 import MCH from "./markup/pages/serviceDetaile/mch/MCH";
