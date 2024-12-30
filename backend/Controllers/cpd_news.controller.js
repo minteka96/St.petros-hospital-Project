@@ -1,3 +1,4 @@
+
 const cpd_NewsService = require("../Services/cpd_news.service");
 
 const createCpdNews = async (req, res) => {
@@ -13,13 +14,16 @@ const createCpdNews = async (req, res) => {
   } catch (err) {
     console.error("Error creating CPD news:", err);
     return res.status(500).json({ error: "Internal Server Error" });
+
   }
 };
 
 const getCpdNewsById = async (req, res) => {
   try {
     const newsId = req.params.id;
+
     const news = await cpd_NewsService.getCpdNewsById(newsId);
+
     
     if (!news) {
       return res.status(404).json({ error: "CPD News not found" });
@@ -33,7 +37,9 @@ const getCpdNewsById = async (req, res) => {
 
 const getAllCpdNews = async (req, res) => {
   try {
+
     const newsList = await cpd_NewsService.getAllCpdNews();
+
     
     if (!newsList) {
       return res.status(400).json({ error: "Failed to fetch CPD news entries!" });
@@ -58,6 +64,7 @@ const updateCpdNews = async (req, res) => {
     }
 
     const existingNews = await cpd_NewsService.getCpdNewsById(newsId);
+
     if (!existingNews) {
       return res.status(404).json({ error: "CPD News not found" });
     }
@@ -69,6 +76,7 @@ const updateCpdNews = async (req, res) => {
     };
 
     const result = await cpd_NewsService.updateCpdNews(newsId, updatedData);
+
 
     if (!result) {
       return res.status(404).json({ error: "Failed to update CPD news" });
@@ -86,7 +94,9 @@ const updateCpdNews = async (req, res) => {
 const deleteCpdNews = async (req, res) => {
   try {
     const newsId = req.params.id;
+
     const result = await cpd_NewsService.deleteCpdNews(newsId);
+
 
     if (!result) {
       return res.status(404).json({ error: "CPD News not found" });

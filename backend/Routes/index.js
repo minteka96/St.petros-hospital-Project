@@ -21,6 +21,7 @@ const cpdNewsRouter = require("./cpd_news.routes");
 const traineesSignUpRoute = require("./traineesSignUp.routes.js");
 // Import the trainees sign-in route
 const traineesSignInRoute = require("./traineesSignIn.routes.js");
+
 // Use the routers in the main router
 router.use(loginRouter);
 router.use(userRouter);

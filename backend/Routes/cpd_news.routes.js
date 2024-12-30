@@ -8,7 +8,9 @@ router.post(
   "/api/cpd-news",
   [
     authMiddleware.verifyToken,
+
     authMiddleware.checkRoles(["superadmin", "Admin", "CPD"])
+
   ],
   cpdNewsController.createCpdNews
 );
@@ -20,7 +22,9 @@ router.put(
   "/api/cpd-news/:id",
   [
     authMiddleware.verifyToken,
+
     authMiddleware.checkRoles(["superadmin", "Admin", "CPD"])
+
   ],
   cpdNewsController.updateCpdNews
 );
@@ -29,7 +33,9 @@ router.delete(
   "/api/cpd-news/:id",
   [
     authMiddleware.verifyToken,
+
     authMiddleware.checkRoles(["superadmin", "Admin", "CPD"])
+
   ],
   cpdNewsController.deleteCpdNews
 );
