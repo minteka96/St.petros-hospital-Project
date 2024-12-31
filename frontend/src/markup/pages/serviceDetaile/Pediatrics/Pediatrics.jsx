@@ -2,8 +2,8 @@
 import React from "react";
 import { Carousel } from "react-bootstrap"; // Importing Carousel component from React-Bootstrap
 import img1 from "../../../../assets/img/slider/peadi/pedi 10.JPG";
-import img2 from "../../../../assets/img/slider/peadi/pedi2.jpg";
-import img3 from "../../../../assets/img/slider/peadi/pedi4.jpg";
+import img2 from "../../../../assets/img/slider/peadi/pedi01.jpg";
+import img3 from "../../../../assets/img/slider/peadi/pedih.JPG";
 import classes from "./Pediatrics.module.css";
 
 const Pediatrics = () => {

@@ -13,12 +13,11 @@
 
 .pageTitleArea h1 {
   font-size: 2.5rem;
-  color: #00796b;/* Dark green for the pharmacy theme */
+  color: #00796b; /* Dark green for the pharmacy theme */
 }
 
 .pageTitleArea li, p {
   font-size: 1.2rem;
-  
 }
 
 /* Department Area */
@@ -30,59 +29,27 @@
 }
 
 /* Department Gallery */
-.contentWrapper {
+.departmentGallery {
   margin: 20px 0;
   width: 80%;
   max-width: 800px;
-  height: 500px;
-  margin: auto;
 }
 
-.galleryTitle {
-  margin-bottom: 10px;
-  color: #00796b; /* Darker green for gallery title */
-}
-
-.galleryImage {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-/* Pharmacy Services */
-.services {
-  margin: 20px 0;
-}
-
-.servicesTitle {
-  margin-bottom: 10px;
+/* Services */
+.servicesTitle, .galleryTitle {
   color: #00796b;
+  text-align: center;
 }
 
 .servicesList {
   list-style-type: none;
   padding: 0;
+  font-size: 1.2rem;
 }
 
 .servicesItem {
   margin: 5px 0;
   color: #000; /* Dark green text for services */
-}
-
-/* Head Of Department */
-.headOfDepartment {
-  margin: 20px 0;
-}
-
-.departmentHeadTitle {
-  margin-bottom: 5px;
-  color: #00796b;
-}
-
-.departmentHeadName {
-  margin: 5px 0;
-  font-weight: bold;
-  color: #00796b;
 }
 
 /* Swiper Navigation Buttons */
@@ -92,50 +59,19 @@
   padding: 10px;
   border-radius: 50%;
 }
-
+.gt{
+  color: #00796b;
+}
 /* Responsive Styles */
 @media (max-width: 768px) {
-  .departmentArea {
-    flex-direction: column;
-  }
-
-  .sidebarWrapper {
-    margin-bottom: 40px;
-  }
-
-  /* Mobile adjustments */
-  .swiper-container {
-    height: 300px; /* Adjust height for small screens */
-  }
-
   .departmentGallery {
     width: 100%;
   }
-
-  .servicesList {
-    padding-left: 0;
+ .pharmacyServices {
+  text-align: left;
+  text-decoration: dotted;
   }
-
   .servicesItem {
-    font-size: 1rem; /* Adjust font size for mobile */
+    font-size: 1.2rem; /* Adjust font size for mobile */
   }
-
-  .headOfDepartment {
-    margin: 10px 0;
-    text-align: center;
-  }
-
-  .departmentHeadName {
-    font-size: 1.1rem;
-  }
-}
-
-/* Styling for <strong> elements */
-strong {
-  color: #00796b; /* Set color of <strong> elements to green */
-}
-
-/* Ensuring consistency of black text color */
-body, .servicesItem, .departmentHeadName {
-  color: #000; /* Black text color */
 }

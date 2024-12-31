@@ -3,9 +3,9 @@
 
 import React from "react";
 import { Carousel } from "react-bootstrap";
-import img1 from "../../../../assets/img/slider/derma/001.avif"; // Replace with relevant ART department images
+import img1 from "../../../../assets/img/slider/pharmacy/pharmacy.jpg"; // Replace with relevant ART department images
 import img2 from "../../../../assets/img/about/006.webp";
-import img3 from "../../../../assets/img/banner/0004.jpeg";
+import img3 from "../../../../assets/img/slider/derma/001.avif";
 import classes from "./ART.module.css";
 
 const ART = () => {

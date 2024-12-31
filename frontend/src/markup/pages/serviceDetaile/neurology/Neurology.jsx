@@ -3,7 +3,7 @@ import React from "react";
 import { Carousel } from "react-bootstrap";
 import img1 from "../../../../assets/img/slider/neuro/nurology.jpg";
 import img2 from "../../../../assets/img/slider/neuro/923530Dr Felke WMichael Neurosurgeon.jpg";
-import img3 from "../../../../assets/img/slider/st.peter1jpg copy.png";
+import img3 from "../../../../assets/img/slider/neuro/nurology.jpg";
 import classes from "./Neurology.module.css";
 
 const Neurology = () => {
@@ -16,7 +16,7 @@ const Neurology = () => {
           Comprehensive care for neurological conditions. The neurology
           department is specialized in the diagnosis and treatment of diseases
           of the nervous system, including stroke, movement problems,
-          Parkinson's disease, epilepsy, and neuromuscular disorders. SPH
+          Parkinsons disease, epilepsy, and neuromuscular disorders. SPH
           provides the finest and most recent healthcare services in managing
           neurological disorders, such as:
         </p>
@@ -92,16 +92,6 @@ const Neurology = () => {
                 Neuropsychological assessments
               </li>
             </ul>
-          </div>
-
-          {/* Head Of Department */}
-          <div className={classes.headOfDepartment} id="team">
-            <h4 className={classes.departmentHeadTitle}>Head of Department</h4>
-            <h5 className={classes.departmentHeadName}>Dr. Jane Doe</h5>
-            <p>
-              Specializing in pediatric neurology with over 15 years of
-              experience.
-            </p>
           </div>
         </div>
       </div>

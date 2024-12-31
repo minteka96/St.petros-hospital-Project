@@ -3,7 +3,7 @@ import React from "react";
 import { Carousel } from "react-bootstrap"; // Import Carousel from React Bootstrap
 import img1 from "../../../../assets/img/slider/surgical/surgical.jpg";
 import img2 from "../../../../assets/img/slider/surgical/surgical26.jpg";
-import img3 from "../../../../assets/img/slider/surgical/surgical (2).jpg";
+import img3 from "../../../../assets/img/slider/surgical/surgical3.jpg";
 import classes from "./Surgery.module.css";
 
 const Surgery = () => {
