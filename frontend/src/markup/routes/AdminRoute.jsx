@@ -32,6 +32,9 @@ const api_url = import.meta.env.VITE_API_URL;
 import ApplicantsPage from "../components/Admin/Applicant/ApplicantsPage.jsx";
 import HRManagerApplicants from "../components/Admin/Applicant/HRManagerApplicants.jsx";
 import JobArchivePage from "../components/Admin/Applicant/JobArchivePage.jsx";
+import AddNewCourse from "../components/Admin/CPD/CpdCourse/AddNewCourse.jsx";
+import ListAllCourses from "../components/Admin/CPD/CpdCourse/ListAllCourses.jsx";
+import CourseDetail from "../components/Admin/CPD/CpdCourse/CourseDetail.jsx";
 
 const AdminRoute = () => {
   const navigate = useNavigate();
@@ -253,6 +256,9 @@ const AdminRoute = () => {
               <Route path="/add-job" element={<AddJobForm />} />
               <Route path="/all-job" element={<JobsListPage />} />
               <Route path="/job/edit/:job_id" element={<EditJobForm />} />
+              <Route path="/cpd/newCourse" element={<AddNewCourse />} />
+              <Route path="/cpd/list" element={<ListAllCourses />} />
+              <Route path="/cpd/course/:course_id" element={<CourseDetail />} />
             </Routes>
           </div>
         </div>
@@ -306,7 +312,9 @@ const AdminRoute = () => {
               <Form.Group className="mb-3" controlId="formNewPassword">
                 <Form.Label>New Password</Form.Label>
                 {passwordError && (
-                  <div className="alert color1 pt-0 mb-1 p-1">{passwordError}</div>
+                  <div className="alert color1 pt-0 mb-1 p-1">
+                    {passwordError}
+                  </div>
                 )}
                 <InputGroup>
                   <Form.Control

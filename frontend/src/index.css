@@ -61,6 +61,20 @@
   }
 }
 
+/* Disable text selection */
+.no-copy {
+  user-select: none;  /* Prevents text from being selected */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
+  -ms-user-select: none; /* For older versions of IE */
+}
+
+/* Prevent right-click context menu (optional) */
+.no-copy-context {
+  pointer-events: none; /* Disables right-click */
+}
+
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
