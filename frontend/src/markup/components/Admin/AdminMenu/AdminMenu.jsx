@@ -98,9 +98,6 @@ function AdminMenu() {
             <Link to="/admin/cpd-news-list" className="list-group-item">
               List of CPD News
             </Link>
-            <Link to="/admin/edit-cpd-news/:newsId" className="list-group-item">
-              Edit CPD News
-            </Link>
           </>
         )}
 
