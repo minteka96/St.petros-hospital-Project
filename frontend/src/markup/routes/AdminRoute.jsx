@@ -13,6 +13,7 @@ import AddNews from "../components/Admin/AddNewsForm/AddNewsForm.jsx";
 import EditNews from "../components/Admin/NewsEditForm/NewsEditForm.jsx";
 import Newss from "../components/Admin/NewsList/NewsList.jsx";
 /* **************** News Components End Here about news  ******************/
+
 /* ************ Health Tip Components Start Here ********************  */
 import HealthTipList from "../components/Admin/HealthTipList/HealthTipList.jsx";
 import AddHealthTipForm from "../components/Admin/addhealthtipForm/AddHealthTipForm.jsx";
@@ -23,13 +24,17 @@ import { useAuth } from "../../contexts/AuthContext.jsx";
 import AdminManagement from "../pages/Admin/AdminManagement.jsx";
 import AddAdmin from "../pages/Admin/AddAdmin.jsx";
 import JobsListPage from "../components/Admin/JobList/JobList.jsx";
-// import ContactDashboard from "../components/Admin/Contact/ContactDashboard.jsx";
-// import AdminLayout from "../components/Admin/AdminLayout.jsx";
+
 // CPD News Components
 import AddCpdNewsForm from "../components/Admin/CPDNewsForm/AddCpdNewsForm.jsx";
 import CpdNewsList from "../components/Admin/CPDNewsList/CpdNewsList.jsx";
 import EditCpdNewsForm from "../components/Admin/CPDNewsDetails/EditCpdNewsForm .jsx";
 import Cpdnews from "../pages/CPD/Cpdnews.jsx";
+
+// Train Info Components
+import TrainInfoList from "../../markup/components/Admin/Trainer/TrainInfoList.jsx";
+import TrainInfoDetail from "../../markup/components/Admin/Trainer/TrainInfoDetail.jsx";
+import TraineeAddForm from "../../markup/components/Admin/Trainer/TraineeAddForm.jsx";
 
 const AdminRoute = () => {
   const navigate = useNavigate();
@@ -142,19 +147,15 @@ const AdminRoute = () => {
               <Route path="/add-job" element={<AddJobForm />} />
               <Route path="/all-job" element={<JobsListPage />} />
               <Route path="/job/edit/:job_id" element={<EditJobForm />} />
-              {/* <Route path="/contact" element={<ContactDashboard />} /> */}
+              <Route path="/add-cpd-news" element={<AddCpdNewsForm />} />
+              <Route path="/edit-cpd-news/:newsId" element={<EditCpdNewsForm/>} />
+              <Route path="/cpd-news-list" element={<CpdNewsList />} />
+              
+              {/* Train Info Routes */}
+              <Route path="/trainees" element={<TrainInfoList    />} />
+              <Route path="/trainee/:id" element={<TrainInfoDetail />} />
+              <Route path="/add-trainee" element={<TraineeAddForm />} />
 
-              {/* Admin Routes */}
-              {/* <Route path="/admin" element={<AdminLayout />}> */}
-                {/* Nested child routes */}
-                  <Route path="/cpd-news" element={<Cpdnews />} />
-                <Route path="/add-cpd-news" element={<AddCpdNewsForm />} />
-                <Route path="/edit-cpd-news/:newsId" element={<EditCpdNewsForm/>} />
-                <Route path="/cpd-news-list" element={<CpdNewsList />} />
-              {/* </Route> */}
-
-              {/* Catch-all Route for undefined routes */}
-              {/* <Route path="*" element={<h2>Page Not Found</h2>} /> */}
             </Routes>
           </div>
         </div>

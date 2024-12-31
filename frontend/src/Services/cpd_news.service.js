@@ -98,34 +98,38 @@ const getCpdNewsById = async (news_id) => {
   }
 };
 
-const updateCpdNews = async (news_id, formData, token) => {
+const updateCpdNews = async (id, formData, token) => {
   try {
-    const response = await fetch(`/api/cpd-news/${news_id}`, {
+    const response = await fetch(`${api_url}/api/cpd-news/${id}`, {
       method: "PUT",
       headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "multipart/form-data", // Remove Content-Type header for FormData
+        "x-access-token": token,
       },
       body: formData,
     });
 
     if (!response.ok) {
-      const errorText = await response.text(); // Try to parse the error as text
+      const errorText = await response.text();
       let errorDetails;
       try {
-        errorDetails = JSON.parse(errorText); // Try parsing as JSON
+        errorDetails = JSON.parse(errorText);
       } catch (e) {
-        errorDetails = errorText; // If it fails, use the raw text
+        errorDetails = errorText;
       }
-      throw new Error(`HTTP error! Status: ${response.status}, Details: ${JSON.stringify(errorDetails)}`);
+      throw new Error(
+        `HTTP error! Status: ${response.status}, Details: ${JSON.stringify(
+          errorDetails
+        )}`
+      );
     }
 
     return await response.json();
   } catch (err) {
     console.error("Error updating CPD news:", err);
-    throw err; // Propagate the error to be handled by the frontend
+    throw err;
   }
 };
+
 
 
 // Delete a specific CPD news item
