@@ -6,7 +6,7 @@ import { useAuth } from "../../../../contexts/AuthContext";
 
 function AdminMenu() {
   const [role, setRole] = useState("");
-  const { user } = useAuth();
+  const { user, privileges } = useAuth();
 
   useEffect(() => {
     const token = user ? user.token : null;
@@ -104,6 +104,12 @@ function AdminMenu() {
           </>
         )}
 
+        <Link to="/admin/cpd/newCourse" className="list-group-item">
+          Add CPD Course
+        </Link>
+        <Link to="/admin/cpd/list" className="list-group-item">
+          List of CPD Courses
+        </Link>
         <Link to="/admin/video" className="list-group-item">
           Video
         </Link>

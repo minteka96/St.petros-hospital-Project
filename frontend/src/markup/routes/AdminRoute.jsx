@@ -23,6 +23,14 @@ import { useAuth } from "../../contexts/AuthContext.jsx";
 import AdminManagement from "../pages/Admin/AdminManagement.jsx";
 import AddAdmin from "../pages/Admin/AddAdmin.jsx";
 import JobsListPage from "../components/Admin/JobList/JobList.jsx";
+import { updatePasswordSchema } from "../../Schemas/validationSchemas.js";
+const api_url = import.meta.env.VITE_API_URL;
+import ApplicantsPage from "../components/Admin/Applicant/ApplicantsPage.jsx";
+import HRManagerApplicants from "../components/Admin/Applicant/HRManagerApplicants.jsx";
+import JobArchivePage from "../components/Admin/Applicant/JobArchivePage.jsx";
+import AddNewCourse from "../components/Admin/CPD/CpdCourse/AddNewCourse.jsx";
+import ListAllCourses from "../components/Admin/CPD/CpdCourse/ListAllCourses.jsx";
+import CourseDetail from "../components/Admin/CPD/CpdCourse/CourseDetail.jsx";
 // import ContactDashboard from "../components/Admin/Contact/ContactDashboard.jsx";
 // import AdminLayout from "../components/Admin/AdminLayout.jsx";
 // CPD News Components
@@ -142,22 +150,122 @@ const AdminRoute = () => {
               <Route path="/add-job" element={<AddJobForm />} />
               <Route path="/all-job" element={<JobsListPage />} />
               <Route path="/job/edit/:job_id" element={<EditJobForm />} />
-              {/* <Route path="/contact" element={<ContactDashboard />} /> */}
-
-              {/* Admin Routes */}
-              {/* <Route path="/admin" element={<AdminLayout />}> */}
-                {/* Nested child routes */}
-                  <Route path="/cpd-news" element={<Cpdnews />} />
+<Route path="/cpd-news" element={<Cpdnews />} />
                 <Route path="/add-cpd-news" element={<AddCpdNewsForm />} />
                 <Route path="/edit-cpd-news/:newsId" element={<EditCpdNewsForm/>} />
                 <Route path="/cpd-news-list" element={<CpdNewsList />} />
-              {/* </Route> */}
-
-              {/* Catch-all Route for undefined routes */}
-              {/* <Route path="*" element={<h2>Page Not Found</h2>} /> */}
+              <Route path="/cpd/newCourse" element={<AddNewCourse />} />
+              <Route path="/cpd/list" element={<ListAllCourses />} />
+              <Route path="/cpd/course/:course_id" element={<CourseDetail />} />
             </Routes>
           </div>
         </div>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Change Password</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form id="change-password-form" onSubmit={handleSubmit}>
+              {/* Email Address Field */}
+              <Form.Group className="mb-3" controlId="formEmail">
+                {error && <div className="alert alert-danger">{error}</div>}
+                {success && (
+                  <div className="alert alert-success">{success}</div>
+                )}
+
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="email"
+                  placeholder="name@example.com"
+                  autoFocus
+                  required
+                />
+              </Form.Group>
+
+              {/* Current Password Field */}
+              <Form.Group className="mb-3" controlId="formCurrentPassword">
+                <Form.Label>Current Password</Form.Label>
+                <InputGroup>
+                  <Form.Control
+                    onChange={(e) => setCurrentPassword(e.target.value)}
+                    type={showCurrentPassword ? "text" : "password"}
+                    placeholder="Enter current password"
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="bg2"
+                    variant="outline-secondary"
+                    onClick={() =>
+                      togglePasswordVisibility(setShowCurrentPassword)
+                    }
+                  >
+                    {showCurrentPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </InputGroup>
+              </Form.Group>
+
+              {/* New Password Field */}
+              <Form.Group className="mb-3" controlId="formNewPassword">
+                <Form.Label>New Password</Form.Label>
+                {passwordError && (
+                  <div className="alert color1 pt-0 mb-1 p-1">
+                    {passwordError}
+                  </div>
+                )}
+                <InputGroup>
+                  <Form.Control
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    type={showNewPassword ? "text" : "password"}
+                    placeholder="Enter new password"
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="bg2"
+                    variant="outline-secondary"
+                    onClick={() => togglePasswordVisibility(setShowNewPassword)}
+                  >
+                    {showNewPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </InputGroup>
+              </Form.Group>
+
+              {/* Confirm New Password Field */}
+              <Form.Group className="mb-3" controlId="formConfirmNewPassword">
+                <Form.Label>Confirm New Password</Form.Label>
+                <InputGroup>
+                  <Form.Control
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder="Re-enter new password"
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="bg2"
+                    variant="outline-secondary"
+                    onClick={() =>
+                      togglePasswordVisibility(setShowConfirmPassword)
+                    }
+                  >
+                    {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </InputGroup>
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" type="submit" form="change-password-form">
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ const loginRouter = require("./logIn.routes");
 const userRouter = require("./user.routes");
 // Import the news router
 const newsRoutes = require("./news.routes");
+const cpdRoute = require("./cpd.routes");
 // Import the video router
 const videoRouter = require("./videos.routes");
 
@@ -25,6 +26,7 @@ const traineesSignInRoute = require("./traineesSignIn.routes.js");
 // Use the routers in the main router
 router.use(loginRouter);
 router.use(userRouter);
+router.use(cpdRoute);
 router.use(applicantRouter);
 // Add the install router to the main router
 router.use(installRouter);
