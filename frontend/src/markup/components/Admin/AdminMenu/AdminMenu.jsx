@@ -107,6 +107,9 @@ function AdminMenu() {
         <Link to="/admin/cpd/list" className="list-group-item">
           List of CPD Courses
         </Link>
+        <Link to="/admin/cpd/schedule" className="list-group-item">
+          List of Course Schedules
+        </Link>
         <Link to="/admin/video" className="list-group-item">
           Video
         </Link>
