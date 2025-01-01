@@ -9,8 +9,6 @@ const ListAllCourses = () => {
   const token = user ? user.token : null;
   const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [refresh, setRefresh] = useState(false);
   // Fetch all cpd courses
   useEffect(() => {
     if (!token) {
@@ -26,7 +24,6 @@ const ListAllCourses = () => {
           },
         });
         setCourses(response.data);
-        console.log("response.data", response.data);
       } catch (error) {
         console.error("Error fetching CPD courses:", error);
       }
@@ -36,7 +33,7 @@ const ListAllCourses = () => {
     
     
     
-  }, [token, navigate, refresh]);
+  }, [token, navigate]);
   
 
 

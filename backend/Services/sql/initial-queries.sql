@@ -98,6 +98,18 @@ VALUES
 ON DUPLICATE KEY UPDATE 
     `video_link` = VALUES(`video_link`);
 
+
+-- Creat contact Table
+CREATE TABLE IF NOT EXISTS `contact` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL,
+    `email` VARCHAR(255) NOT NULL,
+    `subject` VARCHAR(255) NOT NULL,
+    `message` TEXT NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)
+
 -- Create cpd_trainings Table
 CREATE TABLE IF NOT EXISTS `cpd_trainings` (
     `training_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -123,7 +135,8 @@ CREATE TABLE IF NOT EXISTS `training_schedule` (
     `course_end_date` DATE NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (training_id) REFERENCES cpd_trainings(training_id)
+    FOREIGN KEY (training_id) REFERENCES cpd_trainings(training_id),
+    FOREIGN KEY (course_name) REFERENCES cpd_trainings(course_name)
 ) ENGINE=InnoDB;
 
 -- Create cpd_news Table

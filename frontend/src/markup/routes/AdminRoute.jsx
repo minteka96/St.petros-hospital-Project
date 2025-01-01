@@ -39,6 +39,7 @@ import AddCpdNewsForm from "../components/Admin/CPDNewsForm/AddCpdNewsForm.jsx";
 import CpdNewsList from "../components/Admin/CPDNewsList/CpdNewsList.jsx";
 import EditCpdNewsForm from "../components/Admin/CPDNewsDetails/EditCpdNewsForm .jsx";
 import Cpdnews from "../pages/CPD/Cpdnews.jsx";
+import ListOfSchedule from "../components/Admin/CPD/CpdSchedules/ListOfSchedule.jsx";
 
 const AdminRoute = () => {
   const navigate = useNavigate();
@@ -276,6 +277,7 @@ const AdminRoute = () => {
               <Route path="/cpd/newCourse" element={<AddNewCourse />} />
               <Route path="/cpd/list" element={<ListAllCourses />} />
               <Route path="/cpd/course/:course_id" element={<CourseDetail />} />
+              <Route path="/cpd/schedule" element={<ListOfSchedule />} />
             </Routes>
           </div>
         </div>
