@@ -198,8 +198,8 @@ function CourseDetail() {
         setCreateSchedule(!createSchedule);
         setTimeout(() => {
           handleCloseSchedule();
+          navigate(`/admin/cpd/schedule`);
         }, 1500);
-        // navigate(`/cpd/course/${course_id}`);
       }
     } catch (error) {
       console.error("Error updating schedule:", error);
