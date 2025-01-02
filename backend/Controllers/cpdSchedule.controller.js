@@ -32,23 +32,33 @@ async function createSchedule(req, res) {
   }
 }
 
-// get all cpd schedules
+// Get all CPD schedules
 async function getAllSchedules(req, res) {
   try {
+    // Update registration status for all schedules
+    await cpdScheduleService.updateAllRegistrationStatuses();
+
+    // Fetch updated schedules
     const schedules = await cpdScheduleService.getAllSchedules();
-    if (!schedules) {
+
+    if (!schedules || schedules.length === 0) {
       return res.status(404).json({ error: "Schedules not found" });
     }
+
+    // Return the updated schedules
     res.status(200).json(schedules);
   } catch (error) {
+    console.error("Error fetching schedules:", error);
     res.status(400).json({ error: error.message });
   }
 }
+
 
 // get a specific cpd schedule by id
 async function getScheduleById(req, res) {
   const { id } = req.params;
   try {
+    await cpdScheduleService.updateAllRegistrationStatuses();
     const schedule = await cpdScheduleService.getScheduleById(id);
     if (!schedule) {
       return res.status(404).json({ error: "Schedule not found" });

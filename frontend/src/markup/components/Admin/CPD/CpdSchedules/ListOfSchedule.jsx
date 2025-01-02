@@ -10,10 +10,10 @@ function ListOfSchedule() {
   const token = user ? user.token : null;
   const navigate = useNavigate();
   const [schedule, setSchedule] = useState([]);
-  const [filteredSchedule, setFilteredSchedule] = useState({});
+  const [refresh, setRefresh] = useState(false);
   const [updateSchedule, setUpdateSchedule] = useState(false);
   const [EditSchedule, setEditSchedule] = useState({});
-
+  console.log("EditSchedule", EditSchedule);
   const handleScheduleChange = (e) => {
     const { name, value } = e.target;
     setEditSchedule((prev) => ({
@@ -39,7 +39,7 @@ function ListOfSchedule() {
       }
     };
     fetchSchedule();
-  }, []);
+  }, [refresh, token, navigate]);
 
   // collect data with filter by id
   const handleFilter = (id) => {
@@ -48,7 +48,10 @@ function ListOfSchedule() {
 
   const [showSchedule, setShowSchedule] = useState(false);
 
-  const handleCloseSchedule = () => setShowSchedule(false);
+  const handleCloseSchedule = () => {
+    setShowSchedule(false);
+    setUpdateSchedule(false);
+  };
   const handleShowSchedule = (id) => {
     setShowSchedule(true);
     handleFilter(id);
@@ -61,21 +64,95 @@ function ListOfSchedule() {
       [name]: value,
     }));
   };
-  // format dates
+
+  const handleDeleteSchedule = async (id) => {
+    // confirm delete by alert
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this schedule?"
+    );
+    if (!confirmDelete) {
+      return;
+    }
+
+    try {
+      const response = await axios.delete(`${api_url}/api/cpd/schedule/${id}`, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      if (response.status === 200) {
+        setRefresh(!refresh);
+      }
+    } catch (error) {
+      console.error("Error deleting CPD schedule:", error);
+    }
+  };
+
+  const handleUpdateSchedule = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("course_name", EditSchedule.course_name);
+    formData.append(
+      "registration_start_date",
+      EditSchedule.registration_start_date
+    );
+    formData.append(
+      "registration_end_date",
+      EditSchedule.registration_end_date
+    );
+    formData.append("course_start_date", EditSchedule.course_start_date);
+    formData.append("course_end_date", EditSchedule.course_end_date);
+    try {
+      console.log("EditSchedule", EditSchedule);
+      const response = await axios.put(
+        `${api_url}/api/cpd/schedule/${EditSchedule?.schedule_id}`,
+        formData,
+        {
+          headers: {
+            "x-access-token": token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status === 200) {
+        setUpdateSchedule(!updateSchedule);
+        setRefresh(!refresh);
+        setTimeout(() => {
+          handleCloseSchedule();
+        }, 1500);
+      }
+    } catch (error) {
+      console.error("Error updating CPD schedule:", error);
+    }
+  };
+  // format dates like December 1, 2023
+  const formatDateToYearMonthDate = (date) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${year}/${month}/${day}`;
+  };
+
   schedule.map((schedule) => {
-    schedule.registration_start_date = new Date(
+    schedule.registration_start_date = formatDateToYearMonthDate(
       schedule.registration_start_date
-    ).toLocaleDateString();
-    schedule.registration_end_date = new Date(
+    );
+    schedule.registration_end_date = formatDateToYearMonthDate(
       schedule.registration_end_date
-    ).toLocaleDateString();
-    schedule.course_start_date = new Date(
+    );
+    schedule.course_start_date = formatDateToYearMonthDate(
       schedule.course_start_date
-    ).toLocaleDateString();
-    schedule.course_end_date = new Date(
+    );
+    schedule.course_end_date = formatDateToYearMonthDate(
       schedule.course_end_date
-    ).toLocaleDateString();
+    );
   });
+
+  const formatdate = (date) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(date).toLocaleDateString("en-US", options);
+  };
 
   return (
     <div className="container py-5">
@@ -92,48 +169,72 @@ function ListOfSchedule() {
               <th className="px-3">Course Name</th>
               <th className="px-3">Registration Start Date</th>
               <th className="px-3">Registration End Date</th>
+              <th className="px-3">Registration Expiry</th>
               <th className="px-3">Training Start Date</th>
               <th className="px-3">Training End Date</th>
               <th className="px-3">Action</th>
             </tr>
           </thead>
           <tbody>
-            {schedule.map((schedule, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{schedule.course_name}</td>
-                <td>{schedule.registration_start_date}</td>
-                <td>{schedule.registration_end_date}</td>
-                <td>{schedule.course_start_date}</td>
-                <td>{schedule.course_end_date}</td>
-                <td className="d-flex gap-2">
-                  <button
-                    onClick={() => handleShowSchedule(schedule.schedule_id)}
-                    className="btn bg-white border border-1 "
+            {schedule
+              .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) // Sort by created_at
+              .map((schedule, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{schedule.course_name}</td>
+                  <td>{formatdate(schedule.registration_start_date)}</td>
+                  <td>{formatdate(schedule.registration_end_date)}</td>
+                  <td
+                    className={
+                      schedule.registration_status
+                        ? "text-danger"
+                        : "text-success"
+                    }
                   >
-                    <img
-                      src="https://img.icons8.com/?size=100&id=114092&format=png&color=000000"
-                      alt=""
-                      style={{ width: "20px", height: "20px" }}
-                    />
-                  </button>
-                  <button className="btn bg-white border border-1">
-                    <img
-                      src="https://img.icons8.com/?size=100&id=gjhtZ8keOudc&format=png&color=000000"
-                      alt=""
-                      style={{ width: "20px", height: "20px" }}
-                    />
-                  </button>
-                  <button className="btn bg-white border border-1">
-                    <img
-                      src="https://img.icons8.com/?size=100&id=47863&format=png&color=000000"
-                      alt=""
-                      style={{ width: "20px", height: "20px" }}
-                    />
-                  </button>
-                </td>
-              </tr>
-            ))}
+                    {schedule.registration_status ? "Closed" : "Open"}
+                  </td>
+                  <td>{formatdate(schedule.course_start_date)}</td>
+                  <td>{formatdate(schedule.course_end_date)}</td>
+                  <td className="d-flex gap-2">
+                    {!schedule?.registration_status ? (
+                      <>
+                        <button
+                          onClick={() =>
+                            handleShowSchedule(schedule.schedule_id)
+                          }
+                          className="btn bg-white border border-1 "
+                        >
+                          <img
+                            src="https://img.icons8.com/?size=100&id=114092&format=png&color=000000"
+                            alt=""
+                            style={{ width: "20px", height: "20px" }}
+                          />
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleDeleteSchedule(schedule.schedule_id)
+                          }
+                          className="btn bg-white border border-1"
+                        >
+                          <img
+                            src="https://img.icons8.com/?size=100&id=gjhtZ8keOudc&format=png&color=000000"
+                            alt=""
+                            style={{ width: "20px", height: "20px" }}
+                          />
+                        </button>
+                      </>
+                    ) : null}
+
+                    <button className="btn bg-white border border-1">
+                      <img
+                        src="https://img.icons8.com/?size=100&id=47863&format=png&color=000000"
+                        alt=""
+                        style={{ width: "20px", height: "20px" }}
+                      />
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
         <Modal
@@ -145,11 +246,11 @@ function ListOfSchedule() {
         >
           <Modal.Header closeButton>
             <Modal.Title>
-              Schedule {EditSchedule.course_name} Course
+              Schedule for {EditSchedule.course_name} Course
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <form action="" onSubmit={handleSchedule}>
+            <form action="" onSubmit={handleUpdateSchedule}>
               <div className="mb-3">
                 {updateSchedule && (
                   <div className="alert alert-success py-1">
@@ -164,7 +265,6 @@ function ListOfSchedule() {
                 </label>
                 <input
                   type="date"
-                  value={EditSchedule.registration_start_date}
                   className="form-control mb-3"
                   name="registration_start_date"
                   onChange={handleScheduleChange}

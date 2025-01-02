@@ -57,7 +57,7 @@ async function getAllSchedules() {
 //update cpd schedule by id
 async function updateScheduleById(id, data) {
   const sql =
-    "UPDATE training_schedule SET course_name = ?, registration_start_date = ?, registration_end_date = ?, course_start_date = ?, course_end_date = ? WHERE training_id = ?";
+    "UPDATE training_schedule SET course_name = ?, registration_start_date = ?, registration_end_date = ?, course_start_date = ?, course_end_date = ? WHERE schedule_id = ?";
   const connection = await conn.pool.getConnection();
   try {
     await connection.beginTransaction();
@@ -95,5 +95,39 @@ async function deleteScheduleById(id) {
     await connection.release();
   }
 }
+// "UPDATE training_schedule SET registration_status = (NOW() > registration_end_date)";
 
-module.exports = { createSchedule, getScheduleById, getAllSchedules, updateScheduleById, deleteScheduleById };
+//update registration status by itself
+// Update registration status for all schedules
+async function updateAllRegistrationStatuses() {
+  const sql = `
+    UPDATE training_schedule 
+    SET registration_status = (NOW() > registration_end_date)
+  `;
+  const connection = await conn.pool.getConnection();
+  try {
+    await connection.beginTransaction();
+    const [result] = await connection.query(sql);
+    await connection.commit();
+    return result;
+  } catch (error) {
+    await connection.rollback();
+    console.error("Error updating registration statuses:", error);
+    throw error;
+  } finally {
+    await connection.release();
+  }
+}
+
+
+
+
+
+module.exports = {
+  createSchedule,
+  getScheduleById,
+  getAllSchedules,
+  updateScheduleById,
+  deleteScheduleById,
+  updateAllRegistrationStatuses,
+};

@@ -99,7 +99,7 @@ ON DUPLICATE KEY UPDATE
     `video_link` = VALUES(`video_link`);
 
 
--- Creat contact Table
+-- Create contact Table
 CREATE TABLE IF NOT EXISTS `contact` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
     `message` TEXT NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)
+) ENGINE=InnoDB;
 
 -- Create cpd_trainings Table
 CREATE TABLE IF NOT EXISTS `cpd_trainings` (
@@ -131,6 +131,7 @@ CREATE TABLE IF NOT EXISTS `training_schedule` (
     `course_name` VARCHAR(255) NOT NULL,
     `registration_start_date` DATE NOT NULL,
     `registration_end_date` DATE NOT NULL,
+    `registration_status` BOOLEAN DEFAULT FALSE,
     `course_start_date` DATE NOT NULL,
     `course_end_date` DATE NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -178,13 +179,15 @@ CREATE TABLE IF NOT EXISTS `trainees_info` (
 CREATE TABLE IF NOT EXISTS `courses` (
     `course_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `trainee_id` VARCHAR(36) NOT NULL,
+    `schedule_id` INT NOT NULL,
     `course_name` VARCHAR(255) NOT NULL,
     `pri_score` VARCHAR(255) NOT NULL,
     `post_score` VARCHAR(255) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (trainee_id) REFERENCES trainees(trainee_id),
-    FOREIGN KEY (course_name) REFERENCES cpd_trainings(course_name)
+    FOREIGN KEY (course_name) REFERENCES cpd_trainings(course_name),
+    FOREIGN KEY (schedule_id) REFERENCES training_schedule(schedule_id)
 ) ENGINE=InnoDB;
 
 -- Create trainees_status Table
