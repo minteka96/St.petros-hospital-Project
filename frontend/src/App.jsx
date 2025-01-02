@@ -54,11 +54,11 @@ import ApplicantForms from "./markup/pages/Jobs/ApplicationForm.jsx";
 import HealthTip from "./markup/pages/healthtips/HealthTip.jsx";
 import HealthTipDetail from "./markup/pages/healthtips/healthtipdetail/healthtipdetail.jsx";
 import HealthTipList from "./markup/components/Admin/HealthTipList/HealthTipList.jsx";
+import TraineeDashboard from "./markup/components/TraineeDashboard/TraineeDashboard.jsx";
 function App() {
   // check if thr route is '/login' or not
   if (window.location.pathname === "/login") {
-    
-  } 
+  }
   return (
     <div>
       {["/login", "/admin"].some((path) =>
@@ -81,12 +81,13 @@ function App() {
           path="/healthTipDetails/:healthTipId"
           element={<HealthTipDetail HealthTipList={HealthTipList} />}
         />
- 
+
         {/* **************************News Client Side End Here********************** */}
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/cpd" element={<Cpd />} />
+        <Route path="/TraineeDashboard" element={<TraineeDashboard />} />
         <Route path="/healhtip" element={<HealthTip />}></Route>
         <Route
           path="/HealthWorkerEntertainment"
