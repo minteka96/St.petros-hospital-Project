@@ -54,6 +54,7 @@ import ApplicantForms from "./markup/pages/Jobs/ApplicationForm.jsx";
 import HealthTip from "./markup/pages/healthtips/HealthTip.jsx";
 import HealthTipDetail from "./markup/pages/healthtips/healthtipdetail/healthtipdetail.jsx";
 import HealthTipList from "./markup/components/Admin/HealthTipList/HealthTipList.jsx";
+import Test from "./markup/pages/test/test.jsx";
 import CpdNews from "./markup/pages/CPD/Cpdnews.jsx";
 function App() {
   // check if thr route is '/login' or not
@@ -136,6 +137,7 @@ function App() {
         <Route path="/admin/application-form" element={<ApplicationForm />} />
 
         <Route path="/admin/*" element={<AdminRoute />} />
+        <Route path="/test" element={<Test/>} />
       </Routes>
       {["/login", "/admin"].some((path) =>
         window.location.pathname.startsWith(path)
