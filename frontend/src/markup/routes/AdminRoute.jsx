@@ -46,6 +46,7 @@ import CpdNewsList from "../components/Admin/CPDNewsList/CpdNewsList.jsx";
 import EditCpdNewsForm from "../components/Admin/CPDNewsDetails/EditCpdNewsForm .jsx";
 import Cpdnews from "../pages/CPD/Cpdnews.jsx";
 import ListOfSchedule from "../components/Admin/CPD/CpdSchedules/ListOfSchedule.jsx";
+import Trainee from "../components/Admin/CPD/Trainees/Trainee.jsx";
 
 // Train Info Components
 import TrainInfoList from "../../markup/components/Admin/Trainer/TrainInfoList.jsx";
@@ -300,6 +301,7 @@ const AdminRoute = () => {
               <Route path="/cpd/list" element={<ListAllCourses />} />
               <Route path="/cpd/course/:course_id" element={<CourseDetail />} />
               <Route path="/cpd/schedule" element={<ListOfSchedule />} />
+              <Route path="/cpd/trainees/:schedule_id" element={<Trainee />} />
 
             </Routes>
           </div>
