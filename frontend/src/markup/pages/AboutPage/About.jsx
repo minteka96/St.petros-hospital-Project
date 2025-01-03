@@ -8,6 +8,7 @@ import img4 from "../../../assets/img/about/004 dr.webp";
 import img6 from "../../../assets/img/about/003.jpeg";
 import img7 from "../../../assets/img/about/002.jpg";
 
+
 const About = () => {
   return (
     <div className="wrapper home-default-wrapper">
@@ -356,7 +357,9 @@ const About = () => {
         </div>
       </footer>
     </div>
+
   );
 };
+
 
 export default About;

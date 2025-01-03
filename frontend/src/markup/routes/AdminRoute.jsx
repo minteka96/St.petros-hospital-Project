@@ -16,6 +16,7 @@ import AddNews from "../components/Admin/AddNewsForm/AddNewsForm.jsx";
 import EditNews from "../components/Admin/NewsEditForm/NewsEditForm.jsx";
 import Newss from "../components/Admin/NewsList/NewsList.jsx";
 /* **************** News Components End Here about news  ******************/
+
 /* ************ Health Tip Components Start Here ********************  */
 import HealthTipList from "../components/Admin/HealthTipList/HealthTipList.jsx";
 import AddHealthTipForm from "../components/Admin/addhealthtipForm/AddHealthTipForm.jsx";
@@ -27,6 +28,10 @@ import { useAuth } from "../../contexts/AuthContext.jsx";
 import AdminManagement from "../pages/Admin/AdminManagement.jsx";
 import AddAdmin from "../pages/Admin/AddAdmin.jsx";
 import JobsListPage from "../components/Admin/JobList/JobList.jsx";
+
+
+// CPD News Components
+
 import { updatePasswordSchema } from "../../Schemas/validationSchemas.js";
 const api_url = import.meta.env.VITE_API_URL;
 import ApplicantsPage from "../components/Admin/Applicant/ApplicantsPage.jsx";
@@ -35,12 +40,18 @@ import JobArchivePage from "../components/Admin/Applicant/JobArchivePage.jsx";
 import ListAllCourses from "../components/Admin/CPD/CpdCourse/ListAllCourses.jsx";
 import CourseDetail from "../components/Admin/CPD/CpdCourse/CourseDetail.jsx";
 import AddNewCourse from "../components/Admin/CPD/CpdCourse/AddNewCourse.jsx";
+
 import AddCpdNewsForm from "../components/Admin/CPDNewsForm/AddCpdNewsForm.jsx";
 import CpdNewsList from "../components/Admin/CPDNewsList/CpdNewsList.jsx";
 import EditCpdNewsForm from "../components/Admin/CPDNewsDetails/EditCpdNewsForm .jsx";
 import Cpdnews from "../pages/CPD/Cpdnews.jsx";
 import ListOfSchedule from "../components/Admin/CPD/CpdSchedules/ListOfSchedule.jsx";
 import Trainee from "../components/Admin/CPD/Trainees/Trainee.jsx";
+
+// Train Info Components
+import TrainInfoList from "../../markup/components/Admin/Trainer/TrainInfoList.jsx";
+// import TrainInfoDetail from "../../markup/components/Admin/Trainer/TrainInfoDetail.jsx";
+import TraineeAddForm from "../../markup/components/Admin/Trainer/TraineeAddForm.jsx";
 
 const AdminRoute = () => {
   const navigate = useNavigate();
@@ -261,8 +272,19 @@ const AdminRoute = () => {
               <Route path="/add-job" element={<AddJobForm />} />
               <Route path="/all-job" element={<JobsListPage />} />
               <Route path="/job/edit/:job_id" element={<EditJobForm />} />
-              <Route path="/cpd-news" element={<Cpdnews />} />
-              <Route path="/add-cpd-news" element={<AddCpdNewsForm />} />
+
+
+ 
+      
+              
+              {/* Train Info Routes */}
+              <Route path="/trainees" element={<TrainInfoList    />} />
+              {/* <Route path="/trainee/:id" element={<TrainInfoDetail />} /> */}
+              <Route path="/add-trainee" element={<TraineeAddForm />} />
+
+
+             
+          
               <Route
                 path="/edit-cpd-news/:newsId"
                 element={<EditCpdNewsForm />}
@@ -280,6 +302,7 @@ const AdminRoute = () => {
               <Route path="/cpd/course/:course_id" element={<CourseDetail />} />
               <Route path="/cpd/schedule" element={<ListOfSchedule />} />
               <Route path="/cpd/trainees/:schedule_id" element={<Trainee />} />
+
             </Routes>
           </div>
         </div>

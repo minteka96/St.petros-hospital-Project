@@ -98,6 +98,18 @@ function AdminMenu() {
             <Link to="/admin/cpd-news-list" className="list-group-item">
               List of CPD News
             </Link>
+
+         
+            <Link to="/admin/add-trainee" className="list-group-item">
+                Add Trainee
+              </Link>
+
+           <Link to="/admin/trainees" className="list-group-item">
+             <i className="fas fa-users"></i> Trainees info
+               </Link>
+    
+      
+
           </>
         )}
 
