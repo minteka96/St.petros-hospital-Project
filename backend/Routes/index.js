@@ -15,7 +15,6 @@ const newsRoutes = require("./news.routes");
 const cpdRoute = require("./cpd.routes");
 // Import the video router
 const videoRouter = require("./videos.routes");
-
 // Import the cpd news router
 const cpdNewsRouter = require("./cpd_news.routes");
 // Import the trainees sign-up route
@@ -23,27 +22,26 @@ const traineesSignUpRoute = require("./traineesSignUp.routes.js");
 // Import the trainees sign-in route
 const traineesSignInRoute = require("./traineesSignIn.routes.js");
 
+// Import the contact router
+const contactRoutes = require("./contact.routes");  // <-- Add this line
+
 // Use the routers in the main router
 router.use(loginRouter);
 router.use(userRouter);
 router.use(cpdRoute);
 router.use(applicantRouter);
-// Add the install router to the main router
 router.use(installRouter);
-// Add the jobs router to the main router
 router.use(jobsRouter);
-// Add the news routes to the main router
 router.use(newsRoutes);
-// Add the video routes to the main router
 router.use(videoRouter);
-// Add the health tip routes to the main router
 router.use(healthtipRouter);
-// Use the sign-up route
 router.use(traineesSignUpRoute);
-// Add the cpd news routes to the main router
 router.use(cpdNewsRouter);
-
-// Use the sign-in route
 router.use(traineesSignInRoute);
+
+// Use the contact routes for the /api/contact path // Ensure correct path
+
+// Use the routes
+router.use('/api', contactRoutes); 
 // Export the router to be used in the main application file
 module.exports = router;

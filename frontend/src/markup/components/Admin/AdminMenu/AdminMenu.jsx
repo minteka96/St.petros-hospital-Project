@@ -44,9 +44,9 @@ function AdminMenu() {
             <Link to="/admin/new" className="list-group-item">
               Add New Admin
             </Link>
-            <Link to="/admin/contact" className="list-group-item">
+            {/* <Link to="/admin/contact" className="list-group-item">
               See Feedback Messages
-            </Link>
+            </Link> */}
           </>
         )}
 
@@ -59,6 +59,12 @@ function AdminMenu() {
             <Link to="/admin/news" className="list-group-item">
               List of News
             </Link>
+            <Link to="/admin/contact" className="list-group-item">
+              List of contact
+            </Link>
+            {/* <Link to="/admin//contact/:id" className="list-group-item">
+              List of details
+            </Link> */}
           </>
         )}
 

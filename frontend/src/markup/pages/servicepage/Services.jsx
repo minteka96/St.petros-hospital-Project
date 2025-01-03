@@ -266,16 +266,16 @@ function Services() {
 
 
                {/* Urology Service */}
-<div className="col-sm-6 col-md-6 col-lg-3 service-item">
+{/* <div className="col-sm-6 col-md-6 col-lg-3 service-item">
   <div className="icon">
-    <i className="icofont-doctor"></i> {/* Updated icon */}
+    <i className="icofont-doctor"></i> 
   </div>
   <div className="content">
     <h5 className="service-name">Urology</h5>
     <p>Expert care for urinary tract disorders, including kidney stones, bladder conditions, and male reproductive health.</p>
     <a className="btn-link" href="/servicedetail/urology">More <i className="icofont-simple-right"></i></a>
   </div>
-</div>
+</div> */}
 
 
               </div>

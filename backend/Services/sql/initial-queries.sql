@@ -188,3 +188,12 @@ CREATE TABLE IF NOT EXISTS `trainees_status` (
     FOREIGN KEY (trainee_id) REFERENCES trainees(trainee_id),
     FOREIGN KEY (course_name) REFERENCES cpd_trainings(course_name)
 ) ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS `contacts` (
+   `id` INT AUTO_INCREMENT PRIMARY KEY,
+   `name` VARCHAR(100) NOT NULL,
+   `email` VARCHAR(100) NOT NULL,
+   `subject` VARCHAR(255),
+   `message` TEXT NOT NULL,
+   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

@@ -1,3 +1,5 @@
+/* eslint-disable no-empty */
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./markup/components/Header/Header";
@@ -56,6 +58,7 @@ import HealthTipDetail from "./markup/pages/healthtips/healthtipdetail/healthtip
 import HealthTipList from "./markup/components/Admin/HealthTipList/HealthTipList.jsx";
 import Test from "./markup/pages/test/test.jsx";
 import CpdNews from "./markup/pages/CPD/Cpdnews.jsx";
+import ContactForm from "./markup/pages/Contact/contactForm/ContactForm.jsx";
 function App() {
   // check if thr route is '/login' or not
   if (window.location.pathname === "/login") {
@@ -91,6 +94,8 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/cpd" element={<Cpd />} />
         <Route path="/healhtip" element={<HealthTip />}></Route>
+
+         
         <Route
           path="/HealthWorkerEntertainment"
           element={<HealthWorkerINfo />}
@@ -119,7 +124,9 @@ function App() {
           <Route path="psychiatric" element={<Psychiatric />} />
           <Route path="imaging" element={<Imaging />} />
         </Route>
-
+          <Route path="/contact" element={<Contact />} >
+          <Route path="/contactform" element={<ContactForm />} />
+          </Route>
         <Route path="/application/form" element={<ApplicantForms />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />

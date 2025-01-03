@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
@@ -39,6 +40,8 @@ import AddCpdNewsForm from "../components/Admin/CPDNewsForm/AddCpdNewsForm.jsx";
 import CpdNewsList from "../components/Admin/CPDNewsList/CpdNewsList.jsx";
 import EditCpdNewsForm from "../components/Admin/CPDNewsDetails/EditCpdNewsForm .jsx";
 import Cpdnews from "../pages/CPD/Cpdnews.jsx";
+import ContactList from "../components/Admin/ContactList/ContactList.jsx";
+import ContactDetail from "../components/Admin/ContactDetail/ContactDetail.jsx";
 
 const AdminRoute = () => {
   const navigate = useNavigate();
@@ -234,17 +237,12 @@ const AdminRoute = () => {
           <div className="m-3 normalBg">
             <Routes>
               <Route path="/video" element={<VideoEmbeds />} />
-
               <Route path="/" element={<AdminDashbord />} />
               <Route path="/admins" element={<AdminManagement />} />
               <Route path="/new" element={<AddAdmin />} />
               <Route path="/ApplicantsPage" element={<ApplicantsPage />} />
               <Route path="/JobArchivePage" element={<JobArchivePage />} />
-              <Route
-                path="/HRManagerApplicants"
-                element={<HRManagerApplicants />}
-              />
-
+              <Route path="/HRManagerApplicants" element={<HRManagerApplicants />} />
               <Route path="/applicant" element={<Applicants />} />
               <Route path="/applicant/:id" element={<ApplicantDetails />} />
               <Route path="/add-news" element={<AddNews />} />
@@ -252,30 +250,19 @@ const AdminRoute = () => {
               <Route path="news/edit/:news_id" element={<EditNews />} />
               <Route path="/add-healthtip" element={<AddHealthTipForm />} />
               <Route path="/healthtipList" element={<HealthTipList />} />
-              <Route
-                path="/healthtiplist/edit/:health_tip_id"
-                element={<EditHealthTip />}
-              />
+              <Route path="/healthtiplist/edit/:health_tip_id" element={<EditHealthTip />} />
               <Route path="/add-job" element={<AddJobForm />} />
               <Route path="/all-job" element={<JobsListPage />} />
               <Route path="/job/edit/:job_id" element={<EditJobForm />} />
               <Route path="/cpd-news" element={<Cpdnews />} />
               <Route path="/add-cpd-news" element={<AddCpdNewsForm />} />
-              <Route
-                path="/edit-cpd-news/:newsId"
-                element={<EditCpdNewsForm />}
-              />
-              {/*  */}
-              <Route path="/cpd-news" element={<Cpdnews />} />
-              <Route path="/add-cpd-news" element={<AddCpdNewsForm />} />
-              <Route
-                path="/edit-cpd-news/:newsId"
-                element={<EditCpdNewsForm />}
-              />
+              <Route path="/edit-cpd-news/:newsId" element={<EditCpdNewsForm />} />
               <Route path="/cpd-news-list" element={<CpdNewsList />} />
               <Route path="/cpd/newCourse" element={<AddNewCourse />} />
               <Route path="/cpd/list" element={<ListAllCourses />} />
               <Route path="/cpd/course/:course_id" element={<CourseDetail />} />
+              <Route path="/contact" element={<ContactList />} />
+              <Route path="/contact/:id" element={<ContactDetail />} />
             </Routes>
           </div>
         </div>
@@ -288,10 +275,7 @@ const AdminRoute = () => {
               {/* Email Address Field */}
               <Form.Group className="mb-3" controlId="formEmail">
                 {error && <div className="alert alert-danger">{error}</div>}
-                {success && (
-                  <div className="alert alert-success">{success}</div>
-                )}
-
+                {success && <div className="alert alert-success">{success}</div>}
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control
                   onChange={(e) => setEmail(e.target.value)}

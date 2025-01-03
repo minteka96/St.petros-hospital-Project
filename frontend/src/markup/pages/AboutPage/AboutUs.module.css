@@ -1,45 +1,45 @@
-General wrapper
-/* .wrapper {
+/* General wrapper */
+.wrapper {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-} */
+}
 
 /* Hero Slider Section */
-/* .hero-slider {
+.hero-slider {
   position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-} */
+}
 
-/* .swiper-container {
+.swiper-container {
   width: 100%;
   height: 100%;
-} */
+}
 
-/* .swiper-slide {
+.swiper-slide {
   background-size: cover;
   background-position: center center;
   position: relative;
   height: 100vh;
-} */
+}
 
-/* .slider-content {
+.slider-content {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
   color: white;
-} */
+}
 
-/* .slider-content .title {
+.slider-content .title {
   font-size: 3rem;
   font-weight: bold;
-} */
+}
 
-/* .slider-content .btn {
+.slider-content .btn {
   padding: 12px 25px;
   font-size: 16px;
   background-color :#00A99E;
@@ -48,90 +48,91 @@ General wrapper
   text-transform: uppercase;
   margin-top: 20px;
   text-decoration: none;
-} */
+}
 
-/* .slider-content .btn:hover {
+.slider-content .btn:hover {
   background-color: #00A99E;
-} */
+}
 
 /* About Section */
-/* .about-area {
+.about-area {
   padding: 60px 0;
   background-color: #f9f9f9;
-} */
+}
 
-/* .service-list-content {
+.service-list-content {
   background-color: #ffffff;
   padding: 30px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-} */
+}
 
-/* .title {
+.title {
   font-size: 2.5rem;
   font-weight: bold;
   color: #333;
   margin-bottom: 30px;
-} */
+}
 
-/* .post-details-content .post-details-body .content {
+.post-details-content .post-details-body .content {
   font-size: 1.1rem;
   line-height: 1.6;
   color: #555;
-} */
+}
 
-/* h5.title {
+h5.title {
   color: lightseagreen;
   font-size: 1.5rem;
   margin-bottom: 15px;
-} */
+}
 
-/* blockquote {
+blockquote {
   background: #f0f0f0;
   padding: 20px;
   border-left: 5px solid #00A99E;
   font-style: italic;
   margin-top: 40px;
-} */
+}
 
-/* blockquote .row {
+blockquote .row {
   display: flex;
   justify-content: space-between;
-} */
+}
 
-/* blockquote h2 {
+blockquote h2 {
   font-size: 1.8rem;
   color: #00A99E;
-} */
+}
 
-/* .post-details-content, blockquote p {
+.post-details-content, blockquote p {
   font-size: 1.1rem;
-} */
+ 
+}
 
 /* Image section styling */
-/* img.img-fluid {
+img.img-fluid {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-} */
+}
 
 /* Responsive grid for the about section */
-/* .row {
+.row {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-} */
+}
 
-/* .col-md-6 {
+.col-md-6 {
   flex: 1 1 48%;
   margin-bottom: 30px;
-} */
+}
 
-/* .col-lg-12 {
+.col-lg-12 {
   flex: 1 1 100%;
-} */
+}
 
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
   .col-md-6 {
     flex: 1 1 100%;
   }
@@ -156,38 +157,38 @@ General wrapper
   .about-area {
     padding: 40px 0;
   }
-} */
+}
 
 /* Statistics and other small section adjustments */
-/* .statistics {
+.statistics {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   margin-top: 40px;
-} */
+}
 
-/* .stat-item {
+.stat-item {
   flex: 1 1 24%;
   text-align: center;
   margin: 20px 0;
-} */
+}
 
-/* .stat-item h3 {
+.stat-item h3 {
   font-size: 2.5rem;
   color: #00A99E;
-} */
+}
 
-/* .related-post {
+.related-post {
   margin-top: 30px;
-} */
+}
 
-/* .post-item img {
+.post-item img {
   width: 100%;
   height: auto;
-} */
+}
 
 /* Swiper Navigation buttons */
-/* .swiper-button-prev,
+.swiper-button-prev,
 .swiper-button-next {
   position: absolute;
   top: 50%;
@@ -195,37 +196,173 @@ General wrapper
   font-size: 30px;
   color: white;
   z-index: 99;
-} */
+}
 
-/* .swiper-button-prev {
+.swiper-button-prev {
   left: 20px;
-} */
+}
 
-/* .swiper-button-next {
+.swiper-button-next {
   right: 20px;
-} */
+}
 
-/* .icofont-arrow-left,
+.icofont-arrow-left,
 .icofont-arrow-right {
   font-size: 30px;
   color: #fff;
-} */
+}
 
 /* Button Hover Effects */
-/* .btn-danger:hover {
+.btn-danger:hover {
   background-color: #3bb9a9;
-} */
+}
 
 /* Custom Styles for Blockquote */
-/* .blockquote-style {
+.blockquote-style {
   margin-top: 40px;
   padding: 30px;
   background: #f7f7f7;
   border-left: 5px solid #00a99e;
   font-size: 1.1rem;
-} */
+}
 
-/* .blockquote-style .row {
+.blockquote-style .row {
   margin-top: 20px;
-} */
+}
+/* General Styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
+.carouselSection {
+  margin-bottom: 40px;
+}
+
+.carouselCaptionContent {
+  text-align: center;
+  color: white;
+  padding: 50px 20px;
+}
+
+.carouselTitle {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.carouselSubtitle {
+  font-size: 2rem;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.carouselButton {
+  font-size: 1.1rem;
+  padding: 12px 25px;
+  border-radius: 5px;
+}
+
+.carouselButton:hover {
+  background-color: #f44336;
+}
+
+/* About Us Section */
+.about-area {
+  padding: 60px 0;
+  background-color: #f9f9f9;
+}
+
+.about-area .title {
+  color: #00796b;
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+}
+
+.post-details-content {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+.about-area img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Section for Left and Right Layout */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-md-6 {
+  flex: 1;
+  padding: 15px;
+}
+
+blockquote {
+  background-color: #fff;
+  padding: 20px;
+  border-left: 5px solid #00796b;
+  margin-bottom: 30px;
+}
+
+.blockquote-style {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.blockquote-style h2 {
+  font-size: 2.2rem;
+  color: #00796b;
+  margin-bottom: 20px;
+}
+
+.blockquote-style p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+img.img-fluid {
+  border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Carousel Styling */
+@media (max-width: 768px) {
+  .carouselCaptionContent {
+    padding: 30px 15px;
+  }
+
+  .carouselTitle {
+    font-size: 2rem;
+  }
+
+  .carouselSubtitle {
+    font-size: 1.5rem;
+  }
+
+  .carouselButton {
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .carouselCaptionContent {
+    padding: 20px 10px;
+  }
+
+  .carouselTitle {
+    font-size: 1.5rem;
+  }
+
+  .carouselSubtitle {
+    font-size: 1.2rem;
+  }
+
+  .carouselButton {
+    padding: 8px 15px;
+  }
+}
