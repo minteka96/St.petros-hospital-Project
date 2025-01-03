@@ -1,8 +1,9 @@
+
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
 import { useNavigate } from "react-router";
-import trainInfoService from "../../../../services/trainInfo.service";
-import { FaCheck, FaTimes, FaEye } from "react-icons/fa";
+import trainInfoService from "../../../../Services/trainInfo.service";
+import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Pagination from "react-bootstrap/Pagination";
@@ -19,6 +20,16 @@ const TrainInfoList = () => {
   const [loading, setLoading] = useState(false);
   const [selectedTrainee, setSelectedTrainee] = useState(null);
   const [showTraineeModal, setShowTraineeModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editFormData, setEditFormData] = useState({
+    first_name: "",
+    middle_name: "",
+    last_name: "",
+    sex: "",
+    phone: "",
+    profession: "",
+    account_number: ""
+  });
 
   const traineesPerPage = 10;
 
@@ -32,11 +43,21 @@ const TrainInfoList = () => {
       try {
         setLoading(true);
         const response = await trainInfoService.getAllTraineesInfo(token);
-        setTrainees(response.data);
-        setFilteredTrainees(response.data);
+        const traineeData = response.data ? response.data : response;
+        
+        if (Array.isArray(traineeData)) {
+          setTrainees(traineeData);
+          setFilteredTrainees(traineeData);
+        } else {
+          setTrainees([]);
+          setFilteredTrainees([]);
+          toast.error("Invalid data format received");
+        }
       } catch (err) {
         console.error("Error fetching trainees:", err);
         toast.error("Failed to fetch trainees");
+        setTrainees([]);
+        setFilteredTrainees([]);
       } finally {
         setLoading(false);
       }
@@ -48,6 +69,52 @@ const TrainInfoList = () => {
   const handleViewTrainee = (trainee) => {
     setSelectedTrainee(trainee);
     setShowTraineeModal(true);
+  };
+
+  const handleEditTrainee = (trainee) => {
+    setSelectedTrainee(trainee);
+    setEditFormData(trainee);
+    setShowEditModal(true);
+  };
+
+  const handleDeleteTrainee = async (traineeId) => {
+    if (window.confirm("Are you sure you want to delete this trainee?")) {
+      try {
+        await trainInfoService.deleteTrainee(traineeId, token);
+        toast.success("Trainee deleted successfully!");
+        // Refresh the trainees list
+        const response = await trainInfoService.getAllTraineesInfo(token);
+        setTrainees(response.data);
+        setFilteredTrainees(response.data);
+      } catch (error) {
+        toast.error("Failed to delete trainee");
+        console.error("Delete error:", error);
+      }
+    }
+  };
+
+  const handleEditChange = (e) => {
+    const { name, value } = e.target;
+    setEditFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await trainInfoService.updateTrainee(selectedTrainee.id, editFormData, token);
+      toast.success("Trainee updated successfully!");
+      setShowEditModal(false);
+      // Refresh the trainees list
+      const response = await trainInfoService.getAllTraineesInfo(token);
+      setTrainees(response.data);
+      setFilteredTrainees(response.data);
+    } catch (error) {
+      toast.error("Failed to update trainee");
+      console.error("Update error:", error);
+    }
   };
 
   const totalPages = Math.ceil(filteredTrainees.length / traineesPerPage);
@@ -93,6 +160,18 @@ const TrainInfoList = () => {
                     className="text-primary me-2 cursor-pointer"
                     title="View Details"
                     onClick={() => handleViewTrainee(trainee)}
+                    style={{ fontSize: "1.2rem" }}
+                  />
+                  <FaEdit
+                    className="text-warning me-2 cursor-pointer"
+                    title="Edit Trainee"
+                    onClick={() => handleEditTrainee(trainee)}
+                    style={{ fontSize: "1.2rem" }}
+                  />
+                  <FaTrash
+                    className="text-danger cursor-pointer"
+                    title="Delete Trainee"
+                    onClick={() => handleDeleteTrainee(trainee.id)}
                     style={{ fontSize: "1.2rem" }}
                   />
                 </td>
@@ -144,6 +223,108 @@ const TrainInfoList = () => {
             Close
           </Button>
         </Modal.Footer>
+      </Modal>
+
+      {/* Edit Trainee Modal */}
+      <Modal
+        show={showEditModal}
+        onHide={() => setShowEditModal(false)}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Trainee</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form onSubmit={handleEditSubmit}>
+            <div className="mb-3">
+              <label className="form-label">First Name</label>
+              <input
+                type="text"
+                className="form-control"
+                name="first_name"
+                value={editFormData.first_name}
+                onChange={handleEditChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Middle Name</label>
+              <input
+                type="text"
+                className="form-control"
+                name="middle_name"
+                value={editFormData.middle_name}
+                onChange={handleEditChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Last Name</label>
+              <input
+                type="text"
+                className="form-control"
+                name="last_name"
+                value={editFormData.last_name}
+                onChange={handleEditChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Sex</label>
+              <select
+                className="form-select"
+                name="sex"
+                value={editFormData.sex}
+                onChange={handleEditChange}
+                required
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Phone Number</label>
+              <input
+                type="tel"
+                className="form-control"
+                name="phone"
+                value={editFormData.phone}
+                onChange={handleEditChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Profession</label>
+              <input
+                type="text"
+                className="form-control"
+                name="profession"
+                value={editFormData.profession}
+                onChange={handleEditChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Account Number</label>
+              <input
+                type="text"
+                className="form-control"
+                name="account_number"
+                value={editFormData.account_number}
+                onChange={handleEditChange}
+                required
+              />
+            </div>
+            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+              <Button variant="secondary" onClick={() => setShowEditModal(false)}>
+                Cancel
+              </Button>
+              <Button type="submit" variant="primary">
+                Save Changes
+              </Button>
+            </div>
+          </form>
+        </Modal.Body>
       </Modal>
 
       <ToastContainer />

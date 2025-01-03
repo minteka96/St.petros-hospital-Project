@@ -33,7 +33,7 @@ import Cpdnews from "../pages/CPD/Cpdnews.jsx";
 
 // Train Info Components
 import TrainInfoList from "../../markup/components/Admin/Trainer/TrainInfoList.jsx";
-import TrainInfoDetail from "../../markup/components/Admin/Trainer/TrainInfoDetail.jsx";
+// import TrainInfoDetail from "../../markup/components/Admin/Trainer/TrainInfoDetail.jsx";
 import TraineeAddForm from "../../markup/components/Admin/Trainer/TraineeAddForm.jsx";
 
 const AdminRoute = () => {
@@ -153,7 +153,7 @@ const AdminRoute = () => {
               
               {/* Train Info Routes */}
               <Route path="/trainees" element={<TrainInfoList    />} />
-              <Route path="/trainee/:id" element={<TrainInfoDetail />} />
+              {/* <Route path="/trainee/:id" element={<TrainInfoDetail />} /> */}
               <Route path="/add-trainee" element={<TraineeAddForm />} />
 
             </Routes>

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../contexts/AuthContext";
-import trainInfoService from "../../../../services/trainInfo.service";
+import trainInfoService from "../../../../Services/trainInfo.service";
 import { toast } from "react-toastify";
+import { v4 as uuidv4 } from 'uuid';
 
 const TraineeAddForm = () => {
   const navigate = useNavigate();
@@ -12,13 +13,12 @@ const TraineeAddForm = () => {
   const [formData, setFormData] = useState({
     first_name: "",
     middle_name: "",
+    email: "",
     last_name: "",
     sex: "",
-    email: "",
     phone: "",
     profession: "",
-    account_number: "",
-    status: "Active"
+    account_number: ""
   });
 
   const handleChange = (e) => {
@@ -29,36 +29,59 @@ const TraineeAddForm = () => {
     }));
   };
 
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate form data
-    if (!formData.first_name || !formData.last_name || !formData.sex || !formData.email || !formData.phone || !formData.profession || !formData.account_number) {
-      toast.error("Please fill in all required fields.");
+  
+    // Enhanced validation
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(formData.phone)) {
+      toast.error("Please enter a valid 10-digit phone number");
       return;
     }
+  
 
+
+        // Generate trainee_id using UUID v4
+        // const trainee_id = uuidv4(); // Make sure to import { v4 as uuidv4 } from 'uuid'
+  
+        // const submitData = {
+        //   ...formData,
+        //   trainee_id,
+        //   email: `${formData.first_name.toLowerCase()}.${formData.last_name.toLowerCase()}@example.com`,
+        //   password: 'defaultpassword123' // You might want to generate this securely
+        // };
+
+        
+    // Generate trainee_id using UUID v4
+    const trainee_id = uuidv4(); // Make sure to import { v4 as uuidv4 } from 'uuid'
+  
+    const submitData = {
+      ...formData,
+      trainee_id
+    };
+  
     setLoading(true);
-
+  
     try {
-      await trainInfoService.addTrainee(formData, user.token);
-      toast.success("Trainee added successfully!");
-      navigate("/admin/trainees");
+      const response = await trainInfoService.addTrainee(submitData, user.token);
+      toast.success("Registration completed successfully!");
+      navigate("/admin/trainees"); // Navigate to trainee list after successful registration
     } catch (error) {
-      toast.error("Failed to add trainee. Please try again.");
-      console.error("Error adding trainee:", error);
+      toast.error(error.response?.data?.message || "Registration failed. Please try again.");
+      console.error("Registration error:", error);
     } finally {
       setLoading(false);
     }
   };
-
+  
   return (
     <div className="container py-4">
       <div className="row justify-content-center">
         <div className="col-md-8">
           <div className="card shadow">
-            <div className="card-header bg-primary text-white">
-              <h3 className="mb-0">Add New Trainee</h3>
+            <div className="card-header  text-white text-center">
+              <h3 className="mb-0 text-gray-500">Add New Trainee</h3>
             </div>
             <div className="card-body">
               <form onSubmit={handleSubmit}>
@@ -114,17 +137,6 @@ const TraineeAddForm = () => {
                 </div>
                 <div className="row mb-3">
                   <div className="col-md-6">
-                    <label className="form-label">Email</label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="col-md-6">
                     <label className="form-label">Phone Number</label>
                     <input
                       type="tel"
@@ -135,8 +147,6 @@ const TraineeAddForm = () => {
                       required
                     />
                   </div>
-                </div>
-                <div className="row mb-3">
                   <div className="col-md-6">
                     <label className="form-label">Profession</label>
                     <input
@@ -148,6 +158,8 @@ const TraineeAddForm = () => {
                       required
                     />
                   </div>
+                </div>
+                <div className="row mb-3">
                   <div className="col-md-6">
                     <label className="form-label">Account Number</label>
                     <input
@@ -159,18 +171,17 @@ const TraineeAddForm = () => {
                       required
                     />
                   </div>
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Status</label>
-                  <select
-                    className="form-select"
-                    name="status"
-                    value={formData.status}
-                    onChange={handleChange}
-                  >
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                  </select>
+                  {/* <div className="col-md-6">
+                    <label className="form-label">Email</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div> */}
                 </div>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                   <button
