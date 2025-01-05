@@ -8,6 +8,7 @@ import img2 from "../../../assets/img/about/007.png";
 import img3 from "../../../assets/img/about/002.jpg"; // Make sure you add this image
 import styles from "./AboutUs.module.css"; // Import CSS Module
 
+
 const About = () => {
   return (
     <div>
@@ -155,5 +156,6 @@ const About = () => {
 
   );
 };
+
 
 export default About;

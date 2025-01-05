@@ -10,32 +10,43 @@ function CourseDetail() {
   const { user } = useAuth();
   const token = user ? user.token : null;
   const [course, setCourse] = useState(null);
+  const [createSchedule, setCreateSchedule] = useState(false);
   const { course_id } = useParams();
   const [success, setSuccess] = useState(false);
   const [refresh, setRefresh] = useState(false);
- const handleClose = () => {
-   setShow(false);
-   setSuccess(false);
- };
- const handleShow = () => setShow(true);
-    const [formData, setFormData] = useState({
-      course_name: "",
-      course_level: "",
-      pri_test: null,
-      pri_duration: "",
-      post_test: null,
-      post_duration: "",
-      minimum_score: "",
-    });
+  const handleShow = () => setShow(true);
+  const [formData, setFormData] = useState({
+    course_name: "",
+    course_level: "",
+    pri_test: null,
+    pri_test_duration: "",
+    post_test: null,
+    post_test_duration: "",
+    minimum_score: "",
+  });
+  const [schedule, setSchedule] = useState({});
 
-const handleChange = (e) => {
-  const { name, value, files } = e.target;
+  const handleScheduleChange = (e) => {
+    const { name, value } = e.target;
+    setSchedule((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-  setFormData((prev) => ({
-    ...prev,
-    [name]: files ? files[0] : value, // Handle file inputs
-  }));
-};
+  const handleClose = () => {
+    setShow(false);
+    setSuccess(false);
+    setFormData(course);
+  };
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: files ? files[0] : value, // Handle file inputs
+    }));
+  };
 
   useEffect(() => {
     if (!token) {
@@ -63,40 +74,84 @@ const handleChange = (e) => {
     fetchCourse();
   }, [token, navigate, course_id, api_url, refresh]);
 
-  const handleEdit = async() => {
-   try {
-    const response = await axios.put(
-      `${api_url}/api/cpd/course/${course_id}`,
-      formData,
-      {
-        headers: {
-          "x-access-token": token,
-        },
+  // check is the file path is correct
+
+  const checkFilePath = (file) => {
+    if (!file && typeof file !== "string") return false;
+    if (typeof file !== "string") return false;
+
+    const allowedExtensions = ["xlsx"]; // Define allowed extensions
+    const fileExtension = file.split(".").pop().toLowerCase(); // Extract file extension
+
+    // Check if the file extension matches allowed extensions
+    return allowedExtensions.includes(fileExtension);
+  };
+
+  // check if the file type is xlsx
+  const isXlsxFile = (file) => {
+    if (!file || !file.name) return false;
+    const allowedExtensions = ["xlsx"];
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+    return allowedExtensions.includes(fileExtension);
+  };
+
+  const handleEdit = async () => {
+    const submissionData = new FormData();
+    submissionData.append("course_name", formData.course_name);
+    submissionData.append("course_level", formData.course_level);
+    submissionData.append("pri_duration", formData.pri_test_duration);
+    submissionData.append("post_duration", formData.post_test_duration);
+    submissionData.append("min_score", formData.minimum_score);
+    if (
+      formData.pri_test &&
+      (isXlsxFile(formData.pri_test) || checkFilePath(formData.pri_test))
+    ) {
+      submissionData.append("pri_test", formData.pri_test);
+    } else {
+      alert("Please upload a valid xlsx file for pri_test");
+      return;
+    }
+    if (
+      (formData.post_test && isXlsxFile(formData.post_test)) ||
+      checkFilePath(formData.post_test)
+    ) {
+      submissionData.append("post_test", formData.post_test);
+    } else {
+      alert("Please upload a valid xlsx file for post_test");
+      return;
+    }
+    try {
+      const response = await axios.put(
+        `${api_url}/api/cpd/course/${course_id}`,
+        submissionData,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (response.status === 200) {
+        // alert("Course details updated successfully!");
+        setRefresh(!refresh);
+        setSuccess(true);
+        setTimeout(() => {
+          handleClose();
+        }, 1500);
       }
+    } catch (error) {
+      console.error("Error updating course details:", error);
+    }
+  };
+
+  const handleDelete = async () => {
+    // confirm deletion by alert
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this course?"
     );
-    if (response.status === 200) {
-      // alert("Course details updated successfully!");
-      setRefresh(!refresh);
-      setSuccess(true);
-      setTimeout(() => {
-       handleClose();
-      }, 1500);
-      
-     }
-
-  } catch (error) {
-    console.error("Error updating course details:", error);
-  }
-  }
-
-  const handleDelete = async() => {
-   // confirm deletion by alert 
-   const confirmDelete = window.confirm(
-    "Are you sure you want to delete this course?");
     if (!confirmDelete) {
       return;
     }
-   
+
     try {
       const response = await axios.delete(
         `${api_url}/api/cpd/course/${course_id}`,
@@ -116,13 +171,46 @@ const handleChange = (e) => {
     }
   };
 
-  const handleSchedule = () => {
-    
+  const handleSchedule = async (e) => {
+    e.preventDefault();
+    const submitData = new FormData();
+    submitData.append("course_name", formData.course_name);
+    submitData.append(
+      "registration_start_date",
+      schedule.registration_start_date
+    );
+    submitData.append("registration_end_date", schedule.registration_end_date);
+    submitData.append("course_start_date", schedule.course_start_date);
+    submitData.append("course_end_date", schedule.course_end_date);
+    try {
+      const response = await axios.post(
+        `${api_url}/api/cpd/schedule/${course_id}`,
+        submitData,
+        {
+          headers: {
+            "x-access-token": token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 201) {
+        setCreateSchedule(!createSchedule);
+        setTimeout(() => {
+          handleCloseSchedule();
+          navigate(`/admin/cpd/schedule`);
+        }, 1500);
+      }
+    } catch (error) {
+      console.error("Error updating schedule:", error);
+    }
   };
 
   const [show, setShow] = useState(false);
-  
- 
+  const [showSchedule, setShowSchedule] = useState(false);
+
+  const handleCloseSchedule = () => setShowSchedule(false);
+  const handleShowSchedule = () => setShowSchedule(true);
 
   if (!course) {
     return (
@@ -183,169 +271,246 @@ const handleChange = (e) => {
             <button className="btn" onClick={handleDelete}>
               Delete
             </button>
-            <button className="btn" onClick={handleSchedule}>
+            <button className="btn" onClick={handleShowSchedule}>
               Schedule
             </button>
           </div>
         </div>
       </div>
-      <div>
-        <Modal
-          show={show}
-          onHide={handleClose}
-          animation={false}
-          // Increased modal width
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Edit Course</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <form
+      <Modal
+        show={show}
+        onHide={handleClose}
+        // animation={false}
+        size="lg"
+        // Increased modal width
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Course</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form
+            style={{
+              maxWidth: "100%",
+            }}
+            onSubmit={(event) => {
+              event.preventDefault(); // Prevent the page refresh
+              handleEdit(); // Call the edit handler
+            }}
+          >
+            <div className="mb-3">
+              {success && (
+                <div className="alert alert-success py-1">
+                  course updated successfully
+                </div>
+              )}
+              <label htmlFor="courseName" className="form-label">
+                Course Name
+              </label>
+              <input
+                type="text"
+                id="courseName"
+                value={formData.course_name}
+                placeholder="Enter course name"
+                required
+                name="course_name"
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="courseLevel" className="form-label">
+                Course Level
+              </label>
+              <input
+                type="text"
+                id="courseLevel"
+                value={formData.course_level}
+                placeholder="Enter course level"
+                required
+                name="course_level"
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="priTestQuestion" className="form-label">
+                Pri-Test Questions{" "}
+                <span className="text-muted text-sm">
+                  (leave blank to keep existing questions)
+                </span>
+              </label>
+              <input
+                type="file"
+                id="priTestQuestion"
+                accept=".xlsx"
+                name="pri_test"
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="priTestDuration" className="form-label">
+                Primary Test Duration (minutes)
+              </label>
+              <input
+                type="number"
+                id="priTestDuration"
+                value={formData.pri_test_duration}
+                placeholder="Enter duration in minutes"
+                required
+                name="pri_test_duration"
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="postTestQuestion" className="form-label">
+                Post-Test Questions{" "}
+                <span className="text-muted text-sm">
+                  (leave blank to keep existing questions)
+                </span>
+              </label>
+              <input
+                type="file"
+                id="postTestQuestion"
+                accept=".xlsx"
+                name="post_test"
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="postTestDuration" className="form-label">
+                Post Test Duration (minutes)
+              </label>
+              <input
+                type="number"
+                id="postTestDuratio"
+                value={formData.post_test_duration}
+                placeholder="Enter duration in minutes"
+                required
+                name="post_test_duration"
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="minimumScore" className="form-label">
+                Minimum Score for Passing Post-Test
+              </label>
+              <input
+                type="number"
+                id="minimumScore"
+                value={formData.minimum_score}
+                placeholder="Enter minimum score"
+                required
+                name="minimum_score"
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="btn btn-primary w-100"
               style={{
-                maxWidth: "100%",
-              }}
-              onSubmit={(event) => {
-                event.preventDefault(); // Prevent the page refresh
-                handleEdit(); // Call the edit handler
+                fontWeight: "bold",
+                padding: "10px",
+                fontSize: "16px",
               }}
             >
-              <div className="mb-3">
-                {success && (
-                  <div className="alert alert-success py-1">course updated successfully</div>
-                )}
-                <label htmlFor="courseName" className="form-label">
-                  Course Name
-                </label>
-                <input
-                  type="text"
-                  id="courseName"
-                  value={formData.course_name}
-                  placeholder="Enter course name"
-                  required
-                  name="course_name"
-                  onChange={handleChange}
-                  className="form-control"
-                />
-              </div>
+              Submit
+            </button>
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal
+        show={showSchedule}
+        onHide={handleCloseSchedule}
+        backdrop={true}
+        keyboard={false}
+        size="lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Schedule {formData.course_name} Course</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form action="" onSubmit={handleSchedule}>
+            <div className="mb-3">
+              {createSchedule && (
+                <div className="alert alert-success py-1">
+                  Schedule created successfully
+                </div>
+              )}
+              <label htmlFor="" className="form-label">
+                Registration start date
+              </label>
+              <input
+                type="date"
+                required
+                className="form-control mb-3"
+                name="registration_start_date"
+                onChange={handleScheduleChange}
+                min={new Date().toISOString().split("T")[0]}
+              />
 
-              <div className="mb-3">
-                <label htmlFor="courseLevel" className="form-label">
-                  Course Level
-                </label>
-                <input
-                  type="text"
-                  id="courseLevel"
-                  value={formData.course_level}
-                  placeholder="Enter course level"
-                  required
-                  name="course_level"
-                  onChange={handleChange}
-                  className="form-control"
-                />
-              </div>
+              <label htmlFor="" className="form-label">
+                Registration end date
+              </label>
+              <input
+                type="date"
+                required
+                className="form-control mb-3"
+                name="registration_end_date"
+                onChange={handleScheduleChange}
+                min={new Date().toISOString().split("T")[0]}
+              />
+              <label htmlFor="" className="form-label">
+                Training start date
+              </label>
+              <input
+                type="date"
+                required
+                className="form-control mb-3"
+                name="course_start_date"
+                onChange={handleScheduleChange}
+                min={new Date().toISOString().split("T")[0]}
+              />
+              <label htmlFor="" className="form-label">
+                Training end date
+              </label>
+              <input
+                type="date"
+                required
+                className="form-control mb-3"
+                name="course_end_date"
+                onChange={handleScheduleChange}
+                min={new Date().toISOString().split("T")[0]}
+              />
+            </div>
 
-              <div className="mb-3">
-                <label htmlFor="priTestQuestion" className="form-label">
-                  Pri-Test Questions{" "}
-                  <span className="text-muted text-sm">
-                    (leave blank to keep existing questions)
-                  </span>
-                </label>
-                <input
-                  type="file"
-                  id="priTestQuestion"
-                  accept=".xlsx"
-                  name="pri_test"
-                  onChange={handleChange}
-                  className="form-control"
-                />
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="priTestDuration" className="form-label">
-                  Primary Test Duration (minutes)
-                </label>
-                <input
-                  type="number"
-                  id="priTestDuration"
-                  value={formData.pri_test_duration}
-                  placeholder="Enter duration in minutes"
-                  required
-                  name="pri_duration"
-                  onChange={handleChange}
-                  className="form-control"
-                />
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="postTestQuestion" className="form-label">
-                  Post-Test Questions{" "}
-                  <span className="text-muted text-sm">
-                    (leave blank to keep existing questions)
-                  </span>
-                </label>
-                <input
-                  type="file"
-                  id="postTestQuestion"
-                  accept=".xlsx"
-                  name="post_test"
-                  onChange={handleChange}
-                  className="form-control"
-                />
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="postTestDuration" className="form-label">
-                  Post Test Duration (minutes)
-                </label>
-                <input
-                  type="number"
-                  id="postTestDuration"
-                  value={formData.post_test_duration}
-                  placeholder="Enter duration in minutes"
-                  required
-                  name="post_duration"
-                  onChange={handleChange}
-                  className="form-control"
-                />
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="minimumScore" className="form-label">
-                  Minimum Score for Passing Post-Test
-                </label>
-                <input
-                  type="number"
-                  id="minimumScore"
-                  value={formData.minimum_score}
-                  placeholder="Enter minimum score"
-                  required
-                  name="min_score"
-                  onChange={handleChange}
-                  className="form-control"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="btn btn-primary w-100"
-                style={{
-                  fontWeight: "bold",
-                  padding: "10px",
-                  fontSize: "16px",
-                }}
-              >
-                Submit
-              </button>
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
+            <button className="btn " variant="primary" type="submit">
+              Save
+            </button>
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseSchedule}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

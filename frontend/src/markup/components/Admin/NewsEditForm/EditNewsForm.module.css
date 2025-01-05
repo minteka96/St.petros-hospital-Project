@@ -1,5 +1,31 @@
-/* src/components/AddNewsForm.module.css */
+/* Success Message */
+.successMessage {
+  display: flex;
+  align-items: center;
+  background-color: #d4edda;
+  color: #155724;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
 
+.successIcon {
+  margin-right: 10px;
+  font-size: 1.3rem;
+  color: #28a745;
+}
+
+.errorMessage {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+/* The rest of your form CSS... */
 .formContainer {
   max-width: 600px;
   margin: 0 auto;

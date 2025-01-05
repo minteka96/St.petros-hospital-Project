@@ -31,7 +31,9 @@ import Psychiatric from "./markup/pages/serviceDetaile/Psychiatric/Psychiatric";
 import Imaging from "./markup/pages/serviceDetaile/Imaging/Imaging.jsx";
 import About from "./markup/pages/AboutPage/About";
 import Contact from "./markup/pages/Contact/Contact.jsx";
-import Cpd from "./markup/pages/CPD/cpd.jsx";
+import CpdLogin from "./markup/pages/CpdLogin/cpd.jsx";
+import CpdLoginSignup from "./markup/pages/CpdLogin/SignUpSignIn.jsx";
+
 import "./style/css/style.css";
 
 import AddTenderForm from "./markup/components/Admin/AddTenderForm/AddTenderForm.jsx";
@@ -62,8 +64,7 @@ import ContactForm from "./markup/pages/Contact/contactForm/ContactForm.jsx";
 function App() {
   // check if thr route is '/login' or not
   if (window.location.pathname === "/login") {
-    
-  } 
+  }
   return (
     <div>
       {["/login", "/admin"].some((path) =>
@@ -87,12 +88,13 @@ function App() {
           path="/healthTipDetails/:healthTipId"
           element={<HealthTipDetail HealthTipList={HealthTipList} />}
         />
- 
+
         {/* **************************News Client Side End Here********************** */}
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/cpd" element={<Cpd />} />
+        <Route path="/cpd/" element={<CpdLogin />} />
+        <Route path="/cpd/login" element={<CpdLoginSignup />} />
         <Route path="/healhtip" element={<HealthTip />}></Route>
 
          

@@ -80,7 +80,7 @@ async function deleteCpdCourseById(courseId) {
 }
 
 // update cpd course by id
-async function updateCpdCourseById(courseId, courseData) {
+async function updateCpdCourseById(id, courseData) {
   const sql = `UPDATE cpd_trainings SET course_name = ?, course_level = ?, pri_test = ?, pri_test_duration = ?, post_test = ?, post_test_duration = ?, minimum_score = ? WHERE training_id = ?`;
   const {
     course_name,
@@ -89,7 +89,7 @@ async function updateCpdCourseById(courseId, courseData) {
     pri_test_duration,
     post_test,
     post_test_duration,
-    minimum_score
+    minimum_score,
   } = courseData;
   const connection = await conn.pool.getConnection();
   try {
@@ -102,7 +102,7 @@ async function updateCpdCourseById(courseId, courseData) {
       post_test,
       post_test_duration,
       minimum_score,
-      courseId
+      id,
     ]);
     await connection.commit();
     return result.affectedRows > 0;
