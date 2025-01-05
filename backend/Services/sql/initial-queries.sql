@@ -107,7 +107,7 @@ ON DUPLICATE KEY UPDATE
     `video_link` = VALUES(`video_link`);
 
 -- Create contact Table
-CREATE TABLE IF NOT EXISTS `contact` (
+CREATE TABLE IF NOT EXISTS `contacts` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL,
     `email` VARCHAR(255) NOT NULL,
