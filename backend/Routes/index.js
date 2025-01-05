@@ -15,6 +15,14 @@ const newsRoutes = require("./news.routes");
 // Import the video router
 const videoRouter = require("./videos.routes");
 // Use the routers in the main router
+// Import the trainees sign-up route
+const traineesSignUpRoute = require("./traineesSignUp.routes.js");
+// Import the trainees sign-in route
+const traineesSignInRoute = require("./traineesSignIn.routes.js");
+// Use the sign-up route
+router.use(traineesSignUpRoute);
+// Use the sign-in route
+router.use(traineesSignInRoute);
 router.use(loginRouter);
 router.use(userRouter);
 router.use(applicantRouter);

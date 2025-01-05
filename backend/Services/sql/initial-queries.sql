@@ -9,6 +9,14 @@ CREATE TABLE IF NOT EXISTS `Users` (
     `added_date` DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+
+CREATE TABLE IF NOT EXISTS `user_privileges` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `user_id` INT NOT NULL,
+    `privilege` VARCHAR(255) NOT NULL,
+    FOREIGN KEY (`user_id`) REFERENCES `Users`(`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- Insert default admin user
 INSERT INTO `Users` (`username`, `email`, `password_hashed`, `role`)
 VALUES 
@@ -24,9 +32,17 @@ CREATE TABLE IF NOT EXISTS `News` (
     `news_detail` TEXT NOT NULL,
     `news_description` TEXT,
     `news_link` VARCHAR(255),
-    `news_image_link` VARCHAR(255),
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Create NewsImages Table
+CREATE TABLE IF NOT EXISTS `NewsImages` (
+    `image_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `news_id` INT NOT NULL,
+    `image_link` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`news_id`) REFERENCES `News`(`news_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Create Health Tips Table
@@ -44,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `Health_Tips` (
 
 -- Create Vacancy Table
 CREATE TABLE IF NOT EXISTS `Vacancy` (
-    `vacancy_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `vacancy_id` VARCHAR(36) NOT NULL PRIMARY KEY,
     `job_title` VARCHAR(255) NOT NULL,
     `job_description` TEXT NOT NULL,
     `job_requirements` TEXT NOT NULL,
@@ -69,6 +85,7 @@ CREATE TABLE IF NOT EXISTS `Applicant` (
     `additional_information` TEXT NOT NULL, 
     `cv_file_path` VARCHAR(255) NOT NULL, 
     `other_testimonials` VARCHAR(255) NOT NULL, 
+    `Status` VARCHAR(255) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -88,3 +105,94 @@ VALUES
     ('test', 'https://www.youtube.com/watch?v=T8VqfQACMbM&t=511s')
 ON DUPLICATE KEY UPDATE 
     `video_link` = VALUES(`video_link`);
+
+-- Create cpd_trainings Table
+CREATE TABLE IF NOT EXISTS `cpd_trainings` (
+    `training_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `course_name` VARCHAR(255) NOT NULL UNIQUE,
+    `course_level` VARCHAR(255) NOT NULL,
+    `pri_test` VARCHAR(255) NOT NULL,
+    `pri_test_duration` VARCHAR(255) NOT NULL,
+    `post_test` VARCHAR(255) NOT NULL,
+    `post_test_duration` VARCHAR(255) NOT NULL,
+    `minimum_score` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- Create training schedule Table
+CREATE TABLE IF NOT EXISTS `training_schedule` (
+    `schedule_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `training_id` INT NOT NULL,
+    `course_name` VARCHAR(255) NOT NULL,
+    `registration_start_date` DATE NOT NULL,
+    `registration_end_date` DATE NOT NULL,
+    `course_start_date` DATE NOT NULL,
+    `course_end_date` DATE NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (training_id) REFERENCES cpd_trainings(training_id)
+) ENGINE=InnoDB;
+
+-- Create cpd_news Table
+CREATE TABLE IF NOT EXISTS `cpd_news` (
+    `news_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `news_title` VARCHAR(255) NOT NULL,
+    `news_description` TEXT,
+    `expiry_date` DATE,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- Create trainees Table
+CREATE TABLE IF NOT EXISTS `trainees` (
+    `trainee_id` VARCHAR(36) NOT NULL PRIMARY KEY,
+    `email` VARCHAR(255) NOT NULL UNIQUE,
+    `password` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- Create trainees_info Table
+CREATE TABLE IF NOT EXISTS `trainees_info` (
+    `id` VARCHAR(36) NOT NULL PRIMARY KEY,
+    `trainee_id` VARCHAR(36) NOT NULL,
+    `first_name` VARCHAR(255) NOT NULL,
+    `middle_name` VARCHAR(255),
+    `last_name` VARCHAR(255) NOT NULL,
+    `sex` VARCHAR(255) NOT NULL,
+    `phone` VARCHAR(255) NOT NULL,
+    `profession` VARCHAR(255),
+    `account_number` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,    
+    FOREIGN KEY (trainee_id) REFERENCES trainees(trainee_id)
+) ENGINE=InnoDB;
+
+-- Create courses Table
+CREATE TABLE IF NOT EXISTS `courses` (
+    `course_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `trainee_id` VARCHAR(36) NOT NULL,
+    `course_name` VARCHAR(255) NOT NULL,
+    `pri_score` VARCHAR(255) NOT NULL,
+    `post_score` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (trainee_id) REFERENCES trainees(trainee_id),
+    FOREIGN KEY (course_name) REFERENCES cpd_trainings(course_name)
+) ENGINE=InnoDB;
+
+-- Create trainees_status Table
+CREATE TABLE IF NOT EXISTS `trainees_status` (
+    `status_id` VARCHAR(36) NOT NULL PRIMARY KEY,
+    `trainee_id` VARCHAR(36) NOT NULL,
+    `course_name` VARCHAR(255) NOT NULL,
+    `registration` VARCHAR(255) NOT NULL,
+    `pri_test` VARCHAR(255) NOT NULL,
+    `post_test` VARCHAR(255) NOT NULL,
+    `certificate` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (trainee_id) REFERENCES trainees(trainee_id),
+    FOREIGN KEY (course_name) REFERENCES cpd_trainings(course_name)
+) ENGINE=InnoDB;

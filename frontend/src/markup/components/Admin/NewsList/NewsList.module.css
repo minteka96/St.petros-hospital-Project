@@ -1,91 +1,150 @@
-.newsListContainer {
-  padding: 15px;
-}
-
-.newsListContainer h2 {
-  font-size: 1.8rem;
-  text-align: center;
-  margin-bottom: 20px;
-  color: #444;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
 .newsTable {
   width: 100%;
   border-collapse: collapse;
-  margin: 0 auto;
-  background-color: #fff;
+  table-layout: fixed;
 }
 
 .newsTable th,
 .newsTable td {
-  padding: 10px;
+  padding: 12px 15px;
   text-align: left;
   border: 1px solid #ddd;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #444;
 }
 
 .newsTable th {
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
   font-weight: bold;
   text-transform: uppercase;
+  text-align: center;
 }
 
+
+.titleColumn {
+  width: 10%;
+}
+
+.detailColumn {
+  width: 25%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.descriptionColumn {
+  width: 20%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.linkColumn {
+  width: 11%;
+}
+
+.linkColumn a {
+  color: #444; 
+  text-decoration: none;
+}
+
+.linkColumn a:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.imageColumn {
+  width: 8%;
+}
+
+.dateColumn,
+.actionsColumn {
+  width: 9%;
+}
 .link{
-  color: blue;
+  color: #444484;
 }
-button:hover{
-  background-color:#00A99E ;
+
+.imageGrid {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
+
+.imageThumbnail {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease;
+}
+
+.imageThumbnail:hover {
+  transform: scale(1.1);
+}
+
+.moreImages {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #666;
+  margin-left: 10px;
+}
+
+
 .iconButton {
   background: none;
   border: none;
   cursor: pointer;
   font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.iconButton:hover {
+  background-color:#00A99E;
+  transform: scale(1.0);
 }
 
 .editIcon {
   color: #34c759;
-  margin-right: 5px;
 }
 
 .deleteIcon {
   color: #d9534f;
 }
+/* New Styles for Formatted Text */
+.bulletedDetail {
+  color: #007bff;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.highlightedDetail {
+  background-color: #f0f8ff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.plainDetail {
+  color: #444;
+}
+
 
 @media (max-width: 768px) {
-  .newsTable {
-    display: block;
-  }
-
-  .newsTable thead {
-    display: none;
-  }
-
   .newsTable tr {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-bottom: 1px solid #ddd;
-    padding: 10px 0;
+  }
+
+  .newsTable th {
+    display: none;
   }
 
   .newsTable td {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border: none;
-    padding: 8px 0;
-  }
-
-  .newsTable td::before {
-    content: attr(data-label); 
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #444;
-    margin-right: 10px;
-    flex-shrink: 0;
+    padding: 8px;
   }
 }
