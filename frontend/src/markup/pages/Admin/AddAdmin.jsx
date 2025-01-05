@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { updatePasswordSchema } from "../../../Schemas/validationSchemas";
@@ -147,7 +149,9 @@ const AddAdmin = () => {
                 <option value="HR">HR</option>
                 <option value="HE">Health Literacy</option>
                 <option value="Comm">Communication</option>
+                <option value="Comm">CPD Traning</option>
               </select>
+           
             </div>
 
             <div className="mb-3 form-check">

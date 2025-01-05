@@ -151,6 +151,7 @@ async function getTraineeByEmail(req, res) {
     const { trainee_email } = req.params;
 
     if (!trainee_email) {
+
       return res.status(400).json({
         status: "fail",
         message: "Email is required",
@@ -160,6 +161,7 @@ async function getTraineeByEmail(req, res) {
     const trainee = await traineesSignUpService.getTraineeByEmail(
       trainee_email
     );
+
 
     if (!trainee) {
       return res.status(404).json({

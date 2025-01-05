@@ -1,6 +1,5 @@
 const applicantService = require("../Services/applicant.service");
 
-
 async function createApplicant(req, res) {
   try {
     const {
@@ -44,7 +43,9 @@ async function createApplicant(req, res) {
 
     // Create applicant in the database
     await applicantService.createApplicant(applicantData);
-    res.status(201).json({ message: "Applicant created successfully",status:201 });
+    res
+      .status(201)
+      .json({ message: "Applicant created successfully", status: 201 });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -119,6 +120,38 @@ async function deleteAllApplicants(req, res) {
   }
 }
 // Export the createApplicant function
+async function updateApplicant(req, res) {
+  try {
+    // Extract the applicant ID and status from the request
+    const { id } = req.params;
+    const { status } = req.body;
+
+    // Validate status input
+    if (!status || (status !== "Approved" && status !== "Rejected")) {
+      return res
+        .status(400)
+        .json({
+          error: "Invalid status. Only 'Approved' or 'Rejected' are allowed.",
+        });
+    }
+
+    // Call service function to update the applicant
+    const updatedApplicant = await applicantService.updateApplicant(id, {
+      status,
+    });
+
+    // Check if applicant was found and updated
+    if (!updatedApplicant) {
+      return res.status(404).json({ error: "Applicant not found" });
+    }
+
+    // Return the updated applicant in the response
+    res.status(200).json({ data: updatedApplicant });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
 
 module.exports = {
   createApplicant,
@@ -127,4 +160,5 @@ module.exports = {
   deleteApplicant,
   deleteApplicantBJobTitle,
   deleteAllApplicants,
+  updateApplicant,
 };

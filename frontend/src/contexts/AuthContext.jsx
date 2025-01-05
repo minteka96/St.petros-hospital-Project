@@ -15,29 +15,48 @@ export const AuthProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [user, setUser] = useState(null);
+  const [privileges, setPrivileges] = useState([]); // New state for privileges
   const [loading, setLoading] = useState(true); // Track loading state
 
-  const value = { isLogged, isAdmin, user, setIsLogged, setIsAdmin };
+  const value = {
+    isLogged,
+    isAdmin,
+    user,
+    privileges,
+    setIsLogged,
+    setIsAdmin,
+  };
+
   useEffect(() => {
     const initializeAuth = async () => {
       try {
         const token = await userAuthHeader();
         if (token) {
           // Decode the token payload
-          const { role, username, email } = JSON.parse(
+          const decodedToken = JSON.parse(
             atob(token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))
           );
+          const {
+            role,
+            username,
+            email,
+            privileges: userPrivileges,
+          } = decodedToken;
 
           // Update authentication state
           setIsLogged(true);
           setUser({ username, role, email, token });
           setIsAdmin(role === "admin"); // Check if the role is "admin"
+
+          // Update privileges
+          setPrivileges(userPrivileges || []); // Default to an empty array if privileges are not provided
         }
       } catch (error) {
         console.error("Error during authentication initialization:", error);
         setIsLogged(false); // Reset states on error
         setIsAdmin(false);
         setUser(null);
+        setPrivileges([]);
       } finally {
         setLoading(false); // Set loading to false when done
       }

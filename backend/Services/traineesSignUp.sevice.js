@@ -79,6 +79,22 @@ async function getAllTrainees() {
     throw new Error("Failed to fetch trainees.");
   }
 }
+
+// Update trainee password by email
+async function updateTraineePasswordByEmail(email, newPassword) {
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    const query = "UPDATE trainees SET password = ? WHERE email = ?";
+    const [result] = await conn.pool.query(query, [hashedPassword, email]);
+
+    return result.affectedRows > 0;
+  } catch (error) {
+    throw error;
+  }
+}
+
 // Update trainee details by ID
 async function updateTraineeById(traineeId, updatedDetails) {
   const connection = await conn.pool.getConnection();
@@ -146,6 +162,7 @@ module.exports = {
   getTraineeByEmail,
   getTraineeById, // Added this function
   getAllTrainees,
+  updateTraineePasswordByEmail,
   updateTraineeById,
   deleteTraineeById,
 };

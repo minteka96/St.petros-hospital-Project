@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UpdateAdmin from "./AdminUpdate";
@@ -39,6 +41,7 @@ const AdminManagement = () => {
     };
 
     fetchUsers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   // Handle user deletion
@@ -112,7 +115,15 @@ const AdminManagement = () => {
               <tr key={user.user_id}>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
-                <td>{user.role === "superadmin" ? "Super Admin" : user.role==="Admin" ? "Admin" : user.role==="HR" ? "HR" : user.role==="HE" ? "Health Literacy" : "Communication"}</td>
+              <td>
+  {user.role === "superadmin" ? "Super Admin" 
+    : user.role === "Admin" ? "Admin" 
+    : user.role === "HR" ? "HR" 
+    : user.role === "HE" ? "Health Literacy" 
+    : user.role === "CPD" ? "CPD Training" 
+    : user.role === "Comm" ? "Communication" 
+    : "Unknown Role"}
+</td>
                 <td>
                   <span
                     className={`badge ${
@@ -157,6 +168,9 @@ const AdminManagement = () => {
               </p>
               <p style={{ fontSize: "12px", padding: 0 }}>
                 Communication : <span>access only News</span>
+              </p>
+              <p style={{ fontSize: "12px", padding: 0 }}>
+               CPD Traning : <span>access only CPDNews</span>
               </p>
             </div>
           </div>

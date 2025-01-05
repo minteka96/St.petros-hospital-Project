@@ -1,19 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import classes from "./JobsDetails/ApplicantForms.module.css"; // Import module CSS
+import classes from "./JobsDetails/ApplicantForms.module.css"; 
 import { useAuth } from "../../../contexts/AuthContext";
 import applicantService from "../../../Services/applicant.service";
+import jobService from "../../../Services/jobs.service";
 
 const ApplicantForms = () => {
   const { user } = useAuth();
   const token = user ? user.token : null;
   const location = useLocation();
 
-  // Extract query parameters
   const queryParams = new URLSearchParams(location.search);
-  const title = queryParams.get("title");
+  const id = queryParams.get("undfjw");
   const navigate = useNavigate();
+
+  const [title, setTitle] = useState(null);
+  const [closingDate, setClosingDate] = useState(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  const currentDate = new Date().getTime();
+  useEffect(() => {
+    const fetchJob = async () => {
+      try {
+        const response = await jobService.getJobById(id);
+        setTitle(response.job_title);
+        setClosingDate(new Date(response.deadline).getTime());
+      } catch (error) {
+        console.error("Error fetching job:", error);
+        setError("Failed to fetch job details. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJob();
+  }, [id]);
+
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      position: title || "",
+    }));
+  }, [title]);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -44,9 +75,7 @@ const ApplicantForms = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create a new FormData instance
     const formDataToSend = new FormData();
-
     formDataToSend.append("first_name", formData.firstName);
     formDataToSend.append("last_name", formData.lastName);
     formDataToSend.append("email_address", formData.email);
@@ -58,14 +87,12 @@ const ApplicantForms = () => {
       formDataToSend.append("testimonials", formData.testimonials);
 
     try {
-      // Use your applicantService to send the data
       const response = await applicantService.postApplicant(
         formDataToSend,
         token
       );
       if (response.status === 201) {
         alert("CV submitted successfully!");
-        // Clear form fields after successful submission
         setFormData({
           firstName: "",
           lastName: "",
@@ -84,6 +111,22 @@ const ApplicantForms = () => {
       console.error("Error submitting CV:", error);
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="alert alert-danger text-center">{error}</div>;
+  }
+
+  if (currentDate > closingDate) {
+    return (
+      <div className="alert alert-danger text-center">
+        The application period has ended.
+      </div>
+    );
+  }
 
   return (
     <div className={`container my-5 ${classes.formContainer}`}>
@@ -162,7 +205,10 @@ const ApplicantForms = () => {
 
           <Form.Group className="mb-3" controlId="formAdditionalInfo">
             <Form.Label>
-              Additional Information <span className="text-danger">*</span>
+              Additional Information <span className="text-danger">*</span><br/>
+              <span className="text-muted">
+                (optional)
+              </span>
             </Form.Label>
             <Form.Control
               as="textarea"
@@ -189,7 +235,8 @@ const ApplicantForms = () => {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formTestimonials">
-            <Form.Label>Other Testimonials (e.g. Certificates)</Form.Label>
+            <Form.Label>Other Testimonials (e.g. Certificates)</Form.Label><br/>
+            <span>(optional)</span>
             <div className={classes.fileUploadBox}>
               <Form.Control
                 type="file"

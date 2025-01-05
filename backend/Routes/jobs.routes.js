@@ -14,6 +14,7 @@ router.post(
   [
     authMiddleware.verifyToken,
     authMiddleware.checkRoles(["superadmin", "Admin", "HR"]),
+    
   ],
   jobsController.createJob
 );
@@ -23,6 +24,8 @@ router.get("/api/vacancies", jobsController.getAllJobs);
 
 // Define a route to get a job by ID
 router.get("/api/vacancies/:id", jobsController.getJobById);
+
+router.put("/api/vacancies/:jobId", jobsController.updateStatus);
 
 // Define a route to delete a job
 router.delete(

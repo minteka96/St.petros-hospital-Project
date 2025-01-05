@@ -1,9 +1,13 @@
 const conn = require("../Config/db.config");
+const { v4: uuidv4 } = require("uuid");
 
 async function createJob(jobData) {
+  const vacancy_id = uuidv4();
   const insertVacancyQuery = `
         INSERT INTO Vacancy 
-        (job_title,
+        (
+        vacancy_id,
+        job_title,
         job_description,
         job_requirements,
         qualifications,
@@ -12,7 +16,7 @@ async function createJob(jobData) {
         salary,
         address,
         deadline) 
-        VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )`;
 
   const {
     job_title,
@@ -31,6 +35,7 @@ async function createJob(jobData) {
     await connection.beginTransaction();
 
     const [resultIdentifier] = await connection.query(insertVacancyQuery, [
+      vacancy_id,
       job_title,
       job_description,
       job_requirements,
@@ -101,10 +106,30 @@ async function deleteJob(vacancy_id) {
     await connection.release();
   }
 }
+async function updateStatus(jobId) {
+  const status = 0;
+  console.log(jobId);
+  const updateStatusQuery = `UPDATE vacancy SET status = ? WHERE vacancy_id = ?`;
+
+  const connection = await conn.pool.getConnection();
+  try {
+    await connection.beginTransaction();
+    const [result] = await connection.query(updateStatusQuery, [status, jobId]);
+    await connection.commit();
+    return result.affectedRows > 0; // Return true if the status was successfully updated
+  } catch (error) {
+    await connection.rollback();
+    throw error; // Rethrow the error for higher-level handling
+  } finally {
+    connection.release(); // Release the connection back to the pool
+  }
+}
+
 // Export the function
 module.exports = {
   createJob,
   getAllJobs,
   getJobById,
   deleteJob,
+  updateStatus,
 };

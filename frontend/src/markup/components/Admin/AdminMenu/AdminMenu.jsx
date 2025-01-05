@@ -6,7 +6,7 @@ import { useAuth } from "../../../../contexts/AuthContext";
 
 function AdminMenu() {
   const [role, setRole] = useState("");
-  const { user } = useAuth();
+  const { user, privileges } = useAuth();
 
   useEffect(() => {
     const token = user ? user.token : null;
@@ -15,7 +15,7 @@ function AdminMenu() {
     } else {
       setRole("");
     }
-  }, []);
+  }, [user]);
 
   // Helper functions for role-based visibility
   const isSuperAdmin = role === "superadmin";
@@ -23,6 +23,7 @@ function AdminMenu() {
   const isComm = isAdminOrHigher || role === "Comm";
   const isHR = isAdminOrHigher || role === "HR";
   const isHE = isAdminOrHigher || role === "HE";
+  const isCPD = isAdminOrHigher || role === "CPD";
 
   return (
     <div className="pb-4">
@@ -42,6 +43,9 @@ function AdminMenu() {
             </Link>
             <Link to="/admin/new" className="list-group-item">
               Add New Admin
+            </Link>
+            <Link to="/admin/contact" className="list-group-item">
+              See Feedback Messages
             </Link>
           </>
         )}
@@ -74,7 +78,7 @@ function AdminMenu() {
         {isHR && (
           <>
             <Link to="/admin/add-job" className="list-group-item">
-              Job Post
+              Add Job
             </Link>
             <Link to="/admin/all-job" className="list-group-item">
               List of Jobs
@@ -84,9 +88,43 @@ function AdminMenu() {
             </Link>
           </>
         )}
-            <Link to="/admin/video" className="list-group-item">
-              Video
+
+        {/* CPD roles */}
+        {isCPD && (
+          <>
+            <Link to="/admin/add-cpd-news" className="list-group-item">
+              Add CPD News
             </Link>
+            <Link to="/admin/cpd-news-list" className="list-group-item">
+              List of CPD News
+            </Link>
+
+         
+            <Link to="/admin/add-trainee" className="list-group-item">
+                Add Trainee
+              </Link>
+
+           <Link to="/admin/trainees" className="list-group-item">
+             <i className="fas fa-users"></i> Trainees info
+               </Link>
+    
+      
+
+          </>
+        )}
+
+        <Link to="/admin/cpd/newCourse" className="list-group-item">
+          Add CPD Course
+        </Link>
+        <Link to="/admin/cpd/list" className="list-group-item">
+          List of CPD Courses
+        </Link>
+        <Link to="/admin/cpd/schedule" className="list-group-item">
+          List of Course Schedules
+        </Link>
+        <Link to="/admin/video" className="list-group-item">
+          Video
+        </Link>
       </div>
     </div>
   );

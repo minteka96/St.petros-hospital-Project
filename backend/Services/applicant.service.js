@@ -114,6 +114,32 @@ async function deleteAllApplicants() {
     await connection.release();
   }
 }
+async function updateApplicant(id, formData) {
+  const connection = await conn.pool.getConnection();
+  try {
+    console.log("first");
+    // Update the status of the applicant
+    const sql = `UPDATE applicant SET Status = ? WHERE id = ?`;
+    const [result] = await connection.query(sql, [formData.status, id]);
+
+    if (result.affectedRows === 0) {
+      // If no rows were affected, return null to indicate that the applicant was not found
+      return null;
+    }
+
+    // Fetch the updated applicant information
+    const [updatedApplicant] = await connection.query(
+      `SELECT * FROM applicant WHERE id = ?`,
+      [id]
+    );
+
+    return updatedApplicant[0]; // Return the first result (the updated applicant)
+  } catch (error) {
+    throw error;
+  } finally {
+    await connection.release();
+  }
+}
 
 module.exports = {
   createApplicant,
@@ -122,4 +148,5 @@ module.exports = {
   deleteApplicant,
   deleteApplicantByVacancyId,
   deleteAllApplicants,
+  updateApplicant,
 };

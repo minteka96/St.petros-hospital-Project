@@ -47,6 +47,7 @@ const getAllApplicants = async (loggedInEmployeeToken) => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
+    console.log(data);
     if (response.status === 200) {
       return data;
     }
@@ -114,10 +115,10 @@ const deleteApplicant = async (id, token) => {
     }
     throw new Error(
       "Failed to fetch applications: " + (data.message || "Unknown error")
-    );    
+    );
   } catch (error) {
     console.error("Error fetching applications:", error);
-    throw error;    
+    throw error;
   }
 };
 
@@ -131,10 +132,7 @@ const deleteAllApplicants = async () => {
   };
 
   try {
-    const response = await fetch(
-      `${api_url}/api/applicants`,
-      requestOptions
-    );
+    const response = await fetch(`${api_url}/api/applicants`, requestOptions);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -144,10 +142,10 @@ const deleteAllApplicants = async () => {
     }
     throw new Error(
       "Failed to fetch applications: " + (data.message || "Unknown error")
-    );    
+    );
   } catch (error) {
     console.error("Error fetching applications:", error);
-    throw error;    
+    throw error;
   }
 };
 
@@ -179,6 +177,37 @@ const deleteApplicantByJobTitle = async (jobTitle, token) => {
     throw error;
   }
 };
+const updateApplicantStatus = async (id, status, token) => {
+  const requestOptions = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+    body: JSON.stringify({ status }), // Dynamically send the status
+  };
+
+  try {
+    const response = await fetch(
+      `${api_url}/api/applicant/${id}`,
+      requestOptions
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    if (response.status === 200) {
+      return data;
+    }
+    throw new Error(
+      "Failed to update applicant status: " + (data.message || "Unknown error")
+    );
+  } catch (error) {
+    console.error("Error updating applicant status:", error);
+    throw error;
+  }
+};
+
 const applicantService = {
   postApplicant,
   getAllApplicants,
@@ -186,5 +215,6 @@ const applicantService = {
   deleteApplicant,
   deleteApplicantByJobTitle,
   deleteAllApplicants,
+  updateApplicantStatus,
 };
 export default applicantService;

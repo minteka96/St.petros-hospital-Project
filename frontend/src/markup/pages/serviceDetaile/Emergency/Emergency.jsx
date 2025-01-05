@@ -1,25 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
-import Swiper from 'swiper';
-import img1 from '../../../../assets/img/slider/Emergancy/emergancy2.jpg';
-import img2 from '../../../../assets/img/slider/Emergancy/emergancy.jpg';
-import img3 from '../../../../assets/img/slider/Emergancy/emergancy2.jpg';
-
-import classes from './Emergency.module.css';
+import React from "react";
+import { Carousel } from "react-bootstrap";
+import img1 from "../../../../assets/img/slider/Emergancy/emergancy2.jpg";
+import img2 from "../../../../assets/img/slider/Emergancy/emergancy.jpg";
+import img3 from "../../../../assets/img/slider/Emergancy/emergancy2.jpg"; // Uncomment this if you want to add more images
+import classes from "./Emergency.module.css";
 
 const Emergency = () => {
-  useEffect(() => {
-    new Swiper('.swiper-container', {
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      loop: true,
-    });
-  }, []);
-
   return (
     <div className={classes.mainContent}>
+      {/* Page Title Area */}
       <div className={classes.pageTitleArea}>
         <h1>Emergency Department</h1>
         <p>Immediate care for urgent medical conditions.</p>
@@ -79,34 +69,48 @@ const Emergency = () => {
         </p>
       </div>
 
+      {/* Department Area */}
       <div className={classes.departmentArea}>
-        <div className={classes.contentWrapper}>
-          <div className={`swiper-container department-gallery ${classes.departmentGallery}`} id="gallery">
-            <h2 className={classes.galleryTitle}>Department Gallery</h2>
-            <div className="swiper-wrapper gallery-slider">
-              <div className="swiper-slide" style={{ backgroundImage: `url(${img1})` }}>
-                <div className="slider-content">
-                  <p className={`${classes.sliderTitle} ${classes.traumaCare}`}>Trauma Care</p>
-                </div>
-              </div>
-              <div className="swiper-slide" style={{ backgroundImage: `url(${img2})` }}>
-                <div className="slider-content">
-                  <p className={`${classes.sliderTitle} ${classes.resuscitation}`}>Resuscitation</p>
-                </div>
-              </div>
-               <div className="swiper-slide" style={
-                { backgroundImage: `url(${img3})` }}
-                >
-                <div className="slider-content">
-                  <p className={`${classes.sliderTitle} ${classes.other}`}></p>
-                </div>
-              </div> 
-            </div>
+        {/* Department Gallery with React Bootstrap Carousel */}
+        <div className={classes.carouselWrapper}>
+          <h2 className={classes.galleryTitle}>Department Gallery</h2>
+          <Carousel>
+            {/* Slide 1 */}
+            <Carousel.Item>
+              <img
+                className={`d-block w-100 ${classes.carouselImage}`}
+                src={img1}
+                alt="Trauma Care"
+              />
+              <Carousel.Caption>
+                <h5>Trauma Care</h5>
+              </Carousel.Caption>
+            </Carousel.Item>
 
-            <div className="swiper-button-prev"><i className="icofont-arrow-left"></i></div>
-            <div className="swiper-button-next"><i className="icofont-arrow-right"></i></div>
-          </div>
+            {/* Slide 2 */}
+            <Carousel.Item>
+              <img
+                className={`d-block w-100 ${classes.carouselImage}`}
+                src={img2}
+                alt="Resuscitation"
+              />
+              <Carousel.Caption>
+                <h5>Resuscitation</h5>
+              </Carousel.Caption>
+            </Carousel.Item>
 
+            {/* Slide 3 (Optional) */}
+            <Carousel.Item>
+              <img
+                className={`d-block w-100 ${classes.carouselImage}`}
+                src={img3}
+                alt="Other Emergency Services"
+              />
+              <Carousel.Caption>
+                <h5>Other Emergency Services</h5>
+              </Carousel.Caption>
+            </Carousel.Item>
+          </Carousel>
         </div>
       </div>
     </div>

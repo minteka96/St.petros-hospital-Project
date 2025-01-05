@@ -348,7 +348,7 @@ const Header = () => {
         {/* <!-- header-bottom end --> */}
         {/* ============================================= */}
         {/* Offcanvas Menu Start */}
-        <div>
+        <div style={{ maxWidth: "90vw" }}>
           <div
             className={`offcanvas-overlay ${isMenuOpen ? "active" : ""}`}
             onClick={toggleMenu}
@@ -359,6 +359,7 @@ const Header = () => {
             className={`offcanvas offcanvas-mobile-menu ${
               isMenuOpen ? "active" : ""
             }`}
+            style={{ width: "90vw" }}
           >
             <div className="inner">
               <div className="border-bottom mb-3 pb-3 text-end">
@@ -377,16 +378,42 @@ const Header = () => {
               </div>
               <nav className="offcanvas-menu">
                 <ul>
-                  <li>
+                  <li onClick={toggleMenu}>
                     <Link to="/">
                       <span className="menu-text">Home</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link className="main-menu-link" to="/News">
-                      News
+                  {/*  */}
+                  <li
+                    className={`sub-menu-list ${
+                      activeSubMenu === "news" ? "active" : ""
+                    }`}
+                  >
+                    <span
+                      className="menu-expand"
+                      onClick={() => toggleSubMenu("news")}
+                    >
+                      {/* Change icon based on state */}
+                    </span>
+                    <Link>
+                      <span className="menu-text">News</span>
                     </Link>
+                    <ul
+                      className="offcanvas-submenu"
+                      style={{
+                        display: activeSubMenu === "news" ? "block" : "none",
+                      }}
+                    >
+                      <li onClick={toggleMenu}>
+                        <Link to="/news">News</Link>
+                      </li>
+                      <li onClick={toggleMenu}>
+                        <Link to="/healhtip">Health Tip</Link>
+                      </li>
+                    </ul>
                   </li>
+                  {/*  */}
+
                   <li
                     className={`sub-menu-list ${
                       activeSubMenu === "services" ? "active" : ""
@@ -398,7 +425,7 @@ const Header = () => {
                     >
                       {/* Change icon based on state */}
                     </span>
-                    <Link to="/services">
+                    <Link>
                       <span className="menu-text">Services</span>
                     </Link>
                     <ul
@@ -408,16 +435,16 @@ const Header = () => {
                           activeSubMenu === "services" ? "block" : "none",
                       }}
                     >
-                      <li>
+                      <li onClick={toggleMenu}>
                         <Link to="/services">Service</Link>
                       </li>
-                      <li>
+                      <li onClick={toggleMenu}>
                         <Link to="/servicedetail">Service Details</Link>
                       </li>
                     </ul>
                   </li>
 
-                  <li
+                  {/* <li
                     className={`sub-menu-list ${
                       activeSubMenu === "cpd" ? "active" : ""
                     }`}
@@ -425,13 +452,13 @@ const Header = () => {
                     <span
                       className="menu-expand"
                       onClick={() => toggleSubMenu("cpd")}
-                    >
-                      {/* Change icon based on state */}
-                    </span>
-                    <Link to="/cpd">
+                    > */}
+                  {/* Change icon based on state */}
+                  {/* </span> */}
+                  {/* <Link to="/cpd">
                       <span className="menu-text">CPD</span>
-                    </Link>
-                    <ul
+                    </Link> */}
+                  {/* <ul
                       className="offcanvas-submenu"
                       style={{
                         display: activeSubMenu === "cpd" ? "block" : "none",
@@ -440,28 +467,28 @@ const Header = () => {
                       <li>
                         <Link to="/about-cpd">ABOUT CPD</Link>
                       </li>
-                    </ul>
-                  </li>
-                  <li>
+                    </ul> */}
+                  {/* </li> */}
+                  <li onClick={toggleMenu}>
                     <Link to="/about">About</Link>
                   </li>
-                  <li>
+                  <li onClick={toggleMenu}>
                     <Link className="main-menu-link" to="/jobs">
                       Jobs
                     </Link>
                   </li>
-                  <li
+                  {/* <li
                     className={`sub-menu-list ${
                       activeSubMenu === "tender" ? "active" : ""
                     }`}
-                  >
-                    <span
+                  > */}
+                  {/* <span
                       className="menu-expand"
                       onClick={() => toggleSubMenu("tender")}
-                    >
-                      {/* Change icon based on state */}
-                    </span>
-                    <Link className="main-menu-link" to="/tender">
+                    > */}
+                  {/* Change icon based on state */}
+                  {/* </span> */}
+                  {/* <Link className="main-menu-link" to="/tender">
                       Tender
                     </Link>
                     <ul
@@ -481,9 +508,9 @@ const Header = () => {
                           Tender Details
                         </Link>
                       </li>
-                    </ul>
-                  </li>
-                  <li>
+                    </ul> */}
+                  {/* </li> */}
+                  <li onClick={toggleMenu}>
                     <Link to="/contact">Contact Us</Link>
                   </li>
                 </ul>
@@ -569,3 +596,4 @@ const Header = () => {
 };
 
 export default Header;
+
