@@ -43,7 +43,9 @@ import AllTenderFormDetails from "./markup/components/Admin/AddTenderForm/AllTen
 import Vacancies from "./markup/pages/Jobs/Vacancies.jsx";
 import ApplicationForm from "./markup/pages/Jobs/ApplicationForm.jsx";
 import HealthWorkerINfo from "./markup/pages/HealthWorkerEntertainment/HealthWorkerEntertainment .jsx";
-import QulityResearch from "./markup/pages/qulity&research/qulityResearch.jsx";
+import QulityResearch from "./markup/pages/qulity&research/QulityResearch.jsx";
+import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
+import PublicationDetails from './markup/pages/qulity&research/PublicationDetails.jsx';
 import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
 import AdminRoute from "./markup/routes/AdminRoute.jsx";
 import Login from "./markup/pages/Login/Login.jsx";
