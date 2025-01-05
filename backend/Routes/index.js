@@ -27,7 +27,7 @@ const traineesInfoRoutes = require('./trainees_info.routes.js');
 
 // Import the contact router
 const contactRoutes = require("./contact.routes");  // <-- Add this line
-
+const researchPublicationRouter = require('./researchPublication.routes')
 // Use the routers in the main router
 // Use the sign-up route
 router.use(traineesSignUpRoute);
@@ -51,7 +51,7 @@ router.use(cpdNewsRouter);
 router.use(traineesSignInRoute);
 
 // Use the contact routes for the /api/contact path // Ensure correct path
-
+router.use('/api', researchPublicationRouter);
 // Use the routes
 router.use('/api', contactRoutes); 
 router.use(cpdNewsRouter);

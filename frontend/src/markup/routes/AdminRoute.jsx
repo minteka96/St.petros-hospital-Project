@@ -55,6 +55,10 @@ import Trainee from "../components/Admin/CPD/Trainees/Trainee.jsx";
 import TrainInfoList from "../../markup/components/Admin/Trainer/TrainInfoList.jsx";
 // import TrainInfoDetail from "../../markup/components/Admin/Trainer/TrainInfoDetail.jsx";
 import TraineeAddForm from "../../markup/components/Admin/Trainer/TraineeAddForm.jsx";
+import AddPublication from "../components/Admin/addpublication/AddPublication.jsx";
+  import EditPublicationForm from "../components/Admin/EditPublicationForm/EditPublicationForm.jsx";
+   import ResearchPublications from "../pages/qulity&research/ResearchPublication.jsx";
+   import PublicationList from "../components/Admin/publicationlist/PublicationList.jsx";
 
 const AdminRoute = () => {
   const navigate = useNavigate();
@@ -273,7 +277,10 @@ const AdminRoute = () => {
               {/* <Route path="/trainee/:id" element={<TrainInfoDetail />} /> */}
               <Route path="/add-trainee" element={<TraineeAddForm />} />
 
-
+              <Route path="/add-publication" element={<AddPublication />} /> 
+              <Route path="/publications" element={<ResearchPublications />} /> 
+              <Route path="/publications/edit/:id" element={<EditPublicationForm />} />
+              <Route path="/publicationlist" element={<PublicationList />} />
              
           
               <Route

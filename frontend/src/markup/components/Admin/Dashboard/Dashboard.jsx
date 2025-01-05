@@ -14,6 +14,8 @@ import HealthTipList from '../HealthTipList/HealthTipList';
 import AddhealthTipForm from '../HealthTipList/AddhealthTipForm';
 import Applicant from '../Applicant/Applicant';
 import ContactList from '../Admin/ContactList/ContactList'; // Import the ContactList component
+import AddPublication from '../addpublication/AddPublication';
+import PublicationList from '../publicationlist/PublicationList';
 
 //import AddTenderForm from './AddTenderForm';
 const Dashboard = () => {
@@ -55,6 +57,11 @@ const Dashboard = () => {
         <h2 className={classes.sectionTitle}>Feedback Contacts</h2>
         <ContactList /> {/* Add the ContactList component */}
       </div>
+       <div className={classes.publicationManagement}>
+        <h2 className={classes.sectionTitle}>Publication Management</h2>
+        <AddPublication />
+        <PublicationList />
+    </div>
     </div>
   );
 };

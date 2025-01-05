@@ -1,0 +1,39 @@
+.pdfLink {
+  margin-top: 10px;
+}
+
+.viewPdfButton {
+  background-color: #00a99e;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.pdfViewerContainer {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.title, .author {
+  color: #00a99e;
+}
+
+.title {
+  text-align: left;
+  font-size: 1.4rem;
+}
+
+.col-md-6 {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.col-md-6:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 12px 40px rgba(0, 0, 0, 0.2);
+}

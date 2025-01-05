@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UpdateAdmin from "./AdminUpdate";
@@ -22,6 +20,7 @@ const AdminManagement = () => {
       "x-access-token": token,
     },
   };
+
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -41,7 +40,7 @@ const AdminManagement = () => {
     };
 
     fetchUsers();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   // Handle user deletion
@@ -88,7 +87,7 @@ const AdminManagement = () => {
   };
 
   return (
-    <div className="container  py-5">
+    <div className="container py-5">
       <h1 className="mb-4">Admin Management</h1>
       {error && <div className="alert alert-danger mb-4">{error}</div>}
 
@@ -115,15 +114,23 @@ const AdminManagement = () => {
               <tr key={user.user_id}>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
-              <td>
-  {user.role === "superadmin" ? "Super Admin" 
-    : user.role === "Admin" ? "Admin" 
-    : user.role === "HR" ? "HR" 
-    : user.role === "HE" ? "Health Literacy" 
-    : user.role === "CPD" ? "CPD Training" 
-    : user.role === "Comm" ? "Communication" 
-    : "Unknown Role"}
-</td>
+                <td>
+                  {user.role === "superadmin"
+                    ? "Super Admin"
+                    : user.role === "Admin"
+                    ? "Admin"
+                    : user.role === "HR"
+                    ? "HR"
+                    : user.role === "HE"
+                    ? "Health Literacy"
+                    : user.role === "CPD"
+                    ? "CPD Training"
+                    : user.role === "RPUB"
+                    ? "Research Publication"
+                    : user.role === "Comm"
+                    ? "Communication"
+                    : "Unknown Role"}
+                </td>
                 <td>
                   <span
                     className={`badge ${
@@ -152,7 +159,7 @@ const AdminManagement = () => {
               </tr>
             ))}
           </tbody>
-          <div className="mt-4 " style={{ fontSize: "12px" }}>
+          <div className="mt-4" style={{ fontSize: "12px" }}>
             <h5 style={{ fontSize: "16px", padding: 0, margin: 0 }}>
               Role Access definition
             </h5>
@@ -161,16 +168,19 @@ const AdminManagement = () => {
                 Admin : <span>access all without admin Management</span>
               </p>
               <p style={{ fontSize: "12px", padding: 0 }}>
-                HR : <span>access only Job and Applicant </span>
+                HR : <span>access only Job and Applicant</span>
               </p>
               <p style={{ fontSize: "12px", padding: 0 }}>
-                Health Literacy : <span>access only Health-Tip </span>
+                Health Literacy : <span>access only Health-Tip</span>
               </p>
               <p style={{ fontSize: "12px", padding: 0 }}>
                 Communication : <span>access only News</span>
               </p>
               <p style={{ fontSize: "12px", padding: 0 }}>
-               CPD Traning : <span>access only CPDNews</span>
+                Research Publication : <span>access only Publication</span>
+              </p>
+              <p style={{ fontSize: "12px", padding: 0 }}>
+                CPD Training : <span>access only CPD Training</span>
               </p>
             </div>
           </div>

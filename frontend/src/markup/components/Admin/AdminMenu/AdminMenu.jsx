@@ -24,6 +24,7 @@ function AdminMenu() {
   const isHR = isAdminOrHigher || role === "HR";
   const isHE = isAdminOrHigher || role === "HE";
   const isCPD = isAdminOrHigher || role === "CPD";
+const isRPUB= isAdminOrHigher || role === "RPUB";
 
   return (
     <div className="pb-4">
@@ -67,7 +68,15 @@ function AdminMenu() {
             </Link> */}
           </>
         )}
-
+{/* Research Publication roles */}
+        {isRPUB && (<><Link to="/admin/add-publication" className="list-group-item">
+              Add Publication
+            </Link>
+            <Link to="/admin/publicationlist" className="list-group-item">
+              List of Publications
+            </Link>
+            </>)}
+      
         {/* Health tips (visible to all roles) */}
         {isHE && (
           <>
