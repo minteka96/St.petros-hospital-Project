@@ -32,9 +32,17 @@ CREATE TABLE IF NOT EXISTS `News` (
     `news_detail` TEXT NOT NULL,
     `news_description` TEXT,
     `news_link` VARCHAR(255),
-    `news_image_link` VARCHAR(255),
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Create NewsImages Table
+CREATE TABLE IF NOT EXISTS `NewsImages` (
+    `image_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `news_id` INT NOT NULL,
+    `image_link` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`news_id`) REFERENCES `News`(`news_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Create Health Tips Table
@@ -98,7 +106,6 @@ VALUES
 ON DUPLICATE KEY UPDATE 
     `video_link` = VALUES(`video_link`);
 
-
 -- Create contact Table
 CREATE TABLE IF NOT EXISTS `contact` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -136,6 +143,7 @@ CREATE TABLE IF NOT EXISTS `training_schedule` (
     `course_end_date` DATE NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
     FOREIGN KEY (training_id) REFERENCES cpd_trainings(training_id),
     FOREIGN KEY (course_name) REFERENCES cpd_trainings(course_name)
 ) ENGINE=InnoDB;
@@ -153,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `cpd_news` (
 -- Create trainees Table
 CREATE TABLE IF NOT EXISTS `trainees` (
     `trainee_id` VARCHAR(36) NOT NULL PRIMARY KEY,
-    `email` VARCHAR(255) NOT NULL,
+    `email` VARCHAR(255) NOT NULL UNIQUE,
     `password` VARCHAR(255) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

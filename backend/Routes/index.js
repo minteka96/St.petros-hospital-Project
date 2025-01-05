@@ -27,6 +27,14 @@ const traineeRouter = require("./trainee.toutes.js");
 const traineesInfoRoutes = require('./trainees_info.routes.js');
 
 // Use the routers in the main router
+// Import the trainees sign-up route
+const traineesSignUpRoute = require("./traineesSignUp.routes.js");
+// Import the trainees sign-in route
+const traineesSignInRoute = require("./traineesSignIn.routes.js");
+// Use the sign-up route
+router.use(traineesSignUpRoute);
+// Use the sign-in route
+router.use(traineesSignInRoute);
 router.use('/', traineesInfoRoutes);
 router.use(loginRouter);
 router.use(userRouter);
