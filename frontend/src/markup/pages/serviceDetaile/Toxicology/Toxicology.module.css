@@ -74,10 +74,10 @@
   position: absolute;
   left: 0;
   top: 50%;
-  transform: translateY(-50%);
+  /* transform: translateY(-50%); */
   width: 12px;
   height: 12px;
-  background-color: #00796b;
+  /* background-color: #00796b; */
   border-radius: 50%;
 }
 
@@ -104,7 +104,7 @@
 
 .pageTitleArea p {
   font-size: 1.1rem;
-  line-height: 1.6;
+  /* line-height: 1.6; */
 }
 
 .departmentGallery {

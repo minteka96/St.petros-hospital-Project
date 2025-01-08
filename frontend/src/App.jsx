@@ -4,7 +4,7 @@ import Header from "./markup/components/Header/Header";
 import Footer from "./markup/components/Footer/Footer";
 import Home from "./markup/pages/Home/Home";
 // ***************************servicesdetail Client Side ********************
-import Services from "./markup/pages/servicepage/Services";
+import Services from "./markup/pages/servicepage/Services.jsx";
 import ServiceDetail from "./markup/pages/serviceDetaile/ServiceDetail.jsx";
 import Cardiology from "./markup/pages/serviceDetaile/cardac/Cardiology";
 import MCH from "./markup/pages/serviceDetaile/mch/MCH";
@@ -54,7 +54,10 @@ import ApplicantForms from "./markup/pages/Jobs/ApplicationForm.jsx";
 import HealthTip from "./markup/pages/healthtips/HealthTip.jsx";
 import HealthTipDetail from "./markup/pages/healthtips/healthtipdetail/healthtipdetail.jsx";
 import HealthTipList from "./markup/components/Admin/HealthTipList/HealthTipList.jsx";
-import TraineeDashboard from "./markup/components/TraineeDashboard/TraineeDashboard.jsx";
+import Test from "./markup/pages/test/test.jsx";
+import CpdNews from "./markup/pages/CPD/Cpdnews.jsx";
+import TraineesDashboard from "./markup/components/TraineesDashboard/TraineesDashboard.jsx";
+import CertificateGenerator from "./markup/components/TraineesDashboard/CertificateGenerator.jsx";
 function App() {
   // check if thr route is '/login' or not
   if (window.location.pathname === "/login") {
@@ -70,12 +73,18 @@ function App() {
       <Routes>
         {/* *************************News Client Side Start Here*********************** */}
         <Route path="/news" element={<News />} />
+        <Route path="/cpd-news" element={<CpdNews />} />
         {/* <Route path="/newsDetails" element={<NewsDetails />} /> */}
         <Route
           path="/newsDetails/:newsId"
           element={<NewsDetails newsList={newsList} />}
         />
         <Route path="/healthtip" element={<HealthTip />} />
+        <Route path="/TraineesDashboard" element={<TraineesDashboard />} />
+        <Route
+          path="/CertificateGenerator"
+          element={<CertificateGenerator />}
+        />
         {/* <Route path="/newsDetails" element={<NewsDetails />} /> */}
         <Route
           path="/healthTipDetails/:healthTipId"
@@ -87,7 +96,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/cpd" element={<Cpd />} />
-        <Route path="/TraineeDashboard" element={<TraineeDashboard />} />
         <Route path="/healhtip" element={<HealthTip />}></Route>
         <Route
           path="/HealthWorkerEntertainment"
@@ -135,6 +143,7 @@ function App() {
         <Route path="/admin/application-form" element={<ApplicationForm />} />
 
         <Route path="/admin/*" element={<AdminRoute />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
       {["/login", "/admin"].some((path) =>
         window.location.pathname.startsWith(path)

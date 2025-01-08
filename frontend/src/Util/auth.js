@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const userAuthHeader = async () => {
   try {
     const token = sessionStorage.getItem("access-token");

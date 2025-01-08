@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 
 import img1 from "../../../../assets/img/slider/ortopedics/ortopedics.jpg";
-import img2 from "../../../../assets/img/team/02.jpg";
-import img3 from "../../../../assets/img/team/03.jpg";
+import img2 from "../../../../assets/img/slider/surgical/surgical3.jpg";
+import img3 from "../../../../assets/img/slider/surgical/surgical.jpg";
 import React from "react";
 import {
   Carousel,
@@ -20,7 +20,7 @@ const Orthopedics = () => {
       {/* Page Title Section */}
       <div className={`${classes.pageTitleArea} bg-light py-5 text-center`}>
         <Container>
-          <h1 className="text-primary">Orthopedics Department</h1>
+          <h1 className="text-primary"style={{color:"#00796b;"}}>Orthopedics Department</h1>
           <p className="lead text-muted">
             Comprehensive care for musculoskeletal conditions.
           </p>
@@ -54,7 +54,7 @@ const Orthopedics = () => {
       {/* Department Gallery Section */}
       <div className="py-5 bg-white">
         <Container>
-          <h2 className="text-center text-primary mb-4">Department Gallery</h2>
+          <h2 className="text-center text-primary mb-4 "style={{color:"#00796b;"}}>Department Gallery</h2>
           <Carousel>
             {/* Slide 1 */}
             <Carousel.Item>

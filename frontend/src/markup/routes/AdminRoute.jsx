@@ -32,6 +32,14 @@ const api_url = import.meta.env.VITE_API_URL;
 import ApplicantsPage from "../components/Admin/Applicant/ApplicantsPage.jsx";
 import HRManagerApplicants from "../components/Admin/Applicant/HRManagerApplicants.jsx";
 import JobArchivePage from "../components/Admin/Applicant/JobArchivePage.jsx";
+import ListAllCourses from "../components/Admin/CPD/CpdCourse/ListAllCourses.jsx";
+import CourseDetail from "../components/Admin/CPD/CpdCourse/CourseDetail.jsx";
+import AddNewCourse from "../components/Admin/CPD/CpdCourse/AddNewCourse.jsx";
+import AddCpdNewsForm from "../components/Admin/CPDNewsForm/AddCpdNewsForm.jsx";
+import CpdNewsList from "../components/Admin/CPDNewsList/CpdNewsList.jsx";
+import EditCpdNewsForm from "../components/Admin/CPDNewsDetails/EditCpdNewsForm .jsx";
+import Cpdnews from "../pages/CPD/Cpdnews.jsx";
+import ListOfSchedule from "../components/Admin/CPD/CpdSchedules/ListOfSchedule.jsx";
 
 const AdminRoute = () => {
   const navigate = useNavigate();
@@ -67,22 +75,21 @@ const AdminRoute = () => {
   };
   const handleShow = () => setShow(true);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-     if (newPassword) {
-       const result = updatePasswordSchema.safeParse({
-         password: newPassword,
-       });
+    if (newPassword) {
+      const result = updatePasswordSchema.safeParse({
+        password: newPassword,
+      });
 
-       if (!result.success) {
-         setPasswordError(result.error.errors[0].message); // Set the first error message
-         return;
-       }else{
+      if (!result.success) {
+        setPasswordError(result.error.errors[0].message); // Set the first error message
+        return;
+      } else {
         setPasswordError("");
-       }
-     }
+      }
+    }
 
     if (newPassword !== confirmPassword) {
       setError("Passwords do not match");
@@ -253,6 +260,24 @@ const AdminRoute = () => {
               <Route path="/add-job" element={<AddJobForm />} />
               <Route path="/all-job" element={<JobsListPage />} />
               <Route path="/job/edit/:job_id" element={<EditJobForm />} />
+              <Route path="/cpd-news" element={<Cpdnews />} />
+              <Route path="/add-cpd-news" element={<AddCpdNewsForm />} />
+              <Route
+                path="/edit-cpd-news/:newsId"
+                element={<EditCpdNewsForm />}
+              />
+              {/*  */}
+              <Route path="/cpd-news" element={<Cpdnews />} />
+              <Route path="/add-cpd-news" element={<AddCpdNewsForm />} />
+              <Route
+                path="/edit-cpd-news/:newsId"
+                element={<EditCpdNewsForm />}
+              />
+              <Route path="/cpd-news-list" element={<CpdNewsList />} />
+              <Route path="/cpd/newCourse" element={<AddNewCourse />} />
+              <Route path="/cpd/list" element={<ListAllCourses />} />
+              <Route path="/cpd/course/:course_id" element={<CourseDetail />} />
+              <Route path="/cpd/schedule" element={<ListOfSchedule />} />
             </Routes>
           </div>
         </div>
@@ -306,7 +331,9 @@ const AdminRoute = () => {
               <Form.Group className="mb-3" controlId="formNewPassword">
                 <Form.Label>New Password</Form.Label>
                 {passwordError && (
-                  <div className="alert color1 pt-0 mb-1 p-1">{passwordError}</div>
+                  <div className="alert color1 pt-0 mb-1 p-1">
+                    {passwordError}
+                  </div>
                 )}
                 <InputGroup>
                   <Form.Control
