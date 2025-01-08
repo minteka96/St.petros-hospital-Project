@@ -33,11 +33,7 @@ const TraineesDashboard = () => {
 
 
   useEffect(() => {
-     if (!token) {
-       navigate("/cpd/login");
-       return;
-     }
-    const fetchTrainings = async () => {
+         const fetchTrainings = async () => {
       try {
         const response = await fetch(
           `http://localhost:3001/api/cpd/available/courses`
@@ -58,6 +54,29 @@ const TraineesDashboard = () => {
     fetchTrainings();
   }, []);
 
+  useEffect(() => {
+    if (!token) {
+      navigate("/cpd/login");
+      return;
+    }
+    const checkTrainee = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3001/api/trainee-info/${traineeId}`
+        );
+        console.log("traineeId", traineeId);
+        console.log("response", response);
+        if (response.status===404) {
+          navigate("/cpd/trainee-info");
+        }
+        const data = await response.json();
+      } catch (error) {
+        console.error("Error checking trainee:", error);
+      }
+    }
+
+    checkTrainee();
+  },[])
   // Fetch registered courses for the trainee
   useEffect(() => {
     const fetchRegisteredCourses = async () => {
