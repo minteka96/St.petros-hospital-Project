@@ -33,6 +33,7 @@ import About from "./markup/pages/AboutPage/About";
 import Contact from "./markup/pages/Contact/Contact.jsx";
 import CpdLogin from "./markup/pages/CpdLogin/cpd.jsx";
 import CpdLoginSignup from "./markup/pages/CpdLogin/SignUpSignIn.jsx";
+import TraineeAddForm from "./markup/components/Admin/Trainer/TraineeAddForm.jsx";
 
 import "./style/css/style.css";
 
@@ -46,7 +47,7 @@ import HealthWorkerINfo from "./markup/pages/HealthWorkerEntertainment/HealthWor
 import QulityResearch from "./markup/pages/qulity&research/QulityResearch.jsx";
 import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
 import PublicationDetails from './markup/pages/qulity&research/PublicationDetails.jsx';
-import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
+// import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
 import AdminRoute from "./markup/routes/AdminRoute.jsx";
 import Login from "./markup/pages/Login/Login.jsx";
 
@@ -97,6 +98,7 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/cpd/" element={<CpdLogin />} />
         <Route path="/cpd/login" element={<CpdLoginSignup />} />
+         <Route path="/cpd/trainee-info" element={<TraineeAddForm  />} />
         <Route path="/healhtip" element={<HealthTip />}></Route>
 
          
