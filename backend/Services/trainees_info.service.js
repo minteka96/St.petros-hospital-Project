@@ -147,6 +147,18 @@ async function getTraineeInfoById(id) {
     await connection.release();
   }
 }
+async function getTraineeInfoByTraineeId(id) {
+  const sql = `SELECT * FROM trainees_info WHERE trainee_id = ?`;
+  const connection = await conn.pool.getConnection();
+  try {
+    const [rows] = await connection.query(sql, [id]);
+    return rows[0];
+  } catch (error) {
+    throw error;
+  } finally {
+    await connection.release();
+  }
+}
 
 
 
@@ -171,5 +183,6 @@ module.exports = {
   getAllTraineesInfo,
   getTraineeInfoById,
   updateTraineeInfo,
-  deleteTraineeInfo
+  deleteTraineeInfo,
+  getTraineeInfoByTraineeId
 };

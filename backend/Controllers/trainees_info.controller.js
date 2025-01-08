@@ -119,6 +119,22 @@ async function getTraineeInfoById(req, res) {
   }
 }
 
+async function getTraineeInfoByTraineeId(req, res) {
+  try {
+    const traineeInfo = await traineesInfoService.getTraineeInfoByTraineeId(
+      req.params.traineeId
+    );
+    console.log(req.params.traineeId)
+    if (!traineeInfo) {
+      return res.status(404).json({ error: "Trainee info not found" });
+    }
+    res.status(200).json({ data: traineeInfo });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
 async function updateTraineeInfo(req, res) {
   try {
     const updatedTraineeInfo = await traineesInfoService.updateTraineeInfo(
@@ -153,5 +169,6 @@ module.exports = {
   getAllTraineesInfo,
   getTraineeInfoById,
   updateTraineeInfo,
-  deleteTraineeInfo
+  deleteTraineeInfo,
+  getTraineeInfoByTraineeId,
 };
