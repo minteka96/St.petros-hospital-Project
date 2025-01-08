@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../contexts/AuthContext";
 import trainInfoService from "../../../../Services/trainInfo.service";
 import { toast } from "react-toastify";
-import { v4 as uuidv4 } from 'uuid';
 
 const TraineeAddForm = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user,trainee } = useAuth();
   const [loading, setLoading] = useState(false);
 
+  const trainee_id=trainee?.id
   const [formData, setFormData] = useState({
     first_name: "",
     middle_name: "",
@@ -42,20 +42,7 @@ const TraineeAddForm = () => {
   
 
 
-        // Generate trainee_id using UUID v4
-        // const trainee_id = uuidv4(); // Make sure to import { v4 as uuidv4 } from 'uuid'
-  
-        // const submitData = {
-        //   ...formData,
-        //   trainee_id,
-        //   email: `${formData.first_name.toLowerCase()}.${formData.last_name.toLowerCase()}@example.com`,
-        //   password: 'defaultpassword123' // You might want to generate this securely
-        // };
-
-        
-    // Generate trainee_id using UUID v4
-    const trainee_id = uuidv4(); // Make sure to import { v4 as uuidv4 } from 'uuid'
-  
+     
     const submitData = {
       ...formData,
       trainee_id
@@ -66,7 +53,7 @@ const TraineeAddForm = () => {
     try {
       const response = await trainInfoService.addTrainee(submitData, user.token);
       toast.success("Registration completed successfully!");
-      navigate("/admin/trainees"); // Navigate to trainee list after successful registration
+      navigate("/TraineesDashboard"); // Navigate to trainee list after successful registration
     } catch (error) {
       toast.error(error.response?.data?.message || "Registration failed. Please try again.");
       console.error("Registration error:", error);

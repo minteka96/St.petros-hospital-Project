@@ -1,27 +1,24 @@
 const conn = require("../Config/db.config");
 const { v4: uuidv4 } = require('uuid');
-async function createTraineeInfo(data) {
+
+const createTraineeInfo = async (data) => {
   const connection = await conn.pool.getConnection();
   try {
-    await connection.beginTransaction();
+    // Get the latest created trainee record
+    const [latestTrainee] = await connection.query(
+      'SELECT trainee_id FROM trainees ORDER BY created_at DESC LIMIT 1'
+    );
+    
+    const traineeId = latestTrainee[0].trainee_id;
 
-    // First, insert into trainees table
-    const traineeId = uuidv4();
-    const traineeSql = `INSERT INTO trainees (trainee_id, email, password) VALUES (?, ?, ?)`;
-    await connection.query(traineeSql, [
-      traineeId,
-      `${data.first_name.toLowerCase()}.${data.last_name.toLowerCase()}@example.com`,
-      'defaultpassword123'
-    ]);
-
-    // Then, insert into trainees_info table
+    // Create trainee info using the retrieved trainee_id
     const traineeInfoSql = `INSERT INTO trainees_info 
-      (id, trainee_id, first_name, middle_name, last_name, sex, phone, profession, account_number) 
+      (id, trainee_id, first_name, middle_name, last_name, sex, phone, profession, account_number)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const [result] = await connection.query(traineeInfoSql, [
       uuidv4(),
-      traineeId,
+      traineeId,  // Using the latest trainee_id
       data.first_name,
       data.middle_name,
       data.last_name,
@@ -31,206 +28,11 @@ async function createTraineeInfo(data) {
       data.account_number
     ]);
 
-    await connection.commit();
     return result;
-  } catch (error) {
-    await connection.rollback();
-    throw error;
   } finally {
     connection.release();
   }
-}
-
-
-
-
-async function createTraineeInfo(data) {
-  const connection = await conn.pool.getConnection();
-  try {
-    await connection.beginTransaction();
-
-
-//     const traineeSql = `INSERT INTO trainees (trainee_id, email, password) VALUES (?, ?, ?)`;
-//     await connection.query(traineeSql, [
-//       data.trainee_id,
-//       `${data.first_name.toLowerCase()}.${data.last_name.toLowerCase()}@example.com`,
-//       'defaultpassword123'
-//     ]);
-
-//     // Then, insert into trainees_info table
-//     const traineeInfoSql = `INSERT INTO trainees_info 
-//       (id, trainee_id, first_name, middle_name, last_name, sex, phone, profession, account_number) 
-//       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-
-//     const [result] = await connection.query(traineeInfoSql, [
-//       uuidv4(),
-//       data.trainee_id,
-//       data.first_name,
-//       data.middle_name,
-//       data.last_name,
-//       data.sex,
-//       data.phone,
-//       data.profession,
-//       data.account_number
-//     ]);
-
-//     await connection.commit();
-//     return result;
-//   } catch (error) {
-//     await connection.rollback();
-//     throw error;
-//   } finally {
-//     connection.release();
-//   }
-// }
-// async function createTraineeInfoWithJoin(data) {
-//   const connection = await conn.pool.getConnection();
-//   try {
-//     await connection.beginTransaction();
-
-//     const traineeId = uuidv4();
-//     const traineeSql = `
-//       INSERT INTO trainees (trainee_id, email, password) 
-//       VALUES (?, ?, ?)
-//     `;
-//     await connection.query(traineeSql, [
-//       traineeId,
-//       `${data.first_name.toLowerCase()}.${data.last_name.toLowerCase()}@example.com`,
-//       'defaultpassword123'
-//     ]);
-
-//     const traineeInfoSql = `
-//       INSERT INTO trainees_info 
-//       (id, trainee_id, first_name, middle_name, last_name, sex, phone, profession, account_number) 
-//       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-//     `;
-//     const [result] = await connection.query(traineeInfoSql, [
-//       uuidv4(),
-//       traineeId,
-//       data.first_name,
-//       data.middle_name,
-//       data.last_name,
-//       data.sex,
-//       data.phone,
-//       data.profession,
-//       data.account_number
-//     ]);
-
-//     await connection.commit();
-//     return result;
-//   } catch (error) {
-//     await connection.rollback();
-//     throw error;
-//   } finally {
-//     connection.release();
-//   }
-// }
-
-
-const traineeSql = `INSERT INTO trainees (trainee_id, email, password) VALUES (?, ?, ?)`;
-await connection.query(traineeSql, [
-  data.trainee_id,
-  `${data.first_name.toLowerCase()}.${data.last_name.toLowerCase()}@example.com`,
-  'defaultpassword123'
-]);
-
-// Then, insert into trainees_info table
-const traineeInfoSql = `INSERT INTO trainees_info 
-  (id, trainee_id, first_name, middle_name, last_name, sex, phone, profession, account_number) 
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-
-const [result] = await connection.query(traineeInfoSql, [
-  uuidv4(),
-  data.trainee_id,
-  data.first_name,
-  data.middle_name,
-  data.last_name,
-  data.sex,
-  data.phone,
-  data.profession,
-  data.account_number
-]);
-
-await connection.commit();
-return result;
-} catch (error) {
-await connection.rollback();
-throw error;
-} finally {
-connection.release();
-}
-}
-
-async function createTraineeInfoWithJoin(data) {
-const connection = await conn.pool.getConnection();
-try {
-await connection.beginTransaction();
-
-const traineeId = uuidv4();
-const traineeSql = `
-  INSERT INTO trainees (trainee_id, email, password) 
-  VALUES (?, ?, ?)
-`;
-await connection.query(traineeSql, [
-  traineeId,
-  `${data.first_name.toLowerCase()}.${data.last_name.toLowerCase()}@example.com`,
-  'defaultpassword123'
-]);
-
-const traineeInfoSql = `
-  INSERT INTO trainees_info 
-  (id, trainee_id, first_name, middle_name, last_name, sex, phone, profession, account_number) 
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-`;
-const [result] = await connection.query(traineeInfoSql, [
-  uuidv4(),
-  traineeId,
-  data.first_name,
-  data.middle_name,
-  data.last_name,
-  data.sex,
-  data.phone,
-  data.profession,
-  data.account_number
-]);
-
-await connection.commit();
-return result;
-} catch (error) {
-await connection.rollback();
-throw error;
-} finally {
-connection.release();
-}
-}
-
-// async function updateTraineeInfo(id, data) {
-// const connection = await conn.pool.getConnection();
-// try {
-// await connection.beginTransaction();
-
-// // Update trainees_info table first
-// const updateTraineeInfoSql = `UPDATE trainees_info SET ? WHERE id = ?`;
-// await connection.query(updateTraineeInfoSql, [data, id]);
-
-// // Then update trainees table
-// const updateTraineeSql = `UPDATE trainees SET email = ? WHERE trainee_id = (
-//   SELECT trainee_id FROM trainees_info WHERE id = ?
-// )`;
-// await connection.query(updateTraineeSql, [
-//   `${data.first_name.toLowerCase()}.${data.last_name.toLowerCase()}@example.com`,
-//   id
-// ]);
-
-// await connection.commit();
-// return getTraineeInfoById(id);
-// } catch (error) {
-// await connection.rollback();
-// throw error;
-// } finally {
-// connection.release();
-// }
-// }
+};
 
 
 async function updateTraineeInfo(id, data) {
@@ -346,22 +148,7 @@ async function getTraineeInfoById(id) {
   }
 }
 
-// async function updateTraineeInfo(id, data) {
-//   const sql = `UPDATE trainees_info SET ? WHERE id = ?`;
-//   const connection = await conn.pool.getConnection();
-//   try {
-//     await connection.beginTransaction();
-//     const [result] = await connection.query(sql, [data, id]);
-//     await connection.commit();
-//     if (result.affectedRows === 0) return null;
-//     return getTraineeInfoById(id);
-//   } catch (error) {
-//     await connection.rollback();
-//     throw error;
-//   } finally {
-//     await connection.release();
-//   }
-// }
+
 
 async function deleteTraineeInfo(id) {
   const sql = `DELETE FROM trainees_info WHERE id = ?`;
