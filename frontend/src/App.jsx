@@ -46,7 +46,6 @@ import HealthWorkerINfo from "./markup/pages/HealthWorkerEntertainment/HealthWor
 import QulityResearch from "./markup/pages/qulity&research/QulityResearch.jsx";
 import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
 import PublicationDetails from './markup/pages/qulity&research/PublicationDetails.jsx';
-import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
 import AdminRoute from "./markup/routes/AdminRoute.jsx";
 import Login from "./markup/pages/Login/Login.jsx";
 
@@ -63,7 +62,7 @@ import HealthTipList from "./markup/components/Admin/HealthTipList/HealthTipList
 import Test from "./markup/pages/test/test.jsx";
 import CpdNews from "./markup/pages/CPD/Cpdnews.jsx";
 import TraineesDashboard from "./markup/components/TraineesDashboard/TraineesDashboard.jsx";
-import CertificateGenerator from "./markup/components/TraineesDashboard/CertificateGenerator.jsx";
+// import CertificateGenerator from "./markup/components/TraineesDashboard/CertificateGenerator.jsx";
 import ContactForm from "./markup/pages/Contact/contactForm/ContactForm.jsx";
 function App() {
   // check if thr route is '/login' or not
@@ -88,10 +87,10 @@ function App() {
         />
         <Route path="/healthtip" element={<HealthTip />} />
         <Route path="/TraineesDashboard" element={<TraineesDashboard />} />
-        <Route
+        {/* <Route
           path="/CertificateGenerator"
           element={<CertificateGenerator />}
-        />
+        /> */}
         {/* <Route path="/newsDetails" element={<NewsDetails />} /> */}
         <Route
           path="/healthTipDetails/:healthTipId"
