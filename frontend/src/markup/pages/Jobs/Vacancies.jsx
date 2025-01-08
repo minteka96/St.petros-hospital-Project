@@ -95,7 +95,7 @@ const Vacancies = () => {
         </button>
       </div>
 
-      {error && <p className="error-message">{error}</p>}
+      {/* {error && <p className="error-message">{error}</p>} */}
 
       {loading ? (
         <p>Loading jobs...</p>
