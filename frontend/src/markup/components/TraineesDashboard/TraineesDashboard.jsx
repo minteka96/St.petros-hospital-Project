@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../../contexts/AuthContext";
 import {
   Container,
   Row,
@@ -11,6 +12,7 @@ import {
   OverlayTrigger,
   Alert,
 } from "react-bootstrap";
+import { useNavigate } from "react-router";
 
 const TraineesDashboard = () => {
   const [trainings, setTrainings] = useState([]);
@@ -21,10 +23,20 @@ const TraineesDashboard = () => {
   const [applying, setApplying] = useState(false);
   const [popupMessage, setPopupMessage] = useState(null); // Popup messages state
 
-  const traineeId = "57ef192e-ca72-11ef-8e9d-40b03409c8f0"; // Replace with the actual trainee ID.
+  const navigate = useNavigate();
+  const { trainee } = useAuth();
+  const traineeId = trainee?.id;
+  const token = trainee?.traineeToken;
+  // const traineeId = "57ef192e-ca72-11ef-8e9d-40b03409c8f0"; // Replace with the actual trainee ID.
 
   // Fetch available trainings
+
+
   useEffect(() => {
+     if (!token) {
+       navigate("/cpd/login");
+       return;
+     }
     const fetchTrainings = async () => {
       try {
         const response = await fetch(
@@ -163,15 +175,15 @@ const TraineesDashboard = () => {
                       {training.course_name || "N/A"}
                     </Card.Title>
                     <Card.Text>
-                      <strong>Start Date:</strong>{" "}
-                      {training.course_start_date
-                        ? formatDate(training.course_start_date)
+                      <strong>Registration Start Date:</strong>{" "}
+                      {training.registration_start_date
+                        ? formatDate(training.registration_start_date)
                         : "TBD"}
                     </Card.Text>
                     <Card.Text>
-                      <strong>End Date:</strong>{" "}
-                      {training.course_end_date
-                        ? formatDate(training.course_end_date)
+                      <strong>Registration End Date:</strong>{" "}
+                      {training.registration_end_date
+                        ? formatDate(training.registration_end_date)
                         : "TBD"}
                     </Card.Text>
                     <Card.Text>
@@ -228,8 +240,8 @@ const TraineesDashboard = () => {
             ) : (
               <>
                 <p>
-                  Are you sure you want to apply for the{" "}
-                  <strong>{selectedTraining.course_name}</strong> training?
+                  Are you sure you want to apply for the
+                  <strong className="space">{ selectedTraining.course_name }</strong> training?
                 </p>
                 <p>
                   <strong>Start Date:</strong>{" "}

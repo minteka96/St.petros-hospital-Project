@@ -62,7 +62,7 @@ const SignIn = ({ onSwitch }) => {
         setTimeout(() => {
           setMessage("");
           // window.location.href = "/news";
-          navigate("/news");
+          navigate("/TraineesDashboard");
         }, 2000);
       } else {
         console.error("Login failed:", response.message || "Unexpected error.");
