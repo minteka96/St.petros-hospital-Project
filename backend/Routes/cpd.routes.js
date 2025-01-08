@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const router = express.Router();
 const cpdController = require("../Controllers/cpd.controller");
+const { route } = require("./applicant.routes");
 
 // Configure Multer for file uploads
 const storage = multer.diskStorage({
@@ -64,9 +65,16 @@ router.put(
 
 // Route for getting all cpd courses
 router.get("/api/cpd/courses", cpdController.getAllCpdCourses);
+router.get("/api/cpd/available/courses", cpdController.getAvailableCpdCourses);
+
+//  `http://localhost:3001/api/cpd/available/courses?trainee_id=${traineeId}`
+
+router.get("/api/cpd/IsApply/:trainee_id", cpdController.IsApply);
 
 // Route for getting a specific cpd course by ID
 router.get("/api/cpd/course/:id", cpdController.getCpdCourseById);
+
+router.post("/api/cpd/apply", cpdController.apply);
 
 // Route for deleting a specific cpd course by ID
 router.delete("/api/cpd/course/:id", cpdController.deleteCpdCourse);

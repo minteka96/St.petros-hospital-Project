@@ -1,4 +1,3 @@
-
 const cpdservice = require("../Services/cpd.service");
 
 // Create a new CPD course
@@ -9,7 +8,7 @@ async function createCpdCourse(req, res) {
       course_level,
       pri_duration,
       post_duration,
-      min_score
+      min_score,
     } = req.body;
     // Validate required fields
     if (
@@ -21,15 +20,15 @@ async function createCpdCourse(req, res) {
     ) {
       return res.status(400).json({ error: "All fields are required" });
     }
-    
+
     // Get file paths from Multer
     const pri_file_path = req.files.pri_test
-    ? `/uploads/cpd/pri_test/${req.files.pri_test[0].filename}`
-    : null;
+      ? `/uploads/cpd/pri_test/${req.files.pri_test[0].filename}`
+      : null;
     const post_file_path = req.files.post_test
-    ? `/uploads/cpd/post_test/${req.files.post_test[0].filename}`
-    : "";
-    
+      ? `/uploads/cpd/post_test/${req.files.post_test[0].filename}`
+      : "";
+
     // Prepare applicant data
     const courseData = {
       course_name,
@@ -38,14 +37,14 @@ async function createCpdCourse(req, res) {
       pri_test_duration: pri_duration,
       post_test: post_file_path,
       post_test_duration: post_duration,
-      minimum_score: min_score      
+      minimum_score: min_score,
     };
-    
+
     // Create applicant in the database
     await cpdservice.createCpdCourse(courseData);
     res
-    .status(201)
-    .json({ message: "CPD course created successfully", status: 201 });
+      .status(201)
+      .json({ message: "CPD course created successfully", status: 201 });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -123,8 +122,6 @@ async function getAllCpdCourses(req, res) {
   }
 }
 
-
-
 // Delete a specific CPD course by ID
 async function deleteCpdCourse(req, res) {
   try {
@@ -139,12 +136,95 @@ async function deleteCpdCourse(req, res) {
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
+async function getAvailableCpdCourses(req, res) {
+  try {
+    const cpdCourses = await cpdservice.AvailableCpdCourses();
+    res.status(200).json(cpdCourses);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+async function apply(req, res) {
+  try {
+    // Destructure necessary fields from the request body
+    const { trainee_id, schedule_id, course_name, pri_score, post_score } =
+      req.body;
 
+    // Check if all required fields are present
+    if (!trainee_id || !schedule_id || !course_name) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    // Call service to apply for the course
+    const applyResult = await cpdservice.ApplyCourses(
+      trainee_id,
+      schedule_id,
+      course_name,
+      pri_score,
+      post_score
+    );
+    // If the ApplyCourses service fails
+    if (!applyResult.success) {
+      if (
+        applyResult.message === "You are already registered for this course."
+      ) {
+        return res.status(409).json({ error: applyResult.message }); // Conflict status for duplicate registration
+      }
+      return res.status(500).json({ error: applyResult.message }); // Internal server error
+    }
+
+    // If insertion was successful, return a success response with the new application ID
+    return res.status(201).json({
+      message: "Application successfully submitted.",
+      applicationId: applyResult.result.insertId, // Get the insertId from the result of ApplyCourses
+    });
+  } catch (error) {
+    // Handle any unexpected errors
+    console.error("Error applying for the course:", error);
+    return res.status(500).json({
+      error: "An error occurred. Please try again later.",
+    });
+  }
+}
+async function IsApply(req, res) {
+  try {
+    // Extract trainee_id from request parameters
+    const { trainee_id } = req.params;
+
+    if (!trainee_id) {
+      return res.status(400).json({ error: "Trainee ID is required." }); // Bad request
+    }
+
+    // Call the service to fetch applied courses
+    const applyResult = await cpdservice.IsApply(trainee_id);
+
+    if (!applyResult.success) {
+      return res.status(500).json({ error: applyResult.message }); // Internal server error
+    }
+
+    // Return the list of applied courses
+    return res.status(200).json({
+      success: true,
+      data: applyResult.data,
+    });
+  } catch (error) {
+    console.error("Error fetching applied courses:", error);
+
+    // Return a generic internal server error message
+    return res.status(500).json({
+      error: "An unexpected error occurred. Please try again later.",
+    });
+  }
+}
 
 module.exports = {
   createCpdCourse,
   getAllCpdCourses,
   getCpdCourseById,
   deleteCpdCourse,
-  updateCpdCourse  
+  updateCpdCourse,
+  getAvailableCpdCourses,
+  apply,
+  IsApply,
 };
