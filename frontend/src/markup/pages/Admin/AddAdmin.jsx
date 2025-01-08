@@ -149,7 +149,8 @@ const AddAdmin = () => {
                 <option value="HR">HR</option>
                 <option value="HE">Health Literacy</option>
                 <option value="Comm">Communication</option>
-                <option value="Comm">CPD Traning</option>
+                <option value="CPD">CPD Traning</option>
+                <option value="RPUB">Research Publication</option>
               </select>
            
             </div>

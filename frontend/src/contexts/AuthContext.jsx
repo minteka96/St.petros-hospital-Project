@@ -15,9 +15,11 @@ export const AuthProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [user, setUser] = useState(null);
+  const [trainee, setTrainee] = useState(null);
   const [privileges, setPrivileges] = useState([]); // New state for privileges
   const [loading, setLoading] = useState(true); // Track loading state
 
+  // console.log("trainee", trainee);
   const value = {
     isLogged,
     isAdmin,
@@ -25,11 +27,13 @@ export const AuthProvider = ({ children }) => {
     privileges,
     setIsLogged,
     setIsAdmin,
+    trainee,
   };
 
   useEffect(() => {
     const initializeAuth = async () => {
       try {
+        const traineeToken = await userAuthHeader();
         const token = await userAuthHeader();
         if (token) {
           // Decode the token payload
@@ -50,6 +54,17 @@ export const AuthProvider = ({ children }) => {
 
           // Update privileges
           setPrivileges(userPrivileges || []); // Default to an empty array if privileges are not provided
+        }
+        if (traineeToken) {
+          // console.log("traineeToken", traineeToken);
+          const decodedTraineeToken = JSON.parse(
+            atob(
+              traineeToken.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")
+            )
+          );
+          const { id, email } = decodedTraineeToken;
+          // console.log("id, email", id, email);
+          setTrainee({ id, email, traineeToken });
         }
       } catch (error) {
         console.error("Error during authentication initialization:", error);

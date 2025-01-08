@@ -79,22 +79,39 @@ async function updateScheduleById(id, data) {
   }
 } 
 
-//delete cpd schedule by id
 async function deleteScheduleById(id) {
-  const sql = "DELETE FROM training_schedule WHERE schedule_id = ?";
+  const deleteCoursesSql = "DELETE FROM courses WHERE schedule_id = ?";
+  const deleteScheduleSql =
+    "DELETE FROM training_schedule WHERE schedule_id = ?";
+
   const connection = await conn.pool.getConnection();
+
   try {
+    // Start the transaction
     await connection.beginTransaction();
-    const [result] = await connection.query(sql, [id]);
+
+    // Delete associated courses
+    await connection.query(deleteCoursesSql, [id]);
+
+    // Delete the schedule
+    const [result] = await connection.query(deleteScheduleSql, [id]);
+
+    // Commit the transaction
     await connection.commit();
-    return result.affectedRows > 0;
+
+    return result;
   } catch (error) {
+    // Rollback the transaction on error
     await connection.rollback();
-    throw error;
+    throw new Error(
+      "Error deleting schedule and associated courses: " + error.message
+    );
   } finally {
+    // Release the connection back to the pool
     await connection.release();
   }
 }
+
 // "UPDATE training_schedule SET registration_status = (NOW() > registration_end_date)";
 
 //update registration status by itself

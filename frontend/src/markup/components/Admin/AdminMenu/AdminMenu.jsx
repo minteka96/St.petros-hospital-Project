@@ -24,6 +24,7 @@ function AdminMenu() {
   const isHR = isAdminOrHigher || role === "HR";
   const isHE = isAdminOrHigher || role === "HE";
   const isCPD = isAdminOrHigher || role === "CPD";
+const isRPUB= isAdminOrHigher || role === "RPUB";
 
   return (
     <div className="pb-4">
@@ -44,9 +45,9 @@ function AdminMenu() {
             <Link to="/admin/new" className="list-group-item">
               Add New Admin
             </Link>
-            <Link to="/admin/contact" className="list-group-item">
+            {/* <Link to="/admin/contact" className="list-group-item">
               See Feedback Messages
-            </Link>
+            </Link> */}
           </>
         )}
 
@@ -59,9 +60,23 @@ function AdminMenu() {
             <Link to="/admin/news" className="list-group-item">
               List of News
             </Link>
+            <Link to="/admin/contact" className="list-group-item">
+              List of contact
+            </Link>
+            {/* <Link to="/admin//contact/:id" className="list-group-item">
+              List of details
+            </Link> */}
           </>
         )}
-
+{/* Research Publication roles */}
+        {isRPUB && (<><Link to="/admin/add-publication" className="list-group-item">
+              Add Publication
+            </Link>
+            <Link to="/admin/publicationlist" className="list-group-item">
+              List of Publications
+            </Link>
+            </>)}
+      
         {/* Health tips (visible to all roles) */}
         {isHE && (
           <>
@@ -98,6 +113,18 @@ function AdminMenu() {
             <Link to="/admin/cpd-news-list" className="list-group-item">
               List of CPD News
             </Link>
+
+         
+            <Link to="/admin/add-trainee" className="list-group-item">
+                Add Trainee
+              </Link>
+
+           <Link to="/admin/trainees" className="list-group-item">
+             <i className="fas fa-users"></i> Trainees info
+               </Link>
+    
+      
+
           </>
         )}
 

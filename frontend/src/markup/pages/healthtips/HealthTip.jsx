@@ -63,7 +63,7 @@ const HealthTip = () => {
                   />
                 </div>
                 <div className={styles.content}>
-                  <a className={styles.category} href={tip.categoryLink}>
+                  <a className={styles.category} href="#">
                     {tip.category}
                   </a>
                   <h2 className={styles.title}>
@@ -82,7 +82,7 @@ const HealthTip = () => {
                   </p>
                   <div className={styles.meta}>
                     {format(new Date(tip.created_at), "MMMM d, yyyy")} by{" "}
-                    <a className={styles.author} href={tip.authorLink}>
+                    <a className={styles.author} href="#">
                       {tip.author}
                     </a>
                   </div>

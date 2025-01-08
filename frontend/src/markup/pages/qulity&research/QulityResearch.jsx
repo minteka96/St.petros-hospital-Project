@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import classes from './QulityResearch.module.css';
+import classes from './css/QulityResearch.module.css';
 import { Carousel } from "react-bootstrap";
 import img3 from "../../../assets/img/about/008.jpeg";
 import img4 from "../../../assets/img/about/question-signs.jpg";

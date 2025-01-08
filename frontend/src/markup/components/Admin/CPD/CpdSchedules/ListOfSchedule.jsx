@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import { useAuth } from "../../../../../contexts/AuthContext";
 import { Button, Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
 const api_url = import.meta.env.VITE_API_URL;
 
 function ListOfSchedule() {
@@ -169,7 +170,7 @@ function ListOfSchedule() {
               <th className="px-3">Course Name</th>
               <th className="px-3">Registration Start Date</th>
               <th className="px-3">Registration End Date</th>
-              <th className="px-3">Registration Expiry</th>
+              <th className="px-3">Registration</th>
               <th className="px-3">Training Start Date</th>
               <th className="px-3">Training End Date</th>
               <th className="px-3">Action</th>
@@ -207,7 +208,11 @@ function ListOfSchedule() {
                           <img
                             src="https://img.icons8.com/?size=100&id=114092&format=png&color=000000"
                             alt=""
-                            style={{ width: "20px", height: "20px" }}
+                            style={{
+                              maxWidth: "20px",
+                              minWidth: "20px",
+                              height: "20px",
+                            }}
                           />
                         </button>
                         <button
@@ -219,19 +224,30 @@ function ListOfSchedule() {
                           <img
                             src="https://img.icons8.com/?size=100&id=gjhtZ8keOudc&format=png&color=000000"
                             alt=""
-                            style={{ width: "20px", height: "20px" }}
+                            style={{
+                              maxWidth: "20px",
+                              minWidth: "20px",
+                              height: "20px",
+                            }}
                           />
                         </button>
                       </>
                     ) : null}
 
-                    <button className="btn bg-white border border-1">
+                    <Link
+                      to={`/admin/cpd/trainees/${schedule.schedule_id}`}
+                      className="btn bg-white border border-1"
+                    >
                       <img
                         src="https://img.icons8.com/?size=100&id=47863&format=png&color=000000"
                         alt=""
-                        style={{ width: "20px", height: "20px" }}
+                        style={{
+                          maxWidth: "20px",
+                          minWidth: "20px",
+                          height: "20px",
+                        }}
                       />
-                    </button>
+                    </Link>
                   </td>
                 </tr>
               ))}

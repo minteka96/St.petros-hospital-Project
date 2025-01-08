@@ -1,0 +1,25 @@
+/* src/markup/pages/css/PublicationDetails.module.css */
+
+.publicationDetailsArea {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.title {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.meta {
+  margin-bottom: 20px;
+}
+
+.abstract {
+  margin-top: 20px;
+}
+
+.pdfViewer {
+  margin-top: 20px;
+}
+

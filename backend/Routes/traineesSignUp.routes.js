@@ -31,7 +31,8 @@ router.get(
 
 // Fetch trainee by email (optional authentication)
 router.get(
-  "/api/trainee",
+  "/api/trainee/email/:trainee_email",
+
   // authMiddleware, // Uncomment if authentication middleware is needed
   traineesSignUpController.getTraineeByEmail
 );
