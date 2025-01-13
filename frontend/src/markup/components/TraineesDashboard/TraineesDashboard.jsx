@@ -13,6 +13,7 @@ import {
   Alert,
 } from "react-bootstrap";
 import { useNavigate } from "react-router";
+const api_url = import.meta.env.VITE_API_URL;
 
 const TraineesDashboard = () => {
   const [trainings, setTrainings] = useState([]);
@@ -21,23 +22,16 @@ const TraineesDashboard = () => {
   const [selectedTraining, setSelectedTraining] = useState(null);
   const [error, setError] = useState(null);
   const [applying, setApplying] = useState(false);
-  const [popupMessage, setPopupMessage] = useState(null); // Popup messages state
+  const [popupMessage, setPopupMessage] = useState(null);
 
   const navigate = useNavigate();
   const { trainee } = useAuth();
   const traineeId = trainee?.id;
-  const token = trainee?.traineeToken;
-  // const traineeId = "57ef192e-ca72-11ef-8e9d-40b03409c8f0"; // Replace with the actual trainee ID.
-
-  // Fetch available trainings
-
 
   useEffect(() => {
-         const fetchTrainings = async () => {
+    const fetchTrainings = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3001/api/cpd/available/courses`
-        );
+        const response = await fetch(`${api_url}/api/cpd/available/courses`);
         if (!response.ok) {
           throw new Error("Failed to fetch trainings");
         }
@@ -55,6 +49,7 @@ const TraineesDashboard = () => {
   }, []);
 
   useEffect(() => {
+    const token = trainee?.traineeToken;
     if (!token) {
       navigate("/cpd/login");
       return;
@@ -62,34 +57,32 @@ const TraineesDashboard = () => {
     const checkTrainee = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3001/api/trainee-info/${traineeId}`
+          `${api_url}/api/trainee-info/${traineeId}`
         );
         console.log("traineeId", traineeId);
         console.log("response", response);
-        if (response.status===404) {
+        if (response.status === 404) {
           navigate("/cpd/trainee-info");
         }
-        const data = await response.json();
+        // const data = await response.json();
       } catch (error) {
         console.error("Error checking trainee:", error);
       }
-    }
+    };
 
     checkTrainee();
-  },[])
+  }, []);
   // Fetch registered courses for the trainee
   useEffect(() => {
     const fetchRegisteredCourses = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3001/api/cpd/IsApply/${traineeId}`
-        );
+        const response = await fetch(`${api_url}/api/cpd/IsApply/${traineeId}`);
         if (!response.ok) {
           throw new Error("Failed to fetch registered courses");
         }
         const data = await response.json();
-        console.log("Registered courses data:", data.data); // Debugging
-        setRegisteredCourses(data.data || []); // Ensure it's an array
+        console.log("Registered courses data:", data.data);
+        setRegisteredCourses(data.data || []);
       } catch (error) {
         console.error("Error fetching registered courses:", error);
       }
@@ -124,7 +117,7 @@ const TraineesDashboard = () => {
     setApplying(true);
 
     try {
-      const response = await fetch("http://localhost:3001/api/cpd/apply", {
+      const response = await fetch(`${api_url}/api/cpd/apply`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -260,7 +253,10 @@ const TraineesDashboard = () => {
               <>
                 <p>
                   Are you sure you want to apply for the
-                  <strong className="space">{ selectedTraining.course_name }</strong> training?
+                  <strong className="space">
+                    {selectedTraining.course_name}
+                  </strong>{" "}
+                  training?
                 </p>
                 <p>
                   <strong>Start Date:</strong>{" "}

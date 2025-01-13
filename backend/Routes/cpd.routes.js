@@ -73,6 +73,7 @@ router.get("/api/cpd/IsApply/:trainee_id", cpdController.IsApply);
 
 // Route for getting a specific cpd course by ID
 router.get("/api/cpd/course/:id", cpdController.getCpdCourseById);
+router.get("/api/cpd/trainings/:course_name", cpdController.getCpdCourseByName);
 
 router.post("/api/cpd/apply", cpdController.apply);
 
