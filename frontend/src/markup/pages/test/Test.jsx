@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
-
+import { useAuth } from "../../../contexts/AuthContext";
+const api_url = import.meta.env.VITE_API_URL;
+console.log(" api_url", api_url);
 function Test() {
   const [typeError, setTypeError] = useState(null);
   const [priQuestion, setPriQuestion] = useState([]);
@@ -9,11 +11,15 @@ function Test() {
   const [userAnswers, setUserAnswers] = useState({});
   const [score, setScore] = useState(null);
   const [courses, setCourses] = useState([]);
-
-  const selectCourse = async (id, type) => {
-    const selectedCourse = courses.find((course) => course.training_id === id);
+  const [appliedCourses, setAppliedCourses ] = useState([]);
+  // console.log("appliedCourses", appliedCourses);
+  const { trainee } = useAuth();
+  const id = trainee?.id;
+  const selectCourse = async (course_name, type) => {
+    const selectedCourse = courses.find(
+      (applied) => applied.course_name=== course_name
+    );
     if (selectedCourse) {
-
       // Base URL for your backend
       const baseUrl = "http://localhost:3001";
 
@@ -28,7 +34,7 @@ function Test() {
         const workbook = XLSX.read(testData, { type: "array" });
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
-        const jsonData = XLSX.utils.sheet_to_json(sheet,{range:1});
+        const jsonData = XLSX.utils.sheet_to_json(sheet, { range: 1 });
 
         // Validate format
         const isValid = jsonData.every(
@@ -91,21 +97,27 @@ function Test() {
     setScore(totalScore);
   };
 
-  const questionTypes = (id, type) => {
-    selectCourse(id, type);
+  const questionTypes = (course_name, type) => {
+    selectCourse(course_name, type);
   };
 
   useEffect(() => {
     const getCpdCourses = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3001/api/cpd/courses"
+      const response = await axios.get(`${api_url}/api/cpd/courses`);
+        const appliedCourses = await axios.get(
+          `${api_url}/api/cpd/IsApply/${id}`
         );
+        console.log("response", response);
         if (response.data && response.data.length > 0) {
           setCourses(response.data);
         } else {
           console.error("No courses found.");
         }
+        if (appliedCourses.data.data && appliedCourses.data.data.length > 0) {
+          setAppliedCourses(appliedCourses.data.data);
+        }
+        // console.log("appliedCourses", appliedCourses.data.data);
       } catch (error) {
         console.error("Error fetching CPD courses:", error);
       }
@@ -113,17 +125,23 @@ function Test() {
 
     getCpdCourses();
   }, []);
-
+const filterAppliedCourses = courses.filter((course) => {
+  return appliedCourses.some((applied) => applied.course_name === course.course_name);
+})
   return (
     <div style={{ padding: "20px" }}>
       <h1 style={{ textAlign: "center" }}>Exam for test</h1>
-      {courses.map((course) => (
+      {filterAppliedCourses.map((course) => (
         <div key={course._id}>
           <h3>{course.course_name}</h3>
-          <button onClick={() => questionTypes(course.training_id, "pri")}>
+          <button 
+          onClick={() => questionTypes(course.course_name, "pri")}
+          >
             pri test
           </button>
-          <button onClick={() => questionTypes(course.training_id, "post")}>
+          <button 
+          onClick={() => questionTypes(course.course_name, "post")}
+          >
             post test
           </button>
         </div>

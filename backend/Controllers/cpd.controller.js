@@ -218,12 +218,28 @@ async function IsApply(req, res) {
   }
 }
 
+//get cpd_trainings by course_name
+async function getCpdCourseByName(req, res) {
+  try {
+    const { course_name } = req.params;
+    const cpdCourse = await cpdservice.getCpdCourseByName(course_name);
+    if (!cpdCourse) {
+      return res.status(404).json({ error: "CPD course not found" });
+    }
+    res.status(200).json(cpdCourse);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
 module.exports = {
   createCpdCourse,
   getAllCpdCourses,
   getCpdCourseById,
   deleteCpdCourse,
   updateCpdCourse,
+  getCpdCourseByName,
   getAvailableCpdCourses,
   apply,
   IsApply,
