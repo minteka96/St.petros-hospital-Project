@@ -60,12 +60,16 @@ import ApplicantForms from "./markup/pages/Jobs/ApplicationForm.jsx";
 import HealthTip from "./markup/pages/healthtips/HealthTip.jsx";
 import HealthTipDetail from "./markup/pages/healthtips/healthtipdetail/healthtipdetail.jsx";
 import HealthTipList from "./markup/components/Admin/HealthTipList/HealthTipList.jsx";
-import Test from "./markup/pages/test/test.jsx";
+import Test from "./markup/pages/test/Test.jsx";
 import CpdNews from "./markup/pages/CPD/Cpdnews.jsx";
 import TraineesDashboard from "./markup/components/TraineesDashboard/TraineesDashboard.jsx";
 // import CertificateGenerator from "./markup/components/TraineesDashboard/CertificateGenerator.jsx";
 import ContactForm from "./markup/pages/Contact/contactForm/ContactForm.jsx";
+
 import AdminDashboardCpd from "./markup/pages/Admin/AdminDashboardCpd.jsx";
+
+import Test2 from "./markup/pages/test/Test2.jsx";
+
 function App() {
   // check if thr route is '/login' or not
   if (window.location.pathname === "/login") {
@@ -157,6 +161,7 @@ function App() {
 
         <Route path="/admin/*" element={<AdminRoute />} />
         <Route path="/test" element={<Test />} />
+
         {/* --------------------------- */}
         {/* add CPD admin dashboard Route  */}
         <Route path="/cpdadmin" element={<AdminDashboardCpd />} />
@@ -165,6 +170,9 @@ function App() {
           element={<TraineesDashboard />}
         />
         {/* --------------------------- */}
+
+        <Route path="/test2" element={<Test2 />} />
+
       </Routes>
       {["/login", "/admin"].some((path) =>
         window.location.pathname.startsWith(path)

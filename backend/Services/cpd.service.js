@@ -254,6 +254,20 @@ async function IsApply(trainee_id) {
   }
 }
 
+//function to get all cpd_trainings by course_name
+async function getCpdCourseByName(courseName) {
+  const sql = `SELECT * FROM cpd_trainings WHERE course_name = ?`;
+  const connection = await conn.pool.getConnection();
+  try {
+    const [rows] = await connection.query(sql, [courseName]);
+    return rows;
+  } catch (error) {
+    throw error;
+  } finally {
+    await connection.release();
+  }
+}
+
 // export the functions
 module.exports = {
   createCpdCourse,
@@ -262,6 +276,7 @@ module.exports = {
   deleteCpdCourseById,
   updateCpdCourseById,
   AvailableCpdCourses,
+  getCpdCourseByName,
   ApplyCourses,
   IsApply,
 };
