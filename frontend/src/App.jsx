@@ -46,7 +46,7 @@ import ApplicationForm from "./markup/pages/Jobs/ApplicationForm.jsx";
 import HealthWorkerINfo from "./markup/pages/HealthWorkerEntertainment/HealthWorkerEntertainment .jsx";
 import QulityResearch from "./markup/pages/qulity&research/QulityResearch.jsx";
 import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
-import PublicationDetails from './markup/pages/qulity&research/PublicationDetails.jsx';
+import PublicationDetails from "./markup/pages/qulity&research/PublicationDetails.jsx";
 import AdminRoute from "./markup/routes/AdminRoute.jsx";
 import Login from "./markup/pages/Login/Login.jsx";
 
@@ -65,6 +65,7 @@ import CpdNews from "./markup/pages/CPD/Cpdnews.jsx";
 import TraineesDashboard from "./markup/components/TraineesDashboard/TraineesDashboard.jsx";
 // import CertificateGenerator from "./markup/components/TraineesDashboard/CertificateGenerator.jsx";
 import ContactForm from "./markup/pages/Contact/contactForm/ContactForm.jsx";
+import AdminDashboardCpd from "./markup/pages/Admin/AdminDashboardCpd.jsx";
 function App() {
   // check if thr route is '/login' or not
   if (window.location.pathname === "/login") {
@@ -104,10 +105,9 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/cpd/" element={<CpdLogin />} />
         <Route path="/cpd/login" element={<CpdLoginSignup />} />
-         <Route path="/cpd/trainee-info" element={<TraineeAddForm  />} />
+        <Route path="/cpd/trainee-info" element={<TraineeAddForm />} />
         <Route path="/healhtip" element={<HealthTip />}></Route>
 
-         
         <Route
           path="/HealthWorkerEntertainment"
           element={<HealthWorkerINfo />}
@@ -136,9 +136,9 @@ function App() {
           <Route path="psychiatric" element={<Psychiatric />} />
           <Route path="imaging" element={<Imaging />} />
         </Route>
-          <Route path="/contact" element={<Contact />} >
+        <Route path="/contact" element={<Contact />}>
           <Route path="/contactform" element={<ContactForm />} />
-          </Route>
+        </Route>
         <Route path="/application/form" element={<ApplicantForms />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
@@ -157,6 +157,14 @@ function App() {
 
         <Route path="/admin/*" element={<AdminRoute />} />
         <Route path="/test" element={<Test />} />
+        {/* --------------------------- */}
+        {/* add CPD admin dashboard Route  */}
+        <Route path="/cpdadmin" element={<AdminDashboardCpd />} />
+        <Route
+          path="/cpdadmin/TraineesDashboard"
+          element={<TraineesDashboard />}
+        />
+        {/* --------------------------- */}
       </Routes>
       {["/login", "/admin"].some((path) =>
         window.location.pathname.startsWith(path)

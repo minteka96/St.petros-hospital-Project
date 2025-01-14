@@ -67,7 +67,7 @@ const TraineesDashboard = () => {
         console.log("traineeId", traineeId);
         console.log("response", response);
         if (response.status===404) {
-          navigate("/cpd/trainee-info");
+          // navigate("/cpd/trainee-info");
         }
         const data = await response.json();
       } catch (error) {
