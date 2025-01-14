@@ -1,4 +1,6 @@
-const { query } = require('../config/db.config');
+// const { query } = require('../config/db.config');
+const { query } = require("../Config/db.config");
+
 
 async function getPublications(req, res) {
     try {
