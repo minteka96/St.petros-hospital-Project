@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../../contexts/AuthContext";
 import {
   Container,
   Row,
@@ -11,6 +12,8 @@ import {
   OverlayTrigger,
   Alert,
 } from "react-bootstrap";
+import { useNavigate } from "react-router";
+const api_url = import.meta.env.VITE_API_URL;
 
 const TraineesDashboard = () => {
   const [trainings, setTrainings] = useState([]);
@@ -19,17 +22,16 @@ const TraineesDashboard = () => {
   const [selectedTraining, setSelectedTraining] = useState(null);
   const [error, setError] = useState(null);
   const [applying, setApplying] = useState(false);
-  const [popupMessage, setPopupMessage] = useState(null); // Popup messages state
+  const [popupMessage, setPopupMessage] = useState(null);
 
-  const traineeId = "57ef192e-ca72-11ef-8e9d-40b03409c8f0"; // Replace with the actual trainee ID.
+  const navigate = useNavigate();
+  const { trainee } = useAuth();
+  const traineeId = trainee?.id;
 
-  // Fetch available trainings
   useEffect(() => {
     const fetchTrainings = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3001/api/cpd/available/courses`
-        );
+        const response = await fetch(`${api_url}/api/cpd/available/courses`);
         if (!response.ok) {
           throw new Error("Failed to fetch trainings");
         }
@@ -46,19 +48,43 @@ const TraineesDashboard = () => {
     fetchTrainings();
   }, []);
 
+  useEffect(() => {
+    const token = trainee?.traineeToken;
+    if (!token) {
+      navigate("/cpd/login");
+      return;
+    }
+    const checkTrainee = async () => {
+      try {
+        const response = await fetch(
+          `${api_url}/api/trainee-info/${traineeId}`
+        );
+        console.log("traineeId", traineeId);
+        console.log("response", response);
+
+        if (response.status === 404) {
+          navigate("/cpd/trainee-info");
+
+        }
+        // const data = await response.json();
+      } catch (error) {
+        console.error("Error checking trainee:", error);
+      }
+    };
+
+    checkTrainee();
+  }, []);
   // Fetch registered courses for the trainee
   useEffect(() => {
     const fetchRegisteredCourses = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3001/api/cpd/IsApply/${traineeId}`
-        );
+        const response = await fetch(`${api_url}/api/cpd/IsApply/${traineeId}`);
         if (!response.ok) {
           throw new Error("Failed to fetch registered courses");
         }
         const data = await response.json();
-        console.log("Registered courses data:", data.data); // Debugging
-        setRegisteredCourses(data.data || []); // Ensure it's an array
+        console.log("Registered courses data:", data.data);
+        setRegisteredCourses(data.data || []);
       } catch (error) {
         console.error("Error fetching registered courses:", error);
       }
@@ -93,7 +119,7 @@ const TraineesDashboard = () => {
     setApplying(true);
 
     try {
-      const response = await fetch("http://localhost:3001/api/cpd/apply", {
+      const response = await fetch(`${api_url}/api/cpd/apply`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -163,15 +189,15 @@ const TraineesDashboard = () => {
                       {training.course_name || "N/A"}
                     </Card.Title>
                     <Card.Text>
-                      <strong>Start Date:</strong>{" "}
-                      {training.course_start_date
-                        ? formatDate(training.course_start_date)
+                      <strong>Registration Start Date:</strong>{" "}
+                      {training.registration_start_date
+                        ? formatDate(training.registration_start_date)
                         : "TBD"}
                     </Card.Text>
                     <Card.Text>
-                      <strong>End Date:</strong>{" "}
-                      {training.course_end_date
-                        ? formatDate(training.course_end_date)
+                      <strong>Registration End Date:</strong>{" "}
+                      {training.registration_end_date
+                        ? formatDate(training.registration_end_date)
                         : "TBD"}
                     </Card.Text>
                     <Card.Text>
@@ -228,8 +254,11 @@ const TraineesDashboard = () => {
             ) : (
               <>
                 <p>
-                  Are you sure you want to apply for the{" "}
-                  <strong>{selectedTraining.course_name}</strong> training?
+                  Are you sure you want to apply for the
+                  <strong className="space">
+                    {selectedTraining.course_name}
+                  </strong>{" "}
+                  training?
                 </p>
                 <p>
                   <strong>Start Date:</strong>{" "}

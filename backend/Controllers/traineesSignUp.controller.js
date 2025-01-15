@@ -148,16 +148,20 @@ async function getAllTrainees(req, res) {
 // Fetch trainee by email function
 async function getTraineeByEmail(req, res) {
   try {
-    const { email } = req.query;
+    const { trainee_email } = req.params;
 
-    if (!email) {
+    if (!trainee_email) {
+
       return res.status(400).json({
         status: "fail",
         message: "Email is required",
       });
     }
 
-    const trainee = await traineesSignUpService.getTraineeByEmail(email);
+    const trainee = await traineesSignUpService.getTraineeByEmail(
+      trainee_email
+    );
+
 
     if (!trainee) {
       return res.status(404).json({
@@ -178,6 +182,7 @@ async function getTraineeByEmail(req, res) {
     });
   }
 }
+
 
 // Fetch trainee by ID function
 async function getTraineeById(req, res) {

@@ -12,7 +12,10 @@ import AddNewsForm from './AddNewsForm';
 import classes from './Dashboard.module.css'; // Import CSS module as "classes"
 import HealthTipList from '../HealthTipList/HealthTipList';
 import AddhealthTipForm from '../HealthTipList/AddhealthTipForm';
-import Applicant from '../Applicant/Applicant'
+import Applicant from '../Applicant/Applicant';
+import ContactList from '../Admin/ContactList/ContactList'; // Import the ContactList component
+import AddPublication from '../addpublication/AddPublication';
+import PublicationList from '../publicationlist/PublicationList';
 
 //import AddTenderForm from './AddTenderForm';
 const Dashboard = () => {
@@ -42,17 +45,23 @@ const Dashboard = () => {
         <h2 className={classes.sectionTitle}>News Management</h2>
         <AddNewsForm />
         <NewsList />
-        <div className={classes.healthTipManagement}>
-        <h2 className={classes.sectionTitle}>Health tip  Management</h2>
+      </div>
+
+      <div className={classes.healthTipManagement}>
+        <h2 className={classes.sectionTitle}>Health Tip Management</h2>
         <AddhealthTipForm />
         <HealthTipList />
       </div>
-      {/* <div className={classes.tenderManagement}>
-        <h2 className={classes.sectionTitle}>tender  Management</h2>
-        <AddTenderForm />
-      
-      </div> */}
+
+      <div className={classes.contactManagement}>
+        <h2 className={classes.sectionTitle}>Feedback Contacts</h2>
+        <ContactList /> {/* Add the ContactList component */}
       </div>
+       <div className={classes.publicationManagement}>
+        <h2 className={classes.sectionTitle}>Publication Management</h2>
+        <AddPublication />
+        <PublicationList />
+    </div>
     </div>
   );
 };

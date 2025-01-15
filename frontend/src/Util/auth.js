@@ -1,15 +1,23 @@
 /* eslint-disable no-unused-vars */
 const userAuthHeader = async () => {
   try {
+    const traineeToken = sessionStorage.getItem("zaccess-token");
     const token = sessionStorage.getItem("access-token");
 
+    
     if (token) {
       const decodedToken = decodeTokenPayload(token);
-
-      const { role, username,email } = decodedToken; // Destructure for clarity
-
+      
+      const { role, username, email } = decodedToken; // Destructure for clarity
+      
       return token; // Return the token as the Authorization header value
-    } else {
+    } 
+    if (traineeToken) {
+      const decodedTraineeToken = decodeTokenPayload(traineeToken);
+      const { role, username, email } = decodedTraineeToken; // Destructure for clarity
+
+      return traineeToken; // Return the token as the Authorization header value
+    }else {
       console.warn("No token found in localStorage.");
       return {}; // No token available
     }

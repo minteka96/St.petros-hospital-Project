@@ -19,13 +19,13 @@ router.get("/api/cpd-news/:id", cpdNewsController.getCpdNewsById);
 router.get("/api/cpd-news", cpdNewsController.getAllCpdNews);
 
 router.put(
-  "/api/cpd-news/:id",
-  [
-    authMiddleware.verifyToken,
+  "/api/cpd_news/:id",
+  // [
+  //   authMiddleware.verifyToken,
 
-    authMiddleware.checkRoles(["superadmin", "Admin", "CPD"])
+  //   authMiddleware.checkRoles(["superadmin", "Admin", "CPD"])
 
-  ],
+  // ],
   cpdNewsController.updateCpdNews
 );
 

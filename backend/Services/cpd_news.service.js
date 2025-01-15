@@ -1,4 +1,4 @@
-const db = require("../Config/db.config");
+const db = require("../Config/db.config.js");
 
 
 const createCpdNews = async ({ newsTitle, newsDescription, expiryDate }) => {
@@ -56,16 +56,28 @@ const updateCpdNews = async (newsId, data) => {
   try {
     const result = await db.query(
       `UPDATE cpd_news 
-       SET news_title = ?, news_description = ?, expiry_date = ?
+       SET news_title = ?, 
+           news_description = ?, 
+           expiry_date = ?,
+           updated_at = CURRENT_TIMESTAMP
        WHERE news_id = ?`,
       [newsTitle, newsDescription, expiryDate, newsId]
     );
 
-    return result.affectedRows > 0;
+    if (result.affectedRows === 0) {
+      throw new Error("News item not found");
+    }
+
+    return {
+      success: true,
+      message: "News updated successfully",
+      data: { newsId, newsTitle, newsDescription, expiryDate }
+    };
   } catch (err) {
     throw new Error("Error updating CPD news: " + err.message);
   }
 };
+
 
 const deleteCpdNews = async (newsId) => {
   try {

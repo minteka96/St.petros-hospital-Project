@@ -1,4 +1,6 @@
 const api_url = import.meta.env.VITE_API_URL;
+
+// Function to create a new news item
 const createNews = async (formData, token) => {
   if (!token) throw new Error("Token is missing.");
 
@@ -25,43 +27,40 @@ const createNews = async (formData, token) => {
   }
 };
 
-// A function to send GET request to get all news entries
+// Function to fetch all news items
 const getAllNews = async () => {
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // "x-access-token": token,
     },
   };
 
   try {
     const response = await fetch(`${api_url}/api/news`, requestOptions);
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    if (data.status !== "success") {
+      const errorText = await response.text();
       throw new Error(
-        "Failed to fetch news: " + (data.message || "Unknown error")
+        `HTTP error! Status: ${response.status}, Details: ${errorText}`
       );
     }
-    return data;
+    const data = await response.json();
+    return data.data; // Assuming the data is nested under `data`
   } catch (error) {
     console.error("Error fetching news:", error);
     throw error;
   }
 };
 
-// A function to send GET request to get a specific news item by its ID
+// Function to fetch a single news item by its ID
 const getNewsById = async (news_id) => {
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // "x-access-token": token,
     },
   };
+
   try {
     const response = await fetch(
       `${api_url}/api/news/${news_id}`,
@@ -74,29 +73,25 @@ const getNewsById = async (news_id) => {
       );
     }
     const data = await response.json();
-    if (!data || !data.data) {
-      throw new Error(
-        `Failed to fetch news: ${data.message || "Unknown error"}`
-      );
-    }
-    return data.data;
+    return data.data; // Assuming the data is nested under `data.data`
   } catch (error) {
-    console.error("Error fetching news:", error);
+    console.error("Error fetching news by ID:", error);
     throw error;
   }
 };
 
+// Function to update a news item
 const updateNews = async (news_id, formData, token) => {
+  if (!token) throw new Error("Token is missing.");
+
   const requestOptions = {
     method: "PUT",
-    // ****
     headers: {
-      // "Content-Type": "application/json",
-      "x-access-token": token,
+      "x-access-token": token, // Authentication token
     },
-    // ****
     body: formData, // FormData includes files and text data
   };
+
   try {
     const response = await fetch(
       `${api_url}/api/news/${news_id}`,
@@ -108,24 +103,22 @@ const updateNews = async (news_id, formData, token) => {
         `HTTP error! Status: ${response.status}, Details: ${errorText}`
       );
     }
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     console.error("Error updating news:", error);
     throw error;
   }
 };
 
-// A function to send DELETE request to delete a specific news item
+// Function to delete a news item
 const deleteNews = async (news_id, token) => {
+  if (!token) throw new Error("Token is missing.");
+
   const requestOptions = {
     method: "DELETE",
-    // ****
     headers: {
-      // "Content-Type": "application/json",
       "x-access-token": token,
     },
-    // ****
   };
 
   try {
@@ -133,34 +126,23 @@ const deleteNews = async (news_id, token) => {
       `${api_url}/api/news/${news_id}`,
       requestOptions
     );
-
     if (!response.ok) {
       const errorText = await response.text();
       throw new Error(
         `HTTP error! Status: ${response.status}, Details: ${errorText}`
       );
     }
-    const data = await response.json();
-    if (data.status === "success") {
-      return data;
-    } else {
-      throw new Error(
-        `Failed to delete news: ${data.message || "Unknown error"}`
-      );
-    }
+    return await response.json();
   } catch (error) {
     console.error("Error deleting news:", error);
     throw error;
   }
 };
 
-// Export all the functions
-const newsService = {
+export default {
   createNews,
   getAllNews,
   getNewsById,
   updateNews,
   deleteNews,
 };
-
-export default newsService;

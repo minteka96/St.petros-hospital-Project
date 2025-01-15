@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 
+import ContactForm from "../../pages/Contact/contactForm/ContactForm";
 const Header = () => {
   return (
     <div>
@@ -11,7 +13,9 @@ const Header = () => {
         {/*== End Map Area Wrapper ==*/}
 
         {/*== Start Contact Area ==*/}
-        <section className="contact-area">
+             <ContactForm/>
+
+        {/* <section className="contact-area">
           <div className="container">
             <div className="row">
               <div className="col-lg-12">
@@ -55,7 +59,7 @@ const Header = () => {
                   <form
                     className="contact-form-wrapper"
                     id="contact-form"
-                    action="http://whizthemes.com/mail-php/raju/arden/mail.php"
+                    
                     method="post"
                   >
                     <div className="row">
@@ -112,11 +116,11 @@ const Header = () => {
                   </form>
                 </div>
                 {/* Message Notification */}
-                <div className="form-message"></div>
+                {/* <div className="form-message"></div>
               </div>
             </div>
           </div>
-        </section>
+        </section> */} 
         {/*== End Contact Area ==*/}
 
         {/*== Start Footer Area Wrapper ==*/}

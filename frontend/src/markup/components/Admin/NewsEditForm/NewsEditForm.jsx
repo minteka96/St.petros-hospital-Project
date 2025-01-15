@@ -3,6 +3,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import newsService from "../../../../Services/news.service"; // Adjust path if necessary
 import classes from "./EditNewsForm.module.css"; // Adjust path if necessary
 import { useAuth } from "../../../../contexts/AuthContext.jsx";
+import { FaCheckCircle } from "react-icons/fa";
 
 const EditNewsForm = () => {
   const { user } = useAuth();
@@ -23,7 +24,6 @@ const EditNewsForm = () => {
   useEffect(() => {
     const initializeFormData = async () => {
       if (location.state?.news) {
-        // Use the news item from state
         const news = location.state.news;
         setNewsTitle(news.news_title || "");
         setNewsDetail(news.news_detail || "");
@@ -32,7 +32,6 @@ const EditNewsForm = () => {
         setNewsImageLink(news.news_image_link || null);
         setLoading(false);
       } else {
-        // Fetch from API if no state is passed
         try {
           const response = await newsService.getNewsById(news_id);
           const news = response.data;
@@ -52,22 +51,39 @@ const EditNewsForm = () => {
     initializeFormData();
   }, [news_id, location.state]);
 
+  const validateForm = () => {
+    if (!newsTitle.trim()) {
+      setError("News title is required.");
+      return false;
+    }
+    if (!newsDetail.trim()) {
+      setError("News detail is required.");
+      return false;
+    }
+    if (newsLink && !/^https?:\/\/[^\s$.?#].[^\s]*$/i.test(newsLink)) {
+      setError("Please enter a valid URL for the news link.");
+      return false;
+    }
+    setError(""); // Clear errors if all validations pass
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("news_title", newsTitle);
-    formData.append("news_detail", newsDetail);
-    formData.append("news_description", newsDescription);
-    formData.append("news_link", newsLink);
-    if (newsImageLink) {
-      formData.append("news_image", newsImageLink);
+    if (!validateForm()) {
+      return;
     }
 
-    // Validation check for empty fields
-    if (!newsTitle || !newsDetail) {
-      setError("News title and detail are required.");
-      return;
+    const formData = new FormData();
+    formData.append("news_title", newsTitle.trim());
+    formData.append("news_detail", newsDetail.trim());
+    formData.append("news_description", newsDescription.trim());
+    if (newsLink.trim()) {
+      formData.append("news_link", newsLink.trim());
+    }
+    if (newsImageLink) {
+      formData.append("news_image", newsImageLink);
     }
 
     try {
@@ -84,8 +100,8 @@ const EditNewsForm = () => {
         }, 2000);
       }
     } catch (err) {
+      console.error("Error updating news:", err);
       setError("Something went wrong while updating the news.");
-      setSuccess("");
     }
   };
 
@@ -97,8 +113,12 @@ const EditNewsForm = () => {
     <form onSubmit={handleSubmit} className={classes.formContainer}>
       <h2>Edit News</h2>
       {error && <div className={classes.errorMessage}>{error}</div>}
-      {success && <div className={classes.successMessage}>{success}</div>}
-
+      {success && (
+        <div className={classes.successMessage}>
+          <FaCheckCircle className={classes.successIcon} />
+          <span>{success}</span>
+        </div>
+      )}
       <input
         type="text"
         placeholder="News Title"
@@ -122,13 +142,14 @@ const EditNewsForm = () => {
       />
       <input
         type="text"
-        placeholder="News Link"
+        placeholder="News Link (optional)"
         value={newsLink}
         onChange={(e) => setNewsLink(e.target.value)}
         className={classes.inputField}
       />
       <input
         type="file"
+        accept="image/*"
         onChange={(e) => setNewsImageLink(e.target.files[0])}
         className={classes.inputField}
       />

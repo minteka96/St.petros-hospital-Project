@@ -5,46 +5,36 @@ const authMiddleware = require("../Middlewares/auth.middleware");
 
 router.post(
   "/api/trainees-info",
-  [
-    authMiddleware.verifyToken,
-    authMiddleware.checkRoles(["superadmin", "Admin"])
-  ],
+  
   TraineesInfoController.createTraineeInfo
 );
 
 router.get(
   "/api/trainees-info",
-  [
-    authMiddleware.verifyToken,
-    authMiddleware.checkRoles(["superadmin", "Admin"])
-  ],
+  
   TraineesInfoController.getAllTraineesInfo
 );
 
 router.get(
   "/api/trainees-info/:id",
-  [
-    authMiddleware.verifyToken,
-    authMiddleware.checkRoles(["superadmin", "Admin"])
-  ],
+  
   TraineesInfoController.getTraineeInfoById
+);
+router.get(
+  "/api/trainee-info/:traineeId",
+
+  TraineesInfoController.getTraineeInfoByTraineeId
 );
 
 router.put(
   "/api/trainees-info/:id",
-  [
-    authMiddleware.verifyToken,
-    authMiddleware.checkRoles(["superadmin", "Admin"])
-  ],
+  
   TraineesInfoController.updateTraineeInfo
 );
 
 router.delete(
   "/api/trainees-info/:id",
-  [
-    authMiddleware.verifyToken,
-    authMiddleware.checkRoles(["superadmin", "Admin"])
-  ],
+  
   TraineesInfoController.deleteTraineeInfo
 );
 

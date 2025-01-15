@@ -1,0 +1,242 @@
+/* General Styles */
+.signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+  height: 670px;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  font-family: Arial, sans-serif;
+}
+
+.signup__container {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Form Section */
+.signup__form {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signup__title h6 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+.signUp__Description {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}
+.signup__btn,
+.submitButton {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 1rem;
+  /* margin-bottom: 1rem; */
+  border: none;
+  background-color: #00a99e;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.buttonGap {
+  margin-top: 1rem; /* Adds spacing above the second button */
+  text-align: center; /* Aligns the button to the center */
+}
+.signInWrapper h6,
+p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 1rem; */
+  color: #000;
+}
+
+.signInWrapper {
+  margin-top: 0%;
+  padding-top: 0%;
+}
+.signup__btn:hover,
+.submitButton:hover {
+  background-color: #1f867e;
+}
+
+/* Input Fields */
+.signup__input,
+.inputField {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.signup__input:focus,
+.inputField:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.error {
+  border-color: #ff4d4d !important;
+}
+
+/* Password Visibility Toggle */
+.passwordContainer {
+  position: relative;
+  width: 100%;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 10px;
+  top: 40%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.passwordToggleSize:hover {
+  background-color: transparent !important;
+  border: none !important; /* Optional: Removes border if present */
+  box-shadow: none !important; /* Optional: Removes shadow if present */
+}
+
+.passwordToggle:focus {
+  outline: none;
+}
+
+/* Error and Success Messages */
+.errorHandling {
+  color: #ff4d4d;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.successMessage {
+  color: #28a745;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+}
+
+/* About Section */
+.login__about {
+  flex: 1;
+  background: #d4ddea;
+
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.about {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.about__title h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.about__Description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 1rem;
+}
+
+/* Link Buttons */
+.linkButton {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding-left: 1%;
+}
+
+.linkButton:hover {
+  text-decoration: none;
+  /* color: #0056b3; */
+}
+.createAccountButton:hover {
+  background: none !important;
+}
+/* Remove background color from the 'Sign in' button */
+.signup_Description_orange {
+  background: none !important;
+  border: none !important;
+  color: #007bff; /* Optional: Set text color to blue */
+  padding: 0; /* Optional: Remove any padding */
+}
+
+/* Remove background color from the container around 'Already have an account?' button */
+.signup_Description_orange + .buttonGap button {
+  background: none !important;
+  border: none !important;
+  color: #007bff; /* Optional: Set text color to blue */
+  padding: 0; /* Optional: Remove any padding */
+}
+
+/* Optional: Hover effect */
+.signup_Description_orange:hover,
+.signup_Description_orange + .buttonGap button:hover {
+  background: none;
+  color: #0056b3;
+}
+/* Remove background from the button inside the 'signup_Description_orange' class */
+.signup_Description_orange button {
+  background: none !important;
+  border: none !important;
+  color: #007bff; /* Optional: Set text color to blue */
+  padding: 0; /* Optional: Remove any padding */
+  text-align: left; /* Align text if necessary */
+}
+
+/* Optional: Add a hover effect */
+.signup_Description_orange button:hover {
+  color: #0056b3; /* Darker blue color for hover effect */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .signup__container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .login__about {
+    order: -1;
+    padding: 1.5rem;
+  }
+
+  .about__title h1 {
+    font-size: 1.5rem;
+  }
+
+  .about__Description p {
+    font-size: 0.9rem;
+  }
+}
