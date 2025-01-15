@@ -57,7 +57,7 @@ import HealthTipList from "./markup/components/Admin/HealthTipList/HealthTipList
 import Test from "./markup/pages/test/test.jsx";
 import CpdNews from "./markup/pages/CPD/Cpdnews.jsx";
 import TraineesDashboard from "./markup/components/TraineesDashboard/TraineesDashboard.jsx";
-import CertificateGenerator from "./markup/components/TraineesDashboard/CertificateGenerator.jsx";
+import GenerateCertificate from "./markup/components/GenerateCertificate/GenerateCertificate.jsx";
 function App() {
   // check if thr route is '/login' or not
   if (window.location.pathname === "/login") {
@@ -73,6 +73,8 @@ function App() {
       <Routes>
         {/* *************************News Client Side Start Here*********************** */}
         <Route path="/news" element={<News />} />
+        <Route path="/GenerateCertificate" element={<GenerateCertificate />} />
+
         <Route path="/cpd-news" element={<CpdNews />} />
         {/* <Route path="/newsDetails" element={<NewsDetails />} /> */}
         <Route
@@ -81,10 +83,7 @@ function App() {
         />
         <Route path="/healthtip" element={<HealthTip />} />
         <Route path="/TraineesDashboard" element={<TraineesDashboard />} />
-        <Route
-          path="/CertificateGenerator"
-          element={<CertificateGenerator />}
-        />
+
         {/* <Route path="/newsDetails" element={<NewsDetails />} /> */}
         <Route
           path="/healthTipDetails/:healthTipId"

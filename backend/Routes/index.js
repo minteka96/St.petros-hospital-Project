@@ -23,6 +23,8 @@ const cpdNewsRouter = require("./cpd_news.routes");
 const traineesSignUpRoute = require("./traineesSignUp.routes.js");
 // Import the trainees sign-in route
 const traineesSignInRoute = require("./traineesSignIn.routes.js");
+
+const certificatRoute = require("./certificate.routes.js");
 // Use the routers in the main router
 router.use(loginRouter);
 router.use(userRouter);
@@ -46,6 +48,7 @@ router.use(cpdNewsRouter);
 
 // Use the sign-in route
 router.use(traineesSignInRoute);
+router.use(certificatRoute);
 
 // Export the router to be used in the main application file
 module.exports = router;
