@@ -63,6 +63,7 @@ import HealthTipList from "./markup/components/Admin/HealthTipList/HealthTipList
 import Test from "./markup/pages/test/Test.jsx";
 import CpdNews from "./markup/pages/CPD/Cpdnews.jsx";
 import TraineesDashboard from "./markup/components/TraineesDashboard/TraineesDashboard.jsx";
+import GenerateCertificate from "./markup/components/GenerateCertificate/GenerateCertificate.jsx";
 // import CertificateGenerator from "./markup/components/TraineesDashboard/CertificateGenerator.jsx";
 import ContactForm from "./markup/pages/Contact/contactForm/ContactForm.jsx";
 
@@ -85,6 +86,8 @@ function App() {
       <Routes>
         {/* *************************News Client Side Start Here*********************** */}
         <Route path="/news" element={<News />} />
+        <Route path="/GenerateCertificate" element={<GenerateCertificate />} />
+
         <Route path="/cpd-news" element={<CpdNews />} />
         {/* <Route path="/newsDetails" element={<NewsDetails />} /> */}
         <Route

@@ -22,6 +22,8 @@ const cpdNewsRouter = require("./cpd_news.routes");
 const traineesSignUpRoute = require("./traineesSignUp.routes.js");
 // Import the trainees sign-in route
 const traineesSignInRoute = require("./traineesSignIn.routes.js");
+
+const certificatRoute = require("./certificate.routes.js");
 const traineeRouter = require("./trainee.toutes.js");
 const traineesInfoRoutes = require('./trainees_info.routes.js');
 
@@ -49,6 +51,7 @@ router.use(healthtipRouter);
 router.use(traineesSignUpRoute);
 router.use(cpdNewsRouter);
 router.use(traineesSignInRoute);
+router.use(certificatRoute);
 
 // Use the contact routes for the /api/contact path // Ensure correct path
 router.use('/api', researchPublicationRouter);
