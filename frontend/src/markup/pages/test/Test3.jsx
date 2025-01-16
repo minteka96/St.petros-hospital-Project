@@ -21,8 +21,7 @@ function Test3({ courseName, onBack, id }) {
   const [status, setStatus] = useState(null);
   const [startCountdown, setStartCountdown] = useState(false);
   console.log("userAnswers", Object.keys(userAnswers).length);
-  console.log("status", status);
-  console.log("courseName", courseName);
+  // console.log("results", results);
   useEffect(() => {
     const fetchTraining = async () => {
       try {
@@ -87,7 +86,7 @@ function Test3({ courseName, onBack, id }) {
         const updatedStatus = { ...status, [`${testType}`]: "start" };
         await updateStatus(updatedStatus);
         // setStatus(updatedStatus);
-      }else {
+      } else {
         setStartCountdown(true);
       }
 
@@ -125,38 +124,80 @@ function Test3({ courseName, onBack, id }) {
     }));
   };
 
-  const handleSubmit = () => {
-    let totalScore = 0;
-    const currentQuestions =
-      priQuestion.length > 0 ? priQuestion : postQuestion;
+const updateResults = (testType, totalScore) => {
+  const resultKey = testType === "post_test" ? "post_score" : "pri_score";
+  const updatedResults = { [resultKey]: totalScore };
 
-    currentQuestions.forEach((question, index) => {
-      const correctAnswer = question["Correct Answer"];
-      const userAnswer = userAnswers[index];
-      const userAnswerLetter = userAnswer
-        ? userAnswer.charAt(userAnswer.length - 1)
-        : null;
+  // Call storeResults directly with updated results
+  storeResults(updatedResults);
+};
 
-      if (userAnswerLetter === correctAnswer) {
-        totalScore += 1;
-      }
-    });
 
-    setScore(totalScore);
-  };
+ const storeResults = async (result) => {
+   console.log("resulttttttttt", result);
+   try {
+     const response = await axios.put(
+       `${api_url}/api/cpdResult/update/${id}/${courseName}`,
+       result
+     );
+     if (response.status === 200) {
+       console.log("Status updated successfully");
+       console.log("Updated status:", response.data[0]);
+     }
+   } catch (error) {
+     console.error("Error updating status:", error);
+   }
+ };
 
-  const handleFinish = (testType) => {
-    handleSubmit();
-    const updatedStatus = { ...status, [`${testType}`]: "completed" };
-    updateStatus(updatedStatus);
-  };
+ const handleFinish = (testType) => {
+   // Determine current questions
+   const currentQuestions = priQuestion.length > 0 ? priQuestion : postQuestion;
+
+   // Calculate total score
+   const totalScore = currentQuestions.reduce((score, question, index) => {
+     const correctAnswer = question["Correct Answer"];
+     const userAnswer = userAnswers[index];
+     const userAnswerLetter = userAnswer
+       ? userAnswer.charAt(userAnswer.length - 1)
+       : null;
+
+     return score + (userAnswerLetter === correctAnswer ? 1 : 0);
+   }, 0);
+
+   // Update score state
+   setScore(totalScore);
+   console.log("scorrr", totalScore);
+
+   // Determine certification status
+   const certificationResult =
+     testType === "post_test" && totalScore >= training?.minimum_score
+       ? "passed"
+       : "failed";
+
+   // Update status based on testType
+   const updatedStatus = {
+     ...status,
+     [`${testType}`]: "completed",
+     ...(testType === "post_test" && { certificate: certificationResult }),
+   };
+
+   updateStatus(updatedStatus);
+
+   // Update results and store them directly
+   const resultKey = testType === "post_test" ? "post_score" : "pri_score";
+   const updatedResults = { [resultKey]: totalScore };
+   storeResults(updatedResults);
+updateResults(testType, totalScore);
+   console.log("Updated status:", testType);
+ };
+
 
   if (loading) return <p>Loading...</p>;
   if (error) return <ErrorDisplay error={error} />;
 
   return (
     <div className="position-relative">
-      {priQuestion.length > 0 || postQuestion.length > 0 ? (
+      {(priQuestion.length > 0 || postQuestion.length > 0) && !score ? (
         <h2>good luck </h2>
       ) : (
         <>

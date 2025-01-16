@@ -254,6 +254,46 @@ async function IsApply(trainee_id) {
   }
 }
 
+async function updateTestResult(trainee_id, course_name, score) {
+  // Validate score object
+  if (!score || (!score.pri_score && !score.post_score)) {
+    throw new Error(
+      "Invalid score object. It must contain either pri_score or post_score."
+    );
+  }
+
+  // Construct the query dynamically
+  let sql = "UPDATE courses SET ";
+  const values = [];
+
+  if (score.pri_score !== undefined) {
+    sql += "pri_score = ?";
+    values.push(score.pri_score);
+  }
+
+  if (score.post_score !== undefined) {
+    if (values.length > 0) {
+      sql += ", ";
+    }
+    sql += "post_score = ?";
+    values.push(score.post_score);
+  }
+
+  sql += " WHERE trainee_id = ? AND course_name = ?";
+  values.push(trainee_id, course_name);
+
+  const connection = await conn.pool.getConnection();
+  try {
+    const [result] = await connection.query(sql, values);
+    return result.affectedRows > 0;
+  } catch (error) {
+    throw error;
+  } finally {
+    await connection.release();
+  }
+}
+
+
 //function to get all cpd_trainings by course_name
 async function getCpdCourseByName(courseName) {
   const sql = `SELECT * FROM cpd_trainings WHERE course_name = ?`;
@@ -279,4 +319,5 @@ module.exports = {
   getCpdCourseByName,
   ApplyCourses,
   IsApply,
+  updateTestResult,
 };

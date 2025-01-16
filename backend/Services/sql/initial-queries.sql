@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `cpd_trainings` (
     `pri_test_duration` VARCHAR(255) NOT NULL,
     `post_test` VARCHAR(255) NOT NULL,
     `post_test_duration` VARCHAR(255) NOT NULL,
-    `minimum_score` VARCHAR(255) NOT NULL,
+    `minimum_score` INT NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
