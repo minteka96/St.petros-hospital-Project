@@ -32,8 +32,9 @@ function TestSelection({ onSelect, status }) {
           className="card h-100 shadow-sm"
           style={{ border: "1px solid #ddd", borderRadius: "8px" }}
         >
-          <div className="card-body d-flex flex-column align-items-center justify-content-between">
+          <div className="card-body d-flex flex-column align-items-center justify-content-around">
             <h5>Select Test Type</h5>
+            <p style={{ textAlign: "center", fontSize: "14px" }}>when the test is available you can select the test</p>
             <div className="d-flex justify-content-between gap-5 mt-3">
               {/* Pri Test Button */}
               <div
@@ -136,14 +137,49 @@ function TestSelection({ onSelect, status }) {
           className="card h-100 shadow-sm"
           style={{ border: "1px solid #ddd", borderRadius: "8px" }}
         >
-          <div className="card-body d-flex flex-column align-items-center justify-content-between">
+          <div className="card-body d-flex flex-column align-items-center justify-content-around">
             <h5>Test Result</h5>
-            <div class="d-flex  justify-content-between gap-5 mt-3">
-              <h5 className="">
-                Pri Test : <span style={{ color: "green" }}>0</span>
+            <div className="justify-content-between gap-5 mt-3">
+              <h5>
+                Pri Test:{" "}
+                <span
+                  style={{
+                    color:
+                      status?.pri_test === "completed"
+                        ? "green"
+                        : (status?.pri_test === "start"|| status?.pri_test === "1")
+                        ? "orange"
+                        : "red",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {status?.pri_test === "1" || status?.pri_test === "start"
+                    ? "On Progress"
+                    : status?.pri_test === "completed"
+                    ? "Completed"
+                    : "Not Available"}
+                </span>
               </h5>
-              <h5 className="">
-                Post Test : <span style={{ color: "green" }}>0</span>
+              <h5>
+                Post Test:{" "}
+                <span
+                  style={{
+                    color:
+                      status?.post_test === "completed"
+                        ? "green"
+                        : (status?.post_test === "start"|| status?.post_test === "1")
+                        ? "orange"
+                        : "red",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {status?.post_test === "0"
+                    ? "Not Available"
+                    : (status?.post_test === "start"|| status?.post_test === "1")
+                    ? "On Progress"
+                    : status?.certificate || "Not Defined"}
+                </span><br/>
+                {status?.certificate ==="failed" && <span style={{color:"gray",fontSize:"12px",marginTop:"5px" }} > you have't passed the post test, your result is less than our standard</span>}
               </h5>
             </div>
           </div>
@@ -155,11 +191,10 @@ function TestSelection({ onSelect, status }) {
           className="card h-100 shadow-sm"
           style={{ border: "1px solid #ddd", borderRadius: "8px" }}
         >
-          <div className="card-body d-flex flex-column align-items-center justify-content-between">
+          <div className="card-body d-flex flex-column align-items-center justify-content-around">
             <h5>Certificate</h5>
-            <p className="fs-6">
-              when you complete the the Post test and get our score you will get
-              a certificate
+            <p style={{ fontSize: "14px", textAlign: "center" }}>
+              when you complete the the Post test and your result is more than our standard you can download your certificate
             </p>
             <div class="gap-5 mt-3">
               <p className="fs-6 m-0 " style={{ color: "green" }}>
