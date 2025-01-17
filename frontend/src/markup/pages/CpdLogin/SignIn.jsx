@@ -61,7 +61,7 @@ const SignIn = ({ onSwitch }) => {
 
         setTimeout(() => {
           setMessage("");
-          window.location.href = "/cpdadmin/TraineesDashboard";
+          window.location.href = "/cpd/TraineesDashboard";
           // navigate("/cpdadmin/TraineesDashboard");
         }, 2000);
       } else {
