@@ -3,23 +3,19 @@ import { useNavigate } from "react-router-dom";
 import newsService from "../../../../Services/news.service";
 import classes from "./NewsList.module.css";
 import { format } from "date-fns";
-import { FaEdit, FaTrash, FaCheckCircle } from "react-icons/fa";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import { useAuth } from "../../../../contexts/AuthContext.jsx";
-
-// API URL from environment variables
-const api_url = import.meta.env.VITE_API_URL;
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const NewsList = () => {
   const { user } = useAuth();
   const token = user ? user.token : null;
 
-  // State variables
   const [newsList, setNewsList] = useState([]);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const navigate = useNavigate();
 
-  // Fetch news data on component mount
   useEffect(() => {
     const fetchNews = async () => {
       try {
@@ -33,7 +29,6 @@ const NewsList = () => {
     fetchNews();
   }, []);
 
-  // Handle delete functionality
   const handleDelete = async (newsId) => {
     if (!window.confirm("Are you sure you want to delete this news item?"))
       return;
@@ -41,15 +36,22 @@ const NewsList = () => {
     try {
       await newsService.deleteNews(newsId, token);
       setNewsList(newsList.filter((news) => news.news_id !== newsId));
-      setSuccess("News deleted successfully!");
-      setTimeout(() => setSuccess(""), 2000);
+      toast.success("News deleted successfully!");
     } catch (err) {
-      setError("Failed to delete news item.");
-      setTimeout(() => setError(""), 2000);
+      toast.error("Failed to delete news item.");
     }
   };
 
-  // Truncate long text
+  const handleUpdate = async (newsId) => {
+    try {
+      // Assuming the update logic is here, like calling the API to update news
+      await newsService.updateNews(newsId, token); // Add your update logic here
+      toast.success("News updated successfully!"); // Show success message after update
+    } catch (err) {
+      toast.error("Failed to update news.");
+    }
+  };
+
   const truncateText = (text, maxLength = 15) => {
     if (!text) return "No Link";
     return text.length > maxLength
@@ -57,7 +59,6 @@ const NewsList = () => {
       : text;
   };
 
-  // Render formatted text with styles
   const renderFormattedText = (text) => {
     return text.split("\n").map((line, index) => {
       const trimmed = line.trim();
@@ -87,12 +88,7 @@ const NewsList = () => {
     <div className={classes.newsListContainer}>
       <h2>News List</h2>
       {error && <div className={classes.errorMessage}>{error}</div>}
-      {success && (
-        <div className={classes.successMessage}>
-          <FaCheckCircle style={{ color: "green", marginRight: "8px" }} />
-          {success}
-        </div>
-      )}
+
       {newsList.length === 0 ? (
         <p>No news available.</p>
       ) : (
@@ -189,8 +185,13 @@ const NewsList = () => {
           </tbody>
         </table>
       )}
+
+      <ToastContainer />
     </div>
   );
 };
 
 export default NewsList;
+
+
+

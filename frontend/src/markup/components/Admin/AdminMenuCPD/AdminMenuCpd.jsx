@@ -1,23 +1,13 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./adminMenu.css"; // Import CSS file
 
 function AdminMenuCpd() {
-  const navigate = useNavigate();
-
-  const logOut = () => {
-    sessionStorage.removeItem("zaccess-token");
-    navigate("/cpd/login");
-  };
-
   return (
     <div className="pb-4">
       {/* CPD Admin Menu */}
       <div className="admin-menu">
         <h2>CPD Menu</h2>
-        <button onClick={logOut} className="logout-button">
-          Log Out
-        </button>
       </div>
 
       <div className="list-group">

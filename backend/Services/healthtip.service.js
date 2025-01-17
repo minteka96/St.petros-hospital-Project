@@ -12,22 +12,23 @@ const createHealthTip = async (data) => {
   } = data;
 
   try {
-    // The INSERT query should return an array with the result at index 0
+    // Insert the health tip
     const result = await db.query(
-      `INSERT INTO Health_Tips (health_tip_title,health_tip_detail, health_tip_description, health_tip_link, health_tip_video_link, health_tip_image )
+      `INSERT INTO Health_Tips (health_tip_title, health_tip_detail, health_tip_description, health_tip_link, health_tip_video_link, health_tip_image)
       VALUES (?, ?, ?, ?, ?, ?)`,
       [
         healthTipTitle,
         healthTipDetail,
-        healthTipDescription,
-        healthTipLink,
-        healthTipVideoLink,
+        healthTipDescription || null, // Allow optional description
+        healthTipLink || null, // Allow optional link
+        healthTipVideoLink || null, // Allow optional video link
         healthTipImageLink,
       ]
     );
+    const healthTipId = result.insertId;
 
-    // Return the inserted ID and other details
     return {
+      id: healthTipId,
       healthTipTitle,
       healthTipDetail,
       healthTipDescription,
@@ -41,15 +42,13 @@ const createHealthTip = async (data) => {
   }
 };
 
-// Function to fetch a health tip by ID
+// Function to fetch a health tip by its ID
 const getHealthTipById = async (healthTipId) => {
   try {
     const result = await db.query(
       `SELECT * FROM Health_Tips WHERE health_tip_id = ?`,
       [healthTipId]
     );
-
-    // Return the health tip if found, otherwise null
     return result[0] || null;
   } catch (err) {
     console.error("Error fetching health tip by ID:", err);
@@ -63,12 +62,12 @@ const getAllHealthTips = async () => {
     const result = await db.query(`SELECT * FROM Health_Tips`);
     return result;
   } catch (err) {
-    console.error("Error fetching health tips:", err);
+    console.error("Error fetching all health tips:", err);
     throw new Error("Error fetching health tips: " + err.message);
   }
 };
 
-// Function to update a health tip by ID
+// Function to update a health tip
 const updateHealthTip = async (healthTipId, data) => {
   const {
     healthTipTitle,
@@ -80,48 +79,47 @@ const updateHealthTip = async (healthTipId, data) => {
   } = data;
 
   try {
+    // Fetch the current health tip to retain the existing image if no new image is provided
+    const currentHealthTip = await getHealthTipById(healthTipId);
+    if (!currentHealthTip) {
+      throw new Error("Health tip not found");
+    }
 
+    // Use the new image link if provided, otherwise keep the existing one
+    const imageLinkToUpdate =
+      healthTipImageLink || currentHealthTip.health_tip_image;
+
+    // Update the Health_Tips table
     const result = await db.query(
-      `UPDATE Health_Tips
-      SET health_tip_title = ?, health_tip_detail= ?, health_tip_description= ?, health_tip_link= ?, health_tip_video_link= ?, health_tip_image = ?
-      WHERE health_tip_id = ?`,
+      `UPDATE Health_Tips SET health_tip_title = ?, health_tip_detail = ?, health_tip_description = ?, health_tip_link = ?, health_tip_video_link = ?, health_tip_image = ? WHERE health_tip_id = ?`,
       [
         healthTipTitle,
         healthTipDetail,
-        healthTipDescription,
-        healthTipLink,
-        healthTipVideoLink,
-        healthTipImageLink,
+        healthTipDescription || null,
+        healthTipLink || null,
+        healthTipVideoLink || null,
+        imageLinkToUpdate,
         healthTipId,
       ]
     );
 
-    // Check if any rows were affected
-    if (result.affectedRows === 0) {
-      return false; // No health tip found with the given ID
-    }
+    if (result.affectedRows === 0) return false;
 
-    return true; // Successful update
+    return true;
   } catch (err) {
     console.error("Error updating health tip:", err);
     throw new Error("Error updating health tip: " + err.message);
   }
 };
 
-// Function to delete a health tip by ID
+// Function to delete a health tip
 const deleteHealthTip = async (healthTipId) => {
   try {
     const result = await db.query(
       `DELETE FROM Health_Tips WHERE health_tip_id = ?`,
       [healthTipId]
     );
-
-    // Check if any rows were affected
-    if (result.affectedRows === 0) {
-      return false; // No health tip found with the given ID
-    }
-
-    return true; // Successful deletion
+    return result.affectedRows > 0;
   } catch (err) {
     console.error("Error deleting health tip:", err);
     throw new Error("Error deleting health tip: " + err.message);
