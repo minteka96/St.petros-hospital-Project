@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useAuth } from "../../../../../contexts/AuthContext";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, NavLink } from "react-bootstrap";
 import { Link } from "react-router-dom";
 const api_url = import.meta.env.VITE_API_URL;
 
@@ -234,6 +234,20 @@ function ListOfSchedule() {
                       </>
                     ) : null}
 
+                    <Link
+                      to={`/admin/cpd/check-exam/${schedule.schedule_id}/${schedule.course_name}`}
+                      className="btn bg-white border border-1 "
+                    >
+                      <img
+                        src="https://img.icons8.com/?size=100&id=zo9eHF24MB3R&format=png&color=000000"
+                        alt=""
+                        style={{
+                          maxWidth: "20px",
+                          minWidth: "20px",
+                          height: "20px",
+                        }}
+                      />
+                    </Link>
                     <Link
                       to={`/admin/cpd/trainees/${schedule.schedule_id}`}
                       className="btn bg-white border border-1"

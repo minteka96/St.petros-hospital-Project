@@ -49,7 +49,7 @@ const TraineesDashboard = () => {
   }, []);
 
   useEffect(() => {
-    const token = trainee?.traineeToken;
+    const token = trainee?.token;
     if (!token) {
       navigate("/cpd/login");
       return;
