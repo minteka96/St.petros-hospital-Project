@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../contexts/AuthContext";
 import trainInfoService from "../../../../Services/trainInfo.service";
@@ -10,6 +10,7 @@ const TraineeAddForm = () => {
   const [loading, setLoading] = useState(false);
 
   const trainee_id=trainee?.id
+  const token = trainee ? trainee.token : null;
   const [formData, setFormData] = useState({
     first_name: "",
     middle_name: "",
@@ -20,6 +21,12 @@ const TraineeAddForm = () => {
     profession: "",
     account_number: ""
   });
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/cpd/login");
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

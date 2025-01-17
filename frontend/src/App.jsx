@@ -79,7 +79,7 @@ function App() {
     "/login",
     "/admin",
     "/cpd/login",
-    "/cpdadmin",
+    "/cpd",
   ].some((path) => window.location.pathname.startsWith(path));
 
   return (
@@ -105,7 +105,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/cpd/" element={<CpdLogin />} />
+        {/* <Route path="/cpd/" element={<CpdLogin />} /> */}
         <Route path="/cpd/login" element={<CpdLoginSignup />} />
         <Route path="/cpd/trainee-info" element={<TraineeAddForm />} />
         <Route
@@ -157,7 +157,7 @@ function App() {
         <Route path="/admin/*" element={<AdminRoute />} />
         <Route path="/cpd/*" element={<CpdTraineesRoute />} />
         <Route path="/test" element={<Test />} />
-        <Route path="/test2" element={<Test2 />} />
+        {/* <Route path="/test2" element={<Test2 />} /> */}
       </Routes>
 
       {/* Conditionally render Footer based on route */}

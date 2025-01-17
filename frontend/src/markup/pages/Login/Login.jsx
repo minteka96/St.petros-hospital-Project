@@ -66,8 +66,10 @@ function Login() {
               <div className="card-body px-5 text-center">
                 <div className="mb-md-5 mt-md-4 pb-5">
                   <div className="d-flex align-items-center justify-content-between">
-                    <h1 className="fw-bold mb-2 text-uppercase">Login</h1>
+                    <a href="/" >
                     <img style={{ width: "40%" }} src={logo} alt="" />
+                    </a>
+                    <h1 className="fw-bold mb-2 text-uppercase">Login</h1>
                   </div>
                   <p className="text-white-50 m-3">
                     Enter your email and password!

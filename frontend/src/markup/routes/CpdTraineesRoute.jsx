@@ -39,6 +39,7 @@ const CpdTraineesRoute = () => {
             <Route path="TraineesDashboard" element={<TraineesDashboard />} />
             <Route path="certificate" element={<TrainInfoList />} />
             <Route path="exam" element={<TraineeAddForm />} />
+            <Route path="training" element={<Test2 />} />
           </Routes>
         </div>
       </div>
