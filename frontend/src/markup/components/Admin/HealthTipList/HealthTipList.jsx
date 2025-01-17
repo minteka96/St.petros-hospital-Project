@@ -1,34 +1,29 @@
-// Import required modules and components
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import healthTipService from "../../../../Services/healthtip.service.js"; // Adjust the path as needed
-import classes from "./HealthTipList.module.css"; // Adjust the path as needed
-import { format } from "date-fns"; // Library for date formatting
-import { FaEdit, FaTrash } from "react-icons/fa"; // Action icons
-import { useAuth } from "../../../../contexts/AuthContext"; // Adjust the path as needed
+import healthTipService from "../../../../Services/healthtip.service.js";
+import classes from "./HealthTipList.module.css";
+import { format } from "date-fns";
+import { FaEdit, FaTrash, FaCheckCircle } from "react-icons/fa";
+import { useAuth } from "../../../../contexts/AuthContext";
+import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
+import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 
-// Environment variable for API base URL
 const api_url = import.meta.env.VITE_API_URL;
-
 
 const HealthTipList = () => {
   const { user } = useAuth();
-  const token = user?.token || null; // Extract token from authenticated user context
+  const token = user ? user.token : null;
+
+  const [healthTips, setHealthTips] = useState([]);
   const navigate = useNavigate();
 
-  // State management
-  const [healthTips, setHealthTips] = useState([]);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-
-  // Fetch health tips on component load
   useEffect(() => {
     const fetchHealthTips = async () => {
       try {
         const response = await healthTipService.getAllHealthTips(token);
         setHealthTips(response.data || []);
       } catch (err) {
-        setError("Failed to fetch health tips. Please try again.");
+        toast.error("Failed to fetch health tips. Please try again."); // Show error toast
       }
     };
     fetchHealthTips();
@@ -40,56 +35,69 @@ const HealthTipList = () => {
 
     try {
       await healthTipService.deleteHealthTip(healthTipId, token);
-      setHealthTips((prevTips) =>
-        prevTips.filter((tip) => tip.health_tip_id !== healthTipId)
+      setHealthTips(
+        healthTips.filter((tip) => tip.health_tip_id !== healthTipId)
       );
-      setSuccess("Health tip deleted successfully!");
+      toast.success("Health tip deleted successfully!"); // Show success toast
     } catch (err) {
-      setError("Failed to delete health tip. Please try again.");
+      toast.error("Failed to delete health tip."); // Show error toast
     }
   };
 
-  const truncateText = (text, maxLength = 100) =>
-    text?.length > maxLength
+  const truncateText = (text, maxLength = 15) => {
+    if (!text) return "No Link";
+    return text.length > maxLength
       ? `${text.substring(0, maxLength)}...`
-      : text || "";
-// console.log(healthTips)
+      : text;
+  };
+
+  const renderFormattedText = (text) => {
+    return text.split("\n").map((line, index) => (
+      <p key={index} className={classes.plainDetail}>
+        {line.trim()}
+      </p>
+    ));
+  };
+
   return (
     <div className={classes.healthTipListContainer}>
       <h2>Health Tip List</h2>
 
-      {/* Error and Success Messages */}
-      {error && <div className={classes.errorMessage}>{error}</div>}
-      {success && <div className={classes.successMessage}>{success}</div>}
-
-      {/* Health Tips Table */}
       {healthTips.length === 0 ? (
-        <p>No health tips available at the moment.</p>
+        <p>No health tips available.</p>
       ) : (
-        <table className="table table-bordered table-hover">
+        <table className={classes.healthTipTable}>
           <thead>
             <tr>
-              <th>Title</th>
-              <th>Detail</th>
-              <th>Description</th>
-              <th>Link</th>
-              <th>Image</th>
-              <th>Video</th>
-              <th>Date</th>
-              <th>Actions</th>
+              <th className={classes.titleColumn}>Title</th>
+              <th className={classes.detailColumn}>Detail</th>
+              <th className={classes.descriptionColumn}>Description</th>
+              <th className={classes.linkColumn}>Link</th>
+              <th className={classes.imageColumn}>Image</th>
+              <th className={classes.videoColumn}>Video</th>
+              <th className={classes.dateColumn}>Date</th>
+              <th className={classes.actionsColumn}>Actions</th>
             </tr>
           </thead>
           <tbody>
             {healthTips.map((tip) => (
               <tr key={tip.health_tip_id}>
-                <td data-label="Title">{tip.health_tip_title}</td>
-                <td data-label="Detail">{tip.health_tip_detail}</td>
-                <td data-label="Description">{tip.health_tip_description}</td>
-                <td data-label="Link">
+                <td>{tip.health_tip_title}</td>
+                <td className={classes.truncate}>
+                  <div className={classes.healthTipDetail}>
+                    {renderFormattedText(tip.health_tip_detail)}
+                  </div>
+                </td>
+                <td className={classes.truncate}>
+                  <div className={classes.healthTipDescription}>
+                    {renderFormattedText(tip.health_tip_description)}
+                  </div>
+                </td>
+                <td>
                   {tip.health_tip_link ? (
                     <a
-                      target="_blank"
                       href={tip.health_tip_link}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className={classes.link}
                     >
@@ -99,31 +107,20 @@ const HealthTipList = () => {
                     "No Link"
                   )}
                 </td>
-                <td data-label="Image" style={{ textAlign: "center" }}>
+                <td className={classes.imageCell}>
                   <a
+                    href={`${api_url}${tip.health_tip_image}`}
                     target="_blank"
-                    href={
-                      tip.health_tip_image
-                        ? `${api_url}${tip.health_tip_image}`
-                        : "#"
-                    }
+                    rel="noopener noreferrer"
                   >
                     <img
-                      style={{ width: "90%", borderRadius: "5%" }}
-                      src={
-                        tip.health_tip_image
-                          ? `${api_url}${tip.health_tip_image}`
-                          : ""
-                      }
-                      alt={
-                        tip.health_tip_image
-                          ? "Click to view full image"
-                          : "No Image Available"
-                      }
+                      src={`${api_url}${tip.health_tip_image}`}
+                      alt="Health Tip Image"
+                      className={classes.imageThumbnail}
                     />
                   </a>
                 </td>
-                <td data-label="Link">
+                <td>
                   {tip.health_tip_video_link ? (
                     <a
                       href={tip.health_tip_video_link}
@@ -137,11 +134,10 @@ const HealthTipList = () => {
                     "No Link"
                   )}
                 </td>
-                <td data-label="Date">
+                <td>
                   {format(new Date(tip.created_at), "MM-dd-yyyy | HH:mm")}
                 </td>
-
-                <td data-label="Actions">
+                <td className={classes.actionsCell}>
                   <button
                     onClick={() =>
                       navigate(
@@ -167,6 +163,9 @@ const HealthTipList = () => {
           </tbody>
         </table>
       )}
+
+      {/* Toast container to display success and error messages */}
+      <ToastContainer />
     </div>
   );
 };

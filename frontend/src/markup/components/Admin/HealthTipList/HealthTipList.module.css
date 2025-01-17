@@ -1,4 +1,3 @@
-/* Container Styling */
 .healthTipListContainer {
   padding: 20px;
   background-color: #f9f9f9;
@@ -6,7 +5,6 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Title Styling */
 h2 {
   font-size: 1.8rem;
   color: #333;
@@ -14,7 +12,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* Success and Error Messages */
 .successMessage {
   color: #155724;
   background-color: #d4edda;
@@ -22,6 +19,8 @@ h2 {
   padding: 10px;
   margin-bottom: 15px;
   border-radius: 4px;
+  display: flex;
+  align-items: center;
 }
 
 .errorMessage {
@@ -33,93 +32,152 @@ h2 {
   border-radius: 4px;
 }
 
-/* Table Styling */
 .healthTipTable {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
+  table-layout: fixed;
 }
 
 .healthTipTable th,
 .healthTipTable td {
   padding: 12px 15px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  color: #444;
 }
 
 .healthTipTable th {
-  background-color: #F5F5F5;
-  color:black;
+  background-color: #f8f9fa;
+  font-weight: bold;
   text-transform: uppercase;
-  font-size: 0.9rem;
+  text-align: center;
 }
 
-.healthTipTable tr:nth-child(even) {
-  background-color: #f2f2f2;
+.titleColumn {
+  width: 10%;
 }
 
-.healthTipTable tr:hover {
-  background-color: #f1f8ff;
+.detailColumn {
+  width: 25%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Link Styling */
-.link {
-  color: #007bff;
+.descriptionColumn {
+  width: 20%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.linkColumn {
+  width: 11%;
+}
+
+.linkColumn a {
+  color: #444;
   text-decoration: none;
-  word-break: break-word;
 }
 
-.link:hover {
+.linkColumn a:hover {
+  color: #007bff;
   text-decoration: underline;
 }
 
-/* Icon Button Styling */
-.iconButton {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-  margin: 0 5px;
+.imageColumn {
+  width: 8%;
 }
 
-.iconButton:focus {
-  outline: none;
+.dateColumn,
+.actionsColumn {
+  width: 9%;
+}
+
+.link {
+  color: #444484;
+}
+
+.imageGrid {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.imageThumbnail {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease;
+}
+
+.imageThumbnail:hover {
+  transform: scale(1.1);
+}
+
+.moreImages {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #666;
+  margin-left: 10px;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.iconButton:hover {
+  background-color: #00A99E;
+  transform: scale(1.0);
 }
 
 .editIcon {
-  color: #28a745;
-  font-size: 1.2rem;
+  color: #34c759;
 }
 
 .deleteIcon {
-  color: #dc3545;
-  font-size: 1.2rem;
+  color: #d9534f;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .healthTipTable th,
+/* New Styles for Formatted Text */
+.bulletedDetail {
+  color: #007bff;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.highlightedDetail {
+  background-color: #f0f8ff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.plainDetail {
+  color: #444;
+}
+
+@media (max-width: 768px) {
+  .healthTipTable tr {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .healthTipTable th {
+    display: none;
+  }
+
   .healthTipTable td {
-    font-size: 0.85rem;
-  }
-
-  .healthTipListContainer {
-    padding: 15px;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .healthTipTable {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
   }
 }

@@ -53,7 +53,7 @@ const TraineeAddForm = () => {
     try {
       const response = await trainInfoService.addTrainee(submitData, user.token);
       toast.success("Registration completed successfully!");
-      navigate("/TraineesDashboard"); // Navigate to trainee list after successful registration
+      navigate("/cpdadmin/TraineesDashboard"); // Navigate to trainee list after successful registration
     } catch (error) {
       toast.error(error.response?.data?.message || "Registration failed. Please try again.");
       console.error("Registration error:", error);
