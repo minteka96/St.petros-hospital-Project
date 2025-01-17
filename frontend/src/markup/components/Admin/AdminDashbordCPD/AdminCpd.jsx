@@ -9,7 +9,7 @@ const AdminCpd = () => {
       <div className="sidebar">
         <div
           className="sec-title style-two"
-          style={{ textAlign: "center", paddingTop: "20px" }}
+          style={{ textAlign: "center", paddingTop: "10px" }}
         >
           <h2>CPD Menu Dashboard</h2>
           <div
