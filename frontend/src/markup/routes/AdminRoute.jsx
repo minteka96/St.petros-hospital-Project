@@ -59,6 +59,7 @@ import AddPublication from "../components/Admin/addpublication/AddPublication.js
   import EditPublicationForm from "../components/Admin/EditPublicationForm/EditPublicationForm.jsx";
    import ResearchPublications from "../pages/qulity&research/ResearchPublication.jsx";
    import PublicationList from "../components/Admin/publicationlist/PublicationList.jsx";
+import TrainCourseStatus from "../components/Admin/Trainer/TrainCourseStatus.jsx";
 
 const AdminRoute = () => {
   const navigate = useNavigate();
@@ -302,6 +303,8 @@ const AdminRoute = () => {
               <Route path="/contact/:id" element={<ContactDetail />} />
               <Route path="/cpd/schedule" element={<ListOfSchedule />} />
               <Route path="/cpd/trainees/:schedule_id" element={<Trainee />} />
+              <Route path="/training/:trainee_id" element={<TrainCourseStatus   />} />
+      
 
             </Routes>
           </div>

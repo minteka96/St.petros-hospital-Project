@@ -25,9 +25,13 @@ const traineesSignInRoute = require("./traineesSignIn.routes.js");
 const traineeRouter = require("./trainee.toutes.js");
 const traineesInfoRoutes = require('./trainees_info.routes.js');
 
+
 // Import the contact router
 const contactRoutes = require("./contact.routes");  // <-- Add this line
 const researchPublicationRouter = require('./researchPublication.routes')
+// Import the trainCourseStatus router 
+const trainCourseStatus= require('./trainCourseStatus.routes');
+
 // Use the routers in the main router
 // Use the sign-up route
 router.use(traineesSignUpRoute);
@@ -55,6 +59,7 @@ router.use('/api', researchPublicationRouter);
 // Use the routes
 router.use('/api', contactRoutes); 
 router.use(cpdNewsRouter);
+router.use(trainCourseStatus);
 
 // Export the router to be used in the main application file
 module.exports = router;
