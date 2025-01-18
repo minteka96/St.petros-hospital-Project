@@ -47,7 +47,7 @@ async function createTraineeInfo(req, res) {
       sex,
       phone,
       profession,
-      account_number
+      account_number,
     } = req.body;
 
     // Enhanced validation
@@ -57,7 +57,7 @@ async function createTraineeInfo(req, res) {
       last_name,
       sex,
       phone,
-      account_number
+      account_number,
     };
 
     const missingFields = Object.entries(requiredFields)
@@ -66,7 +66,7 @@ async function createTraineeInfo(req, res) {
 
     if (missingFields.length > 0) {
       return res.status(400).json({
-        error: `Required fields missing: ${missingFields.join(', ')}`
+        error: `Required fields missing: ${missingFields.join(", ")}`,
       });
     }
 
@@ -78,23 +78,22 @@ async function createTraineeInfo(req, res) {
       sex,
       phone,
       profession,
-      account_number
+      account_number,
     };
 
     const result = await traineesInfoService.createTraineeInfo(traineeInfoData);
     res.status(201).json({
       message: "Trainee info created successfully",
-      data: result
+      data: result,
     });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({
       error: "Internal Server Error",
-      details: error.message
+      details: error.message,
     });
   }
 }
-
 
 async function getAllTraineesInfo(req, res) {
   try {
@@ -108,7 +107,9 @@ async function getAllTraineesInfo(req, res) {
 
 async function getTraineeInfoById(req, res) {
   try {
-    const traineeInfo = await traineesInfoService.getTraineeInfoById(req.params.id);
+    const traineeInfo = await traineesInfoService.getTraineeInfoById(
+      req.params.id
+    );
     if (!traineeInfo) {
       return res.status(404).json({ error: "Trainee info not found" });
     }
@@ -121,10 +122,11 @@ async function getTraineeInfoById(req, res) {
 
 async function getTraineeInfoByTraineeId(req, res) {
   try {
+    console.log("first");
     const traineeInfo = await traineesInfoService.getTraineeInfoByTraineeId(
       req.params.traineeId
     );
-    console.log(req.params.traineeId)
+    console.log(req.params.traineeId);
     if (!traineeInfo) {
       return res.status(404).json({ error: "Trainee info not found" });
     }

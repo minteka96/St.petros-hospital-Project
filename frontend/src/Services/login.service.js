@@ -10,6 +10,8 @@ const logIn = async (formData) => {
       body: JSON.stringify(formData),
     });
 
+    console.log(response);
+
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -22,11 +24,7 @@ const logIn = async (formData) => {
   }
 };
 
-
-
-
 // Export the functions
 export default {
   logIn,
-
 };

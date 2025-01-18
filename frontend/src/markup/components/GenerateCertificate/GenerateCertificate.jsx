@@ -1,88 +1,95 @@
-import React, { useState, useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import html2canvas from "html2canvas";
 import "@fontsource/cormorant-garamond";
+import { useLocation } from "react-router";
 
 const GenerateCertificate = () => {
-  const [name, setName] = useState("");
-  const [courseName, setCourseName] = useState(""); // State for course name
   const [certificate, setCertificate] = useState(null);
+  const [error, setError] = useState(false);
   const certificateRef = useRef();
+  const location = useLocation();
+  const { firstName, middleName, lastName, courseName } = location.state || {};
+  const fullName = `${firstName} ${middleName || ""} ${lastName}`.trim();
+  // Fetch the certificate image when the component mounts
+  useEffect(() => {
+    const fetchCertificate = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/api/certificate");
+        if (!response.ok) throw new Error("Failed to fetch certificate image");
+        const blob = await response.blob();
+        setCertificate(URL.createObjectURL(blob));
+      } catch (err) {
+        console.error(err.message);
+        setError(true);
+      }
+    };
 
-  // Fetch the certificate image
-  const fetchCertificate = async () => {
-    try {
-      const response = await fetch("http://localhost:3001/api/certificate");
-      const blob = await response.blob();
-      setCertificate(URL.createObjectURL(blob));
-    } catch (error) {
-      console.error("Error fetching certificate:", error);
-    }
-  };
+    fetchCertificate();
+  }, []);
 
-  // Download the certificate with the name and course name
+  // Download the certificate
   const downloadCertificate = async () => {
-    const element = certificateRef.current;
-    const canvas = await html2canvas(element, { scale: 2 }); // Higher scale for better quality
+    if (!certificateRef.current) return;
+    const canvas = await html2canvas(certificateRef.current, { scale: 2 });
     const dataURL = canvas.toDataURL("image/png");
     const link = document.createElement("a");
     link.href = dataURL;
-    link.download = "certificate.png";
+    link.download = `${name}_certificate.png`;
     link.click();
   };
 
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
-      <h1>Certificate Generator</h1>
-      <button onClick={fetchCertificate} style={{ marginBottom: "20px" }}>
-        Load Certificate
-      </button>
-      <br />
-      {certificate && (
-        <div>
+      {error && (
+        <p style={{ color: "red" }}>Failed to load certificate image.</p>
+      )}
+      {certificate ? (
+        <>
           <div
             ref={certificateRef}
             style={{
               position: "relative",
               display: "inline-block",
-              width: "1123px", // A4 landscape width
-              height: "794px", // A4 landscape height
+              width: "100%",
+              maxWidth: "1123px", // A4 landscape width in pixels
+              height: "auto",
               border: "1px solid #ccc", // Optional border for clarity
             }}
           >
             <img
               src={certificate}
-              alt="Certificate"
+              alt="Certificate Background"
               style={{
                 width: "100%",
-                height: "100%",
+                height: "auto",
                 objectFit: "cover",
               }}
             />
-            {name && (
+            {firstName && (
               <div
                 style={{
                   position: "absolute",
-                  bottom: "320px", // Adjust position as per certificate layout
+                  bottom: "40%", // Adjust position
                   left: "50%",
                   transform: "translateX(-50%)",
-                  fontSize: "32px",
+                  fontSize: "2em",
                   fontWeight: "bold",
                   color: "#000",
                   textAlign: "center",
-                  fontFamily: "'Cormorant Garamond', serif", // Name Font
+                  fontFamily: "'Cormorant Garamond', serif",
                 }}
               >
-                {name}
+                {fullName}
               </div>
             )}
             {courseName && (
               <div
                 style={{
                   position: "absolute",
-                  bottom: "240px", // Adjust position as per certificate layout
+                  bottom: "30%",
                   left: "50%",
                   transform: "translateX(-50%)",
-                  fontSize: "16px", // Slightly larger font for better readability
+                  fontSize: "1.2em",
                   fontWeight: "bold",
                   color: "#5B6784",
                   textAlign: "center",
@@ -93,45 +100,26 @@ const GenerateCertificate = () => {
             )}
           </div>
           <br />
-          <input
-            type="text"
-            placeholder="Enter your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            style={{
-              margin: "10px",
-              padding: "10px",
-              fontSize: "16px",
-              width: "80%",
-              maxWidth: "400px",
-            }}
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="Enter the course name"
-            value={courseName}
-            onChange={(e) => setCourseName(e.target.value)}
-            style={{
-              margin: "10px",
-              padding: "10px",
-              fontSize: "16px",
-              width: "80%",
-              maxWidth: "400px",
-            }}
-          />
-          <br />
           <button
             onClick={downloadCertificate}
             style={{
               padding: "10px 20px",
               fontSize: "1em",
+              color: "#fff",
+              backgroundColor: "#007bff",
+              border: "none",
+              borderRadius: "5px",
               cursor: "pointer",
+              transition: "background-color 0.3s",
             }}
+            onMouseEnter={(e) => (e.target.style.backgroundColor = "#0056b3")}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = "#007bff")}
           >
             Download Certificate
           </button>
-        </div>
+        </>
+      ) : (
+        !error && <p>Loading certificate...</p>
       )}
     </div>
   );

@@ -32,6 +32,7 @@ const TraineesDashboard = () => {
     const fetchTrainings = async () => {
       try {
         const response = await fetch(`${api_url}/api/cpd/available/courses`);
+        console.log(response);
         if (!response.ok) {
           throw new Error("Failed to fetch trainings");
         }
@@ -49,7 +50,7 @@ const TraineesDashboard = () => {
   }, []);
 
   useEffect(() => {
-    const token = trainee?.traineeToken;
+    const token = trainee?.token;
     if (!token) {
       navigate("/cpd/login");
       return;
@@ -59,12 +60,9 @@ const TraineesDashboard = () => {
         const response = await fetch(
           `${api_url}/api/trainee-info/${traineeId}`
         );
-        console.log("traineeId", traineeId);
-        console.log("response", response);
 
         if (response.status === 404) {
           navigate("/cpd/trainee-info");
-
         }
         // const data = await response.json();
       } catch (error) {

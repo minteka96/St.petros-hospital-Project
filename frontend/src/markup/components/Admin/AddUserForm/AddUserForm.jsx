@@ -1,20 +1,20 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { addUser } from '../../../Util/api/api';
+import React, { useState } from "react";
+import { addUser } from "../../../Util/api/api";
 
 const AddUserForm = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await addUser({ username, password });
-      setUsername('');
-      setPassword('');
+      setUsername("");
+      setPassword("");
       // Optionally, you can trigger a refresh of the user list here
     } catch (error) {
-      console.error('Error adding user:', error);
+      console.error("Error adding user:", error);
     }
   };
 

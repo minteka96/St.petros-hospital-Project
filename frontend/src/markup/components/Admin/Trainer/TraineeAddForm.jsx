@@ -6,10 +6,10 @@ import { toast } from "react-toastify";
 
 const TraineeAddForm = () => {
   const navigate = useNavigate();
-  const { user,trainee } = useAuth();
+  const { user, trainee } = useAuth();
   const [loading, setLoading] = useState(false);
 
-  const trainee_id=trainee?.id
+  const trainee_id = trainee?.id;
   const [formData, setFormData] = useState({
     first_name: "",
     middle_name: "",
@@ -18,50 +18,52 @@ const TraineeAddForm = () => {
     sex: "",
     phone: "",
     profession: "",
-    account_number: ""
+    account_number: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
- 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Enhanced validation
     const phoneRegex = /^\d{10}$/;
     if (!phoneRegex.test(formData.phone)) {
       toast.error("Please enter a valid 10-digit phone number");
       return;
     }
-  
 
-
-     
     const submitData = {
       ...formData,
-      trainee_id
+      trainee_id,
     };
-  
+
     setLoading(true);
-  
+
     try {
-      const response = await trainInfoService.addTrainee(submitData, user.token);
+      const response = await trainInfoService.addTrainee(
+        submitData,
+        user?.token
+      );
       toast.success("Registration completed successfully!");
       navigate("/TraineesDashboard"); // Navigate to trainee list after successful registration
     } catch (error) {
-      toast.error(error.response?.data?.message || "Registration failed. Please try again.");
+      toast.error(
+        error.response?.data?.message ||
+          "Registration failed. Please try again."
+      );
       console.error("Registration error:", error);
     } finally {
       setLoading(false);
     }
   };
-  
+
   return (
     <div className="container py-4">
       <div className="row justify-content-center">
