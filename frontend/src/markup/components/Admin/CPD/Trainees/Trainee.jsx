@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router';
+import { useParams} from 'react-router';
+import { Link } from 'react-router-dom';
 const api_url = import.meta.env.VITE_API_URL
 
 function Trainee() {
@@ -93,7 +94,7 @@ if (trainees.length === 0) {
                         </button>
                       </>
 
-                    <button
+                    <Link to={`/admin/training/${trainee.trainee_id}`}
                       className="btn bg-white border border-1"
                     >
                       <img
@@ -105,7 +106,7 @@ if (trainees.length === 0) {
                           height: "20px",
                         }}
                       />
-                    </button>
+                    </Link>
                   </td>
                 </tr>
               ))}

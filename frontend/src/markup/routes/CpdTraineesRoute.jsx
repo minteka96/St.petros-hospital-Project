@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import AdminMenuCpd from "../components/Admin/AdminMenuCPD/AdminMenuCpd.jsx";
 import TraineesDashboard from "../../markup/components/TraineesDashboard/TraineesDashboard.jsx";
 import AdminDashboardCpd from "../components/Admin/AdminDashbordCPD/AdminCpd.jsx";
-import TrainInfoList from "../components/Admin/Trainer/TrainInfoList.jsx";
+// import TrainInfoList from "../components/Admin/Trainer/TrainInfoList.jsx";
 import TraineeAddForm from "../components/Admin/Trainer/TraineeAddForm.jsx";
 import Test2 from "../pages/test/Test2.jsx";
 import styles from "./CpdTraineesRoute.module.css";
@@ -36,8 +36,8 @@ const CpdTraineesRoute = () => {
           <Routes>
             <Route path="/" element={<AdminDashboardCpd />} />
             <Route path="status" element={<Test2 />} />
-            <Route path="TraineesDashboard" element={<TraineesDashboard />} />
-            <Route path="certificate" element={<TrainInfoList />} />
+            <Route path="availableTraining" element={<TraineesDashboard />} />
+            {/* <Route path="certificate" element={<TrainInfoList />} /> */}
             <Route path="exam" element={<TraineeAddForm />} />
             <Route path="training" element={<Test2 />} />
           </Routes>

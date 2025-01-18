@@ -119,10 +119,10 @@ const isRPUB= isAdminOrHigher || role === "RPUB";
                 Add Trainee
               </Link> */}
 
-           <Link to="/admin/trainees" className="list-group-item">
+           {/* <Link to="/admin/trainees" className="list-group-item">
              <i className="fas fa-users"></i> Trainees info
                </Link>
-    
+     */}
       
 
           </>

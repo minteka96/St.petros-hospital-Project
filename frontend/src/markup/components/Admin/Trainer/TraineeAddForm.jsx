@@ -58,9 +58,9 @@ const TraineeAddForm = () => {
     setLoading(true);
   
     try {
-      const response = await trainInfoService.addTrainee(submitData, user.token);
+      const response = await trainInfoService.addTrainee(submitData);
       toast.success("Registration completed successfully!");
-      navigate("/cpdadmin/TraineesDashboard"); // Navigate to trainee list after successful registration
+      navigate("/cpd"); // Navigate to trainee list after successful registration
     } catch (error) {
       toast.error(error.response?.data?.message || "Registration failed. Please try again.");
       console.error("Registration error:", error);
@@ -193,10 +193,10 @@ const TraineeAddForm = () => {
                     {loading ? (
                       <>
                         <span className="spinner-border spinner-border-sm me-2" />
-                        Adding...
+                        Registering...
                       </>
                     ) : (
-                      "Add Trainee"
+                      "Register"
                     )}
                   </button>
                 </div>
