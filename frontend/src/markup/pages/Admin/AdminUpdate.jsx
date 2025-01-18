@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../contexts/AuthContext";
 import { updatePasswordSchema } from "../../../Schemas/validationSchemas";
@@ -167,6 +169,8 @@ const handleSubmit = async (e) => {
                     <option value="HR">HR</option>
                     <option value="HE">Health literacy</option>
                     <option value="Comm">Communication</option>
+                     <option value="CPD">CPD Traning</option>
+                      <option value="RPUB">Research Publication</option>
                   </select>
                 </div>
 

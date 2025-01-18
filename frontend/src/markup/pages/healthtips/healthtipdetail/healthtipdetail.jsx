@@ -64,9 +64,9 @@ const HealthTipDetail = () => {
                     {formatDate(healthTip.created_at)}
                   </span>{" "}
                   by{" "}
-                  <Link className={styles.author} to={healthTip.authorLink}>
+                  <p className={styles.author} to={healthTip.authorLink}>
                     {healthTip.author || "Admin"}
-                  </Link>
+                  </p>
                 </div>
                 {/* Video Link */}
                 {healthTip.health_tip_video_link && (

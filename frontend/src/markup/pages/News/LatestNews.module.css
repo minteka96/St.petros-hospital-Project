@@ -102,3 +102,34 @@ h2.title a:hover {
   text-align: center;
   margin-top: 20px;
 }
+
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #666;
+  margin: 10px 0;
+}
+
+.meta span {
+  flex-grow: 1;
+}
+
+.author {
+  font-weight: bold;
+  color: #333;
+}
+
+.linkButton {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.linkButton:hover {
+  color: #0056b3;
+}

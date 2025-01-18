@@ -1,0 +1,79 @@
+.dashboardContainer {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 250px; /* Adjust width as needed */
+  background-color:#00A99E; /* Dark sidebar color */
+  color: #ecf0f1; /* Light text color */
+  padding: 20px;
+}
+
+.mainContent {
+  flex-grow: 1;
+  background-color: #ecf0f1; /* Light background for the main content */
+  padding: 20px;
+  overflow-y: auto; /* Allows scrolling if content exceeds viewport */
+}
+
+.servicesSection {
+  margin-top: 20px;
+}
+
+.secTitle {
+  margin-bottom: 20px;
+}
+
+.secTitle h2 {
+  font-size: 24px;
+  color: #f26524; /* Title color */
+}
+
+.text {
+  font-size: 16px;
+  color: #34495e; /* Subtitle color */
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Spacing between cards */
+}
+
+.col {
+  flex: 1 1 calc(33.333% - 20px); /* Responsive three-column layout */
+  max-width: calc(33.333% - 20px); /* Ensure max width for columns */
+}
+
+.serviceBlock {
+  background-color: #fff; /* White background for service blocks */
+  border: 1px solid #bdc3c7; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 15px;
+  transition: box-shadow 0.3s; /* Smooth hover effect */
+  cursor: pointer; /* Cursor pointer on hover */
+}
+
+.serviceBlock:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+}
+
+.serviceLink {
+  text-decoration: none;
+  color: #34495e; /* Link color */
+}
+
+.serviceLink h3 {
+  font-size: 18px; /* Title font size */
+  margin: 10px 0; /* Spacing around title */
+}
+
+.selectedSection {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #eafaf1; /* Light background for selected section */
+  border: 1px solid #2ecc71; /* Green border for selected section */
+  border-radius: 5px; /* Rounded corners */
+}

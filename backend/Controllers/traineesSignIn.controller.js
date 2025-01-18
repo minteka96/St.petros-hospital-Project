@@ -37,7 +37,8 @@ async function signIn(req, res) {
 
     return res.status(200).json({
       status: "success",
-      message: "Trainee logged in successfully",
+      message: "Trainee logged in successfully!",
+
       data: {
         token,
         trainee: {

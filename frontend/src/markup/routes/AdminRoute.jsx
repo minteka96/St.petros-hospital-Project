@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
@@ -16,6 +17,7 @@ import AddNews from "../components/Admin/AddNewsForm/AddNewsForm.jsx";
 import EditNews from "../components/Admin/NewsEditForm/NewsEditForm.jsx";
 import Newss from "../components/Admin/NewsList/NewsList.jsx";
 /* **************** News Components End Here about news  ******************/
+
 /* ************ Health Tip Components Start Here ********************  */
 import HealthTipList from "../components/Admin/HealthTipList/HealthTipList.jsx";
 import AddHealthTipForm from "../components/Admin/addhealthtipForm/AddHealthTipForm.jsx";
@@ -27,11 +29,36 @@ import { useAuth } from "../../contexts/AuthContext.jsx";
 import AdminManagement from "../pages/Admin/AdminManagement.jsx";
 import AddAdmin from "../pages/Admin/AddAdmin.jsx";
 import JobsListPage from "../components/Admin/JobList/JobList.jsx";
+
+
+// CPD News Components
+
 import { updatePasswordSchema } from "../../Schemas/validationSchemas.js";
 const api_url = import.meta.env.VITE_API_URL;
 import ApplicantsPage from "../components/Admin/Applicant/ApplicantsPage.jsx";
 import HRManagerApplicants from "../components/Admin/Applicant/HRManagerApplicants.jsx";
 import JobArchivePage from "../components/Admin/Applicant/JobArchivePage.jsx";
+import ListAllCourses from "../components/Admin/CPD/CpdCourse/ListAllCourses.jsx";
+import CourseDetail from "../components/Admin/CPD/CpdCourse/CourseDetail.jsx";
+import AddNewCourse from "../components/Admin/CPD/CpdCourse/AddNewCourse.jsx";
+
+import AddCpdNewsForm from "../components/Admin/CPDNewsForm/AddCpdNewsForm.jsx";
+import CpdNewsList from "../components/Admin/CPDNewsList/CpdNewsList.jsx";
+import EditCpdNewsForm from "../components/Admin/CPDNewsDetails/EditCpdNewsForm .jsx";
+import Cpdnews from "../pages/CPD/Cpdnews.jsx";
+import ContactList from "../components/Admin/ContactList/ContactList.jsx";
+import ContactDetail from "../components/Admin/ContactDetail/ContactDetail.jsx";
+import ListOfSchedule from "../components/Admin/CPD/CpdSchedules/ListOfSchedule.jsx";
+import Trainee from "../components/Admin/CPD/Trainees/Trainee.jsx";
+
+// Train Info Components
+import TrainInfoList from "../../markup/components/Admin/Trainer/TrainInfoList.jsx";
+// import TrainInfoDetail from "../../markup/components/Admin/Trainer/TrainInfoDetail.jsx";
+
+import AddPublication from "../components/Admin/addpublication/AddPublication.jsx";
+  import EditPublicationForm from "../components/Admin/EditPublicationForm/EditPublicationForm.jsx";
+   import ResearchPublications from "../pages/qulity&research/ResearchPublication.jsx";
+   import PublicationList from "../components/Admin/publicationlist/PublicationList.jsx";
 
 const AdminRoute = () => {
   const navigate = useNavigate();
@@ -67,22 +94,21 @@ const AdminRoute = () => {
   };
   const handleShow = () => setShow(true);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-     if (newPassword) {
-       const result = updatePasswordSchema.safeParse({
-         password: newPassword,
-       });
+    if (newPassword) {
+      const result = updatePasswordSchema.safeParse({
+        password: newPassword,
+      });
 
-       if (!result.success) {
-         setPasswordError(result.error.errors[0].message); // Set the first error message
-         return;
-       }else{
+      if (!result.success) {
+        setPasswordError(result.error.errors[0].message); // Set the first error message
+        return;
+      } else {
         setPasswordError("");
-       }
-     }
+      }
+    }
 
     if (newPassword !== confirmPassword) {
       setError("Passwords do not match");
@@ -228,17 +254,12 @@ const AdminRoute = () => {
           <div className="m-3 normalBg">
             <Routes>
               <Route path="/video" element={<VideoEmbeds />} />
-
               <Route path="/" element={<AdminDashbord />} />
               <Route path="/admins" element={<AdminManagement />} />
               <Route path="/new" element={<AddAdmin />} />
               <Route path="/ApplicantsPage" element={<ApplicantsPage />} />
               <Route path="/JobArchivePage" element={<JobArchivePage />} />
-              <Route
-                path="/HRManagerApplicants"
-                element={<HRManagerApplicants />}
-              />
-
+              <Route path="/HRManagerApplicants" element={<HRManagerApplicants />} />
               <Route path="/applicant" element={<Applicants />} />
               <Route path="/applicant/:id" element={<ApplicantDetails />} />
               <Route path="/add-news" element={<AddNews />} />
@@ -246,13 +267,42 @@ const AdminRoute = () => {
               <Route path="news/edit/:news_id" element={<EditNews />} />
               <Route path="/add-healthtip" element={<AddHealthTipForm />} />
               <Route path="/healthtipList" element={<HealthTipList />} />
-              <Route
-                path="/healthtiplist/edit/:health_tip_id"
-                element={<EditHealthTip />}
-              />
+              <Route path="/healthtiplist/edit/:health_tip_id" element={<EditHealthTip />} />
               <Route path="/add-job" element={<AddJobForm />} />
               <Route path="/all-job" element={<JobsListPage />} />
               <Route path="/job/edit/:job_id" element={<EditJobForm />} />
+              
+              {/* Train Info Routes */}
+              <Route path="/trainees" element={<TrainInfoList    />} />
+              {/* <Route path="/trainee/:id" element={<TrainInfoDetail />} /> */}
+             
+
+              <Route path="/add-publication" element={<AddPublication />} /> 
+              <Route path="/publications" element={<ResearchPublications />} /> 
+              <Route path="/publications/edit/:id" element={<EditPublicationForm />} />
+              <Route path="/publicationlist" element={<PublicationList />} />
+             
+          
+              <Route
+                path="/edit-cpd-news/:newsId"
+                element={<EditCpdNewsForm />}
+              />
+              {/*  */}
+              <Route path="/cpd-news" element={<Cpdnews />} />
+              <Route path="/add-cpd-news" element={<AddCpdNewsForm />} />
+              <Route
+                path="/edit-cpd-news/:newsId"
+                element={<EditCpdNewsForm />}
+              />
+              <Route path="/cpd-news-list" element={<CpdNewsList />} />
+              <Route path="/cpd/newCourse" element={<AddNewCourse />} />
+              <Route path="/cpd/list" element={<ListAllCourses />} />
+              <Route path="/cpd/course/:course_id" element={<CourseDetail />} />
+              <Route path="/contact" element={<ContactList />} />
+              <Route path="/contact/:id" element={<ContactDetail />} />
+              <Route path="/cpd/schedule" element={<ListOfSchedule />} />
+              <Route path="/cpd/trainees/:schedule_id" element={<Trainee />} />
+
             </Routes>
           </div>
         </div>
@@ -265,10 +315,7 @@ const AdminRoute = () => {
               {/* Email Address Field */}
               <Form.Group className="mb-3" controlId="formEmail">
                 {error && <div className="alert alert-danger">{error}</div>}
-                {success && (
-                  <div className="alert alert-success">{success}</div>
-                )}
-
+                {success && <div className="alert alert-success">{success}</div>}
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control
                   onChange={(e) => setEmail(e.target.value)}
@@ -306,7 +353,9 @@ const AdminRoute = () => {
               <Form.Group className="mb-3" controlId="formNewPassword">
                 <Form.Label>New Password</Form.Label>
                 {passwordError && (
-                  <div className="alert color1 pt-0 mb-1 p-1">{passwordError}</div>
+                  <div className="alert color1 pt-0 mb-1 p-1">
+                    {passwordError}
+                  </div>
                 )}
                 <InputGroup>
                   <Form.Control

@@ -1,35 +1,75 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
-import img1 from '../../../assets/img/about/001.jpg';
-import img2 from '../../../assets/img/about/007.png';
-import img3 from '../../../assets/img/about/006.webp';
-import img4 from '../../../assets/img/about/004 dr.webp';
-import img7 from '../../../assets/img/about/002.jpg';
-import './About.css'; // Ensure this path is correct
+/* eslint-disable no-unused-vars */
+import React from "react";
+import { Carousel } from "react-bootstrap";
+import img5 from "../../../assets/img/about/004 dr.jpg";
+import img4 from "../../../assets/img/about/1734329236180_IMG_20241216_024054_878.jpg";
+import img2 from "../../../assets/img/about/007.png";
+import img3 from "../../../assets/img/about/002.jpg"; // Make sure you add this image
+import styles from "./AboutUs.module.css"; // Import CSS Module
 
-const AboutUs = () => {
+
+const About = () => {
   return (
-    <div className="wrapper home-default-wrapper">
-  <main className="main-content site-wrapper-reveal">
-    <section className="hero-slider">
-      <div className="swiper-container">
-        <div className="swiper-wrapper">
-          <div className="swiper-slide" style={{ backgroundImage: `url(${img3})` }}>
-            <div className="container">
-              <div className="row">
-                <div className="col-12">
-                  <div className="slider-content">
-                    <h5 className="title animated delay2">መኖራችን <span className="d-block">ለእርስዎ ነዉ!</span></h5>
-                    <h2 className="title animated delay2">Our Existence is <span className="d-block">For You</span></h2>
-                    <a href="#" className="btn btn-danger me-3 animated delay1">about us</a>
-                  </div>
-                </div>
+    <div>
+      {/* Hero Carousel Section */}
+      <div className={styles.carouselSection}>
+        <Carousel interval={3000} controls={true} indicators={true} fade>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src={img3}
+              alt="First slide"
+              style={{ height: "90vh", objectFit: "cover" }}
+            />
+            <Carousel.Caption>
+              <div className={styles.carouselCaptionContent}>
+                <h5 className={styles.carouselTitle} style={{ color: "#00796b" }}>
+                  መኖራችን <span className="d-block">ለእርስዎ ነዉ!</span>
+                </h5>
+                <h2 className={styles.carouselSubtitle}>
+                  Our Existence is <span className="d-block">For You</span>
+                </h2>
+                <a href="#" className={`btn btn-danger me-3 ${styles.carouselButton}`}>
+                 about us
+                </a>
               </div>
-            </div>
-          </div>
-        </div>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src={img4}
+              alt="Second slide"
+              style={{ height: "90vh", objectFit: "cover" }}
+            />
+            <Carousel.Caption>
+              <div className={styles.carouselCaptionContent}>
+                <h3 style={{ color: "#00796b" }}></h3>
+                <a href="#" className={`btn btn-danger me-3 ${styles.carouselButton}`}>
+                  about
+                </a>
+              </div>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src={img5}
+              alt="Third slide"
+              style={{ height: "90vh", objectFit: "cover" }}
+            />
+            <Carousel.Caption>
+              <div className={styles.carouselCaptionContent}>
+                <h3 style={{ color: "#00796b" }}></h3>
+                <a href="#" className={`btn btn-danger me-3 ${styles.carouselButton}`}>
+                  see 
+                </a>
+              </div>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
       </div>
-    </section>
 
     {/* About Us Section */}
     <section className="about-area">
@@ -62,7 +102,7 @@ const AboutUs = () => {
   <div className="row">
     {/* Left Side: History and Expansion */}
     <div className="col-md-6">
-      <h2 style={{ fontSize: 'xx-large' }}> (History & Expansion)</h2>
+      <h2 style={{ fontSize: 'xx-large' }}>History & Expansion</h2>
       <p>
         St. Peter Hospital became a national leader in multidrug-resistant tuberculosis (MDR-TB) care when it treated Ethiopias first MDR-TB patient in 2001 EC. With strong support from USAID, the hospital has since been recognized as a center of excellence in MDR-TB diagnosis and treatment. That same year, St. Peters Hospital introduced DR-TB treatment in Ethiopia, with the FMoH, GHC, and other partners. Since then, it has become the national referral center for DR-TB treatment, training healthcare workers across the country and providing technical support for the expansion of treatment programs to regional centers. This pivotal work was led by Dr. Daniel Meressa, an internal medicine specialist.
       </p>
@@ -73,7 +113,7 @@ const AboutUs = () => {
 
     {/* Right Side: Milestones and Recent Developments */}
     <div className="col-md-6">
-      <h2 style={{ fontSize: 'xx-large' }}>(Milestones & Developments)</h2>
+      <h2 style={{ fontSize: 'xx-large' }}>Milestones & Developments</h2>
       <p>
         In 2008 EC, during Ato Yakob Seman’s tenure as Chief Executive Officer, the hospital further expanded to offer Cesarean section (C/S) surgeries, broadening its surgical capabilities to include general surgery. By 2010 EC, comprehensive outpatient services were introduced, solidifying its role as a multi-specialty hospital. A major milestone was the construction of the hospital’s seven-story main building, designed to accommodate the growing demand for healthcare services. It now houses 300 inpatient beds, including 12 ICU beds, 13 operating rooms including two emergency ORs, and state-of-the-art facilities such as a Cath Lab for cardiac care and adult and pediatric emergency departments.
       </p>
@@ -93,7 +133,7 @@ const AboutUs = () => {
           <div className="row">
             {/* Left Side: Vision Section */}
             <div className="col-md-6">
-              <h2 style={{ fontSize: 'xx-large' }}> (Vision)</h2>
+              <h2 style={{ fontSize: 'xx-large' }}>Vision</h2>
               <p>
                By 2022, we envision transforming the hospital into a center of excellence for research, education, and clinical care, dedicated to improving health outcomes and providing compassionate services to our community.
                         </p>
@@ -102,7 +142,7 @@ const AboutUs = () => {
 
             {/* Right Side: Mission Section */}
             <div className="col-md-6">
-              <h2 style={{ fontSize: 'xx-large' }}> (Mission)</h2>
+              <h2 style={{ fontSize: 'xx-large' }}>Mission</h2>
               <p>
                 St. Peter Hospital is committed to providing high-quality, affordable, and patient-centered healthcare services, with a focus on specialized TB treatment and other essential health services.
               </p>
@@ -111,10 +151,11 @@ const AboutUs = () => {
         </blockquote>
       </div>
     </section>
-  </main>
+ 
 </div>
 
   );
 };
 
-export default AboutUs;
+
+export default About;

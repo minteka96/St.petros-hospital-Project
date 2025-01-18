@@ -1,0 +1,5 @@
+function ErrorDisplay({ error }) {
+  return <div className="error">{error}</div>;
+}
+
+export default ErrorDisplay;

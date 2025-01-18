@@ -11,44 +11,40 @@ const router = express.Router();
 // Configure multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const folder = file.fieldname === "news_image" ? "uploads/news" : "uploads";
-    // Ensure the folder exists, create it if not
+    const folder = "uploads/news";
     const dir = path.join(__dirname, `../${folder}`);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     cb(null, dir);
   },
-  // uniqueName
   filename: (req, file, cb) => {
     const uniqueName = `${Date.now()}_${file.originalname}`;
     cb(null, uniqueName);
   },
-
-  // filename: (req, file, cb) => {
-  //   cb(null, file.originalname);
-  // },
 });
 
 const upload = multer({ storage });
 
-// Route to create a news entry
+// Apply middleware for file uploads
 router.post(
-  "/api/news", // Added leading slash
-  upload.fields([{ name: "news_image", maxCount: 1 }]), // Corrected field name
+  "/api/news",
+  upload.array("news_image", 100),
   [
     authMiddleware.verifyToken,
-    authMiddleware.checkRoles(["superadmin", "Admin", "Comm"]),
+    authMiddleware.checkRoles(["superadmin", "Admin", "Communication"]),
   ],
   newsController.createNews
 );
 
+// Route to fetch a single news entry by ID
 router.get("/api/news/:id", newsController.getNewsById);
+
+// Route to fetch all news entries
 router.get("/api/news", newsController.getAllNews);
 
+// Route to update a news entry
 router.put(
   "/api/news/:id",
-  upload.fields([{ name: "news_image", maxCount: 1 }]),
+  upload.array("news_image", 10),
   [
     authMiddleware.verifyToken,
     authMiddleware.checkRoles(["superadmin", "Admin", "Comm"]),
@@ -56,6 +52,8 @@ router.put(
   newsController.updateNews
 );
 
+
+// Route to delete a news entry
 router.delete(
   "/api/news/:id",
   [
@@ -64,6 +62,6 @@ router.delete(
   ],
   newsController.deleteNews
 );
-// Exporting the router to be used in the main application file
 
+// Exporting the router to be used in the main application file
 module.exports = router;

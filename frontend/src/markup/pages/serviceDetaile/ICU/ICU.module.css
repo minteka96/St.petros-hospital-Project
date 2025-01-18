@@ -5,88 +5,64 @@
 
 /* Page Title Area */
 .pageTitleArea {
-  background-color: #dbf1f1;
-  padding: 20px;
+  background-color: #f0f0f0;
+  padding: 30px;
   border-radius: 8px;
   text-align: center;
 }
-.pageTitleArea h1{
+
+.pageTitleArea h1 {
   color: #00796b;
 }
-.pageTitleArea{ 
-  font-size: 1.2rem;
-}
-.pageTitleArea li{ 
- list-style-type: circle;
- text-align: left;
-}
-/* Department Area */
-.departmentArea {
-  display: flex;
+
+.pageTitleArea p {
+  color: #555;
+  font-size: 1.1rem;
 }
 
-/* Department Gallery */
-.contentWrapper {
-    margin: 20px 0;
-  width: 80%;
+.pageTitleArea ul {
+  list-style-type: circle;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.pageTitleArea h3, .pageTitleArea h4 {
+ color: #00796b;
+  margin-top: 20px;
+}
+
+/* Department Area */
+.departmentArea {
+  margin-top: 40px;
+}
+
+/* Carousel */
+.carouselWrapper {
+  width: 100%;
   max-width: 800px;
-  height: 500px;
   margin: auto;
+  border-radius: 8px;
 }
 
 .galleryTitle {
-  margin-bottom: 10px;
-  color: #00796b;
-}
-
-.galleryImage {
-  width: 100%;
-  border-radius: 8px;
+  color:#00796b;
   margin-bottom: 20px;
+  font-size: 1.5rem;
 }
 
-/* DR-TB Services */
-.drTbServices {
-  margin: 20px 0;
+.carouselImage {
+  border-radius: 8px;
 }
 
-.servicesTitle {
-  margin-bottom: 10px;
-  color: #00796b;
-}
-
-.servicesList {
-  font-size: 1.2rem;
-  list-style-type: none;
-  padding: 0;
-}
-
-.servicesItem {
-  margin: 5px 0;
-}
-
-/* Head Of Department */
-.headOfDepartment {
-  margin: 20px 0;
-}
-
-.departmentHeadTitle {
-  margin-bottom: 5px;
-  color: #00796b;
-}
-
-.departmentHeadName {
-  margin: 5px 0;
-}
-
-/* Swiper Navigation Buttons */
-.swiper-button-prev, .swiper-button-next {
-  color: #00796b;
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-  .departmentArea {
-    flex-direction: column;
+  .pageTitleArea {
+    padding: 15px;
   }
 }

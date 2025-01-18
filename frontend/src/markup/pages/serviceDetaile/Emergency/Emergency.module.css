@@ -1,43 +1,47 @@
-/* General styling for h4 */
-.mainContent h1,
-.mainContent h4 {
-  color: #00796b; /* Apply green color to both h1 and h4 */
+.mainContent {
+  padding: 20px;
 }
 
 /* Page Title Area */
 .pageTitleArea {
-  background-color: #dbf1f1;
+  background-color: #e0f7fa;
   padding: 20px;
   border-radius: 8px;
-  text-align:left;
+  text-align: center;
 }
 
-.pageTitleArea{ 
-  font-size: 1.2rem;
-}
-.pageTitleArea li{ 
- list-style-type: circle;
- text-align: left;
-}
 .pageTitleArea h1 {
   color: #00796b;
 }
 
-.pageTitleArea p {
-  color: #333;
+.pageTitleArea li {
+  font-size: 1.2rem;
+  text-align: left;
+  text-decoration:  dotted;
 }
 
+.pageTitleArea h3,
+h4 {
+  list-style-type: circle;
+  text-align: left;
+  color: #00796b;
+}
+.pageTitleArea
+h4 {
+ 
+  text-align: left;
+  color: #00796b;
+}
 /* Department Area */
 .departmentArea {
   display: flex;
-  color: #00796b;
 }
 
-.contentWrapper {
+/* Department Gallery */
+.carouselWrapper {
   margin: 20px 0;
   width: 80%;
   max-width: 800px;
-  height: 500px;
   margin: auto;
 }
 
@@ -46,55 +50,10 @@
   color: #00796b;
 }
 
-/* Styling for Swiper slides */
-.swiper-container {
+.carouselImage {
   width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  background-size: cover;
-  background-position: center;
-  height: 100%;
-}
-
-.sliderTitle {
-  color: #ffffff;
-  font-size: 24px;
-  font-weight: bold;
-  position: absolute;
-  bottom: 10%;
-  left: 10%;
-}
-
-.gallery-slider .swiper-slide {
-  position: relative;
-}
-
-/* Services List */
-.servicesList {
-  list-style-type: circle; /* Change bullet style */
-  padding-left: 20px;      /* Adds padding to left for circle bullets */
-}
-
-.servicesItem {
-  margin: 5px 0;
-}
-
-/* Head of Department */
-.headOfDepartment {
-  margin: 20px 0;
-}
-
-.departmentHeadTitle {
-  margin-bottom: 5px;
-  color: #00796b;
-}
-
-.departmentHeadName {
-  margin: 5px 0;
-  font-weight: bold;
-  font-size: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
 /* Responsive Styles */

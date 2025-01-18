@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { updatePasswordSchema } from "../../../Schemas/validationSchemas";
 const api_url = import.meta.env.VITE_API_URL;
-// Password validation schema
+
 import {
   Container,
   Card,
@@ -17,7 +17,6 @@ import {
 const AddAdmin = () => {
   const navigate = useNavigate();
 
-  // Form state management
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -27,12 +26,10 @@ const AddAdmin = () => {
     privileges: [],
   });
 
-  // Error and success state
   const [error, setError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Department privileges map
   const privilegesMap = {
     Admin: ["Access All Privileges"],
     HR: [
@@ -43,9 +40,9 @@ const AddAdmin = () => {
     ],
     "Health Literacy": ["Post Health Tip", "Approve Post"],
     Communication: ["Post News", "Approve News"],
+    CPD: ["Schedule CPD course", "Active CPD Test", "Add CPD course"],
   };
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -53,17 +50,15 @@ const AddAdmin = () => {
       [name]: type === "checkbox" ? checked : value,
     });
 
-    // Update privileges based on department selection
     if (name === "department") {
       setFormData({
         ...formData,
         department: value,
-        privileges: [], // Reset privileges when department changes
+        privileges: [],
       });
     }
   };
 
-  // Handle privilege checkbox changes
   const handlePrivilegeChange = (e) => {
     const { value, checked } = e.target;
     setFormData((prevState) => {
@@ -74,14 +69,12 @@ const AddAdmin = () => {
     });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setPasswordError("");
     setSuccess("");
 
-    // Validate password
     const passwordValidation = updatePasswordSchema.safeParse({
       password: formData.password_hashed,
     });
@@ -96,15 +89,13 @@ const AddAdmin = () => {
         return;
       }
 
-      // Simulate an API call
-      await axios.post(`${api_url}/api/user`, formData);
+      const a = await axios.post(`${api_url}/api/user`, formData);
 
       setSuccess("User added successfully!");
       setTimeout(() => {
         navigate("/admin/admins");
       }, 2000);
 
-      // Reset form state
       setFormData({
         username: "",
         email: "",
@@ -194,8 +185,12 @@ const AddAdmin = () => {
                         id={privilege}
                         label={privilege}
                         value={privilege}
-                        checked={formData.privileges.includes(privilege)}
+                        checked={
+                          formData.privileges.includes(privilege) ||
+                          formData.department === "Admin"
+                        }
                         onChange={handlePrivilegeChange}
+                        disabled={formData.department === "Admin"}
                       />
                     </Col>
                   ))}

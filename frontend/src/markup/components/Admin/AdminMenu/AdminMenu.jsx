@@ -7,7 +7,6 @@ import { useAuth } from "../../../../contexts/AuthContext";
 function AdminMenu() {
   const [role, setRole] = useState("");
   const { user, privileges } = useAuth();
-  console.log(user);
   useEffect(() => {
     const token = user ? user.token : null;
     if (token) {
@@ -23,6 +22,8 @@ function AdminMenu() {
   const isComm = isAdminOrHigher || role === "Communication";
   const isHR = isAdminOrHigher || role === "HR";
   const isHE = isAdminOrHigher || role === "HE";
+  const isCPD = isAdminOrHigher || role === "CPD";
+
   // "Post Vacancy",
   // "Approve Applicants",
   // "Screen Applicants",
@@ -95,7 +96,7 @@ function AdminMenu() {
               </Link>
             )}
             {privileges.includes("Screen Applicants") && (
-              <Link to="/admin/applicant" className="list-group-item">
+              <Link to="/admin/ApplicantsPage" className="list-group-item">
                 Screen Applicants
               </Link>
             )}
@@ -116,9 +117,44 @@ function AdminMenu() {
           </>
         )}
 
-        <Link to="/admin/video" className="list-group-item">
-          Video
-        </Link>
+        {/* CPD roles */}
+
+        {isCPD && privileges && (
+          <>
+            {privileges.includes("Add CPD course") && (
+              <Link to="cpd/newCourse" className="list-group-item">
+                New CPD Vacancy
+              </Link>
+            )}
+
+            {privileges.includes("Post Vacancy") && (
+              <Link to="/admin/add-job" className="list-group-item">
+                Post Vacancy
+              </Link>
+            )}
+            {privileges.includes("Screen Applicants") && (
+              <Link to="/admin/ApplicantsPage" className="list-group-item">
+                Screen Applicants
+              </Link>
+            )}
+            {privileges.includes("Manage Applicants") && (
+              <Link to="/admin/HRManagerApplicants" className="list-group-item">
+                Manager Applicants
+              </Link>
+            )}
+
+            <Link to="cpd/list" className="list-group-item">
+              List of CPD
+            </Link>
+            <Link to="cpd/schedule" className="list-group-item">
+              List of CPD schedule
+            </Link>
+
+            <Link to="cpd-news-list" className="list-group-item">
+              CPD news list
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

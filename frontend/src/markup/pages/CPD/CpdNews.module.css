@@ -1,0 +1,130 @@
+/* General Container Styling */
+.blogArea {
+  background-color: #f8f9fa;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 45%;
+  margin: 0 auto;
+}
+
+/* Title Styling */
+/* .content .title h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #00796b;
+  text-align: center;
+} */
+
+/* Error Message Styling */
+.errorMessage {
+  color: #00796b;
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Row and Post Styling */
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+  gap: 1rem;
+}
+
+.postItem {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.postItem:hover {
+  transform: translateY(-5px);
+}
+
+.thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+
+
+/* Content Section */
+.content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.category {
+  font-size: 0.9rem;
+  color: #00796b;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.category:hover {
+  text-decoration: underline;
+}
+
+/* Title Styling */
+.title h2 {
+  color: #00796b;  /* Set the title color to #00796b */
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+  cursor: pointer;
+}
+
+/* .title h2 a {
+  color: inherit;
+  text-decoration: none;
+} */
+
+.title h2 a:hover {
+  color: #00796b;
+}
+
+.description {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+.meta {
+  font-size: 0.9rem;
+  color: #868e96;
+}
+
+.author {
+  color: #00796b;
+  text-decoration: none;
+}
+
+.author:hover {
+  text-decoration: underline;
+}
+
+/* Author and Date */
+.meta span {
+  margin-right: 10px;
+}
+.news-title {
+  color: #00796b;
+ 
+}
+/* Title Styling */
+.category h2 {
+  color: #00796b;  /* Set the color to #00796b */
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+  cursor: pointer;
+}

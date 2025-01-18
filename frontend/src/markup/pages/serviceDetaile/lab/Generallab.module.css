@@ -1,90 +1,182 @@
 /* Main Content */
 .mainContent {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
 }
 
 /* Page Title Area */
 .pageTitleArea {
-  background-color: #dbf1f1;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
+  text-align: left;
+  margin-bottom: 30px;
 }
+
 .pageTitleArea h1 {
-  color: #00796b;
+  font-size: 26px;
+  color: #00796b; /* Updated color */
+  margin-bottom: 10px;
 }
+
 .pageTitleArea p {
-  font-size: 1rem;
-  color: #333;
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 15px;
 }
+
 .pageTitleArea ul {
-  padding-left: 20px;
+  list-style-type: disc;
+  margin-left: 20px;  /* Added margin-left for better alignment */
 }
-.pageTitleArea li {
+
+/* Page Title h3, h4 */
+.pageTitleArea h3,
+.pageTitleArea h4 {
   list-style-type: circle;
   text-align: left;
-  color: #555;
 }
 
 /* Department Area */
 .departmentArea {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  margin-top: 40px;
 }
 
 /* Department Gallery */
 .contentWrapper {
   margin: 20px 0;
-  width: 80%;
+  width: 100%;
   max-width: 800px;
   height: 500px;
   margin: auto;
-  position: relative;
 }
 
 .galleryTitle {
   margin-bottom: 10px;
-  color: #00796b;
-  font-size: 1.5rem;
-  font-weight: bold;
+  color: #00796b; /* Updated color */
+  text-align: center;
 }
 
-.galleryImage {
+/* Carousel Styling */
+.carouselWrapper {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.carouselImage {
+  height: 500px;
+  object-fit: cover;
   width: 100%;
   border-radius: 8px;
-  margin-bottom: 20px;
-  object-fit: cover; /* Ensures images cover the area nicely */
-  height: 100%; /* Ensures images fill the gallery space */
 }
 
-/* Swiper Navigation Buttons */
-.swiper-button-prev,
-.swiper-button-next {
-  color: #00796b;
+.carousel-caption h5 {
   font-size: 24px;
-  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Dermatology Services */
+.dermatologyServices {
+  margin: 20px 0;
+}
+
+.servicesTitle {
+  margin-bottom: 10px;
+  color: #00796b; /* Updated color */
+}
+
+.pageTitleArea li {
+  font-size: 1.2rem;
+  margin-bottom: 5px;  /* Added margin-bottom for spacing between items */
+}
+
+.servicesItem {
+  margin: 5px 0;
+}
+
+/* Head Of Department */
+.headOfDepartment {
+  margin: 20px 0;
+}
+
+.departmentHeadTitle {
+  margin-bottom: 5px;
+  color: #00796b; /* Updated color */
+}
+
+.departmentHeadName {
+  margin: 5px 0;
+}
+
+/* Appointment Form */
+.appointmentForm {
+  margin-top: 20px;
+}
+
+.formTitle {
+  margin-bottom: 10px;
+  color: #00796b; /* Updated color */
+}
+
+.formInput,
+.formTextarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submitButton {
+  background-color: #00796b; /* Updated color */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #004d40; /* Darker shade for hover */
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-  .departmentArea {
-    flex-direction: column;
-    align-items: center; /* Center content for small screens */
+  .pageTitleArea h1 {
+    font-size: 1.8rem;
   }
 
-  .departmentGallery {
+  .pageTitleArea p,
+  .pageTitleArea li {
+    font-size: 1rem;
+  }
+
+  .departmentArea {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contentWrapper {
     width: 100%;
     height: auto;
   }
 
-  .galleryTitle {
-    font-size: 1.2rem; /* Make title smaller on mobile */
+  .carouselImage {
+    height: 300px;
   }
 
-  .swiper-button-prev,
-  .swiper-button-next {
-    font-size: 18px; /* Smaller navigation buttons for mobile */
+  .galleryTitle {
+    font-size: 1.2rem;
+  }
+  
+  .sidebarWrapper {
+    margin-bottom: 40px;
   }
 }
