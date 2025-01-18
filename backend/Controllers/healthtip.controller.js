@@ -13,28 +13,24 @@ const createHealthTip = async (req, res) => {
     } = req.body;
 
     // Validate required fields
-    if (
-      !health_tip_title ||
-      !health_tip_detail ||
-      !health_tip_description ||
-      !health_tip_link ||
-      !health_tip_video_link
-    ) {
-      return res.status(400).json({ error: "All fields are required" });
+    if (!health_tip_title || !health_tip_detail || !health_tip_description) {
+      return res
+        .status(400)
+        .json({ error: "Title, detail, and description are required" });
     }
 
     // Get the file path for the uploaded image
     const health_tip_image = req.files?.health_tip_image
       ? `/uploads/healthtips/${req.files.health_tip_image[0].filename}`
       : null;
-console.log(req.files.health_tip_image)
+
     // Prepare data for the service
     const healthTipData = {
       healthTipTitle: health_tip_title,
       healthTipDetail: health_tip_detail,
       healthTipDescription: health_tip_description,
-      healthTipLink: health_tip_link,
-      healthTipVideoLink: health_tip_video_link,
+      healthTipLink: health_tip_link || null,
+      healthTipVideoLink: health_tip_video_link || null,
       healthTipImageLink: health_tip_image,
     };
 
@@ -52,7 +48,6 @@ console.log(req.files.health_tip_image)
       },
     });
   } catch (err) {
-    // Handle errors
     console.error("Error creating health tip:", err);
     res.status(500).json({ error: "Error creating health tip" });
   }
@@ -62,19 +57,14 @@ console.log(req.files.health_tip_image)
 const getHealthTipById = async (req, res) => {
   try {
     const healthTipId = req.params.id;
-
-    // Call the service to fetch the health tip by ID
     const healthTip = await healthTipService.getHealthTipById(healthTipId);
 
-    // If the health tip is not found, return a 404 error
     if (!healthTip) {
       return res.status(404).json({ error: "Health tip not found" });
     }
 
-    // Respond with the retrieved health tip data
     res.status(200).json({ data: healthTip });
   } catch (err) {
-    // Handle errors
     console.error("Error fetching health tip:", err);
     res.status(500).json({ error: "Error fetching health tip" });
   }
@@ -83,12 +73,9 @@ const getHealthTipById = async (req, res) => {
 // Function to retrieve all health tips
 const getAllHealthTips = async (req, res) => {
   try {
-    // Call the service to get all health tips
     const healthTips = await healthTipService.getAllHealthTips();
-
     res.status(200).json({ data: healthTips });
   } catch (err) {
-    // Handle errors
     console.error("Error fetching health tips:", err);
     res.status(500).json({ error: "Error fetching health tips" });
   }
@@ -107,22 +94,13 @@ const updateHealthTip = async (req, res) => {
     } = req.body;
 
     // Validate required fields
-    if (
-      !health_tip_title ||
-      !health_tip_description ||
-      !health_tip_detail ||
-      !health_tip_link ||
-      !health_tip_video_link
-    ) {
-      return res.status(400).json({ error: "All fields are required" });
+    if (!health_tip_title || !health_tip_description || !health_tip_detail) {
+      return res
+        .status(400)
+        .json({ error: "Title, detail, and description are required" });
     }
 
-    // Get the file path for the uploaded image
-    const health_tip_image = req.files?.health_tip_image
-      ? `/uploads/healthtips/${req.files.health_tip_image[0].filename}`
-      : null;
-
-    // Get the existing health tip for comparison
+    // Fetch existing health tip entry
     const existingHealthTip = await healthTipService.getHealthTipById(
       healthTipId
     );
@@ -130,29 +108,42 @@ const updateHealthTip = async (req, res) => {
       return res.status(404).json({ error: "Health tip not found" });
     }
 
-    // Prepare data for the update
+    // Handle new file upload
+    const health_tip_image = req.files?.health_tip_image
+      ? `/uploads/healthtips/${req.files.health_tip_image[0].filename}`
+      : existingHealthTip.healthTipImageLink;
+
+    // Prepare updated data
     const updatedData = {
       healthTipTitle: health_tip_title,
       healthTipDetail: health_tip_detail,
       healthTipDescription: health_tip_description,
-      healthTipLink: health_tip_link,
-      healthTipVideoLink: health_tip_video_link,
+      healthTipLink: health_tip_link || existingHealthTip.healthTipLink,
+      healthTipVideoLink:
+        health_tip_video_link || existingHealthTip.healthTipVideoLink,
       healthTipImageLink: health_tip_image,
     };
 
-    // Call the service to update the health tip
     const success = await healthTipService.updateHealthTip(
       healthTipId,
       updatedData
     );
-console.log("RES",success)
+
     if (!success) {
       return res.status(404).json({ error: "Failed to update health tip" });
     }
 
-    res.status(200).json({ message: "Health tip updated successfully" });
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
+    const fullImageLink = `${baseUrl}${health_tip_image}`;
+
+    res.status(200).json({
+      message: "Health tip updated successfully",
+      data: {
+        ...updatedData,
+        imageLink: fullImageLink,
+      },
+    });
   } catch (err) {
-    // Handle errors
     console.error("Error updating health tip:", err);
     res.status(500).json({ error: "Error updating health tip" });
   }
@@ -162,17 +153,16 @@ console.log("RES",success)
 const deleteHealthTip = async (req, res) => {
   try {
     const healthTipId = req.params.id;
-
-    // Call the service to delete the health tip by ID
     const success = await healthTipService.deleteHealthTip(healthTipId);
 
     if (!success) {
       return res.status(404).json({ error: "Health tip not found" });
     }
 
-    res.status(200).json({ message: "Health tip deleted successfully",status:"success" });
+    res
+      .status(200)
+      .json({ message: "Health tip deleted successfully", status: "success" });
   } catch (err) {
-    // Handle errors
     console.error("Error deleting health tip:", err);
     res.status(500).json({ error: "Error deleting health tip" });
   }

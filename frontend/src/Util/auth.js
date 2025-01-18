@@ -1,43 +1,29 @@
-/* eslint-disable no-unused-vars */
-const userAuthHeader = async () => {
+const userAuthHeader = async (userType) => {
   try {
-    const traineeToken = sessionStorage.getItem("zaccess-token");
-    const token = sessionStorage.getItem("access-token");
+    const tokenKey =
+      userType === "admin" ? "access-token" : "zaccess-token";
+    const token = sessionStorage.getItem(tokenKey);
 
-    
     if (token) {
       const decodedToken = decodeTokenPayload(token);
-      
-      const { role, username, email } = decodedToken; // Destructure for clarity
-      
-      return token; // Return the token as the Authorization header value
-    } 
-    if (traineeToken) {
-      const decodedTraineeToken = decodeTokenPayload(traineeToken);
-      const { role, username, email } = decodedTraineeToken; // Destructure for clarity
+      const { role, username, email } = decodedToken;
 
-      return traineeToken; // Return the token as the Authorization header value
-    }else {
-      console.warn("No token found in localStorage.");
-      return {}; // No token available
+      console.log(`${userType} Token Info:`, { role, username, email });
+      return token;
+    } else {
+      console.warn(`No token found for ${userType}.`);
+      return null;
     }
   } catch (error) {
-    console.error("Error in userAuthHeader:", error);
-    return {}; // Return an empty object in case of errors
+    console.error(`Error retrieving ${userType} token:`, error);
+    return null;
   }
 };
-
-const decodeTokenPayload = (token) => {
+export const decodeTokenPayload = (token) => {
   try {
     const base64Url = token.split(".")[1];
     const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    const jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split("")
-        .map((c) => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`)
-        .join("")
-    );
-
+    const jsonPayload = atob(base64);
     return JSON.parse(jsonPayload);
   } catch (error) {
     console.error("Error decoding token payload:", error);

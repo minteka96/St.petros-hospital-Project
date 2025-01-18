@@ -5,50 +5,51 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import healthTipService from "../../../../Services/healthtip.service"; // Adjust the path as needed
 import classes from "./EditHealthTipForm.module.css"; // Adjust the path as needed
 import { useAuth } from "../../../../contexts/AuthContext.jsx";
+import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
+import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 
 const EditHealthTipForm = () => {
   const { user } = useAuth();
   const token = user?.token || null; // Extract token from authenticated user context
   const { health_tip_id } = useParams(); // Retrieve health tip ID from URL params
-  const location = useLocation(); // Retrieve state passed through navigation
   const navigate = useNavigate(); // Navigation handler
 
-  // State management for form inputs, error/success messages, and loading state
+  // State management for form inputs and loading state
   const [healthTipTitle, setHealthTipTitle] = useState("");
   const [healthTipDetail, setHealthTipDetail] = useState("");
   const [healthTipDescription, setHealthTipDescription] = useState("");
   const [healthTipLink, setHealthTipLink] = useState("");
   const [healthTipVideoLink, setHealthTipVideoLink] = useState("");
   const [healthTipImageLink, setHealthTipImageLink] = useState(null);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(true);
 
   // Initialize form data on component mount
   useEffect(() => {
     const fetchHealthTipFromAPI = async () => {
-      const response = await healthTipService.getHealthTipById(health_tip_id);
-      if (response) {
-        setHealthTipTitle(response.health_tip_title || "");
-        setHealthTipDetail(response.health_tip_detail || "");
-        setHealthTipDescription(response.health_tip_description || "");
-        setHealthTipLink(response.health_tip_link || "");
-        setHealthTipVideoLink(response.health_tip_video_link || "");
-        setHealthTipImageLink(response.health_tip_image_link || null);
-        setLoading(false);
+      try {
+        const response = await healthTipService.getHealthTipById(health_tip_id);
+        if (response) {
+          setHealthTipTitle(response.health_tip_title || "");
+          setHealthTipDetail(response.health_tip_detail || "");
+          setHealthTipDescription(response.health_tip_description || "");
+          setHealthTipLink(response.health_tip_link || "");
+          setHealthTipVideoLink(response.health_tip_video_link || "");
+          setHealthTipImageLink(response.health_tip_image_link || null);
+          setLoading(false);
+        }
+      } catch (error) {
+        toast.error("Failed to fetch health tip details.");
       }
-      // console.log(response);
-      return response.data;
     };
     fetchHealthTipFromAPI();
-  }, []);
+  }, [health_tip_id]);
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!healthTipTitle || !healthTipDetail) {
-      setError("Health tip title and detail are required.");
+      toast.error("Health tip title and detail are required.");
       return;
     }
 
@@ -72,12 +73,10 @@ const EditHealthTipForm = () => {
         throw new Error(response.error);
       }
 
-      setSuccess("Health Tip updated successfully!");
-      setError("");
+      toast.success("Health Tip updated successfully!");
       setTimeout(() => navigate("/admin/healthtiplist"), 2000);
     } catch (err) {
-      setError("Something went wrong while updating the health tip.");
-      setSuccess("");
+      toast.error("Something went wrong while updating the health tip.");
     }
   };
 
@@ -86,64 +85,65 @@ const EditHealthTipForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={classes.formContainer}>
-      <h2>Edit Health Tip</h2>
+    <>
+      <form onSubmit={handleSubmit} className={classes.formContainer}>
+        <h2>Edit Health Tip</h2>
 
-      {/* Display error or success messages */}
-      {error && <div className={classes.errorMessage}>{error}</div>}
-      {success && <div className={classes.successMessage}>{success}</div>}
+        {/* Form fields */}
+        <input
+          type="text"
+          placeholder="Health Tip Title"
+          value={healthTipTitle}
+          onChange={(e) => setHealthTipTitle(e.target.value)}
+          className={classes.inputField}
+          required
+        />
 
-      {/* Form fields */}
-      <input
-        type="text"
-        placeholder="Health Tip Title"
-        value={healthTipTitle}
-        onChange={(e) => setHealthTipTitle(e.target.value)}
-        className={classes.inputField}
-        required
-      />
+        <textarea
+          placeholder="Health Tip Detail"
+          value={healthTipDetail}
+          onChange={(e) => setHealthTipDetail(e.target.value)}
+          className={classes.textareaField}
+          required
+        />
 
-      <textarea
-        placeholder="Health Tip Detail"
-        value={healthTipDetail}
-        onChange={(e) => setHealthTipDetail(e.target.value)}
-        className={classes.textareaField}
-        required
-      />
+        <textarea
+          placeholder="Health Tip Description"
+          value={healthTipDescription}
+          onChange={(e) => setHealthTipDescription(e.target.value)}
+          className={classes.textareaField}
+        />
 
-      <textarea
-        placeholder="Health Tip Description"
-        value={healthTipDescription}
-        onChange={(e) => setHealthTipDescription(e.target.value)}
-        className={classes.textareaField}
-      />
+        <input
+          type="text"
+          placeholder="Health Tip Link"
+          value={healthTipLink}
+          onChange={(e) => setHealthTipLink(e.target.value)}
+          className={classes.inputField}
+        />
 
-      <input
-        type="text"
-        placeholder="Health Tip Link"
-        value={healthTipLink}
-        onChange={(e) => setHealthTipLink(e.target.value)}
-        className={classes.inputField}
-      />
+        <input
+          type="url"
+          placeholder="Health Tip Video Link"
+          value={healthTipVideoLink}
+          onChange={(e) => setHealthTipVideoLink(e.target.value)}
+          className={classes.inputField}
+        />
 
-      <input
-        type="url"
-        placeholder="Health Tip Video Link"
-        value={healthTipVideoLink}
-        onChange={(e) => setHealthTipVideoLink(e.target.value)}
-        className={classes.inputField}
-      />
+        <input
+          type="file"
+          onChange={(e) => setHealthTipImageLink(e.target.files[0])}
+          className={classes.inputField}
+        />
 
-      <input
-        type="file"
-        onChange={(e) => setHealthTipImageLink(e.target.files[0])}
-        className={classes.inputField}
-      />
+        <button type="submit" className={classes.submitButton}>
+          Update Health Tip
+        </button>
+      </form>
 
-      <button type="submit" className={classes.submitButton}>
-        Update Health Tip
-      </button>
-    </form>
+      {/* Toast container to display success and error messages */}
+      <ToastContainer />
+    </>
   );
 };
 

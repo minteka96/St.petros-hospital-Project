@@ -73,8 +73,12 @@ router.get("/api/cpd/IsApply/:trainee_id", cpdController.IsApply);
 
 // Route for getting a specific cpd course by ID
 router.get("/api/cpd/course/:id", cpdController.getCpdCourseById);
+router.get("/api/cpd/trainings/:course_name", cpdController.getCpdCourseByName);
 
 router.post("/api/cpd/apply", cpdController.apply);
+
+//Route to update course(pri_score, post_score) by trainee_id and course_name
+router.put("/api/cpdResult/update/:trainee_id/:course_name", cpdController.updateTestResult);
 
 // Route for deleting a specific cpd course by ID
 router.delete("/api/cpd/course/:id", cpdController.deleteCpdCourse);

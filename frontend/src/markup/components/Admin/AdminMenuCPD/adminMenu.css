@@ -1,0 +1,93 @@
+/* Admin menu styling */
+.admin-menu {
+  background: #00a99e;
+  padding: 5px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-menu h2 {
+  font-size: 21px;
+  font-weight: 700;
+  text-shadow: #211e1e 1px 1px 1px;
+  line-height: 50px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+/* Other existing styles */
+.gradientCustom {
+  background: #F26524;
+  margin: 0;
+  background: -webkit-linear-gradient(to right, #ffffff, #1F867E);
+  background: linear-gradient(to right, #ffffff, #1F867E);
+}
+
+.color1 {
+  color: #f26524;
+}
+
+.color2 {
+  color: #00a99e;
+}
+
+.bg1 {
+  background-color: #f26524;
+}
+
+.bg2 {
+  background-color: #00a99e;
+}
+
+.normalBg {
+  background-color: #F4F4F9;
+}
+
+.badge {
+  background-color: #f26524;
+}
+
+.badge-success {
+  background-color: #00a99e;
+}
+
+.list-group {
+  width: 90%;
+  margin-top: 10%;
+}
+
+.admin-left-side .list-group-item {
+  width: 90%;
+  border-radius: 20px;
+}
+
+.admin-left-side .list-group-item.active {
+  z-index: 2;
+  color: #fff;
+  font-weight: 600;
+}
+
+.admin-left-side a {
+  color: #a2a5ad;
+}
+
+.admin-left-side a:hover {
+  background: rgba(1, 253, 232, 0.148);
+  border-radius: 10px;
+}
+
+.validation-error {
+  color: red;
+  float: right;
+  font-style: italic;
+}
+
+.anchor-link a {
+  display: block;
+  padding: 8px 3px;
+  text-decoration: none;
+  color: inherit;
+}
