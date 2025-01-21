@@ -63,6 +63,7 @@ function Test3({ courseName, onBack, id }) {
       const sheet = workbook.Sheets[sheetName];
       const jsonData = XLSX.utils.sheet_to_json(sheet, { range: 1 });
 
+      // Validate question format
       const isValid = jsonData.every(
         (row) => row["Question Text"] && row["Correct Answer"]
       );
@@ -72,26 +73,25 @@ function Test3({ courseName, onBack, id }) {
         );
       }
 
+      // Shuffle questions to randomize order
+      const shuffledQuestions = jsonData.sort(() => Math.random() - 0.5);
+
       // Clear the other question set and set the appropriate one
       if (type === "pri") {
         setPostQuestion([]);
-        setPriQuestion(jsonData);
+        setPriQuestion(shuffledQuestions);
       } else {
         setPriQuestion([]);
-        setPostQuestion(jsonData);
+        setPostQuestion(shuffledQuestions);
       }
 
       // Update the status only after successful fetch and validation
       if (status?.[`${testType}`] !== "start") {
         const updatedStatus = { ...status, [`${testType}`]: "start" };
         await updateStatus(updatedStatus);
-        // setStatus(updatedStatus);
       } else {
         setStartCountdown(true);
       }
-
-      // await updateStatus(updatedStatus);
-      // setStatus(updatedStatus);
     } catch (error) {
       console.error("Error loading questions:", error);
       setTypeError("Failed to load questions. Please try again.");
@@ -99,6 +99,7 @@ function Test3({ courseName, onBack, id }) {
       setPostQuestion([]);
     }
   };
+
 
   const updateStatus = async (status) => {
     try {

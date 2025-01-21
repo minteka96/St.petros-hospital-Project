@@ -27,11 +27,16 @@ const TraineesDashboard = () => {
   const navigate = useNavigate();
   const { trainee } = useAuth();
   const traineeId = trainee?.id;
-
+  const token = trainee?.token;
+console.log("token",token);
   useEffect(() => {
     const fetchTrainings = async () => {
       try {
-        const response = await fetch(`${api_url}/api/cpd/available/courses`);
+        const response = await fetch(`${api_url}/api/cpd/available/courses`, {
+          headers: {
+            "y-access-token": token,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch trainings");
         }
