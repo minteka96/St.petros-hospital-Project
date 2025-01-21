@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../contexts/AuthContext";
 import trainInfoService from "../../../../Services/trainInfo.service";
@@ -9,6 +9,7 @@ const TraineeAddForm = () => {
   const { user, trainee } = useAuth();
   const [loading, setLoading] = useState(false);
 
+  const token = trainee ? trainee.token : null;
   const trainee_id = trainee?.id;
   const [formData, setFormData] = useState({
     first_name: "",
@@ -20,6 +21,12 @@ const TraineeAddForm = () => {
     profession: "",
     account_number: "",
   });
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/cpd/login");
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,7 +59,7 @@ const TraineeAddForm = () => {
         user?.token
       );
       toast.success("Registration completed successfully!");
-      navigate("/TraineesDashboard"); // Navigate to trainee list after successful registration
+      navigate("/cpdadmin/TraineesDashboard"); // Navigate to trainee list after successful registration
     } catch (error) {
       toast.error(
         error.response?.data?.message ||

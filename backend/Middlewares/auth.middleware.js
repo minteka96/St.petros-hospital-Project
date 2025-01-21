@@ -1,19 +1,45 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-// A function to verify the token received from the frontend
-
 const userService = require("../Services/user.service");
 
-// A function to verify the token received from the frontend
-const verifyToken = async (req, res, next) => {
-  // get token from localstorage
-  let token = req.headers["x-access-token"];
-  if (!token) {
+const verifyTokenGeneric = (headerKey) => {
+  return async (req, res, next) => {
+    let token = req.headers[headerKey];
+    if (!token) {
+      return res.status(403).send({
+        status: "fail",
+        message: "No token provided!",
+      });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        return res.status(401).send({
+          status: "fail",
+          message: "Unauthorized!",
+        });
+      }
+      req.email = decoded.email;
+      next();
+    });
+  };
+};
+
+const verifyToken = verifyTokenGeneric("x-access-token");
+const verifyTraineeToken = verifyTokenGeneric("y-access-token");
+
+const verifyBothTokens = async (req, res, next) => {
+  let adminToken = req.headers["x-access-token"];
+  let traineeToken = req.headers["y-access-token"];
+
+  if (!adminToken && !traineeToken) {
     return res.status(403).send({
       status: "fail",
       message: "No token provided!",
     });
   }
+
+  const token = adminToken || traineeToken;
 
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
@@ -22,8 +48,6 @@ const verifyToken = async (req, res, next) => {
         message: "Unauthorized!",
       });
     }
-    // console.log("Here is the decoded token");
-    // console.log(decoded);
     req.email = decoded.email;
     next();
   });
@@ -42,7 +66,6 @@ const checkRoles = (allowedRoles) => {
         });
       }
 
-      // Check if the user's role is in the allowedRoles array
       if (!allowedRoles.includes(user.role)) {
         return res.status(403).send({
           status: "fail",
@@ -61,10 +84,10 @@ const checkRoles = (allowedRoles) => {
   };
 };
 
-
 const authMiddleware = {
   verifyToken,
- 
+  verifyTraineeToken,
+  verifyBothTokens,
   checkRoles,
 };
 

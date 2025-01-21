@@ -104,7 +104,7 @@ const Header = () => {
                           </Link>
                         </li>
                         <li>
-                          <Link className="sub-menu-link" to="/healhtip">
+                          <Link className="sub-menu-link" to="/healthtip">
                             Health Tip
                           </Link>
                         </li>
@@ -133,18 +133,18 @@ const Header = () => {
                       </ul>
                     </li>
 
-                    {/* <li>
-                      <Link className="main-menu-link" to="/cpd">
+                    <li>
+                      <a href="/cpd" className="main-menu-link" >
                         CPD
-                      </Link>
+                      </a>
                       <ul className="sub-menu">
                         <li>
                           <Link className="sub-menu-link" to="/about-cpd">
-                            About CPD
+                            CPD News
                           </Link>
                         </li>
                       </ul>
-                    </li> */}
+                    </li>
 
                     <li>
                       <Link className="main-menu-link" to="/about">
@@ -262,7 +262,7 @@ const Header = () => {
                           </Link>
                         </li>
                         <li>
-                          <Link className="sub-menu-link" to="/healhtip">
+                          <Link className="sub-menu-link" to="/healthtip">
                             Health Tip
                           </Link>
                         </li>
@@ -286,7 +286,7 @@ const Header = () => {
                       </ul>
                     </li>
 
-                    {/* <li>
+                    <li>
                       <Link className="main-menu-link" to="/cpd">
                         CPD
                       </Link>
@@ -297,7 +297,7 @@ const Header = () => {
                           </Link>
                         </li>
                       </ul>
-                    </li> */}
+                    </li>
 
                     <li>
                       <Link className="main-menu-link" to="/about">
@@ -408,7 +408,7 @@ const Header = () => {
                         <Link to="/news">News</Link>
                       </li>
                       <li onClick={toggleMenu}>
-                        <Link to="/healhtip">Health Tip</Link>
+                        <Link to="/healthtip">Health Tip</Link>
                       </li>
                     </ul>
                   </li>
@@ -444,7 +444,7 @@ const Header = () => {
                     </ul>
                   </li>
 
-                  {/* <li
+                  <li
                     className={`sub-menu-list ${
                       activeSubMenu === "cpd" ? "active" : ""
                     }`}
@@ -452,23 +452,23 @@ const Header = () => {
                     <span
                       className="menu-expand"
                       onClick={() => toggleSubMenu("cpd")}
-                    > */}
+                    >
                   {/* Change icon based on state */}
-                  {/* </span> */}
-                  {/* <Link to="/cpd">
+                  </span>
+                  <Link to="/cpd">
                       <span className="menu-text">CPD</span>
-                    </Link> */}
-                  {/* <ul
+                    </Link>
+                  <ul
                       className="offcanvas-submenu"
                       style={{
                         display: activeSubMenu === "cpd" ? "block" : "none",
                       }}
                     >
                       <li>
-                        <Link to="/about-cpd">ABOUT CPD</Link>
+                        <Link to="/cpd ">CPD News</Link>
                       </li>
-                    </ul> */}
-                  {/* </li> */}
+                    </ul>
+                  </li>
                   <li onClick={toggleMenu}>
                     <Link to="/about">About</Link>
                   </li>

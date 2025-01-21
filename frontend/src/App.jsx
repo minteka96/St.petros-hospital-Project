@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./markup/components/Header/Header";
 import Footer from "./markup/components/Footer/Footer";
 import Home from "./markup/pages/Home/Home";
+
 // ***************************servicesdetail Client Side ********************
 import Services from "./markup/pages/servicepage/Services.jsx";
 import ServiceDetail from "./markup/pages/serviceDetaile/ServiceDetail.jsx";
@@ -48,6 +49,7 @@ import QulityResearch from "./markup/pages/qulity&research/QulityResearch.jsx";
 import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
 import PublicationDetails from "./markup/pages/qulity&research/PublicationDetails.jsx";
 import AdminRoute from "./markup/routes/AdminRoute.jsx";
+import CpdTraineesRoute from "./markup/routes/CpdTraineesRoute.jsx";
 import Login from "./markup/pages/Login/Login.jsx";
 
 // ***************************News Client Side ********************
@@ -72,53 +74,45 @@ import AdminDashboardCpd from "./markup/pages/Admin/AdminDashboardCpd.jsx";
 import Test2 from "./markup/pages/test/Test2.jsx";
 
 function App() {
-  // check if thr route is '/login' or not
-  if (window.location.pathname === "/login") {
-  }
+  // Check if the route is '/login', '/admin','/cpd/login' or '/cpdadmin'
+  const shouldHideHeaderFooter = [
+    "/login",
+    "/admin",
+    "/cpd/login",
+    "/cpd",
+  ].some((path) => window.location.pathname.startsWith(path));
+
   return (
     <div>
-      {["/login", "/admin"].some((path) =>
-        window.location.pathname.startsWith(path)
-      ) ? null : (
-        <Header />
-      )}
+      {/* Conditionally render Header based on route */}
+      {!shouldHideHeaderFooter && <Header />}
 
       <Routes>
         {/* *************************News Client Side Start Here*********************** */}
         <Route path="/news" element={<News />} />
         <Route path="/GenerateCertificate" element={<GenerateCertificate />} />
-
         <Route path="/cpd-news" element={<CpdNews />} />
-        {/* <Route path="/newsDetails" element={<NewsDetails />} /> */}
         <Route
           path="/newsDetails/:newsId"
           element={<NewsDetails newsList={newsList} />}
         />
         <Route path="/healthtip" element={<HealthTip />} />
-        <Route path="/TraineesDashboard" element={<TraineesDashboard />} />
-        {/* <Route
-          path="/CertificateGenerator"
-          element={<CertificateGenerator />}
-        /> */}
-        {/* <Route path="/newsDetails" element={<NewsDetails />} /> */}
         <Route
           path="/healthTipDetails/:healthTipId"
           element={<HealthTipDetail HealthTipList={HealthTipList} />}
         />
-
         {/* **************************News Client Side End Here********************** */}
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/cpd/" element={<CpdLogin />} />
+        {/* <Route path="/cpd/" element={<CpdLogin />} /> */}
         <Route path="/cpd/login" element={<CpdLoginSignup />} />
         <Route path="/cpd/trainee-info" element={<TraineeAddForm />} />
-        <Route path="/healhtip" element={<HealthTip />}></Route>
-
         <Route
           path="/HealthWorkerEntertainment"
           element={<HealthWorkerINfo />}
-        ></Route>
+        />
+
         {/* service detail page */}
         <Route path="/servicedetail" element={<ServiceDetail />}>
           <Route path="neurology" element={<Neurology />} />
@@ -148,7 +142,6 @@ function App() {
         </Route>
         <Route path="/application/form" element={<ApplicantForms />} />
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/qulity&research" element={<QulityResearch />} />
         <Route path="/researchpublication" element={<ResearchPublication />} />
         <Route path="/tender-list" element={<TenderList />} />
@@ -161,27 +154,14 @@ function App() {
         <Route path="/tender-form-post" element={<AddTenderForm />} />
         <Route path="/Jobs" element={<Vacancies />} />
         <Route path="/admin/application-form" element={<ApplicationForm />} />
-
         <Route path="/admin/*" element={<AdminRoute />} />
+        <Route path="/cpd/*" element={<CpdTraineesRoute />} />
         <Route path="/test" element={<Test />} />
-
-        {/* --------------------------- */}
-        {/* add CPD admin dashboard Route  */}
-        <Route path="/cpdadmin" element={<AdminDashboardCpd />} />
-        <Route
-          path="/cpdadmin/TraineesDashboard"
-          element={<TraineesDashboard />}
-        />
-        {/* --------------------------- */}
-
-        <Route path="/test2" element={<Test2 />} />
-
+        {/* <Route path="/test2" element={<Test2 />} /> */}
       </Routes>
-      {["/login", "/admin"].some((path) =>
-        window.location.pathname.startsWith(path)
-      ) ? null : (
-        <Footer />
-      )}
+
+      {/* Conditionally render Footer based on route */}
+      {!shouldHideHeaderFooter && <Footer />}
     </div>
   );
 }

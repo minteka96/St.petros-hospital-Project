@@ -1,5 +1,16 @@
 const conn = require("../Config/db.config");
 
+
+async function checkIfApplicantExists(email) {
+  try {
+    const query = "SELECT * FROM Applicant WHERE email = ?";
+    const [rows] = await conn.pool.query(query, [email]);
+    return rows.length > 0; // Return true if trainee exists
+  } catch (error) {
+    throw error;
+  }
+}
+
 // create a new applicant
 async function createApplicant(formData) {
   const sql = `INSERT INTO Applicant ( first_name, last_name, email_address, phone_number, position_applied_for, additional_information, cv_file_path, other_testimonials) VALUES (?,  ?, ?, ?, ?, ? , ?, ?)`;
@@ -148,5 +159,6 @@ module.exports = {
   deleteApplicant,
   deleteApplicantByVacancyId,
   deleteAllApplicants,
+  checkIfApplicantExists,
   updateApplicant,
 };

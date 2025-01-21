@@ -4,6 +4,8 @@ import newsService from "../../../../Services/news.service"; // Adjust path if n
 import classes from "./EditNewsForm.module.css"; // Adjust path if necessary
 import { useAuth } from "../../../../contexts/AuthContext.jsx";
 import { FaCheckCircle } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
+import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 
 const EditNewsForm = () => {
   const { user } = useAuth();
@@ -18,7 +20,6 @@ const EditNewsForm = () => {
   const [newsLink, setNewsLink] = useState("");
   const [newsImageLink, setNewsImageLink] = useState(null);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -90,9 +91,9 @@ const EditNewsForm = () => {
       const response = await newsService.updateNews(news_id, formData, token);
       if (response.error) {
         setError(response.error);
-        setSuccess("");
+        toast.error(response.error); // Show error toast
       } else {
-        setSuccess("News updated successfully!");
+        toast.success("News updated successfully!"); // Show success toast
         setError("");
 
         setTimeout(() => {
@@ -102,6 +103,7 @@ const EditNewsForm = () => {
     } catch (err) {
       console.error("Error updating news:", err);
       setError("Something went wrong while updating the news.");
+      toast.error("Something went wrong while updating the news."); // Show error toast
     }
   };
 
@@ -113,12 +115,7 @@ const EditNewsForm = () => {
     <form onSubmit={handleSubmit} className={classes.formContainer}>
       <h2>Edit News</h2>
       {error && <div className={classes.errorMessage}>{error}</div>}
-      {success && (
-        <div className={classes.successMessage}>
-          <FaCheckCircle className={classes.successIcon} />
-          <span>{success}</span>
-        </div>
-      )}
+
       <input
         type="text"
         placeholder="News Title"
@@ -156,8 +153,12 @@ const EditNewsForm = () => {
       <button type="submit" className={classes.submitButton}>
         Update News
       </button>
+
+      {/* Toast container to display success and error messages */}
+      <ToastContainer />
     </form>
   );
 };
 
 export default EditNewsForm;
+

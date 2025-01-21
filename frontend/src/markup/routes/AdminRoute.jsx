@@ -59,6 +59,7 @@ import AddPublication from "../components/Admin/addpublication/AddPublication.js
   import EditPublicationForm from "../components/Admin/EditPublicationForm/EditPublicationForm.jsx";
    import ResearchPublications from "../pages/qulity&research/ResearchPublication.jsx";
    import PublicationList from "../components/Admin/publicationlist/PublicationList.jsx";
+import CheckExam from "../components/Admin/CPD/CheckExam/CheckExam.jsx";
 
 const AdminRoute = () => {
   const navigate = useNavigate();
@@ -259,7 +260,10 @@ const AdminRoute = () => {
               <Route path="/new" element={<AddAdmin />} />
               <Route path="/ApplicantsPage" element={<ApplicantsPage />} />
               <Route path="/JobArchivePage" element={<JobArchivePage />} />
-              <Route path="/HRManagerApplicants" element={<HRManagerApplicants />} />
+              <Route
+                path="/HRManagerApplicants"
+                element={<HRManagerApplicants />}
+              />
               <Route path="/applicant" element={<Applicants />} />
               <Route path="/applicant/:id" element={<ApplicantDetails />} />
               <Route path="/add-news" element={<AddNews />} />
@@ -267,22 +271,26 @@ const AdminRoute = () => {
               <Route path="news/edit/:news_id" element={<EditNews />} />
               <Route path="/add-healthtip" element={<AddHealthTipForm />} />
               <Route path="/healthtipList" element={<HealthTipList />} />
-              <Route path="/healthtiplist/edit/:health_tip_id" element={<EditHealthTip />} />
+              <Route
+                path="/healthtiplist/edit/:health_tip_id"
+                element={<EditHealthTip />}
+              />
               <Route path="/add-job" element={<AddJobForm />} />
               <Route path="/all-job" element={<JobsListPage />} />
               <Route path="/job/edit/:job_id" element={<EditJobForm />} />
-              
-              {/* Train Info Routes */}
-              <Route path="/trainees" element={<TrainInfoList    />} />
-              {/* <Route path="/trainee/:id" element={<TrainInfoDetail />} /> */}
-             
 
-              <Route path="/add-publication" element={<AddPublication />} /> 
-              <Route path="/publications" element={<ResearchPublications />} /> 
-              <Route path="/publications/edit/:id" element={<EditPublicationForm />} />
+              {/* Train Info Routes */}
+              <Route path="/trainees" element={<TrainInfoList />} />
+              {/* <Route path="/trainee/:id" element={<TrainInfoDetail />} /> */}
+
+              <Route path="/add-publication" element={<AddPublication />} />
+              <Route path="/publications" element={<ResearchPublications />} />
+              <Route
+                path="/publications/edit/:id"
+                element={<EditPublicationForm />}
+              />
               <Route path="/publicationlist" element={<PublicationList />} />
-             
-          
+
               <Route
                 path="/edit-cpd-news/:newsId"
                 element={<EditCpdNewsForm />}
@@ -302,7 +310,10 @@ const AdminRoute = () => {
               <Route path="/contact/:id" element={<ContactDetail />} />
               <Route path="/cpd/schedule" element={<ListOfSchedule />} />
               <Route path="/cpd/trainees/:schedule_id" element={<Trainee />} />
-
+              <Route
+                path="/cpd/check-exam/:schedule_id/:courseName"
+                element={<CheckExam />}
+              />
             </Routes>
           </div>
         </div>
@@ -315,7 +326,9 @@ const AdminRoute = () => {
               {/* Email Address Field */}
               <Form.Group className="mb-3" controlId="formEmail">
                 {error && <div className="alert alert-danger">{error}</div>}
-                {success && <div className="alert alert-success">{success}</div>}
+                {success && (
+                  <div className="alert alert-success">{success}</div>
+                )}
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control
                   onChange={(e) => setEmail(e.target.value)}

@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import newsService from "../../../../Services/news.service.js";
-import { FaCheckCircle } from "react-icons/fa";
-import classes from "./AddNewsForm.module.css";
 import { useAuth } from "../../../../contexts/AuthContext.jsx";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import classes from "./AddNewsForm.module.css";
 
 const AddNewsForm = () => {
   const { user } = useAuth();
@@ -15,24 +15,21 @@ const AddNewsForm = () => {
   const [newsLink, setNewsLink] = useState("");
   const [newsImages, setNewsImages] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const navigate = useNavigate();
 
   const validateForm = () => {
     if (!newsTitle.trim()) {
-      setError("News title is required.");
+      toast.error("News title is required.");
       return false;
     }
     if (!newsDetail.trim()) {
-      setError("News detail is required.");
+      toast.error("News detail is required.");
       return false;
     }
     if (newsLink && !/^https?:\/\/[^\s$.?#].[^\s]*$/i.test(newsLink)) {
-      setError("Please enter a valid URL for the news link.");
+      toast.error("Please enter a valid URL for the news link.");
       return false;
     }
-    setError(""); // Clear errors if all validations pass
     return true;
   };
 
@@ -59,27 +56,22 @@ const AddNewsForm = () => {
     try {
       const response = await newsService.createNews(formData, token);
       if (response.error) {
-        setError(response.error);
-        setSuccess("");
+        toast.error(response.error);
       } else {
-        setSuccess("News added successfully!");
-        setError("");
-
-        // Reset the form fields
+        toast.success("News added successfully!");
         setNewsTitle("");
         setNewsDetail("");
         setNewsDescription("");
         setNewsLink("");
         setNewsImages([]);
         setImagePreviews([]);
-
         setTimeout(() => {
           navigate("/admin/news");
         }, 2000);
       }
     } catch (err) {
       console.error("Error submitting news:", err);
-      setError("Something went wrong while adding the news.");
+      toast.error("Something went wrong while adding the news.");
     }
   };
 
@@ -92,20 +84,7 @@ const AddNewsForm = () => {
   return (
     <form onSubmit={handleSubmit} className={classes.formContainer}>
       <h2>Add News</h2>
-      {error && <div className={classes.errorMessage}>{error}</div>}
-      {success && (
-        <div className={classes.successMessage}>
-          <FaCheckCircle className={classes.successIcon} />
-          <span>{success}</span>
-          <button
-            type="button"
-            className={classes.closeButton}
-            onClick={() => setSuccess("")}
-          >
-            &times;
-          </button>
-        </div>
-      )}
+
       <input
         type="text"
         placeholder="News Title"
@@ -114,6 +93,7 @@ const AddNewsForm = () => {
         className={classes.inputField}
         required
       />
+
       <textarea
         placeholder="News Detail"
         value={newsDetail}
@@ -121,12 +101,14 @@ const AddNewsForm = () => {
         className={classes.textareaField}
         required
       />
+
       <textarea
         placeholder="News Description"
         value={newsDescription}
         onChange={(e) => setNewsDescription(e.target.value)}
         className={classes.textareaField}
       />
+
       <input
         type="text"
         placeholder="News Link (optional)"
@@ -134,6 +116,7 @@ const AddNewsForm = () => {
         onChange={(e) => setNewsLink(e.target.value)}
         className={classes.inputField}
       />
+
       <input
         type="file"
         accept="image/*"
@@ -142,7 +125,6 @@ const AddNewsForm = () => {
         className={classes.inputFile}
       />
 
-      {/* Image Previews */}
       {imagePreviews.length > 0 && (
         <div className={classes.imagePreviews}>
           {imagePreviews.map((preview, index) => (
@@ -160,13 +142,14 @@ const AddNewsForm = () => {
         Add News
       </button>
 
-      {/* Notice for standard image size */}
       <div className={classes.notice}>
         <p>
           <strong>Note:</strong> Please use images with the standard size of
           1200x675 pixels for the best display on the website.
         </p>
       </div>
+
+      <ToastContainer />
     </form>
   );
 };

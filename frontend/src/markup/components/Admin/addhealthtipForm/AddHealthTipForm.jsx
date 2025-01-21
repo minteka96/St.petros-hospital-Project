@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import healthTipService from "../../../../Services/healthtip.service.js"; // Adjust the path if necessary
 import classes from "./AddHealthTipForm.module.css"; // Adjust the path if necessary
 import { useAuth } from "../../../../contexts/AuthContext"; // Adjust the path if necessary
+import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
+import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 
 const AddHealthTipForm = () => {
   const { user } = useAuth();
@@ -17,8 +19,6 @@ const AddHealthTipForm = () => {
   const [healthTipLink, setHealthTipLink] = useState("");
   const [healthTipVideoLink, setHealthTipVideoLink] = useState("");
   const [healthTipImageLink, setHealthTipImageLink] = useState(null);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,21 +27,24 @@ const AddHealthTipForm = () => {
     formData.append("health_tip_title", healthTipTitle);
     formData.append("health_tip_detail", healthTipDetail);
     formData.append("health_tip_description", healthTipDescription);
-    formData.append("health_tip_link", healthTipLink);
-    formData.append("health_tip_video_link", healthTipVideoLink);
+
+    // Only append optional fields if they are provided
+    if (healthTipLink) {
+      formData.append("health_tip_link", healthTipLink);
+    }
+    if (healthTipVideoLink) {
+      formData.append("health_tip_video_link", healthTipVideoLink);
+    }
     if (healthTipImageLink) {
       formData.append("health_tip_image", healthTipImageLink);
     }
 
     try {
-
       const response = await healthTipService.createHealthTip(formData, token);
       if (response.error) {
-        setError(response.error);
-        setSuccess("");
+        toast.error(response.error); // Show error toast
       } else {
-        setSuccess("Health Tip added successfully!");
-        setError("");
+        toast.success("Health Tip added successfully!"); // Show success toast
 
         // Reset form fields
         setHealthTipTitle("");
@@ -58,16 +61,13 @@ const AddHealthTipForm = () => {
       }
     } catch (err) {
       console.error("Error creating health tip:", err);
-      setError("Something went wrong while adding the health tip.");
-      setSuccess(""); // Clear success message if there's an error
+      toast.error("Something went wrong while adding the health tip."); // Show error toast
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className={classes.formContainer}>
       <h2>Add Health Tip</h2>
-      {error && <div className={classes.errorMessage}>{error}</div>}
-      {success && <div className={classes.successMessage}>{success}</div>}
 
       <input
         type="text"
@@ -95,7 +95,7 @@ const AddHealthTipForm = () => {
 
       <input
         type="url"
-        placeholder="Health Tip Link"
+        placeholder="Health Tip Link (optional)"
         value={healthTipLink}
         onChange={(e) => setHealthTipLink(e.target.value)}
         className={classes.inputField}
@@ -103,7 +103,7 @@ const AddHealthTipForm = () => {
 
       <input
         type="url"
-        placeholder="Health Tip Video Link"
+        placeholder="Health Tip Video Link (optional)"
         value={healthTipVideoLink}
         onChange={(e) => setHealthTipVideoLink(e.target.value)}
         className={classes.inputField}
@@ -117,6 +117,9 @@ const AddHealthTipForm = () => {
       <button type="submit" className={classes.submitButton}>
         Add Health Tip
       </button>
+
+      {/* Toast container to display success and error messages */}
+      <ToastContainer />
     </form>
   );
 };
