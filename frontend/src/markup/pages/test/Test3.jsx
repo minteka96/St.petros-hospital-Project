@@ -20,11 +20,17 @@ function Test3({ courseName, onBack, id }) {
   const [score, setScore] = useState(null);
   const [status, setStatus] = useState(null);
   const [startCountdown, setStartCountdown] = useState(false);
-  console.log("userAnswers", Object.keys(userAnswers).length);
-  // console.log("results", results);
+  const [info, setInfo] = useState(null);
   useEffect(() => {
     const fetchTraining = async () => {
       try {
+        const traineeId = id;
+        const inforesponse = await fetch(
+          `${api_url}/api/trainee-info/${traineeId}`
+        );
+        const infodata = await inforesponse.json();
+        setInfo(infodata.data[0]);
+
         const response = await axios.get(
           `${api_url}/api/cpd/trainings/${courseName}`
         );
@@ -109,8 +115,7 @@ function Test3({ courseName, onBack, id }) {
       );
       if (response.status === 200) {
         setStatus(response.data[0]);
-        console.log("Status updated successfully");
-        console.log("updated status", response.data[0]);
+
         setStartCountdown(true);
       }
     } catch (error) {
@@ -125,73 +130,67 @@ function Test3({ courseName, onBack, id }) {
     }));
   };
 
-const updateResults = (testType, totalScore) => {
-  const resultKey = testType === "post_test" ? "post_score" : "pri_score";
-  const updatedResults = { [resultKey]: totalScore };
+  const updateResults = (testType, totalScore) => {
+    const resultKey = testType === "post_test" ? "post_score" : "pri_score";
+    const updatedResults = { [resultKey]: totalScore };
 
-  // Call storeResults directly with updated results
-  storeResults(updatedResults);
-};
+    // Call storeResults directly with updated results
+    storeResults(updatedResults);
+  };
 
+  const storeResults = async (result) => {
+    try {
+      const response = await axios.put(
+        `${api_url}/api/cpdResult/update/${id}/${courseName}`,
+        result
+      );
+      if (response.status === 200) {
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
+    }
+  };
 
- const storeResults = async (result) => {
-   console.log("resulttttttttt", result);
-   try {
-     const response = await axios.put(
-       `${api_url}/api/cpdResult/update/${id}/${courseName}`,
-       result
-     );
-     if (response.status === 200) {
-       console.log("Status updated successfully");
-       console.log("Updated status:", response.data[0]);
-     }
-   } catch (error) {
-     console.error("Error updating status:", error);
-   }
- };
+  const handleFinish = (testType) => {
+    // Determine current questions
+    const currentQuestions =
+      priQuestion.length > 0 ? priQuestion : postQuestion;
 
- const handleFinish = (testType) => {
-   // Determine current questions
-   const currentQuestions = priQuestion.length > 0 ? priQuestion : postQuestion;
+    // Calculate total score
+    const totalScore = currentQuestions.reduce((score, question, index) => {
+      const correctAnswer = question["Correct Answer"];
+      const userAnswer = userAnswers[index];
+      const userAnswerLetter = userAnswer
+        ? userAnswer.charAt(userAnswer.length - 1)
+        : null;
 
-   // Calculate total score
-   const totalScore = currentQuestions.reduce((score, question, index) => {
-     const correctAnswer = question["Correct Answer"];
-     const userAnswer = userAnswers[index];
-     const userAnswerLetter = userAnswer
-       ? userAnswer.charAt(userAnswer.length - 1)
-       : null;
+      return score + (userAnswerLetter === correctAnswer ? 1 : 0);
+    }, 0);
 
-     return score + (userAnswerLetter === correctAnswer ? 1 : 0);
-   }, 0);
+    // Update score state
+    setScore(totalScore);
 
-   // Update score state
-   setScore(totalScore);
-   console.log("scorrr", totalScore);
+    // Determine certification status
+    const certificationResult =
+      testType === "post_test" && totalScore >= training?.minimum_score
+        ? "passed"
+        : "failed";
 
-   // Determine certification status
-   const certificationResult =
-     testType === "post_test" && totalScore >= training?.minimum_score
-       ? "passed"
-       : "failed";
+    // Update status based on testType
+    const updatedStatus = {
+      ...status,
+      [`${testType}`]: "completed",
+      ...(testType === "post_test" && { certificate: certificationResult }),
+    };
 
-   // Update status based on testType
-   const updatedStatus = {
-     ...status,
-     [`${testType}`]: "completed",
-     ...(testType === "post_test" && { certificate: certificationResult }),
-   };
+    updateStatus(updatedStatus);
 
-   updateStatus(updatedStatus);
-
-   // Update results and store them directly
-   const resultKey = testType === "post_test" ? "post_score" : "pri_score";
-   const updatedResults = { [resultKey]: totalScore };
-   storeResults(updatedResults);
-updateResults(testType, totalScore);
-   console.log("Updated status:", testType);
- };
-
+    // Update results and store them directly
+    const resultKey = testType === "post_test" ? "post_score" : "pri_score";
+    const updatedResults = { [resultKey]: totalScore };
+    storeResults(updatedResults);
+    updateResults(testType, totalScore);
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <ErrorDisplay error={error} />;
@@ -203,7 +202,7 @@ updateResults(testType, totalScore);
       ) : (
         <>
           <h2>Course Details</h2>
-          <TestSelection onSelect={selectCourse} status={status} />
+          <TestSelection onSelect={selectCourse} status={status} info={info} />
         </>
       )}
       {typeError && <ErrorDisplay error={typeError} />}

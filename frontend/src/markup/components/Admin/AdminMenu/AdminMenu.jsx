@@ -7,7 +7,6 @@ import { useAuth } from "../../../../contexts/AuthContext";
 function AdminMenu() {
   const [role, setRole] = useState("");
   const { user, privileges } = useAuth();
-
   useEffect(() => {
     const token = user ? user.token : null;
     if (token) {
@@ -20,12 +19,15 @@ function AdminMenu() {
   // Helper functions for role-based visibility
   const isSuperAdmin = role === "superadmin";
   const isAdminOrHigher = isSuperAdmin || role === "Admin";
-  const isComm = isAdminOrHigher || role === "Comm";
+  const isComm = isAdminOrHigher || role === "Communication";
   const isHR = isAdminOrHigher || role === "HR";
   const isHE = isAdminOrHigher || role === "HE";
   const isCPD = isAdminOrHigher || role === "CPD";
-const isRPUB= isAdminOrHigher || role === "RPUB";
 
+  // "Post Vacancy",
+  // "Approve Applicants",
+  // "Screen Applicants",
+  // "Archive Vacancy",
   return (
     <div className="pb-4">
       <div className="admin-menu p-3">
@@ -45,39 +47,29 @@ const isRPUB= isAdminOrHigher || role === "RPUB";
             <Link to="/admin/new" className="list-group-item">
               Add New Admin
             </Link>
-            {/* <Link to="/admin/contact" className="list-group-item">
-              See Feedback Messages
-            </Link> */}
           </>
         )}
 
         {/* Comm roles */}
-        {isComm && (
+        {isComm && privileges && (
           <>
-            <Link to="/admin/add-news" className="list-group-item">
-              Add News
-            </Link>
+            {privileges.includes("Post News") && (
+              <Link to="/admin/add-news" className="list-group-item">
+                Add News
+              </Link>
+            )}
+
+            {privileges.includes("Approve News") && (
+              <Link to="/admin/Approve-News" className="list-group-item">
+                Approve News
+              </Link>
+            )}
             <Link to="/admin/news" className="list-group-item">
               List of News
             </Link>
-            <Link to="/admin/contact" className="list-group-item">
-              List of contact
-            </Link>
-            {/* <Link to="/admin//contact/:id" className="list-group-item">
-              List of details
-            </Link> */}
           </>
         )}
-{/* Research Publication roles */}
-        {isRPUB && (<><Link to="/admin/add-publication" className="list-group-item">
-              Add Publication
-            </Link>
-            <Link to="/admin/publicationlist" className="list-group-item">
-              List of Publications
-            </Link>
-            </>)}
-      
-        {/* Health tips (visible to all roles) */}
+
         {isHE && (
           <>
             <Link to="/admin/add-healthtip" className="list-group-item">
@@ -90,56 +82,79 @@ const isRPUB= isAdminOrHigher || role === "RPUB";
         )}
 
         {/* HR roles */}
-        {isHR && (
+        {isHR && privileges && (
           <>
-            <Link to="/admin/add-job" className="list-group-item">
-              Add Job
-            </Link>
+            {privileges.includes("Archive Vacancy") && (
+              <Link to="/admin/JobArchivePage" className="list-group-item">
+                Archive Vacancy
+              </Link>
+            )}
+
+            {privileges.includes("Post Vacancy") && (
+              <Link to="/admin/add-job" className="list-group-item">
+                Post Vacancy
+              </Link>
+            )}
+            {privileges.includes("Screen Applicants") && (
+              <Link to="/admin/ApplicantsPage" className="list-group-item">
+                Screen Applicants
+              </Link>
+            )}
+            {privileges.includes("Manage Applicants") && (
+              <Link to="/admin/HRManagerApplicants" className="list-group-item">
+                Manager Applicants
+              </Link>
+            )}
+
             <Link to="/admin/all-job" className="list-group-item">
               List of Jobs
             </Link>
-            <Link to="/admin/applicant" className="list-group-item">
-              List of Applicants
-            </Link>
+            {privileges.includes("Show Applicants") && (
+              <Link to="/admin/applicant" className="list-group-item">
+                List of Applicants
+              </Link>
+            )}
           </>
         )}
 
         {/* CPD roles */}
-        {isCPD && (
+
+        {isCPD && privileges && (
           <>
-            <Link to="/admin/add-cpd-news" className="list-group-item">
-              Add CPD News
+            {privileges.includes("Add CPD course") && (
+              <Link to="cpd/newCourse" className="list-group-item">
+                New CPD Vacancy
+              </Link>
+            )}
+
+            {privileges.includes("Post Vacancy") && (
+              <Link to="/admin/add-job" className="list-group-item">
+                Post Vacancy
+              </Link>
+            )}
+            {privileges.includes("Screen Applicants") && (
+              <Link to="/admin/ApplicantsPage" className="list-group-item">
+                Screen Applicants
+              </Link>
+            )}
+            {privileges.includes("Manage Applicants") && (
+              <Link to="/admin/HRManagerApplicants" className="list-group-item">
+                Manager Applicants
+              </Link>
+            )}
+
+            <Link to="cpd/list" className="list-group-item">
+              List of CPD
             </Link>
-            <Link to="/admin/cpd-news-list" className="list-group-item">
-              List of CPD News
+            <Link to="cpd/schedule" className="list-group-item">
+              List of CPD schedule
             </Link>
 
-         
-            {/* <Link to="/admin/add-trainee" className="list-group-item">
-                Add Trainee
-              </Link> */}
-
-           <Link to="/admin/trainees" className="list-group-item">
-             <i className="fas fa-users"></i> Trainees info
-               </Link>
-    
-      
-
+            <Link to="cpd-news-list" className="list-group-item">
+              CPD news list
+            </Link>
           </>
         )}
-
-        <Link to="/admin/cpd/newCourse" className="list-group-item">
-          Add CPD Course
-        </Link>
-        <Link to="/admin/cpd/list" className="list-group-item">
-          List of CPD Courses
-        </Link>
-        <Link to="/admin/cpd/schedule" className="list-group-item">
-          List of Course Schedules
-        </Link>
-        <Link to="/admin/video" className="list-group-item">
-          Video
-        </Link>
       </div>
     </div>
   );

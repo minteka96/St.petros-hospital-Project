@@ -14,7 +14,6 @@ function Login() {
   const handleSubmit = async () => {
     const formData = { email, password };
     const validationResult = SigninFormSchema.safeParse(formData);
-
     if (!validationResult.success) {
       const validationErrors = validationResult.error.errors.reduce(
         (acc, error) => {

@@ -64,12 +64,9 @@ console.log("token",token);
         const response = await fetch(
           `${api_url}/api/trainee-info/${traineeId}`
         );
-        console.log("traineeId", traineeId);
-        console.log("response", response);
 
         if (response.status === 404) {
           navigate("/cpd/trainee-info");
-
         }
         // const data = await response.json();
       } catch (error) {
