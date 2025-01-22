@@ -24,6 +24,19 @@ export const AuthProvider = ({ children }) => {
     setIsAdmin,
   };
 
+  const checkTraineeExists = async (id) => {
+    try {
+      const response = await fetch(`/api/trainees-info/${id}`);
+      if (response.status === 200) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error checking trainee existence:", error);
+      return false;
+    }
+  };
+
   useEffect(() => {
     const initializeAuth = async () => {
       try {
@@ -44,6 +57,17 @@ export const AuthProvider = ({ children }) => {
           const decodedTraineeToken = decodeTokenPayload(traineeToken);
           const { id, email } = decodedTraineeToken;
 
+          const traineeExists = await checkTraineeExists(id);
+          if (!traineeExists) {
+            // Reset state if trainee does not exist
+            setIsLogged(false);
+            setIsAdmin(false);
+            setUser(null);
+            setTrainee(null);
+            setPrivileges([]);
+            return;
+          }
+
           setTrainee({ id, email, token: traineeToken });
         }
       } catch (error) {
@@ -60,7 +84,6 @@ export const AuthProvider = ({ children }) => {
 
     initializeAuth();
   }, []);
-
 
   if (loading) {
     return <div>Loading...</div>;

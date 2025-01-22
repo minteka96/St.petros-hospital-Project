@@ -11,6 +11,7 @@ function Test2() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { trainee } = useAuth();
+  const token = trainee?.token;
   const id = trainee?.id;
   useEffect(() => {
     const fetchAppliedCourses = async () => {
@@ -21,7 +22,11 @@ function Test2() {
       }
 
       try {
-        const response = await axios.get(`${api_url}/api/cpd/IsApply/${id}`);
+        const response = await axios.get(`${api_url}/api/cpd/IsApply/${id}`, {
+          headers: {
+            "x-access-token": token,
+          },
+        });
 
         if (response?.data?.data?.length > 0) {
           setAppliedCourses(response.data.data);

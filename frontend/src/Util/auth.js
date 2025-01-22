@@ -1,24 +1,30 @@
 const userAuthHeader = async (userType) => {
   try {
-    const tokenKey =
-      userType === "admin" ? "access-token" : "zaccess-token";
+    // Determine the token key based on the user type
+    const tokenKey = userType === "admin" ? "access-token" : "zaccess-token";
     const token = sessionStorage.getItem(tokenKey);
 
-    if (token) {
-      const decodedToken = decodeTokenPayload(token);
-      const { role, username, email } = decodedToken;
-
-      console.log(`${userType} Token Info:`, { role, username, email });
-      return token;
-    } else {
+    if (!token) {
       console.warn(`No token found for ${userType}.`);
       return null;
     }
+
+    // Decode the token
+    const decodedToken = decodeTokenPayload(token);
+
+    if (tokenKey === "access-token") {
+      const { role, username, email } = decodedToken;
+    } else if (tokenKey === "zaccess-token") {
+      const { id, email } = decodedToken;
+    }
+
+    return token;
   } catch (error) {
     console.error(`Error retrieving ${userType} token:`, error);
     return null;
   }
 };
+
 export const decodeTokenPayload = (token) => {
   try {
     const base64Url = token.split(".")[1];

@@ -28,7 +28,8 @@ const TraineesDashboard = () => {
   const { trainee } = useAuth();
   const traineeId = trainee?.id;
   const token = trainee?.token;
-console.log("token",token);
+  console.log("traineeId", traineeId);
+  console.log("token", token);
   useEffect(() => {
     const fetchTrainings = async () => {
       try {
@@ -80,7 +81,11 @@ console.log("token",token);
   useEffect(() => {
     const fetchRegisteredCourses = async () => {
       try {
-        const response = await fetch(`${api_url}/api/cpd/IsApply/${traineeId}`);
+        const response = await fetch(`${api_url}/api/cpd/IsApply/${traineeId}`, {
+          headers: {
+            "y-access-token": token,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch registered courses");
         }
