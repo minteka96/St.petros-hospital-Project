@@ -97,8 +97,8 @@ router.get(
 router.get(
   "/api/cpd/IsApply/:trainee_id",
   [
-    authMiddleware.verifyBothTokens,
-    authMiddleware.checkRoles(["superadmin", "Admin", "CPD"]),
+    authMiddleware.verifyToken,
+    // authMiddleware.checkRoles(["superadmin", "Admin", "CPD"]),
   ],
   cpdController.IsApply
 );
