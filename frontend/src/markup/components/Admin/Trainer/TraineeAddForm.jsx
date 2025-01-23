@@ -59,7 +59,7 @@ const TraineeAddForm = () => {
         user?.token
       );
       toast.success("Registration completed successfully!");
-      navigate("/cpdadmin/TraineesDashboard"); // Navigate to trainee list after successful registration
+      navigate("/cpd/TraineesDashboard"); // Navigate to trainee list after successful registration
     } catch (error) {
       toast.error(
         error.response?.data?.message ||

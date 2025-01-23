@@ -163,7 +163,7 @@ const AdminManagement = () => {
             <h5 style={{ fontSize: "16px", padding: 0, margin: 0 }}>
               Role Access definition
             </h5>
-            <div>
+            <div style={{ textAlign: "left",display:"flow" }}>
               <p style={{ fontSize: "12px", padding: 0 }}>
                 Admin : <span>access all without admin Management</span>
               </p>

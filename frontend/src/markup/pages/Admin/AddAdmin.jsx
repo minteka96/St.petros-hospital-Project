@@ -31,7 +31,7 @@ const AddAdmin = () => {
   const [success, setSuccess] = useState("");
 
   const privilegesMap = {
-    Admin: ["Access All Privileges"],
+    Admin: ["All Privileges"],
     HR: [
       "Post Vacancy",
       "Manage Applicants",
@@ -61,12 +61,19 @@ const AddAdmin = () => {
 
   const handlePrivilegeChange = (e) => {
     const { value, checked } = e.target;
-    setFormData((prevState) => {
-      const updatedPrivileges = checked
-        ? [...prevState.privileges, value]
-        : prevState.privileges.filter((privilege) => privilege !== value);
-      return { ...prevState, privileges: updatedPrivileges };
-    });
+
+    // if (formData.department==="Admin") {
+    //   setFormData({
+    //     ...formData,
+    //     privileges: "access all privileges",
+    //   })
+    // }
+      setFormData((prevState) => {
+        const updatedPrivileges = checked
+          ? [...prevState.privileges, value]
+          : prevState.privileges.filter((privilege) => privilege !== value);
+        return { ...prevState, privileges: updatedPrivileges };
+      });
   };
 
   const handleSubmit = async (e) => {
@@ -186,11 +193,11 @@ const AddAdmin = () => {
                         label={privilege}
                         value={privilege}
                         checked={
-                          formData.privileges.includes(privilege) ||
-                          formData.department === "Admin"
+                          formData.privileges.includes(privilege)  
+                        
                         }
                         onChange={handlePrivilegeChange}
-                        disabled={formData.department === "Admin"}
+                        // disabled={formData.department === "Admin"}
                       />
                     </Col>
                   ))}

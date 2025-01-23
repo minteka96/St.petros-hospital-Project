@@ -13,7 +13,7 @@ router.get(
 );
 router.get(
   "/api/user/:email",
-  [authMiddleware.verifyToken, authMiddleware.checkRoles(["superadmin"])],
+  [authMiddleware.verifyToken],
   userController.getUserByEmail
 );
 router.get(

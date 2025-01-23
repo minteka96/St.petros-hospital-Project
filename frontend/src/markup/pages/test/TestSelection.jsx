@@ -235,7 +235,7 @@ function TestSelection({ onSelect, status, info }) {
               </p>
               <br />
               <div className="d-flex gap-2 align-items-center justify-content-center">
-                {status.certificate === "yes" ? (
+                {status.certificate === "passed" ? (
                   <>
                     <p className="fs-6 m-0" style={{ color: "#007bff" }}>
                       Download

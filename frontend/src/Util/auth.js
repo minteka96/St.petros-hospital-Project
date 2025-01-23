@@ -1,3 +1,37 @@
+const api_url = import.meta.env.VITE_API_URL;
+
+const checkTraineeExists = async (id) => {
+  try {
+    const response = await fetch(`${api_url}/api/trainees-info/${id}`);
+    if (response.ok) {
+      const data = await response.json();
+      return !!data; // Returns true if the trainee exists
+    }
+    return false;
+  } catch (error) {
+    console.error("Error checking trainee existence:", error);
+    return false;
+  }
+};
+
+const checkAdminExists = async (email, token) => {
+  try {
+    const response = await fetch(`${api_url}/api/user/${email}`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return !!data; // Returns true if the admin exists
+    }
+    return false;
+  } catch (error) {
+    console.error("Error checking admin existence:", error);
+    return false;
+  }
+};
+
 const userAuthHeader = async (userType) => {
   try {
     // Determine the token key based on the user type
@@ -14,8 +48,23 @@ const userAuthHeader = async (userType) => {
 
     if (tokenKey === "access-token") {
       const { role, username, email } = decodedToken;
+      const adminExists = await checkAdminExists(email, token);
+      if (!adminExists) {
+        console.warn(`Admin with email ${email} does not exist.`);
+        return null;
+      }
+      // console.log(`Admin Token Info:`, { role, username, email });
     } else if (tokenKey === "zaccess-token") {
       const { id, email } = decodedToken;
+
+      // Check if the trainee exists
+      // const traineeExists = await checkTraineeExists(id);
+      // if (!traineeExists) {
+      //   console.warn(`Trainee with ID ${id} does not exist.`);
+      //   return null;
+      // }
+
+      console.log(`Trainee Token Info:`, { id, email });
     }
 
     return token;
