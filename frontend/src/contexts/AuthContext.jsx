@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
           const { role, username, email, privileges } = decodedAdminToken;
 
           setIsLogged(true);
-          setUser({ username, role, email, token: adminToken });
+          setUser({ username, role, email, token: adminToken,privileges });
           setIsAdmin(role === "admin");
           setPrivileges(privileges || []);
         }
@@ -58,15 +58,15 @@ export const AuthProvider = ({ children }) => {
           const { id, email } = decodedTraineeToken;
 
           const traineeExists = await checkTraineeExists(id);
-          if (!traineeExists) {
-            // Reset state if trainee does not exist
-            setIsLogged(false);
-            setIsAdmin(false);
-            setUser(null);
-            setTrainee(null);
-            setPrivileges([]);
-            return;
-          }
+          // if (!traineeExists) {
+          //   // Reset state if trainee does not exist
+          //   setIsLogged(false);
+          //   setIsAdmin(false);
+          //   setUser(null);
+          //   // setTrainee(null);
+          //   setPrivileges([]);
+          //   return;
+          // }
 
           setTrainee({ id, email, token: traineeToken });
         }

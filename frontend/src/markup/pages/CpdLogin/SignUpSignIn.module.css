@@ -59,8 +59,8 @@
   margin-top: 1rem; /* Adds spacing above the second button */
   text-align: center; /* Aligns the button to the center */
 }
-.signInWrapper h6,
-p {
+.signInWrapper > h6,
+.signInWrapper > p {
   display: flex;
   justify-content: center;
   align-items: center;

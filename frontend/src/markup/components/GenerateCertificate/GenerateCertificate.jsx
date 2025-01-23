@@ -100,23 +100,26 @@ const GenerateCertificate = () => {
             )}
           </div>
           <br />
-          <button
-            onClick={downloadCertificate}
-            style={{
-              padding: "10px 20px",
-              fontSize: "1em",
-              color: "#fff",
-              backgroundColor: "#007bff",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-              transition: "background-color 0.3s",
-            }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = "#0056b3")}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = "#007bff")}
-          >
-            Download Certificate
-          </button>
+          <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+            <button onClick={() => window.history.back()} >Back</button>
+            <button
+              onClick={downloadCertificate}
+              style={{
+                padding: "10px 20px",
+                fontSize: "1em",
+                color: "#fff",
+                backgroundColor: "#007bff",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                transition: "background-color 0.3s",
+              }}
+              onMouseEnter={(e) => (e.target.style.backgroundColor = "#0056b3")}
+              onMouseLeave={(e) => (e.target.style.backgroundColor = "#007bff")}
+            >
+              Download Certificate
+            </button>
+          </div>
         </>
       ) : (
         !error && <p>Loading certificate...</p>

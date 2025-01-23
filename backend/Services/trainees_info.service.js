@@ -134,7 +134,7 @@ async function getAllTraineesInfo() {
 }
 
 async function getTraineeInfoById(id) {
-  const sql = `SELECT * FROM trainees_info WHERE id = ?`;
+  const sql = `SELECT * FROM trainees_info WHERE trainee_id = ?`;
   const connection = await conn.pool.getConnection();
   try {
     const [rows] = await connection.query(sql, [id]);

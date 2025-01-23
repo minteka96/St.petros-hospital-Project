@@ -209,7 +209,7 @@ function ListOfSchedule() {
                       </>
                     )}
                     <Link
-                      to={`/admin/cpd/check-exam/${schedule.schedule_id}/${schedule.course_name}`}
+                      to={`/admin/cpd/check-exam/${item.schedule_id}/${item.course_name}`}
                       className="btn bg-white border border-1 "
                     >
                       <img
@@ -223,9 +223,8 @@ function ListOfSchedule() {
                       />
                     </Link>
                     <Link
-                      to={`/admin/cpd/trainees/${schedule.schedule_id}`}
+                      to={`/admin/cpd/trainees/${item.schedule_id}`}
                       className="btn bg-white border border-1"
-
                     >
                       <img
                         src="https://img.icons8.com/?size=100&id=47863&format=png&color=000000"

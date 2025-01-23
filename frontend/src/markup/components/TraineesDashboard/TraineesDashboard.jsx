@@ -63,10 +63,18 @@ const TraineesDashboard = () => {
     const checkTrainee = async () => {
       try {
         const response = await fetch(
-          `${api_url}/api/trainee-info/${traineeId}`
-        );
+          `${api_url}/api/trainee-info/${traineeId}`,
+          {
+            headers: {
+              "y-access-token": token,
 
-        if (response.status === 404) {
+            },
+
+          }
+        );
+        const data = await response.json();
+console.log("response", data.data);
+        if (response.status === 404 || response.status === 403 || data.data.length === 0) {
           navigate("/cpd/trainee-info");
         }
         // const data = await response.json();

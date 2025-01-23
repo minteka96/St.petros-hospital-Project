@@ -30,7 +30,6 @@ import AdminManagement from "../pages/Admin/AdminManagement.jsx";
 import AddAdmin from "../pages/Admin/AddAdmin.jsx";
 import JobsListPage from "../components/Admin/JobList/JobList.jsx";
 
-
 // CPD News Components
 
 import { updatePasswordSchema } from "../../Schemas/validationSchemas.js";
@@ -56,9 +55,9 @@ import TrainInfoList from "../../markup/components/Admin/Trainer/TrainInfoList.j
 // import TrainInfoDetail from "../../markup/components/Admin/Trainer/TrainInfoDetail.jsx";
 
 import AddPublication from "../components/Admin/addpublication/AddPublication.jsx";
-  import EditPublicationForm from "../components/Admin/EditPublicationForm/EditPublicationForm.jsx";
-   import ResearchPublications from "../pages/qulity&research/ResearchPublication.jsx";
-   import PublicationList from "../components/Admin/publicationlist/PublicationList.jsx";
+import EditPublicationForm from "../components/Admin/EditPublicationForm/EditPublicationForm.jsx";
+import ResearchPublications from "../pages/qulity&research/ResearchPublication.jsx";
+import PublicationList from "../components/Admin/publicationlist/PublicationList.jsx";
 import CheckExam from "../components/Admin/CPD/CheckExam/CheckExam.jsx";
 
 const AdminRoute = () => {
@@ -70,6 +69,9 @@ const AdminRoute = () => {
   };
 
   const { user } = useAuth();
+  const privileges = user?.privileges;
+  const role = user?.role;
+  console.log("user", user);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [show, setShow] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
@@ -254,66 +256,168 @@ const AdminRoute = () => {
         >
           <div className="m-3 normalBg">
             <Routes>
-              <Route path="/video" element={<VideoEmbeds />} />
-              <Route path="/" element={<AdminDashbord />} />
-              <Route path="/admins" element={<AdminManagement />} />
-              <Route path="/new" element={<AddAdmin />} />
-              <Route path="/ApplicantsPage" element={<ApplicantsPage />} />
-              <Route path="/JobArchivePage" element={<JobArchivePage />} />
-              <Route
-                path="/HRManagerApplicants"
-                element={<HRManagerApplicants />}
-              />
-              <Route path="/applicant" element={<Applicants />} />
-              <Route path="/applicant/:id" element={<ApplicantDetails />} />
-              <Route path="/add-news" element={<AddNews />} />
-              <Route path="/news" element={<Newss />} />
-              <Route path="news/edit/:news_id" element={<EditNews />} />
-              <Route path="/add-healthtip" element={<AddHealthTipForm />} />
-              <Route path="/healthtipList" element={<HealthTipList />} />
-              <Route
-                path="/healthtiplist/edit/:health_tip_id"
-                element={<EditHealthTip />}
-              />
-              <Route path="/add-job" element={<AddJobForm />} />
-              <Route path="/all-job" element={<JobsListPage />} />
-              <Route path="/job/edit/:job_id" element={<EditJobForm />} />
+              {role === "superadmin" ? (
+                <>
+                  <Route path="/admins" element={<AdminManagement />} />
+                  <Route path="/new" element={<AddAdmin />} />
+                </>
+              ) : role === "admin" || role === "superadmin" ? (
+                <>
+                  <Route path="/video" element={<VideoEmbeds />} />
+                  <Route path="/" element={<AdminDashbord />} />
+                  <Route path="/ApplicantsPage" element={<ApplicantsPage />} />
+                  <Route path="/JobArchivePage" element={<JobArchivePage />} />
+                  <Route
+                    path="/HRManagerApplicants"
+                    element={<HRManagerApplicants />}
+                  />
+                  <Route path="/applicant" element={<Applicants />} />
+                  <Route path="/applicant/:id" element={<ApplicantDetails />} />
+                  <Route path="/add-news" element={<AddNews />} />
+                  <Route path="/news" element={<Newss />} />
+                  <Route path="news/edit/:news_id" element={<EditNews />} />
+                  <Route path="/add-healthtip" element={<AddHealthTipForm />} />
+                  <Route path="/healthtipList" element={<HealthTipList />} />
+                  <Route
+                    path="/healthtiplist/edit/:health_tip_id"
+                    element={<EditHealthTip />}
+                  />
+                  <Route path="/add-job" element={<AddJobForm />} />
+                  <Route path="/all-job" element={<JobsListPage />} />
+                  <Route path="/job/edit/:job_id" element={<EditJobForm />} />
 
-              {/* Train Info Routes */}
-              <Route path="/trainees" element={<TrainInfoList />} />
-              {/* <Route path="/trainee/:id" element={<TrainInfoDetail />} /> */}
+                  {/* Train Info Routes */}
+                  <Route path="/trainees" element={<TrainInfoList />} />
+                  {/* <Route path="/trainee/:id" element={<TrainInfoDetail />} /> */}
 
-              <Route path="/add-publication" element={<AddPublication />} />
-              <Route path="/publications" element={<ResearchPublications />} />
-              <Route
-                path="/publications/edit/:id"
-                element={<EditPublicationForm />}
-              />
-              <Route path="/publicationlist" element={<PublicationList />} />
+                  <Route path="/add-publication" element={<AddPublication />} />
+                  <Route
+                    path="/publications"
+                    element={<ResearchPublications />}
+                  />
+                  <Route
+                    path="/publications/edit/:id"
+                    element={<EditPublicationForm />}
+                  />
+                  <Route
+                    path="/publicationlist"
+                    element={<PublicationList />}
+                  />
 
-              <Route
-                path="/edit-cpd-news/:newsId"
-                element={<EditCpdNewsForm />}
-              />
-              {/*  */}
-              <Route path="/cpd-news" element={<Cpdnews />} />
-              <Route path="/add-cpd-news" element={<AddCpdNewsForm />} />
-              <Route
-                path="/edit-cpd-news/:newsId"
-                element={<EditCpdNewsForm />}
-              />
-              <Route path="/cpd-news-list" element={<CpdNewsList />} />
-              <Route path="/cpd/newCourse" element={<AddNewCourse />} />
-              <Route path="/cpd/list" element={<ListAllCourses />} />
-              <Route path="/cpd/course/:course_id" element={<CourseDetail />} />
-              <Route path="/contact" element={<ContactList />} />
-              <Route path="/contact/:id" element={<ContactDetail />} />
-              <Route path="/cpd/schedule" element={<ListOfSchedule />} />
-              <Route path="/cpd/trainees/:schedule_id" element={<Trainee />} />
-              <Route
-                path="/cpd/check-exam/:schedule_id/:courseName"
-                element={<CheckExam />}
-              />
+                  <Route
+                    path="/edit-cpd-news/:newsId"
+                    element={<EditCpdNewsForm />}
+                  />
+                  {/*  */}
+                  <Route path="/cpd-news" element={<Cpdnews />} />
+                  <Route path="/add-cpd-news" element={<AddCpdNewsForm />} />
+                  <Route
+                    path="/edit-cpd-news/:newsId"
+                    element={<EditCpdNewsForm />}
+                  />
+                  <Route path="/cpd-news-list" element={<CpdNewsList />} />
+                  <Route path="/cpd/newCourse" element={<AddNewCourse />} />
+                  <Route path="/cpd/list" element={<ListAllCourses />} />
+                  <Route
+                    path="/cpd/course/:course_id"
+                    element={<CourseDetail />}
+                  />
+                  <Route path="/contact" element={<ContactList />} />
+                  <Route path="/contact/:id" element={<ContactDetail />} />
+                  <Route path="/cpd/schedule" element={<ListOfSchedule />} />
+                  <Route
+                    path="/cpd/trainees/:schedule_id"
+                    element={<Trainee />}
+                  />
+                  <Route
+                    path="/cpd/check-exam/:schedule_id/:courseName"
+                    element={<CheckExam />}
+                  />
+                </>
+              ) : role === "HR" ? (
+                <>
+                  {privileges.includes("Archive Vacancy") && (
+                    <Route
+                      path="/JobArchivePage"
+                      element={<JobArchivePage />}
+                    />
+                  )}
+                  {privileges.includes("Post Vacancy") && (
+                    <Route path="/add-job" element={<AddJobForm />} />
+                  )}
+                  {privileges.includes("Show Applicants") && (
+                    <Route path="/applicant" element={<Applicants />} />
+                  )}
+                  <Route path="/ApplicantsPage" element={<ApplicantsPage />} />
+                  <Route
+                    path="/HRManagerApplicants"
+                    element={<HRManagerApplicants />}
+                  />
+                  <Route path="/applicant/:id" element={<ApplicantDetails />} />
+                </>
+              ) : role === "CPD" ? (
+                <>
+                  {privileges.includes("Add CPD course") && (
+                    <Route path="/cpd/newCourse" element={<AddNewCourse />} />
+                  )}
+                  {privileges.includes("Active CPD Test") && (
+                    <Route
+                      path="/cpd/check-exam/:schedule_id/:courseName"
+                      element={<CheckExam />}
+                    />
+                  )}
+                  {privileges.includes("Schedule CPD course") && (
+                    <>
+                      <Route
+                        path="/cpd/course/:course_id"
+                        element={<CourseDetail />}
+                      />
+                      <Route
+                        path="/add-cpd-news"
+                        element={<AddCpdNewsForm />}
+                      />
+                      <Route
+                        path="/edit-cpd-news/:newsId"
+                        element={<EditCpdNewsForm />}
+                      />
+                    </>
+                  )}
+                  {/* <Route path="/trainees" element={<TrainInfoList />} /> */}
+
+                  {/*  */}
+                  <Route path="/cpd-news" element={<Cpdnews />} />
+                  <Route path="/cpd-news-list" element={<CpdNewsList />} />
+                  <Route path="/cpd/list" element={<ListAllCourses />} />
+                  <Route path="/cpd/schedule" element={<ListOfSchedule />} />
+                  <Route
+                    path="/cpd/trainees/:schedule_id"
+                    element={<Trainee />}
+                  />
+                </>
+              ) : role === "Communication" ? (
+                <>
+                  {privileges.includes("Post News") && (
+                    <Route path="/add-news" element={<AddNews />} />
+                  )}
+                  {/* {privileges.includes("Approve News") && (
+                     <Route path="/news" element={<Newss />} />
+                   )} */}
+                  <Route path="/news" element={<Newss />} />
+                  <Route path="news/edit/:news_id" element={<EditNews />} />
+                  <Route path="/contact" element={<ContactList />} />
+                  <Route path="/contact/:id" element={<ContactDetail />} />
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <Route path="/add-healthtip" element={<AddHealthTipForm />} />
+                  <Route path="/healthtipList" element={<HealthTipList />} />
+                  <Route
+                    path="/healthtiplist/edit/:health_tip_id"
+                    element={<EditHealthTip />}
+                  />
+                </>
+              )}
             </Routes>
           </div>
         </div>

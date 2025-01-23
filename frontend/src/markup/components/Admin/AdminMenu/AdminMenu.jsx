@@ -123,7 +123,7 @@ function AdminMenu() {
           <>
             {privileges.includes("Add CPD course") && (
               <Link to="cpd/newCourse" className="list-group-item">
-                New CPD Vacancy
+                New CPD course
               </Link>
             )}
 
