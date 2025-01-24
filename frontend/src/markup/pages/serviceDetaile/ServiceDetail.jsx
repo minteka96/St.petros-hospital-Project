@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 // ServiceDetail.js
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -51,7 +51,7 @@ function ServiceDetail() {
                               <li><Link to="medical">Medical</Link></li>
                               <li><Link to="toxicology">Toxicology</Link></li>
                               <li><Link to="surgery">Surgery</Link></li>
-                              <li><Link to="urology">Urology</Link></li>
+                           
                               <li><Link to="pathology">Pathology</Link></li>
                               <li><Link to="psychiatric">Psychiatric</Link></li>
                               <li><Link to="generallab">GeneralLab</Link></li>
@@ -67,45 +67,12 @@ function ServiceDetail() {
                       </div>
                     </div>
 
-                    {/* <div className="widget-item">
-                      <div className="widget-work-hours">
-                        <h4 className="title">Work Hours</h4>
-                        <ul>
-                          <li><span className="work-day">Monday</span><span className="work-hours">7:00 - 17:00</span></li> */}
-                          {/* Other work hours */}
-                        {/* </ul>
-                        <a className="btn-theme btn-white" href="#/">REQUEST A CONSULTATION</a>
-                      </div>
-                    </div> */}
+                   
                     
                   </div>
  <Outlet />
-                  {/* <div className="department-content">
-                    <h2 className="title"></h2>
-                    <div className="swiper-container department-gallery">
-                      <div className="swiper-wrapper gallery-slider">
-                        <div className="swiper-slide">
-                          <img src="assets/img/photos/department-s1.jpg" alt="hope-Image" />
-                        </div>
-                        <div className="swiper-slide">
-                          <img src="assets/img/photos/department-s2.jpg" alt="hope-Image" />
-                        </div>
-                      </div>
-                      <div className="swiper-button-prev"><i className="icofont-rounded-left"></i></div>
-                      <div className="swiper-button-next"><i className="icofont-rounded-right"></i></div>
-                    </div>
-
-                    <div className="content">
-                      <p>The Pediatrics Department at Kidus Petros Hospital offers specialized care for children...</p>
-                      <ul className="list-style1">
-                        <li>Routine Pediatric Checkups</li>
-                        <li>Immunizations and Vaccinations</li>
-                        <li>Pediatric Emergency Care</li>
-                        <li>Childhood Illness Treatment</li>
-                        <li>Growth and Development Monitoring</li>
-                      </ul>
-                    </div>
-                  </div> */}
+                  
+                 
                 </div>
               </div>
             </div>

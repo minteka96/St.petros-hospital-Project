@@ -4,7 +4,7 @@ import { Carousel } from "react-bootstrap";
 import classes from "./Pathology.module.css"; // Importing modular CSS
 import img1 from "../../../../assets/img/slider/lab/lab.jpg";
 import img2 from "../../../../assets/img/slider/lab/lab 55.JPG";
-import img3 from "../../../../assets/img/slider/lab/lab miro58.JPG";
+import img3 from "../../../../assets/img/slider/lab/lab-1.jpg";
 
 const Pathology = () => {
   return (
@@ -67,18 +67,7 @@ const Pathology = () => {
           </Carousel>
         </div>
 
-        {/* Pathology Services */}
-        <div className={classes.pathologyServices}>
-          <h4 className={classes.servicesTitle}>Our Services</h4>
-          <ul className={classes.servicesList}>
-            <li className={classes.servicesItem}>Biopsy and Cytology</li>
-            <li className={classes.servicesItem}>Fluid Analysis</li>
-            <li className={classes.servicesItem}>
-              FNAC (Fine Needle Aspiration Cytology)
-            </li>
-            <li className={classes.servicesItem}>Microbiology Testing</li>
-          </ul>
-        </div>
+      
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { Carousel } from "react-bootstrap";
-import img1 from "../../../../assets/img/slider/lab/lab-1.jpg";
+import img1 from "../../../../assets/img/slider/lab/lab miro58.JPG";
 import img2 from "../../../../assets/img/slider/lab/lab3.jpg";
 import classes from "./GeneralLab.module.css";
 
