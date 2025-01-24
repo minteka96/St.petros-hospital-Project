@@ -23,7 +23,6 @@ async function logIn(req, res) {
 
     // Generate JWT token upon successful login
     const user = loginResponse.data;
-
     // Check if the user is active
     if (!user.active_status) {
       return res.status(403).json({
@@ -38,9 +37,9 @@ async function logIn(req, res) {
       email: user.email,
       role: user.role,
       privileges: user.privileges, // Include privileges in the token payload
+      updated_by:user.updated_by
     };
 
-    console.log(payload);
 
     // Set token expiration time (e.g., 24 hours)
     const token = jwt.sign(payload, jwtSecret, { expiresIn: "24h" });
@@ -56,6 +55,7 @@ async function logIn(req, res) {
           email: user.email,
           role: user.role,
           privileges: user.privileges,
+          updated_by:user.updated_by
         },
       },
     });

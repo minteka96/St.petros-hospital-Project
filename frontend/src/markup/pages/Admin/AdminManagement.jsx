@@ -9,7 +9,6 @@ const AdminManagement = () => {
   const { user } = useAuth();
   const token = user ? user.token : null;
   const role = user ? user.role : null;
-  console.log("role", role);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
   const [editingUserId, setEditingUserId] = useState(null); // Track the user being edited
@@ -121,12 +120,12 @@ const AdminManagement = () => {
                     ? "Admin"
                     : user.role === "HR"
                     ? "HR"
-                    : user.role === "HE"
+                    : user.role === "RCUB"
+                    ? "Research Publication"
+                    : user.role === "Health Literacy"
                     ? "Health Literacy"
                     : user.role === "CPD"
                     ? "CPD Training"
-                    : user.role === "RPUB"
-                    ? "Research Publication"
                     : user.role === "Comm"
                     ? "Communication"
                     : "Unknown Role"}
@@ -163,7 +162,7 @@ const AdminManagement = () => {
             <h5 style={{ fontSize: "16px", padding: 0, margin: 0 }}>
               Role Access definition
             </h5>
-            <div style={{ textAlign: "left",display:"flow" }}>
+            <div style={{ textAlign: "left", display: "flow" }}>
               <p style={{ fontSize: "12px", padding: 0 }}>
                 Admin : <span>access all without admin Management</span>
               </p>

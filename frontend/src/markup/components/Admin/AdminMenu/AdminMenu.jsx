@@ -21,8 +21,9 @@ function AdminMenu() {
   const isAdminOrHigher = isSuperAdmin || role === "Admin";
   const isComm = isAdminOrHigher || role === "Communication";
   const isHR = isAdminOrHigher || role === "HR";
-  const isHE = isAdminOrHigher || role === "HE";
+  const isHE = isAdminOrHigher || role === "Health Literacy";
   const isCPD = isAdminOrHigher || role === "CPD";
+  const isRCUB = isAdminOrHigher || role === "RCUB";
 
   // "Post Vacancy",
   // "Approve Applicants",
@@ -127,22 +128,6 @@ function AdminMenu() {
               </Link>
             )}
 
-            {privileges.includes("Post Vacancy") && (
-              <Link to="/admin/add-job" className="list-group-item">
-                Post Vacancy
-              </Link>
-            )}
-            {privileges.includes("Screen Applicants") && (
-              <Link to="/admin/ApplicantsPage" className="list-group-item">
-                Screen Applicants
-              </Link>
-            )}
-            {privileges.includes("Manage Applicants") && (
-              <Link to="/admin/HRManagerApplicants" className="list-group-item">
-                Manager Applicants
-              </Link>
-            )}
-
             <Link to="cpd/list" className="list-group-item">
               List of CPD
             </Link>
@@ -153,6 +138,22 @@ function AdminMenu() {
             <Link to="cpd-news-list" className="list-group-item">
               CPD news list
             </Link>
+          </>
+        )}
+        {isRCUB && (
+          <>
+            <Link to="add-publication" className="list-group-item">
+              Add Research Publication
+            </Link>
+            <Link to="publicationlist" className="list-group-item">
+              List Research Publication
+            </Link>
+            <Link to="publications" className="list-group-item">
+              Research Publication
+            </Link>
+            {/* <Link to="publications/edit/:id" className="list-group-item">
+              Edit Research Publication
+            </Link> */}
           </>
         )}
       </div>

@@ -6,7 +6,9 @@ CREATE TABLE IF NOT EXISTS `Users` (
     `password_hashed` VARCHAR(255) NOT NULL,
     `role` VARCHAR(50) NOT NULL,
     `active_status` TINYINT(1) NOT NULL DEFAULT 1,
-    `added_date` DATETIME DEFAULT CURRENT_TIMESTAMP
+    `updated_by` VARCHAR(50) DEFAULT 'system',
+    `added_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `updated_date` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 
@@ -85,7 +87,6 @@ CREATE TABLE IF NOT EXISTS `Applicant` (
     `additional_information` TEXT NOT NULL, 
     `cv_file_path` VARCHAR(255) NOT NULL, 
     `other_testimonials` VARCHAR(255) NOT NULL, 
-    `Status` VARCHAR(255) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

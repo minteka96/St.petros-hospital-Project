@@ -45,10 +45,10 @@ export const AuthProvider = ({ children }) => {
 
         if (adminToken) {
           const decodedAdminToken = decodeTokenPayload(adminToken);
-          const { role, username, email, privileges } = decodedAdminToken;
+          const { role, username, email, privileges,updated_by } = decodedAdminToken;
 
           setIsLogged(true);
-          setUser({ username, role, email, token: adminToken,privileges });
+          setUser({ username, role, email, token: adminToken,privileges,updated_by });
           setIsAdmin(role === "admin");
           setPrivileges(privileges || []);
         }

@@ -6,6 +6,7 @@ import axios from "axios";
 import { Form, InputGroup, Modal } from "react-bootstrap";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import styles from "../pages/Login/Login.module.css";
 import Applicants from "../components/Admin/Applicant/Applicant.jsx";
 import ApplicantDetails from "../components/Admin/Applicant/ApplicantDetail.jsx";
 import AdminMenu from "../components/Admin/AdminMenu/AdminMenu.jsx";
@@ -59,6 +60,7 @@ import EditPublicationForm from "../components/Admin/EditPublicationForm/EditPub
 import ResearchPublications from "../pages/qulity&research/ResearchPublication.jsx";
 import PublicationList from "../components/Admin/publicationlist/PublicationList.jsx";
 import CheckExam from "../components/Admin/CPD/CheckExam/CheckExam.jsx";
+import ResetPassword from "../pages/Admin/ResetPassword.jsx";
 
 const AdminRoute = () => {
   const navigate = useNavigate();
@@ -71,7 +73,6 @@ const AdminRoute = () => {
   const { user } = useAuth();
   const privileges = user?.privileges;
   const role = user?.role;
-  console.log("user", user);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [show, setShow] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
@@ -84,6 +85,7 @@ const AdminRoute = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isUpdated, setIsUpdated] = useState(false);
   const togglePasswordVisibility = (setter) => {
     setter((prev) => !prev);
   };
@@ -156,8 +158,13 @@ const AdminRoute = () => {
 
   useEffect(() => {
     const token = user ? user.token : null;
+    const role = user ? user.role : null;
+    const updated_by = user ? user.updated_by : null;
     if (!token) {
       navigate("/login");
+    }
+    if (role !== "superadmin" && updated_by === "superAdmin") {
+      setIsUpdated(true);
     }
     const isTokenExpired = () => {
       if (token) {
@@ -176,6 +183,427 @@ const AdminRoute = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
+
+  if (isUpdated) {
+    return (
+      //  <Modal>
+      <div
+        style={{
+          margin: 0,
+          padding: 0,
+          height: "100vh",
+        }}
+        className={`${styles.gradientCustom} d-flex align-items-center`}
+      >
+        <ResetPassword />
+      </div>
+      //  </Modal>
+    );
+  }
+
+  const commonRoutes = [
+    <Route
+      path="/reset-password"
+      element={<ResetPassword />}
+      key="reset-password"
+    />,
+    <Route path="/" element={<AdminDashbord />} key="dashboard" />,
+  ];
+
+  const roleBasedRoutes = {
+    superadmin: [
+      <Route path="/admins" element={<AdminManagement />} key="admins" />,
+      <Route path="/new" element={<AddAdmin />} key="new" />,
+      <Route path="/video" element={<VideoEmbeds />} key="video" />,
+      <Route
+        path="/ApplicantsPage"
+        element={<ApplicantsPage />}
+        key="applicants-page"
+      />,
+      <Route
+        path="/JobArchivePage"
+        element={<JobArchivePage />}
+        key="job-archive"
+      />,
+      <Route
+        path="/HRManagerApplicants"
+        element={<HRManagerApplicants />}
+        key="hr-manager-applicants"
+      />,
+      <Route path="/applicant" element={<Applicants />} key="applicants" />,
+      <Route
+        path="/applicant/:id"
+        element={<ApplicantDetails />}
+        key="applicant-details"
+      />,
+      <Route path="/add-news" element={<AddNews />} key="add-news" />,
+      <Route path="/news" element={<Newss />} key="news" />,
+      <Route
+        path="news/edit/:news_id"
+        element={<EditNews />}
+        key="edit-news"
+      />,
+      <Route
+        path="/add-healthtip"
+        element={<AddHealthTipForm />}
+        key="add-healthtip"
+      />,
+      <Route
+        path="/healthtipList"
+        element={<HealthTipList />}
+        key="healthtip-list"
+      />,
+      <Route
+        path="/healthtiplist/edit/:health_tip_id"
+        element={<EditHealthTip />}
+        key="edit-healthtip"
+      />,
+      <Route path="/add-job" element={<AddJobForm />} key="add-job" />,
+      <Route path="/all-job" element={<JobsListPage />} key="all-jobs" />,
+      <Route
+        path="/job/edit/:job_id"
+        element={<EditJobForm />}
+        key="edit-job"
+      />,
+      <Route path="/trainees" element={<TrainInfoList />} key="trainees" />,
+      <Route
+        path="/add-publication"
+        element={<AddPublication />}
+        key="add-publication"
+      />,
+      <Route
+        path="/publications"
+        element={<ResearchPublications />}
+        key="publications"
+      />,
+      <Route
+        path="/publications/edit/:id"
+        element={<EditPublicationForm />}
+        key="edit-publication"
+      />,
+      <Route
+        path="/publicationlist"
+        element={<PublicationList />}
+        key="publication-list"
+      />,
+      <Route path="/cpd-news" element={<Cpdnews />} key="cpd-news" />,
+      <Route
+        path="/edit-cpd-news/:newsId"
+        element={<EditCpdNewsForm />}
+        key="edit-cpd-news"
+      />,
+      <Route
+        path="/cpd-news-list"
+        element={<CpdNewsList />}
+        key="cpd-news-list"
+      />,
+      <Route
+        path="/cpd/list"
+        element={<ListAllCourses />}
+        key="list-courses"
+      />,
+      <Route
+        path="/cpd/course/:course_id"
+        element={<CourseDetail />}
+        key="course-detail"
+      />,
+      <Route path="/contact" element={<ContactList />} key="contact-list" />,
+      <Route
+        path="/contact/:id"
+        element={<ContactDetail />}
+        key="contact-detail"
+      />,
+      <Route
+        path="/cpd/schedule"
+        element={<ListOfSchedule />}
+        key="list-schedule"
+      />,
+      <Route
+        path="/cpd/trainees/:schedule_id"
+        element={<Trainee />}
+        key="trainee"
+      />,
+      <Route
+        path="/cpd/check-exam/:schedule_id/:courseName"
+        element={<CheckExam />}
+        key="check-exam"
+      />,
+    ],
+    Admin: [
+      privileges.includes("All Privileges") && (
+        <>
+          <Route path="/video" element={<VideoEmbeds />} key="video" />,
+          <Route path="/" element={<AdminDashbord />} key="dashboard" />,
+          <Route
+            path="/ApplicantsPage"
+            element={<ApplicantsPage />}
+            key="applicants-page"
+          />
+          ,
+          <Route
+            path="/JobArchivePage"
+            element={<JobArchivePage />}
+            key="job-archive"
+          />
+          ,
+          <Route
+            path="/HRManagerApplicants"
+            element={<HRManagerApplicants />}
+            key="hr-manager-applicants"
+          />
+          ,
+          <Route path="/applicant" element={<Applicants />} key="applicants" />,
+          <Route
+            path="/applicant/:id"
+            element={<ApplicantDetails />}
+            key="applicant-details"
+          />
+          ,
+          <Route path="/add-news" element={<AddNews />} key="add-news" />,
+          <Route path="/news" element={<Newss />} key="news" />,
+          <Route
+            path="news/edit/:news_id"
+            element={<EditNews />}
+            key="edit-news"
+          />
+          ,
+          <Route
+            path="/add-healthtip"
+            element={<AddHealthTipForm />}
+            key="add-healthtip"
+          />
+          ,
+          <Route
+            path="/healthtipList"
+            element={<HealthTipList />}
+            key="healthtip-list"
+          />
+          ,
+          <Route
+            path="/healthtiplist/edit/:health_tip_id"
+            element={<EditHealthTip />}
+            key="edit-healthtip"
+          />
+          ,
+          <Route path="/add-job" element={<AddJobForm />} key="add-job" />,
+          <Route path="/all-job" element={<JobsListPage />} key="all-jobs" />,
+          <Route
+            path="/job/edit/:job_id"
+            element={<EditJobForm />}
+            key="edit-job"
+          />
+          ,
+          <Route path="/trainees" element={<TrainInfoList />} key="trainees" />,
+          <Route
+            path="/add-publication"
+            element={<AddPublication />}
+            key="add-publication"
+          />
+          ,
+          <Route
+            path="/publications"
+            element={<ResearchPublications />}
+            key="publications"
+          />
+          ,
+          <Route
+            path="/publications/edit/:id"
+            element={<EditPublicationForm />}
+            key="edit-publication"
+          />
+          ,
+          <Route
+            path="/publicationlist"
+            element={<PublicationList />}
+            key="publication-list"
+          />
+          ,
+          <Route path="/cpd-news" element={<Cpdnews />} key="cpd-news" />,
+          <Route
+            path="/edit-cpd-news/:newsId"
+            element={<EditCpdNewsForm />}
+            key="edit-cpd-news"
+          />
+          ,
+          <Route
+            path="/cpd-news-list"
+            element={<CpdNewsList />}
+            key="cpd-news-list"
+          />
+          ,
+          <Route
+            path="/cpd/list"
+            element={<ListAllCourses />}
+            key="list-courses"
+          />
+          ,
+          <Route
+            path="/cpd/course/:course_id"
+            element={<CourseDetail />}
+            key="course-detail"
+          />
+          ,
+          <Route path="/contact" element={<ContactList />} key="contact-list" />
+          ,
+          <Route
+            path="/contact/:id"
+            element={<ContactDetail />}
+            key="contact-detail"
+          />
+          ,
+          <Route
+            path="/cpd/schedule"
+            element={<ListOfSchedule />}
+            key="list-schedule"
+          />
+          ,
+          <Route
+            path="/cpd/trainees/:schedule_id"
+            element={<Trainee />}
+            key="trainee"
+          />
+          ,
+          <Route
+            path="/cpd/check-exam/:schedule_id/:courseName"
+            element={<CheckExam />}
+            key="check-exam"
+          />
+          ,
+        </>
+      ),
+    ],
+    HR: [
+      privileges?.map((privilege) =>
+        privilege === "Archive Vacancy" ? (
+          <Route
+            path="/JobArchivePage"
+            element={<JobArchivePage />}
+            key="job-archive"
+          />
+        ) : privilege === "Post Vacancy" ? (
+          <Route path="/add-job" element={<AddJobForm />} key="add-job" />
+        ) : privilege === "Show Applicants" ? (
+          <Route path="/applicant" element={<Applicants />} key="applicants" />
+        ) : privilege === "Screen Applicants" ? (
+          <Route
+            path="/ApplicantsPage"
+            element={<ApplicantsPage />}
+            key="applicants-page"
+          />
+        ) : privilege === "Manage Applicants" ? (
+          <Route
+            path="/HRManagerApplicants"
+            element={<HRManagerApplicants />}
+            key="hr-manager-applicants"
+          />
+        ) : null
+      ),
+      <Route path="/all-job" element={<JobsListPage />} key="all-jobs" />,
+    ],
+    CPD: [
+      privileges?.map((privilege) =>
+        privilege === "Add CPD course" ? (
+          <>
+            <Route
+              path="/add-cpd-news"
+              element={<AddCpdNewsForm />}
+              key="add-cpd-news"
+            />
+            ,
+            <Route
+              path="/cpd/newCourse"
+              element={<AddNewCourse />}
+              key="add-new-course"
+            />
+            ,
+          </>
+        ) : privilege === "Active CPD Test" ? (
+          <Route
+            path="/cpd/check-exam/:schedule_id/:courseName"
+            element={<CheckExam />}
+            key="check-exam"
+          />
+        ) : null
+      ),
+      <Route path="/cpd-news" element={<Cpdnews />} key="cpd-news" />,
+      <Route
+        path="/cpd-news-list"
+        element={<CpdNewsList />}
+        key="cpd-news-list"
+      />,
+      <Route
+        path="/cpd/list"
+        element={<ListAllCourses />}
+        key="list-courses"
+      />,
+      <Route
+        path="/cpd/schedule"
+        element={<ListOfSchedule />}
+        key="list-schedule"
+      />,
+      <Route
+        path="/cpd/trainees/:schedule_id"
+        element={<Trainee />}
+        key="trainee"
+      />,
+    ],
+    Communication: [
+      privileges?.includes("Post News") && (
+        <Route path="/add-news" element={<AddNews />} key="add-news" />
+      ),
+      <Route path="/news" element={<Newss />} key="news" />,
+      <Route
+        path="news/edit/:news_id"
+        element={<EditNews />}
+        key="edit-news"
+      />,
+      <Route path="/contact" element={<ContactList />} key="contact-list" />,
+      <Route
+        path="/contact/:id"
+        element={<ContactDetail />}
+        key="contact-detail"
+      />,
+    ],
+    "Health Literacy": [
+      <Route
+        path="/add-healthtip"
+        element={<AddHealthTipForm />}
+        key="add-healthtip"
+      />,
+      <Route
+        path="/healthtipList"
+        element={<HealthTipList />}
+        key="healthtip-list"
+      />,
+      <Route
+        path="/healthtiplist/edit/:health_tip_id"
+        element={<EditHealthTip />}
+        key="edit-healthtip"
+      />,
+    ],
+    RCUB: [
+      <Route
+        path="/add-publication"
+        element={<AddPublication />}
+        key="add-publication"
+      />,
+      <Route
+        path="/publications"
+        element={<ResearchPublications />}
+        key="publications"
+      />,
+      <Route
+        path="/publications/edit/:id"
+        element={<EditPublicationForm />}
+        key="edit-publication"
+      />,
+      <Route
+        path="/publicationlist"
+        element={<PublicationList />}
+        key="publication-list"
+      />,
+    ],
+  };
 
   return (
     <div style={{ margin: 0, padding: 0, backgroundColor: "white" }}>
@@ -256,168 +684,9 @@ const AdminRoute = () => {
         >
           <div className="m-3 normalBg">
             <Routes>
-              {role === "superadmin" ? (
-                <>
-                  <Route path="/admins" element={<AdminManagement />} />
-                  <Route path="/new" element={<AddAdmin />} />
-                </>
-              ) : role === "admin" || role === "superadmin" ? (
-                <>
-                  <Route path="/video" element={<VideoEmbeds />} />
-                  <Route path="/" element={<AdminDashbord />} />
-                  <Route path="/ApplicantsPage" element={<ApplicantsPage />} />
-                  <Route path="/JobArchivePage" element={<JobArchivePage />} />
-                  <Route
-                    path="/HRManagerApplicants"
-                    element={<HRManagerApplicants />}
-                  />
-                  <Route path="/applicant" element={<Applicants />} />
-                  <Route path="/applicant/:id" element={<ApplicantDetails />} />
-                  <Route path="/add-news" element={<AddNews />} />
-                  <Route path="/news" element={<Newss />} />
-                  <Route path="news/edit/:news_id" element={<EditNews />} />
-                  <Route path="/add-healthtip" element={<AddHealthTipForm />} />
-                  <Route path="/healthtipList" element={<HealthTipList />} />
-                  <Route
-                    path="/healthtiplist/edit/:health_tip_id"
-                    element={<EditHealthTip />}
-                  />
-                  <Route path="/add-job" element={<AddJobForm />} />
-                  <Route path="/all-job" element={<JobsListPage />} />
-                  <Route path="/job/edit/:job_id" element={<EditJobForm />} />
-
-                  {/* Train Info Routes */}
-                  <Route path="/trainees" element={<TrainInfoList />} />
-                  {/* <Route path="/trainee/:id" element={<TrainInfoDetail />} /> */}
-
-                  <Route path="/add-publication" element={<AddPublication />} />
-                  <Route
-                    path="/publications"
-                    element={<ResearchPublications />}
-                  />
-                  <Route
-                    path="/publications/edit/:id"
-                    element={<EditPublicationForm />}
-                  />
-                  <Route
-                    path="/publicationlist"
-                    element={<PublicationList />}
-                  />
-
-                  <Route
-                    path="/edit-cpd-news/:newsId"
-                    element={<EditCpdNewsForm />}
-                  />
-                  {/*  */}
-                  <Route path="/cpd-news" element={<Cpdnews />} />
-                  <Route path="/add-cpd-news" element={<AddCpdNewsForm />} />
-                  <Route
-                    path="/edit-cpd-news/:newsId"
-                    element={<EditCpdNewsForm />}
-                  />
-                  <Route path="/cpd-news-list" element={<CpdNewsList />} />
-                  <Route path="/cpd/newCourse" element={<AddNewCourse />} />
-                  <Route path="/cpd/list" element={<ListAllCourses />} />
-                  <Route
-                    path="/cpd/course/:course_id"
-                    element={<CourseDetail />}
-                  />
-                  <Route path="/contact" element={<ContactList />} />
-                  <Route path="/contact/:id" element={<ContactDetail />} />
-                  <Route path="/cpd/schedule" element={<ListOfSchedule />} />
-                  <Route
-                    path="/cpd/trainees/:schedule_id"
-                    element={<Trainee />}
-                  />
-                  <Route
-                    path="/cpd/check-exam/:schedule_id/:courseName"
-                    element={<CheckExam />}
-                  />
-                </>
-              ) : role === "HR" ? (
-                <>
-                  {privileges.includes("Archive Vacancy") && (
-                    <Route
-                      path="/JobArchivePage"
-                      element={<JobArchivePage />}
-                    />
-                  )}
-                  {privileges.includes("Post Vacancy") && (
-                    <Route path="/add-job" element={<AddJobForm />} />
-                  )}
-                  {privileges.includes("Show Applicants") && (
-                    <Route path="/applicant" element={<Applicants />} />
-                  )}
-                  <Route path="/ApplicantsPage" element={<ApplicantsPage />} />
-                  <Route
-                    path="/HRManagerApplicants"
-                    element={<HRManagerApplicants />}
-                  />
-                  <Route path="/applicant/:id" element={<ApplicantDetails />} />
-                </>
-              ) : role === "CPD" ? (
-                <>
-                  {privileges.includes("Add CPD course") && (
-                    <Route path="/cpd/newCourse" element={<AddNewCourse />} />
-                  )}
-                  {privileges.includes("Active CPD Test") && (
-                    <Route
-                      path="/cpd/check-exam/:schedule_id/:courseName"
-                      element={<CheckExam />}
-                    />
-                  )}
-                  {privileges.includes("Schedule CPD course") && (
-                    <>
-                      <Route
-                        path="/cpd/course/:course_id"
-                        element={<CourseDetail />}
-                      />
-                      <Route
-                        path="/add-cpd-news"
-                        element={<AddCpdNewsForm />}
-                      />
-                      <Route
-                        path="/edit-cpd-news/:newsId"
-                        element={<EditCpdNewsForm />}
-                      />
-                    </>
-                  )}
-                  {/* <Route path="/trainees" element={<TrainInfoList />} /> */}
-
-                  {/*  */}
-                  <Route path="/cpd-news" element={<Cpdnews />} />
-                  <Route path="/cpd-news-list" element={<CpdNewsList />} />
-                  <Route path="/cpd/list" element={<ListAllCourses />} />
-                  <Route path="/cpd/schedule" element={<ListOfSchedule />} />
-                  <Route
-                    path="/cpd/trainees/:schedule_id"
-                    element={<Trainee />}
-                  />
-                </>
-              ) : role === "Communication" ? (
-                <>
-                  {privileges.includes("Post News") && (
-                    <Route path="/add-news" element={<AddNews />} />
-                  )}
-                  {/* {privileges.includes("Approve News") && (
-                     <Route path="/news" element={<Newss />} />
-                   )} */}
-                  <Route path="/news" element={<Newss />} />
-                  <Route path="news/edit/:news_id" element={<EditNews />} />
-                  <Route path="/contact" element={<ContactList />} />
-                  <Route path="/contact/:id" element={<ContactDetail />} />
-                </>
-              ) : (
-                <>
-                  {" "}
-                  <Route path="/add-healthtip" element={<AddHealthTipForm />} />
-                  <Route path="/healthtipList" element={<HealthTipList />} />
-                  <Route
-                    path="/healthtiplist/edit/:health_tip_id"
-                    element={<EditHealthTip />}
-                  />
-                </>
-              )}
+              {commonRoutes}
+              {roleBasedRoutes[role]}
+              {/* <Route path="*" element={<NotFound />} /> */}
             </Routes>
           </div>
         </div>
@@ -526,6 +795,9 @@ const AdminRoute = () => {
           </Modal.Footer>
         </Modal>
       </div>
+      <Modal>
+        <ResetPassword />
+      </Modal>
     </div>
   );
 };
