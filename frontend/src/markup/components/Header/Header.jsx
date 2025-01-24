@@ -139,7 +139,7 @@ const Header = () => {
                       </a>
                       <ul className="sub-menu">
                         <li>
-                          <Link className="sub-menu-link" to="/about-cpd">
+                          <Link className="sub-menu-link" to="/cpd-news">
                             CPD News
                           </Link>
                         </li>
