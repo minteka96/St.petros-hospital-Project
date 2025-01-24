@@ -12,6 +12,7 @@ const UpdateAdmin = ({ userId, fetchUserData, onSubmit, cancelEditing }) => {
     password_hashed: "",
     role: "User",
     active_status: true,
+    updated_by: "",
   });
 
   const [error, setError] = useState("");
@@ -33,6 +34,7 @@ const UpdateAdmin = ({ userId, fetchUserData, onSubmit, cancelEditing }) => {
           password_hashed: "",
           role: user.role,
           active_status: user.active_status,
+          updated_by: user.updated_by,
         });
       } catch (err) {
         setError("Failed to fetch user data. Please try again.");
@@ -57,8 +59,23 @@ const UpdateAdmin = ({ userId, fetchUserData, onSubmit, cancelEditing }) => {
       ...formData,
       [name]: type === "checkbox" ? checked : value,
     });
-  };
 
+    // check if the name is password_hashed set updated_by to admin
+    if (name === "password_hashed" && value!=="") {
+      setFormData({
+        ...formData,
+        password_hashed: value,
+        updated_by: "superAdmin",
+      });
+    }else if (name === "password_hashed" && value==="") {
+      setFormData({
+        ...formData,
+        password_hashed: value,
+        updated_by:"system",
+      });
+    }
+    
+  };
 const handleSubmit = async (e) => {
   e.preventDefault();
   setError("");

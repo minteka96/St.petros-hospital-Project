@@ -41,6 +41,7 @@ const AddAdmin = () => {
     "Health Literacy": ["Post Health Tip", "Approve Post"],
     Communication: ["Post News", "Approve News"],
     CPD: ["Schedule CPD course", "Active CPD Test", "Add CPD course"],
+    RCUB: null,
   };
 
   const handleChange = (e) => {
@@ -68,12 +69,12 @@ const AddAdmin = () => {
     //     privileges: "access all privileges",
     //   })
     // }
-      setFormData((prevState) => {
-        const updatedPrivileges = checked
-          ? [...prevState.privileges, value]
-          : prevState.privileges.filter((privilege) => privilege !== value);
-        return { ...prevState, privileges: updatedPrivileges };
-      });
+    setFormData((prevState) => {
+      const updatedPrivileges = checked
+        ? [...prevState.privileges, value]
+        : prevState.privileges.filter((privilege) => privilege !== value);
+      return { ...prevState, privileges: updatedPrivileges };
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -181,29 +182,27 @@ const AddAdmin = () => {
               </Form.Select>
             </Form.Group>
 
-            {formData.department && privilegesMap[formData.department] && (
-              <Form.Group className="mb-3">
-                <Form.Label>Privileges</Form.Label>
-                <Row>
-                  {privilegesMap[formData.department].map((privilege) => (
-                    <Col xs={6} key={privilege}>
-                      <Form.Check
-                        type="checkbox"
-                        id={privilege}
-                        label={privilege}
-                        value={privilege}
-                        checked={
-                          formData.privileges.includes(privilege)  
-                        
-                        }
-                        onChange={handlePrivilegeChange}
-                        // disabled={formData.department === "Admin"}
-                      />
-                    </Col>
-                  ))}
-                </Row>
-              </Form.Group>
-            )}
+            {formData.department &&
+              privilegesMap[formData.department] && (
+                <Form.Group className="mb-3">
+                  <Form.Label>Privileges</Form.Label>
+                  <Row>
+                    {privilegesMap[formData.department].length > 0 && privilegesMap[formData.department].map((privilege) => (
+                      <Col xs={6} key={privilege}>
+                        <Form.Check
+                          type="checkbox"
+                          id={privilege}
+                          label={privilege}
+                          value={privilege}
+                          checked={formData.privileges.includes(privilege)}
+                          onChange={handlePrivilegeChange}
+                          // disabled={formData.department === "Admin"}
+                        />
+                      </Col>
+                    ))}
+                  </Row>
+                </Form.Group>
+              )}
 
             <Form.Group className="mb-3">
               <Form.Check

@@ -20,14 +20,14 @@ async function createUser(user) {
     // Hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(user.password_hashed, salt);
-
+const updated_by="superAdmin";
     // Begin a transaction
     await connection.beginTransaction();
 
     // Insert user into Users table
     const userInsertQuery = `
-      INSERT INTO Users (username, email, password_hashed, role, active_status)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO Users (username, email, password_hashed, role, active_status, updated_by)
+      VALUES (?, ?, ?, ?, ?, ?)
     `;
     const [result] = await connection.query(userInsertQuery, [
       user.username,
@@ -35,6 +35,7 @@ async function createUser(user) {
       hashedPassword,
       user.department,
       user.active_status,
+      updated_by
     ]);
 
     const userId = result.insertId;
@@ -93,6 +94,7 @@ async function getUserByEmail(email) {
       u.email,
       u.password_hashed,
       u.role,
+      u.updated_by,
       u.active_status,
       GROUP_CONCAT(up.privilege) AS privileges
     FROM 
@@ -172,6 +174,10 @@ async function updateUserById(userId, formData) {
       updates.push("active_status = ?");
       values.push(formData.active_status);
     }
+    if (formData.updated_by) {
+      updates.push("updated_by = ?");
+      values.push(formData.updated_by);
+    }
 
     // Ensure there are updates to make
     if (updates.length === 0) {
@@ -217,13 +223,14 @@ async function updatePasswordByEmail(email, newPassword) {
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(newPassword, salt);
+    const updated_by = "system";
 
-    const sql = `UPDATE Users SET password_hashed = ? WHERE email = ?`;
+    const sql = `UPDATE Users SET password_hashed = ?, updated_by = ? WHERE email = ?`;
     const connection = await conn.pool.getConnection();
 
     try {
       await connection.beginTransaction();
-      const [result] = await connection.query(sql, [hashedPassword, email]);
+      const [result] = await connection.query(sql, [hashedPassword, updated_by, email]);
       await connection.commit();
       return result.affectedRows > 0;
     } catch (error) {
@@ -246,4 +253,5 @@ module.exports = {
   getUserById,
   updateUserById,
   deleteUserById,
+  updatePasswordByEmail
 };
