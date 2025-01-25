@@ -17,15 +17,12 @@ const ResearchPublications = () => {
   useEffect(() => {
     const fetchPublications = async () => {
       try {
-        if (!token) {
-          throw new Error("No token found!");
-        }
+        // if (!token) {
+        //   throw new Error("No token found!");
+        // }
 
-        console.log("Fetching publications with token:", token);
-        console.log("API URL:", import.meta.env.VITE_API_URL);
 
-        const response = await publicationService.getAllPublications(token);
-        console.log("Response from API:", response);
+        const response = await publicationService.getAllPublications();
 
         if (!response || response.length === 0) {
           throw new Error("No publications available!");
@@ -46,7 +43,7 @@ const ResearchPublications = () => {
     };
 
     fetchPublications();
-  }, [token]);
+  }, []);
 
   const handleImageClick = (publicationId) => {
     navigate(`/publicationDetails/${publicationId}`, { state: { publications } });

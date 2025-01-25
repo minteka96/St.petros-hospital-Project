@@ -17,7 +17,7 @@ const AddPublicationForm = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
-
+console.log("file", file);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -55,6 +55,12 @@ const AddPublicationForm = () => {
     }
   };
 
+    const handleFileChange = (e) => {
+       const { name, files } = e.target;
+      setFile(files);
+      setImagePreviews(files.map((file) => URL.createObjectURL(file)));
+    };
+
   return (
     <form onSubmit={handleSubmit} className={styles.formContainer}>
       <h2>Add Publication</h2>
@@ -88,11 +94,7 @@ const AddPublicationForm = () => {
         onChange={(e) => setPublicationDate(e.target.value)}
         className={styles.inputField}
       />
-      <input
-        type="file"
-        accept="application/pdf"
-        onChange={(e) => setFile(e.target.files[0])}
-      />
+      <input type="file" accept="application/pdf" onChange={(e) => setFile(e.target.files[0])} />
       <button type="submit" className={styles.submitButton}>
         Add Publication
       </button>

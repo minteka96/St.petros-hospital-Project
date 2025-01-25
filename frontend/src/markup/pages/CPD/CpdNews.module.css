@@ -21,9 +21,9 @@
 
 /* Row and Post Styling */
 .row {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(550px, 1fr)); /* Responsive grid layout */
-  gap: 1rem;
+  /* display: grid; */
+  /* grid-template-columns: repeat(auto-fill, minmax(550px, 1fr)); */
+  /* gap: 1rem; */
   justify-items: center; /* This ensures the items are centered */
   padding: 0;
   width: 100%;
@@ -32,7 +32,7 @@
 /* Post Item Styling */
 .postItem {
   background-color: #fff;
-  width: 100%;  /* This makes each item take 46% of the width */
+  width: 80%;  /* This makes each item take 46% of the width */
   height: auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;

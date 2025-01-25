@@ -92,7 +92,8 @@ CREATE TABLE IF NOT EXISTS `Applicant` (
     `email_address` VARCHAR(100) NOT NULL, 
     `phone_number` VARCHAR(20),
     `position_applied_for` VARCHAR(100), 
-    `additional_information` TEXT NOT NULL, 
+    `additional_information` TEXT NOT NULL,
+    `status` VARCHAR(255) DEFAULT '0',
     `cv_file_path` VARCHAR(255) NOT NULL, 
     `other_testimonials` VARCHAR(255) NOT NULL, 
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
@@ -223,13 +224,13 @@ CREATE TABLE IF NOT EXISTS `trainees_status` (
     FOREIGN KEY (course_name) REFERENCES cpd_trainings(course_name)
 ) ENGINE=InnoDB;
 CREATE TABLE IF NOT EXISTS `contacts` (
-   `id` INT AUTO_INCREMENT PRIMARY KEY,
-   `name` VARCHAR(100) NOT NULL,
-   `email` VARCHAR(100) NOT NULL,
-   `subject` VARCHAR(255),
-   `message` TEXT NOT NULL,
-   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-   `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(100) NOT NULL,
+    `subject` VARCHAR(255),
+    `message` TEXT NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE TABLE IF NOT EXISTS `research_publications` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

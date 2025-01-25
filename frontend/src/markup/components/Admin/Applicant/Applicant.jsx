@@ -197,14 +197,14 @@ const ApplicantsTable = () => {
           </tbody>
         </table>
       </div>
-      {filteredApplicants.length > 0 && (
+      {/* {filteredApplicants.length > 0 && (
         <button
           onClick={() => deleteOption(filteredApplicants)}
           className="btn btn-danger mt-3"
         >
           {loading ? "Loading..." : "Delete Selected Applicants"}
         </button>
-      )}
+      )} */}
     </div>
   );
 };

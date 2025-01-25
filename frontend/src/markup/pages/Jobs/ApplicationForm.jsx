@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import classes from "./JobsDetails/ApplicantForms.module.css"; 
-import { useAuth } from "../../../contexts/AuthContext";
 import applicantService from "../../../Services/applicant.service";
 import jobService from "../../../Services/jobs.service";
 
 const ApplicantForms = () => {
-  const { user } = useAuth();
-  const token = user ? user.token : null;
   const location = useLocation();
 
   const queryParams = new URLSearchParams(location.search);
@@ -89,7 +86,6 @@ const ApplicantForms = () => {
     try {
       const response = await applicantService.postApplicant(
         formDataToSend,
-        token
       );
       if (response.status === 201) {
         alert("CV submitted successfully!");
@@ -107,8 +103,10 @@ const ApplicantForms = () => {
       } else {
         alert("Failed to submit CV. Please try again.");
       }
+      // console.log("response", response);
     } catch (error) {
       console.error("Error submitting CV:", error);
+      alert(error.message.split(":")[2]);
     }
   };
 

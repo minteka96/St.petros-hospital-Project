@@ -11,13 +11,16 @@ async function createApplicant(req, res) {
       additional_information,
     } = req.body;
     // Validate required fields
-    const applicantExists = await applicantService.checkIfApplicantExists(
-      email_address
-    )
-    if (applicantExists) {
-      return res
-        .status(400)
-        .json({ error: "Applicant with this email already exists" });
+    if (email_address) {
+      const applicantExists = await applicantService.checkIfApplicantExists(
+        email_address
+      );
+      console.log("applicantExists", applicantExists);
+      if (applicantExists) {
+        return res
+          .status(400)
+          .json({ message: "you have already submitted an application" });
+      }
     }
     if (
       !first_name ||
@@ -48,7 +51,7 @@ async function createApplicant(req, res) {
       cv_file_path,
       other_testimonials,
     };
-
+    console.log("applicantData", applicantData);
     // Create applicant in the database
     await applicantService.createApplicant(applicantData);
     res
@@ -136,11 +139,9 @@ async function updateApplicant(req, res) {
 
     // Validate status input
     if (!status || (status !== "Approved" && status !== "Rejected")) {
-      return res
-        .status(400)
-        .json({
-          error: "Invalid status. Only 'Approved' or 'Rejected' are allowed.",
-        });
+      return res.status(400).json({
+        error: "Invalid status. Only 'Approved' or 'Rejected' are allowed.",
+      });
     }
 
     // Call service function to update the applicant
