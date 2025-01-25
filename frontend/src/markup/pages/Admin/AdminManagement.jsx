@@ -162,23 +162,41 @@ const AdminManagement = () => {
             <h5 style={{ fontSize: "16px", padding: 0, margin: 0 }}>
               Role Access definition
             </h5>
-            <div style={{ textAlign: "left", display: "flow" }}>
-              <p style={{ fontSize: "12px", padding: 0 }}>
+            <div
+              style={{
+                textAlign: "left",
+                display: "flow",
+                backgroundColor: "#F4F4F9",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "12px",
+                  padding: 0,
+                  backgroundColor: "#F4F4F9",
+                }}
+              >
                 Admin : <span>access all without admin Management</span>
               </p>
-              <p style={{ fontSize: "12px", padding: 0 }}>
+              <p
+                style={{
+                  fontSize: "12px",
+                  padding: 0,
+                  backgroundColor: "#F4F4F9",
+                }}
+              >
                 HR : <span>access only Job and Applicant</span>
               </p>
-              <p style={{ fontSize: "12px", padding: 0 }}>
+              <p style={{ fontSize: "12px", padding: 0,backgroundColor: "#F4F4F9", }}>
                 Health Literacy : <span>access only Health-Tip</span>
               </p>
-              <p style={{ fontSize: "12px", padding: 0 }}>
+              <p style={{ fontSize: "12px", padding: 0,backgroundColor: "#F4F4F9", }}>
                 Communication : <span>access only News</span>
               </p>
-              <p style={{ fontSize: "12px", padding: 0 }}>
+              <p style={{ fontSize: "12px", padding: 0,backgroundColor: "#F4F4F9", }}>
                 Research Publication : <span>access only Publication</span>
               </p>
-              <p style={{ fontSize: "12px", padding: 0 }}>
+              <p style={{ fontSize: "12px", padding: 0,backgroundColor: "#F4F4F9", }}>
                 CPD Training : <span>access only CPD Training</span>
               </p>
             </div>

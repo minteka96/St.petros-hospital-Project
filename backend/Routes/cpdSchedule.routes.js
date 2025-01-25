@@ -20,4 +20,11 @@ router.put("/api/cpd/schedule/:id", cpdScheduleController.updateScheduleById);
 // Router to delete a specific schedule by id
 router.delete("/api/cpd/schedule/:id", cpdScheduleController.deleteScheduleById);
 
+//Router to schedule by training id
+router.get(
+  "/api/cpd/schedule/:training_id",
+  cpdScheduleController.getScheduleByTrainingId
+);
+
+
 module.exports = router;

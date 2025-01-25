@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
-import './AdminDashboard.module.css';
+import React from "react";
+import { Outlet, Link } from "react-router-dom";
+import "./AdminDashboard.module.css";
+import CpdNews from "../../../pages/CPD/Cpdnews";
 
 const AdminCpd = () => {
   return (
@@ -12,12 +13,13 @@ const AdminCpd = () => {
           style={{ textAlign: "center", paddingTop: "10px" }}
         >
           <h2>CPD Menu Dashboard</h2>
-          <div
+          {/* <div
             className="text"
             style={{ backgroundColor: "#1F867E", borderRadius: "5px" }}
           >
             Welcome to the CPD Menu Dashboard
-          </div>
+          </div> */}
+          <CpdNews />
         </div>
       </div>
       <div className="mainContent">
@@ -28,4 +30,3 @@ const AdminCpd = () => {
 };
 
 export default AdminCpd;
-

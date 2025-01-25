@@ -61,6 +61,7 @@ const ListAllCourses = () => {
               <th className="px-3">S/N</th>
               <th className="px-3">Course Name</th>
               <th className="px-3">Course Level</th>
+              <th className="px-3">credits</th>
               <th className="px-3">Pre-Test</th>
               <th className="px-3">Post-Test</th>
               <th>Minimum Score to Pass Post-Test</th>
@@ -73,6 +74,7 @@ const ListAllCourses = () => {
                 <td>{indexOfFirstCourse + index + 1}</td>
                 <td>{course.course_name}</td>
                 <td>{course.course_level}</td>
+                <td>{course.credits}</td>
                 <td
                   className={course.pri_test ? "text-success" : "text-danger"}
                 >

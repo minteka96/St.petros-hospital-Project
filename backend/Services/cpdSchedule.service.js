@@ -40,6 +40,20 @@ async function getScheduleById(id) {
   }
 }
 
+//getScheduleByTrainingId
+async function getScheduleByTrainingId(training_id) {
+  const sql = "SELECT * FROM training_schedule WHERE training_id = ?";
+  const connection = await conn.pool.getConnection();
+  try {
+    const [rows] = await connection.query(sql, [training_id]);
+    return rows[0];
+  } catch (error) {
+    throw error;
+  } finally {
+    await connection.release();
+  }
+}
+
 //get all cpd schedules
 async function getAllSchedules() {
   const sql = "SELECT * FROM training_schedule";
@@ -146,5 +160,6 @@ module.exports = {
   getAllSchedules,
   updateScheduleById,
   deleteScheduleById,
+  getScheduleByTrainingId,
   updateAllRegistrationStatuses,
 };

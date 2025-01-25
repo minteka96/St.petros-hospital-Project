@@ -1,8 +1,8 @@
 const api_url = import.meta.env.VITE_API_URL;
 
-const checkTraineeExists = async (id) => {
+const checkTraineeExists = async (email) => {
   try {
-    const response = await fetch(`${api_url}/api/trainees-info/${id}`);
+    const response = await fetch(`${api_url}/api/trainee/email/${email}`);
     if (response.ok) {
       const data = await response.json();
       return !!data; // Returns true if the trainee exists
@@ -58,11 +58,11 @@ const userAuthHeader = async (userType) => {
       const { id, email } = decodedToken;
 
       // Check if the trainee exists
-      // const traineeExists = await checkTraineeExists(id);
-      // if (!traineeExists) {
-      //   console.warn(`Trainee with ID ${id} does not exist.`);
-      //   return null;
-      // }
+      const traineeExists = await checkTraineeExists(email);
+      if (!traineeExists) {
+        console.warn(`Trainee with ID ${email} does not exist.`);
+        return null;
+      }
 
       console.log(`Trainee Token Info:`, { id, email });
     }

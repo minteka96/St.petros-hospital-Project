@@ -19,8 +19,10 @@ function Test3({ courseName, onBack, id }) {
   const [userAnswers, setUserAnswers] = useState({});
   const [score, setScore] = useState(null);
   const [status, setStatus] = useState(null);
+  const [schedule, setSchedule] = useState(null);
   const [startCountdown, setStartCountdown] = useState(false);
   const [info, setInfo] = useState(null);
+
   useEffect(() => {
     const fetchTraining = async () => {
       try {
@@ -45,6 +47,16 @@ function Test3({ courseName, onBack, id }) {
         if (statusResponse?.data?.length > 0) {
           setStatus(statusResponse.data[0]);
         }
+        if (training.training_id) {
+          // get schadule by training id
+          const scheduleResponse = await axios.get(
+            `${api_url}/api/cpd/schedule/${training.training_id}`
+          );
+
+          if (scheduleResponse?.data?.length > 0) {
+            setSchedule(scheduleResponse.data[0]);
+          }
+        }
       } catch (err) {
         console.error("Error fetching training:", err);
         setError("Failed to fetch training. Please try again.");
@@ -54,6 +66,20 @@ function Test3({ courseName, onBack, id }) {
     };
     fetchTraining();
   }, [courseName]);
+
+  useEffect(() => {
+    const scheduleResponse = async () => {
+      if (training?.training_id) {
+        const scheduleResponse = await axios.get(
+          `${api_url}/api/cpd/schedule/${training.training_id}`
+        );
+        if (scheduleResponse) {
+          setSchedule(scheduleResponse.data);
+        }
+      }
+    };
+    scheduleResponse();
+  }, [training]);
 
   const selectCourse = async (type) => {
     try {
@@ -105,7 +131,6 @@ function Test3({ courseName, onBack, id }) {
       setPostQuestion([]);
     }
   };
-
 
   const updateStatus = async (status) => {
     try {
@@ -202,7 +227,13 @@ function Test3({ courseName, onBack, id }) {
       ) : (
         <>
           <h2>Course Details</h2>
-          <TestSelection onSelect={selectCourse} status={status} info={info} />
+          <TestSelection
+            onSelect={selectCourse}
+            status={status}
+            info={info}
+            credits={training.credits}
+            schedule={schedule}
+          />
         </>
       )}
       {typeError && <ErrorDisplay error={typeError} />}

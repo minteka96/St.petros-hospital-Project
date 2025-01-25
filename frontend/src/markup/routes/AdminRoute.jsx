@@ -333,6 +333,11 @@ const AdminRoute = () => {
         element={<AddNewCourse />}
         key="add-new-course"
       />,
+      <Route
+        path="/add-cpd-news"
+        element={<AddCpdNewsForm />}
+        key="add-cpd-news"
+      />,
     ],
     Admin: [
       privileges?.includes("All Privileges") && (
@@ -477,6 +482,11 @@ const AdminRoute = () => {
             path="/cpd/newCourse"
             element={<AddNewCourse />}
             key="add-new-course"
+          />
+          <Route
+            path="/add-cpd-news"
+            element={<AddCpdNewsForm />}
+            key="add-cpd-news"
           />
           ,
         </>

@@ -72,12 +72,12 @@ const TraineeAddForm = () => {
   };
 
   return (
-    <div className="container py-4">
+    <div className="container py-5">
       <div className="row justify-content-center">
         <div className="col-md-8">
           <div className="card shadow">
-            <div className="card-header  text-white text-center">
-              <h3 className="mb-0 text-gray-500">Add New Trainee</h3>
+            <div className="card-header  text-center">
+              <h3 className="mb-0 ">Trainee Registration</h3>
             </div>
             <div className="card-body">
               <form onSubmit={handleSubmit}>
