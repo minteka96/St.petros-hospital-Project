@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import AdminMenuCpd from "../components/Admin/AdminMenuCPD/AdminMenuCpd.jsx";
 import TraineesDashboard from "../../markup/components/TraineesDashboard/TraineesDashboard.jsx";
 import AdminDashboardCpd from "../components/Admin/AdminDashbordCPD/AdminCpd.jsx";
 import TrainInfoList from "../components/Admin/Trainer/TrainInfoList.jsx";
 import TraineeAddForm from "../components/Admin/Trainer/TraineeAddForm.jsx";
+import { useAuth } from "../../contexts/AuthContext.jsx";
 import Test2 from "../pages/test/Test2.jsx";
 import styles from "./CpdTraineesRoute.module.css";
+
 const CpdTraineesRoute = () => {
-  const navigate = useNavigate();
+const navigate = useNavigate();
+
+const { trainee } = useAuth();
+const token = trainee?.token;
+
+useEffect(() => {
+  if (!token) {
+    navigate("/cpd/login");
+  }
+}, [token]);
+
 
   const logOut = () => {
     sessionStorage.removeItem("zaccess-token");

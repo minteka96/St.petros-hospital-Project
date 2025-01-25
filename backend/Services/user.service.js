@@ -33,7 +33,7 @@ async function createUser(user) {
       user.username,
       user.email,
       hashedPassword,
-      user.department, // Assuming `user.department` is used for the role field
+      user.department,
       user.active_status,
     ]);
 
@@ -236,7 +236,6 @@ async function updatePasswordByEmail(email, newPassword) {
     throw error;
   }
 }
-
 
 // export the functions
 module.exports = {

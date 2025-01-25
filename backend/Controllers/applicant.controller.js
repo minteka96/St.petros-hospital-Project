@@ -11,6 +11,14 @@ async function createApplicant(req, res) {
       additional_information,
     } = req.body;
     // Validate required fields
+    const applicantExists = await applicantService.checkIfApplicantExists(
+      email_address
+    )
+    if (applicantExists) {
+      return res
+        .status(400)
+        .json({ error: "Applicant with this email already exists" });
+    }
     if (
       !first_name ||
       !last_name ||

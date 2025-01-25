@@ -27,11 +27,17 @@ const TraineesDashboard = () => {
   const navigate = useNavigate();
   const { trainee } = useAuth();
   const traineeId = trainee?.id;
-
+  const token = trainee?.token;
+  console.log("traineeId", traineeId);
+  console.log("token", token);
   useEffect(() => {
     const fetchTrainings = async () => {
       try {
-        const response = await fetch(`${api_url}/api/cpd/available/courses`);
+        const response = await fetch(`${api_url}/api/cpd/available/courses`, {
+          headers: {
+            "y-access-token": token,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch trainings");
         }
@@ -59,12 +65,9 @@ const TraineesDashboard = () => {
         const response = await fetch(
           `${api_url}/api/trainee-info/${traineeId}`
         );
-        console.log("traineeId", traineeId);
-        console.log("response", response);
 
         if (response.status === 404) {
           navigate("/cpd/trainee-info");
-
         }
         // const data = await response.json();
       } catch (error) {
@@ -78,7 +81,11 @@ const TraineesDashboard = () => {
   useEffect(() => {
     const fetchRegisteredCourses = async () => {
       try {
-        const response = await fetch(`${api_url}/api/cpd/IsApply/${traineeId}`);
+        const response = await fetch(`${api_url}/api/cpd/IsApply/${traineeId}`, {
+          headers: {
+            "y-access-token": token,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch registered courses");
         }

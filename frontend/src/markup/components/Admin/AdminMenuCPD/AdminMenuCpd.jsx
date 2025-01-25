@@ -14,7 +14,7 @@ function AdminMenuCpd() {
         <Link to="/cpd" className="list-group-item">
           Dashboard
         </Link>
-        <Link to="/cpd/Training" className="list-group-item">
+        <Link to="/cpd/TraineesDashboard" className="list-group-item">
           Available Training
         </Link>
         <Link to="/cpd/Training" className="list-group-item">
