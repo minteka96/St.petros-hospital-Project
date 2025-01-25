@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
     `updated_date` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-
+-- Create User Privileges Table
 CREATE TABLE IF NOT EXISTS `user_privileges` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT NOT NULL,
@@ -26,6 +26,14 @@ VALUES
 ON DUPLICATE KEY UPDATE 
     `password_hashed` = VALUES(`password_hashed`), 
     `role` = VALUES(`role`);
+
+-- Optionally, add default privileges for the admin user
+INSERT INTO `user_privileges` (`user_id`, `privilege`)
+SELECT `user_id`, 'All Privileges'
+FROM `Users`
+WHERE `username` = 'admin'
+ON DUPLICATE KEY UPDATE 
+    `privilege` = VALUES(`privilege`);
 
 -- Create News Table
 CREATE TABLE IF NOT EXISTS `News` (
