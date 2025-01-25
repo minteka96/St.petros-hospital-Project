@@ -1,0 +1,23 @@
+
+
+.upArrow i{
+  font-size: 55px;
+  float: right;
+ 
+}
+
+.uparrowhover:hover{
+    color: #1F867E !important;
+}
+.posts-item {
+  list-style: none; /* Optional: removes default list styling */
+  padding: 0;
+  margin: 0;
+}
+
+.posts-item li {
+  margin: 0; /* Remove margin */
+  padding: 5px 0; /* Optional: Adjust spacing between items */
+  display: flex;
+  align-items: center;
+}
