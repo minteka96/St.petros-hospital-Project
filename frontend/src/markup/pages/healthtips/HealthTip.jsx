@@ -33,11 +33,7 @@ const HealthTip = () => {
     fetchHealthTips();
   }, []);
 
-  const handleImageClick = (tipId) => {
-    navigate(`/healthTipDetails/${tipId}`, { state: { healthTips } });
-  };
-
-  const handleTitleClick = (tipId) => {
+  const handleNavigation = (tipId) => {
     navigate(`/healthTipDetails/${tipId}`, { state: { healthTips } });
   };
 
@@ -52,42 +48,62 @@ const HealthTip = () => {
           ) : (
             healthTips.map((tip) => (
               <div key={tip.health_tip_id} className={styles.postItem}>
-                <div
-                  className={styles.imageContainer}
-                  onClick={() => handleImageClick(tip.health_tip_id)}
-                >
-                  <img
-                    src={`${import.meta.env.VITE_API_URL}${
-                      tip.health_tip_image
-                    }`}
-                    alt={tip.health_tip_title || "Health Tip Image"}
-                    className={styles.thumb}
-                  />
-                </div>
+                {/* Check for video link and embed video */}
+                {tip.video_link ? (
+                  <div className={styles.videoContainer}>
+                    <iframe
+                      width="100%"
+                      height="250"
+                      src={tip.video_link}
+                      title="Health Tip Video"
+                      frameBorder="0"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                ) : (
+                  <div
+                    className={styles.imageContainer}
+                    onClick={() => handleNavigation(tip.health_tip_id)}
+                  >
+                    <img
+                      src={`${import.meta.env.VITE_API_URL}${tip.health_tip_image}`}
+                      alt={tip.health_tip_title || "Health Tip Image"}
+                      className={styles.thumb}
+                    />
+                  </div>
+                )}
+
                 <div className={styles.content}>
-                  <a className={styles.category} href="#">
+                  <a className={styles.category} href={tip.categoryLink}>
                     {tip.category}
                   </a>
                   <h2 className={styles.title}>
-                    <a
-                      href={`/healthTipDetails/${tip.health_tip_id}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleTitleClick(tip.health_tip_id);
-                      }}
+                    <span
+                      onClick={() => handleNavigation(tip.health_tip_id)}
+                      className={styles.titleLink}
                     >
                       {tip.health_tip_title}
-                    </a>
+                    </span>
                   </h2>
                   <p className={styles.description}>
                     {tip.health_tip_description}
                   </p>
                   <div className={styles.meta}>
                     {format(new Date(tip.created_at), "MMMM d, yyyy")} by{" "}
-                    <a className={styles.author} href="#">
+                    <a className={styles.author} href={'#'}>
                       {tip.author}
                     </a>
                   </div>
+                </div>
+
+                {/* View Details Button */}
+                <div className={styles.buttonContainer}>
+                  <button
+                    onClick={() => handleNavigation(tip.health_tip_id)}
+                    className={styles.viewDetailsButton}
+                  >
+                    View Details
+                  </button>
                 </div>
               </div>
             ))

@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React from "react";
 import { useParams, Link, useLocation } from "react-router-dom";
 import styles from "./HealthTipDetail.module.css"; // Importing the CSS module
@@ -12,7 +11,7 @@ const formatDate = (dateString) => {
 const HealthTipDetail = () => {
   const { healthTipId } = useParams();
   const location = useLocation();
-  const { healthTips } = location.state || {}; // Get healthTips from state or default to empty object
+  const { healthTips } = location.state || {}; // Get healthTips from state
 
   if (!healthTips || !Array.isArray(healthTips)) {
     return (
@@ -39,34 +38,37 @@ const HealthTipDetail = () => {
   return (
     <section className={styles["detail-area"]}>
       <div className="container">
-        <div className="row">
+        <div className="row justify-content-center">
           <div className="col-lg-8">
             <div className={styles["item-detail"]}>
               <div className={styles.thumb}>
                 <img
-                  src={`${import.meta.env.VITE_API_URL}${
-                    healthTip.health_tip_image
-                  }`}
+                  src={`${import.meta.env.VITE_API_URL}${healthTip.health_tip_image}`}
                   alt={healthTip.health_tip_title}
+                  className={styles.image}
                 />
               </div>
               <div className={styles.content}>
                 <h2 className={styles.title}>{healthTip.health_tip_title}</h2>
+                {/* Health Tip Description */}
                 <div className={styles.description}>
                   <p>{healthTip.health_tip_description}</p>
                 </div>
+                {/* Health Tip Detail */}
                 <div className={styles.detail}>
                   <p>{healthTip.health_tip_detail}</p>
                 </div>
+                {/* Additional Meta Information */}
                 <div className={styles.meta}>
                   <span className={styles.date}>
                     {formatDate(healthTip.created_at)}
                   </span>{" "}
                   by{" "}
-                  <p className={styles.author} to={healthTip.authorLink}>
+                  <span className={styles.author}>
                     {healthTip.author || "Admin"}
-                  </p>
+                  </span>
                 </div>
+                {/* Video Link */}
                 {healthTip.health_tip_video_link && (
                   <div className={styles.video}>
                     <a
@@ -80,8 +82,14 @@ const HealthTipDetail = () => {
                 )}
               </div>
             </div>
+
+            {/* Back Button */}
+            <div className={styles.backButton}>
+              <Link to="/healthtips" className={styles.backButtonLink}>
+                &larr; Back to Health Tips
+              </Link>
+            </div>
           </div>
-          <div className="col-lg-4"></div>
         </div>
       </div>
     </section>
