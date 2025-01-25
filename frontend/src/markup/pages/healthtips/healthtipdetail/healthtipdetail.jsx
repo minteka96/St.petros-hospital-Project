@@ -30,7 +30,7 @@ const HealthTipDetail = () => {
     return (
       <div>
         Health Tip not found.{" "}
-        <Link to="/healthtips">Go back to Health Tips</Link>
+        <Link to="/healthtip">Go back to Health Tips</Link>
       </div>
     );
   }
@@ -85,7 +85,7 @@ const HealthTipDetail = () => {
 
             {/* Back Button */}
             <div className={styles.backButton}>
-              <Link to="/healthtips" className={styles.backButtonLink}>
+              <Link to="/healthtip" className={styles.backButtonLink}>
                 &larr; Back to Health Tips
               </Link>
             </div>
