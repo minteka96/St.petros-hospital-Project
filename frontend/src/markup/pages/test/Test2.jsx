@@ -31,7 +31,7 @@ function Test2() {
         if (response?.data?.data?.length > 0) {
           setAppliedCourses(response.data.data);
         } else {
-          setError("No courses found.");
+          setError("No Training found.");
         }
       } catch (err) {
         console.error("Error fetching applied courses:", err);
@@ -55,7 +55,7 @@ function Test2() {
   return (
     <div className="container my-4">
       <h1 className="text-center mb-4" style={{ color: "#4a90e2" }}>
-        Applied Courses
+        Applied Training
       </h1>
       {loading ? (
         <p className="text-center text-muted">Loading...</p>

@@ -3,10 +3,18 @@ import GenerateCertificate from "../../components/GenerateCertificate/GenerateCe
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 
-function TestSelection({ onSelect, status, info }) {
+function TestSelection({ onSelect, status, info, credits, schedule }) {
   const navigate = useNavigate();
-
+  console.log("info", info);
   const [hoveredButton, setHoveredButton] = useState(null); // Track the hovered button
+
+  function formatDate(inputDate) {
+    const date = new Date(inputDate);
+    const options = { month: "short", day: "numeric", year: "numeric" };
+    return new Intl.DateTimeFormat("en-US", options).format(date);
+  }
+  const trainingStart = (schedule?.course_start_date);
+  const trainingEnd = (schedule?.course_end_date);
 
   const handleDownloadClick = () => {
     // Navigate to GenerateCertificate and pass values via state
@@ -16,6 +24,9 @@ function TestSelection({ onSelect, status, info }) {
         middleName: info.middle_name,
         lastName: info.last_name,
         courseName: status.course_name,
+        credits: credits,
+        trainingStart: formatDate(trainingStart),
+        trainingEnd: formatDate(trainingEnd),
       },
     });
   };

@@ -14,10 +14,13 @@ function CourseDetail() {
   const { course_id } = useParams();
   const [success, setSuccess] = useState(false);
   const [refresh, setRefresh] = useState(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {setShow(true);
+    setFormData(course);
+  };
   const [formData, setFormData] = useState({
     course_name: "",
     course_level: "",
+    credits: "",
     pri_test: null,
     pri_test_duration: "",
     post_test: null,
@@ -25,7 +28,6 @@ function CourseDetail() {
     minimum_score: "",
   });
   const [schedule, setSchedule] = useState({});
-
   const handleScheduleChange = (e) => {
     const { name, value } = e.target;
     setSchedule((prev) => ({
@@ -99,6 +101,7 @@ function CourseDetail() {
     const submissionData = new FormData();
     submissionData.append("course_name", formData.course_name);
     submissionData.append("course_level", formData.course_level);
+    submissionData.append("credits", formData.credits);
     submissionData.append("pri_duration", formData.pri_test_duration);
     submissionData.append("post_duration", formData.post_test_duration);
     submissionData.append("min_score", formData.minimum_score);
@@ -182,6 +185,7 @@ function CourseDetail() {
     submitData.append("registration_end_date", schedule.registration_end_date);
     submitData.append("course_start_date", schedule.course_start_date);
     submitData.append("course_end_date", schedule.course_end_date);
+
     try {
       const response = await axios.post(
         `${api_url}/api/cpd/schedule/${course_id}`,
@@ -209,8 +213,11 @@ function CourseDetail() {
   const [show, setShow] = useState(false);
   const [showSchedule, setShowSchedule] = useState(false);
 
-  const handleCloseSchedule = () => setShowSchedule(false);
-  const handleShowSchedule = () => setShowSchedule(true);
+  const handleCloseSchedule = () =>{ setShowSchedule(false);
+    setFormData(course);
+  };
+  const handleShowSchedule = () => {setShowSchedule(true);
+    setFormData(course);};
 
   if (!course) {
     return (
@@ -229,6 +236,9 @@ function CourseDetail() {
           <h2 className="card-title text-center mb-4">{course.course_name}</h2>
           <p>
             <strong>Course Level:</strong> {course.course_level}
+          </p>
+          <p>
+            <strong>credits:</strong> {course.credits}
           </p>
           <p>
             <strong>Minimum Score Required:</strong> {course.minimum_score}
@@ -329,6 +339,21 @@ function CourseDetail() {
                 placeholder="Enter course level"
                 required
                 name="course_level"
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="credits" className="form-label">
+                Credits
+              </label>
+              <input
+                type="number"
+                id="credits"
+                value={formData.credits}
+                placeholder="Enter credits"
+                required
+                name="credits"
                 onChange={handleChange}
                 className="form-control"
               />

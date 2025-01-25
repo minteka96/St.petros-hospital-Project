@@ -2,7 +2,7 @@ const conn = require("../Config/db.config");
 
 // create a new applicant
 async function createCpdCourse(courseData) {
-  const sql = `INSERT INTO cpd_trainings ( course_name, course_level, pri_test, pri_test_duration, post_test, post_test_duration, minimum_score) VALUES (?, ?, ?, ?, ?, ? , ?)`;
+  const sql = `INSERT INTO cpd_trainings ( course_name, course_level, pri_test, pri_test_duration, post_test, post_test_duration, minimum_score, credits) VALUES (?, ?, ?, ?, ?, ? , ?, ?)`;
   const {
     course_name,
     course_level,
@@ -11,6 +11,7 @@ async function createCpdCourse(courseData) {
     post_test,
     post_test_duration,
     minimum_score,
+    credits,
   } = courseData;
   const connection = await conn.pool.getConnection();
   try {
@@ -23,6 +24,7 @@ async function createCpdCourse(courseData) {
       post_test,
       post_test_duration,
       minimum_score,
+      credits,
     ]);
     await connection.commit();
     return result;
@@ -81,7 +83,7 @@ async function deleteCpdCourseById(courseId) {
 
 // update cpd course by id
 async function updateCpdCourseById(id, courseData) {
-  const sql = `UPDATE cpd_trainings SET course_name = ?, course_level = ?, pri_test = ?, pri_test_duration = ?, post_test = ?, post_test_duration = ?, minimum_score = ? WHERE training_id = ?`;
+  const sql = `UPDATE cpd_trainings SET course_name = ?, course_level = ?, pri_test = ?, pri_test_duration = ?, post_test = ?, post_test_duration = ?, minimum_score = ?, credits = ? WHERE training_id = ?`;
   const {
     course_name,
     course_level,
@@ -90,6 +92,7 @@ async function updateCpdCourseById(id, courseData) {
     post_test,
     post_test_duration,
     minimum_score,
+    credits,
   } = courseData;
   const connection = await conn.pool.getConnection();
   try {
@@ -102,6 +105,7 @@ async function updateCpdCourseById(id, courseData) {
       post_test,
       post_test_duration,
       minimum_score,
+      credits,
       id,
     ]);
     await connection.commit();
@@ -292,7 +296,6 @@ async function updateTestResult(trainee_id, course_name, score) {
     await connection.release();
   }
 }
-
 
 //function to get all cpd_trainings by course_name
 async function getCpdCourseByName(courseName) {

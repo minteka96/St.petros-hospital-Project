@@ -12,3 +12,9 @@
 .logout-button:hover {
   color: #FF8413 !important;
 }
+.bg {
+  background-color: #fafafa;
+  min-height: 100vh;
+  z-index: -1;
+}
+

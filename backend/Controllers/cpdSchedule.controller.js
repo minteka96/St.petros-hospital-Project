@@ -69,6 +69,21 @@ async function getScheduleById(req, res) {
   }
 }
 
+//getScheduleByTrainingId
+async function getScheduleByTrainingId(req, res) {
+  const { training_id } = req.params;
+  try {
+    await cpdScheduleService.updateAllRegistrationStatuses();
+    const schedule = await cpdScheduleService.getScheduleByTrainingId(training_id);
+    if (!schedule) {
+      return res.status(404).json({ error: "Schedule not found" });
+    }
+    res.status(200).json(schedule);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
 // update a specific cpd schedule by id
 async function updateScheduleById(req, res) {
   const { id } = req.params;
@@ -98,4 +113,4 @@ async function deleteScheduleById(req, res) {
 }
 
 
-module.exports = { createSchedule, getAllSchedules, getScheduleById, updateScheduleById, deleteScheduleById };
+module.exports = { createSchedule, getScheduleByTrainingId, getAllSchedules, getScheduleById, updateScheduleById, deleteScheduleById };

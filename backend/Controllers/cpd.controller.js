@@ -9,6 +9,7 @@ async function createCpdCourse(req, res) {
       pri_duration,
       post_duration,
       min_score,
+      credits,
     } = req.body;
     // Validate required fields
     if (
@@ -16,6 +17,7 @@ async function createCpdCourse(req, res) {
       !course_level ||
       !pri_duration ||
       !post_duration ||
+      !credits ||
       !min_score
     ) {
       return res.status(400).json({ error: "All fields are required" });
@@ -38,6 +40,7 @@ async function createCpdCourse(req, res) {
       post_test: post_file_path,
       post_test_duration: post_duration,
       minimum_score: min_score,
+      credits,
     };
 
     // Create applicant in the database
@@ -61,6 +64,7 @@ async function updateCpdCourse(req, res) {
       pri_duration,
       post_duration,
       min_score,
+      credits,
     } = req.body;
 
     // Get file paths from Multer
@@ -80,6 +84,7 @@ async function updateCpdCourse(req, res) {
       post_test: post_file_path,
       post_test_duration: post_duration,
       minimum_score: min_score,
+      credits,
     };
     console.log("courseData", courseData);
     const updatedCpdCourse = await cpdservice.updateCpdCourseById(

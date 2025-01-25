@@ -32,7 +32,6 @@ import Psychiatric from "./markup/pages/serviceDetaile/Psychiatric/Psychiatric";
 import Imaging from "./markup/pages/serviceDetaile/Imaging/Imaging.jsx";
 import About from "./markup/pages/AboutPage/About";
 import Contact from "./markup/pages/Contact/Contact.jsx";
-import CpdLogin from "./markup/pages/CpdLogin/cpd.jsx";
 import CpdLoginSignup from "./markup/pages/CpdLogin/SignUpSignIn.jsx";
 import TraineeAddForm from "./markup/components/Admin/Trainer/TraineeAddForm.jsx";
 
@@ -47,7 +46,6 @@ import ApplicationForm from "./markup/pages/Jobs/ApplicationForm.jsx";
 import HealthWorkerINfo from "./markup/pages/HealthWorkerEntertainment/HealthWorkerEntertainment .jsx";
 import QulityResearch from "./markup/pages/qulity&research/QulityResearch.jsx";
 import ResearchPublication from "./markup/pages/qulity&research/ResearchPublication.jsx";
-import PublicationDetails from "./markup/pages/qulity&research/PublicationDetails.jsx";
 import AdminRoute from "./markup/routes/AdminRoute.jsx";
 import CpdTraineesRoute from "./markup/routes/CpdTraineesRoute.jsx";
 import Login from "./markup/pages/Login/Login.jsx";
@@ -62,16 +60,12 @@ import ApplicantForms from "./markup/pages/Jobs/ApplicationForm.jsx";
 import HealthTip from "./markup/pages/healthtips/HealthTip.jsx";
 import HealthTipDetail from "./markup/pages/healthtips/healthtipdetail/healthtipdetail.jsx";
 import HealthTipList from "./markup/components/Admin/HealthTipList/HealthTipList.jsx";
-import Test from "./markup/pages/test/Test.jsx";
 import CpdNews from "./markup/pages/CPD/Cpdnews.jsx";
-import TraineesDashboard from "./markup/components/TraineesDashboard/TraineesDashboard.jsx";
 import GenerateCertificate from "./markup/components/GenerateCertificate/GenerateCertificate.jsx";
 // import CertificateGenerator from "./markup/components/TraineesDashboard/CertificateGenerator.jsx";
 import ContactForm from "./markup/pages/Contact/contactForm/ContactForm.jsx";
 
-import AdminDashboardCpd from "./markup/pages/Admin/AdminDashboardCpd.jsx";
 
-import Test2 from "./markup/pages/test/Test2.jsx";
 
 function App() {
   // Check if the route is '/login', '/admin','/cpd/login' or '/cpdadmin'
@@ -156,8 +150,6 @@ function App() {
         <Route path="/admin/application-form" element={<ApplicationForm />} />
         <Route path="/admin/*" element={<AdminRoute />} />
         <Route path="/cpd/*" element={<CpdTraineesRoute />} />
-        <Route path="/test" element={<Test />} />
-        {/* <Route path="/test2" element={<Test2 />} /> */}
       </Routes>
 
       {/* Conditionally render Footer based on route */}

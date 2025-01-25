@@ -20,12 +20,7 @@ function AdminMenuCpd() {
         <Link to="/cpd/Training" className="list-group-item">
           Applied Training
         </Link>
-        <Link to="/cpd/certificate" className="list-group-item">
-          Certificates
-        </Link>
-        <Link to="/cpd/exam" className="list-group-item">
-          Exams
-        </Link>
+       
       </div>
     </div>
   );

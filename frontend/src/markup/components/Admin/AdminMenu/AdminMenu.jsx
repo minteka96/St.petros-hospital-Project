@@ -124,9 +124,14 @@ function AdminMenu() {
           <>
             {(privileges.includes("Add CPD course") ||
               privileges.includes("All Privileges")) && (
-              <Link to="cpd/newCourse" className="list-group-item">
-                New CPD course
-              </Link>
+              <>
+                <Link to="cpd/newCourse" className="list-group-item">
+                  New CPD course
+                </Link>
+                <Link to="/admin/add-cpd-news" className="list-group-item">
+                  Add CPD News
+                </Link>
+              </>
             )}
 
             <Link to="cpd/list" className="list-group-item">
