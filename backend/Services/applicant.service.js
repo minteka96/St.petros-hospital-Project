@@ -3,7 +3,7 @@ const conn = require("../Config/db.config");
 
 async function checkIfApplicantExists(email) {
   try {
-    const query = "SELECT * FROM Applicant WHERE email = ?";
+    const query = "SELECT * FROM Applicant WHERE email_address = ?";
     const [rows] = await conn.pool.query(query, [email]);
     return rows.length > 0; // Return true if trainee exists
   } catch (error) {

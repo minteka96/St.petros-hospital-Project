@@ -3,12 +3,10 @@
 const api_url = import.meta.env.VITE_API_URL;
 
 //function to post applications
-const postApplicant = async (formDataToSend, token) => {
+const postApplicant = async (formDataToSend) => {
   const requestOptions = {
     method: "POST",
-    headers: {
-      "x-access-token": token, // Do not set Content-Type; fetch handles it for FormData
-    },
+  
     body: formDataToSend, // FormData object
   };
 

@@ -29,14 +29,14 @@ const createPublication = async (formData, token) => {
 };
 
 // Function to send GET request to fetch all research publications
-const getAllPublications = async (token) => {
-  if (!token) throw new Error("Token is missing.");
+const getAllPublications = async () => {
+  
 
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "x-access-token": token,
+     
     },
   };
 

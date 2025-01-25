@@ -134,12 +134,12 @@ const Header = () => {
                     </li>
 
                     <li>
-                      <a href="/cpd" className="main-menu-link" >
+                      <a href="/cpd" className="main-menu-link">
                         CPD
                       </a>
                       <ul className="sub-menu">
                         <li>
-                          <Link className="sub-menu-link" to="/cpd-news">
+                          <Link className="sub-menu-link" to="/news-cpd">
                             CPD News
                           </Link>
                         </li>
@@ -292,8 +292,8 @@ const Header = () => {
                       </Link>
                       <ul className="sub-menu">
                         <li>
-                          <Link className="sub-menu-link" to="/about-cpd">
-                            ABOUT CPD
+                          <Link className="sub-menu-link" to="/news-cpd">
+                            CPD News
                           </Link>
                         </li>
                       </ul>
@@ -453,19 +453,19 @@ const Header = () => {
                       className="menu-expand"
                       onClick={() => toggleSubMenu("cpd")}
                     >
-                  {/* Change icon based on state */}
-                  </span>
-                  <Link to="/cpd">
+                      {/* Change icon based on state */}
+                    </span>
+                    <Link to="/cpd">
                       <span className="menu-text">CPD</span>
                     </Link>
-                  <ul
+                    <ul
                       className="offcanvas-submenu"
                       style={{
                         display: activeSubMenu === "cpd" ? "block" : "none",
                       }}
                     >
                       <li>
-                        <Link to="/cpd ">CPD News</Link>
+                        <Link to="/news-cpd ">CPD News</Link>
                       </li>
                     </ul>
                   </li>
@@ -477,39 +477,7 @@ const Header = () => {
                       Jobs
                     </Link>
                   </li>
-                  {/* <li
-                    className={`sub-menu-list ${
-                      activeSubMenu === "tender" ? "active" : ""
-                    }`}
-                  > */}
-                  {/* <span
-                      className="menu-expand"
-                      onClick={() => toggleSubMenu("tender")}
-                    > */}
-                  {/* Change icon based on state */}
-                  {/* </span> */}
-                  {/* <Link className="main-menu-link" to="/tender">
-                      Tender
-                    </Link>
-                    <ul
-                      className="offcanvas-submenu"
-                      style={{
-                        display: activeSubMenu === "tender" ? "block" : "none",
-                      }}
-                    >
-                      <li>
-                        <Link to="/tender-form-post">Tender Post</Link>
-                      </li>
-                      <li>
-                        <Link to="/tender-list">Tender List</Link>
-                      </li>
-                      <li>
-                        <Link to="/all-tender-form-details/:tenderNo">
-                          Tender Details
-                        </Link>
-                      </li>
-                    </ul> */}
-                  {/* </li> */}
+
                   <li onClick={toggleMenu}>
                     <Link to="/contact">Contact Us</Link>
                   </li>

@@ -33,7 +33,8 @@ router.get("/research-publications", getPublications);
 
 router.post(
   "/research-publications",
-  upload.single("file"), // Single file upload for "file" field
+  // upload.single("file"),
+  upload.fields([{ name: "file", maxCount: 1 }]),
   [
     authMiddleware.verifyToken,
     authMiddleware.checkRoles(["superadmin", "Admin", "RPUB"]),

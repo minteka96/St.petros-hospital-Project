@@ -46,7 +46,7 @@ function ApplicantDetail() {
     <div className="container py-5">
       <div className="card shadow-lg">
         <div className="card-header text-white">
-          <h3 className="mb-0">
+          <h3 className="mb-0 text-black">
             {applicant.first_name} {applicant.last_name}'s Details
           </h3>
         </div>
@@ -66,7 +66,6 @@ function ApplicantDetail() {
             <strong>Additional Information:</strong> {applicant.additional_information}
           </p>
 
-          <h5 className="mt-4">CV File</h5>
           <p>
             <strong>CV:</strong>{" "}
             {applicant.cv_file_path ? (
@@ -82,7 +81,6 @@ function ApplicantDetail() {
             )}
           </p>
 
-          <h5 className="mt-4">Other Testimonials</h5>
           <p>
             <strong>Other Testimonials:</strong>{" "}
             {applicant.other_testimonials ? (
@@ -100,10 +98,10 @@ function ApplicantDetail() {
         </div>
         <div className="card-footer text-end">
           <div className="d-flex gap-2">
-            <button onClick={() => handleDelete(applicant.id)} className="btn">
+            {/* <button onClick={() => handleDelete(applicant.id)} className="btn">
               {loading ? "Deleting..." : "Delete"}
               
-            </button>
+            </button> */}
             <button
               onClick={() => navigate(-1)} // navigate back to the previous page
               className="btn btn-danger"

@@ -59,7 +59,7 @@ const CpdNews = () => {
                   {/* You can add an image here */}
                 </div>
                 <div className={styles.content} style={{ color: "#00796b" }}>
-                  <a className={styles.category} href={news.categoryLink}>
+                  <a className={styles.category} href="#">
                     {news.category}
                   </a>
                   <h2 className={styles.title}>

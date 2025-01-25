@@ -64,6 +64,7 @@ import CpdNews from "./markup/pages/CPD/Cpdnews.jsx";
 import GenerateCertificate from "./markup/components/GenerateCertificate/GenerateCertificate.jsx";
 // import CertificateGenerator from "./markup/components/TraineesDashboard/CertificateGenerator.jsx";
 import ContactForm from "./markup/pages/Contact/contactForm/ContactForm.jsx";
+import ResearchPublications from "./markup/pages/qulity&research/ResearchPublication.jsx";
 
 
 
@@ -85,7 +86,7 @@ function App() {
         {/* *************************News Client Side Start Here*********************** */}
         <Route path="/news" element={<News />} />
         <Route path="/GenerateCertificate" element={<GenerateCertificate />} />
-        <Route path="/cpd-news" element={<CpdNews />} />
+        <Route path="/news-cpd" element={<CpdNews />} />
         <Route
           path="/newsDetails/:newsId"
           element={<NewsDetails newsList={newsList} />}
@@ -137,7 +138,7 @@ function App() {
         <Route path="/application/form" element={<ApplicantForms />} />
         <Route path="/about" element={<About />} />
         <Route path="/qulity&research" element={<QulityResearch />} />
-        <Route path="/researchpublication" element={<ResearchPublication />} />
+        <Route path="/researchpublication" element={<ResearchPublications />} />
         <Route path="/tender-list" element={<TenderList />} />
         <Route path="/tender-form-submit" element={<TenderSubmitForm />} />
         <Route
