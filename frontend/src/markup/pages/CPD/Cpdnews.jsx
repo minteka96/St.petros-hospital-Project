@@ -17,9 +17,6 @@ const CpdNews = () => {
           ...news,
           category: "CPD News", // Default category for CPD News
           categoryLink: "/category/cpd-news", // Default category link
-          authorLink: `/author/${
-            news.author?.toLowerCase().replace(/\s+/g, "-") || "admin"
-          }`, // Dynamic author link
           author: news.author || "Admin (ቅ.ጴ.ስ.ሆ)", // Default author
         }));
         setCpdNewsList(cpdNewsData);
@@ -59,22 +56,14 @@ const CpdNews = () => {
                   className={styles.imageContainer}
                   onClick={() => handleImageClick(news.news_id)}
                 >
-                  
+                  {/* You can add an image here */}
                 </div>
-                <div className={styles.content}style={{ color: " #00796b" }}>
+                <div className={styles.content} style={{ color: "#00796b" }}>
                   <a className={styles.category} href={news.categoryLink}>
                     {news.category}
                   </a>
-                  <h2 className={styles.title} >
-                    <a
-                      href={`/cpdNewsDetails/${news.news_id}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleTitleClick(news.news_id);
-                      }}
-                    >
-                      { news.news_title }
-                    </a>
+                  <h2 className={styles.title}>
+                    <a>{news.news_title}</a>
                   </h2>
                   <div>
                     <p className={styles.description}>
@@ -82,10 +71,8 @@ const CpdNews = () => {
                     </p>
                   </div>
                   <div className={styles.meta}>
-                    {formatDate(news.created_at)} by{" "}
-                    {/* <a className={styles.author} href=>
-                      {news.author}
-                    </a> */}
+                    {formatDate(news.created_at)} by {news.author}
+                    {/* Removed author link, now it just displays the author's name */}
                   </div>
                 </div>
               </div>
