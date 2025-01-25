@@ -13,9 +13,9 @@ const LatestNews = () => {
     const fetchLatestNews = async () => {
       try {
         const response = await newsService.getAllNews();
-        // Take only the latest 4 news items and add dynamic properties
+        // Take only the latest 3 news items and add dynamic properties
         const newsData = (response || [])
-          .slice(0, 4) // Take only the latest 4
+          .slice(0, 3) // Take only the latest 3
           .map((news) => ({
             ...news,
             category: "News", // Default category

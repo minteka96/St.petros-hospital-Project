@@ -123,11 +123,6 @@ const News = () => {
                       </p>
                     </div>
 
-                    {/* <div className={styles.meta}>
-                      {formatDate(news.created_at)} by{" "}
-                      <span className={styles.author}>{news.author}</span>
-                    </div> */}
-
                     <div className={styles.meta}>
                       <span>
                         {formatDate(news.created_at)}  by{" "}

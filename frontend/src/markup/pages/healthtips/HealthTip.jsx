@@ -57,7 +57,9 @@ const HealthTip = () => {
                   onClick={() => handleImageClick(tip.health_tip_id)}
                 >
                   <img
-                    src={`${import.meta.env.VITE_API_URL}${tip.health_tip_image}`}
+                    src={`${import.meta.env.VITE_API_URL}${
+                      tip.health_tip_image
+                    }`}
                     alt={tip.health_tip_title || "Health Tip Image"}
                     className={styles.thumb}
                   />

@@ -3,7 +3,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./markup/components/Header/Header";
-import Footer from "./markup/components/Footer/Footer";
+import Footer from "./markup/components/Admin/Footer/Footer";
 import Home from "./markup/pages/Home/Home";
 
 // ***************************servicesdetail Client Side ********************

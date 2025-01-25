@@ -9,7 +9,8 @@
   font-weight: bold;
   color: #333;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .errorMessage {
@@ -71,6 +72,7 @@
   font-weight: bold;
 }
 
+/* ------ */
 /* Content Styling */
 .content {
   flex: 2;
@@ -78,18 +80,26 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 0 auto;
+  text-align: center; /* Center text inside .content */
 }
 
+/* Category Styling */
 .category {
-  font-size: 0.9rem;
+  font-size: 20px;
   font-weight: bold;
   color: #007bff;
   margin-bottom: 10px;
+  display: inline-block; /* Makes it behave like a block element */
+  text-align: center; /* Center the text inside the category link */
+  margin: 0 auto; /* Center the category link within the content */
 }
 
 .category:hover {
   text-decoration: underline;
 }
+
+/* ------- */
 
 .title a {
   font-size: 1.2rem;
@@ -103,9 +113,13 @@
 }
 
 .description {
-  font-size: 20px;
-  color: #666;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
   margin: 10px 0;
+  padding: 0 15px;
+  text-align: justify; /* This is the key for indentation */
+  hyphens: auto; /* Improves text wrapping for long words */
 }
 
 .meta {
@@ -140,22 +154,33 @@
 .detailsButton:hover {
   background-color: #13504c;
 }
+
+
 .meta {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; /* Create space between items */
+  align-items: center; /* Vertically align items */
   font-size: 14px;
   color: #666;
-  margin: 10px 0;
+  margin: 15px 0;
+  border-top: 1px solid #ddd; /* Add a subtle top border */
+  padding-top: 10px; /* Add padding to separate it from the content above */
+  gap: 25px; /* Add spacing between items */
 }
 
 .meta span {
   flex-grow: 1;
+  font-size: 16px;
+  color: #333;
 }
 
 .author {
   font-weight: bold;
-  color: #333;
+  color: #007bff;
+}
+
+.author:hover {
+  text-decoration: underline;
 }
 
 .linkButton {
