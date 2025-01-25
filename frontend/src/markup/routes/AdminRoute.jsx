@@ -328,9 +328,14 @@ const AdminRoute = () => {
         element={<CheckExam />}
         key="check-exam"
       />,
+      <Route
+        path="/cpd/newCourse"
+        element={<AddNewCourse />}
+        key="add-new-course"
+      />,
     ],
     Admin: [
-      privileges.includes("All Privileges") && (
+      privileges?.includes("All Privileges") && (
         <>
           <Route path="/video" element={<VideoEmbeds />} key="video" />,
           <Route path="/" element={<AdminDashbord />} key="dashboard" />,
@@ -467,6 +472,11 @@ const AdminRoute = () => {
             path="/cpd/check-exam/:schedule_id/:courseName"
             element={<CheckExam />}
             key="check-exam"
+          />
+          <Route
+            path="/cpd/newCourse"
+            element={<AddNewCourse />}
+            key="add-new-course"
           />
           ,
         </>

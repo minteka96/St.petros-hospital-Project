@@ -17,7 +17,8 @@ function AdminMenu() {
   }, [user]);
 
   // Helper functions for role-based visibility
-  const isSuperAdmin = role === "superadmin";
+  const isSuperAdmin =
+    role === "superadmin" || privileges.includes("All Privileges");
   const isAdminOrHigher = isSuperAdmin || role === "Admin";
   const isComm = isAdminOrHigher || role === "Communication";
   const isHR = isAdminOrHigher || role === "HR";
@@ -38,7 +39,6 @@ function AdminMenu() {
         <Link to="/admin" className="list-group-item">
           Dashboard
         </Link>
-
         {/* Superadmin-only links */}
         {isSuperAdmin && (
           <>
@@ -50,17 +50,18 @@ function AdminMenu() {
             </Link>
           </>
         )}
-
         {/* Comm roles */}
         {isComm && privileges && (
           <>
-            {privileges.includes("Post News") && (
+            {(privileges.includes("Post News") ||
+              privileges.includes("All Privileges")) && (
               <Link to="/admin/add-news" className="list-group-item">
                 Add News
               </Link>
             )}
 
-            {privileges.includes("Approve News") && (
+            {(privileges.includes("Approve News") ||
+              privileges.includes("All Privileges")) && (
               <Link to="/admin/Approve-News" className="list-group-item">
                 Approve News
               </Link>
@@ -70,7 +71,6 @@ function AdminMenu() {
             </Link>
           </>
         )}
-
         {isHE && (
           <>
             <Link to="/admin/add-healthtip" className="list-group-item">
@@ -81,48 +81,49 @@ function AdminMenu() {
             </Link>
           </>
         )}
-
-        {/* HR roles */}
         {isHR && privileges && (
           <>
-            {privileges.includes("Archive Vacancy") && (
+            {(privileges.includes("Archive Vacancy") ||
+              privileges.includes("All Privileges")) && (
               <Link to="/admin/JobArchivePage" className="list-group-item">
                 Archive Vacancy
               </Link>
             )}
 
-            {privileges.includes("Post Vacancy") && (
+            {(privileges.includes("Post Vacancy") ||
+              privileges.includes("All Privileges")) && (
               <Link to="/admin/add-job" className="list-group-item">
                 Post Vacancy
               </Link>
             )}
-            {privileges.includes("Screen Applicants") && (
+            {(privileges.includes("Screen Applicants") ||
+              privileges.includes("All Privileges")) && (
               <Link to="/admin/ApplicantsPage" className="list-group-item">
                 Screen Applicants
               </Link>
             )}
-            {privileges.includes("Manage Applicants") && (
+            {(privileges.includes("Manage Applicants") ||
+              privileges.includes("All Privileges")) && (
               <Link to="/admin/HRManagerApplicants" className="list-group-item">
-                Manager Applicants
+                Manage Applicants
               </Link>
             )}
 
             <Link to="/admin/all-job" className="list-group-item">
               List of Jobs
             </Link>
-            {privileges.includes("Show Applicants") && (
+            {(privileges.includes("Show Applicants") ||
+              privileges.includes("All Privileges")) && (
               <Link to="/admin/applicant" className="list-group-item">
                 List of Applicants
               </Link>
             )}
           </>
         )}
-
-        {/* CPD roles */}
-
         {isCPD && privileges && (
           <>
-            {privileges.includes("Add CPD course") && (
+            {(privileges.includes("Add CPD course") ||
+              privileges.includes("All Privileges")) && (
               <Link to="cpd/newCourse" className="list-group-item">
                 New CPD course
               </Link>
@@ -151,9 +152,6 @@ function AdminMenu() {
             <Link to="publications" className="list-group-item">
               Research Publication
             </Link>
-            {/* <Link to="publications/edit/:id" className="list-group-item">
-              Edit Research Publication
-            </Link> */}
           </>
         )}
       </div>
