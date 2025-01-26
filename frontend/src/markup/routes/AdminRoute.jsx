@@ -61,6 +61,7 @@ import ResearchPublications from "../pages/qulity&research/ResearchPublication.j
 import PublicationList from "../components/Admin/publicationlist/PublicationList.jsx";
 import CheckExam from "../components/Admin/CPD/CheckExam/CheckExam.jsx";
 import ResetPassword from "../pages/Admin/ResetPassword.jsx";
+import TrainCourseStatus from "../components/Admin/Trainer/TrainCourseStatus.jsx";
 
 const AdminRoute = () => {
   const navigate = useNavigate();
@@ -313,6 +314,7 @@ const AdminRoute = () => {
         element={<ContactDetail />}
         key="contact-detail"
       />,
+      <Route path="/training/:trainee_id" element={<TrainCourseStatus   />} />,
       <Route
         path="/cpd/schedule"
         element={<ListOfSchedule />}
@@ -349,6 +351,7 @@ const AdminRoute = () => {
             element={<ApplicantsPage />}
             key="applicants-page"
           />
+           <Route path="/training/:trainee_id" element={<TrainCourseStatus   />} />
           ,
           <Route
             path="/JobArchivePage"
@@ -529,6 +532,7 @@ const AdminRoute = () => {
               element={<AddCpdNewsForm />}
               key="add-cpd-news"
             />
+
             ,
             <Route
               path="/cpd/newCourse"
@@ -566,6 +570,7 @@ const AdminRoute = () => {
         element={<Trainee />}
         key="trainee"
       />,
+      <Route path="/training/:trainee_id" element={<TrainCourseStatus   />} />
     ],
     Communication: [
       privileges?.includes("Post News") && (

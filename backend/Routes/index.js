@@ -26,6 +26,7 @@ const traineesSignInRoute = require("./traineesSignIn.routes.js");
 const certificatRoute = require("./certificate.routes.js");
 const traineeRouter = require("./trainee.toutes.js");
 const traineesInfoRoutes = require('./trainees_info.routes.js');
+const trainCourseStatus= require('./trainCourseStatus.routes');
 
 // Import the contact router
 const contactRoutes = require("./contact.routes");  // <-- Add this line
@@ -42,6 +43,7 @@ router.use(cpdRoute);
 router.use(cpdScheduleRoute);
 router.use(applicantRouter);
 router.use(traineeRouter);
+router.use(trainCourseStatus);
 // Add the install router to the main router
 router.use(installRouter);
 router.use(jobsRouter);
