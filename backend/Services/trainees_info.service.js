@@ -150,7 +150,6 @@ async function getTraineeInfoByTraineeId(id) {
   const connection = await conn.pool.getConnection();
   try {
     const rows = await connection.query(sql, [id]);
-    console.log(rows[0]);
     return rows[0];
   } catch (error) {
     throw error;
@@ -181,7 +180,6 @@ async function TraineeInfoById(id) {
   try {
     // Execute the query and fetch results
     const [rows] = await connection.query(sql, [id]);
-    console.log(rows);
     return rows.length > 0 ? rows[0] : null; // Return the first result or null if no rows
   } catch (error) {
     console.error("Database query error:", error.message);

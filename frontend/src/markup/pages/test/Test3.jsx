@@ -6,6 +6,7 @@ import Questions from "./Questions";
 import ScoreDisplay from "./ScoreDisplay";
 import ErrorDisplay from "./ErrorDisplay";
 import CountDown from "./CountDown";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const api_url = import.meta.env.VITE_API_URL;
 
@@ -22,6 +23,9 @@ function Test3({ courseName, onBack, id }) {
   const [schedule, setSchedule] = useState(null);
   const [startCountdown, setStartCountdown] = useState(false);
   const [info, setInfo] = useState(null);
+
+  const { trainee } = useAuth();
+const token = trainee?.token;
 
   useEffect(() => {
     const fetchTraining = async () => {
@@ -167,7 +171,10 @@ function Test3({ courseName, onBack, id }) {
     try {
       const response = await axios.put(
         `${api_url}/api/cpdResult/update/${id}/${courseName}`,
-        result
+        result,{
+          headers: {
+            "y-access-token": token,
+        }}
       );
       if (response.status === 200) {
       }
@@ -261,7 +268,7 @@ function Test3({ courseName, onBack, id }) {
       <button onClick={onBack}>Back</button>
       {(priQuestion.length > 0 || postQuestion.length > 0) &&
         score === null && (
-          <div className="position-fixed z-index-1 top-50 right-0">
+          <div className="position-fixed z-index-1 " style={{ left: "10px",top:"90px" }}>
             <div
               className="card h-100 shadow-sm"
               style={{ border: "1px solid #ddd", borderRadius: "8px" }}

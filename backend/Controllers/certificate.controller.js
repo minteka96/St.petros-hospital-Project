@@ -15,11 +15,9 @@ const getcertificate = async (req, res) => {
 };
 const getById = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
 
   try {
     const traineeData = await traineesInfoService.TraineeInfoById(id);
-    console.log(traineeData);
     if (traineeData) {
       res
         .status(200)

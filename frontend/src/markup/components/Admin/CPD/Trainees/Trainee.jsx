@@ -2,11 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 const api_url = import.meta.env.VITE_API_URL
+import { Link } from 'react-router-dom';
 
 function Trainee() {
 const{schedule_id}=useParams();
 const [trainees, setTrainees] = useState([]);
-console.log("trainees", trainees);
 useEffect(() => {
  const fetchTrainees = async () => {
   try {
@@ -62,7 +62,7 @@ if (trainees.length === 0) {
                   </td>
                   <td>{ trainee.account_number}</td>
                   <td className="d-flex gap-2">
-                      <>
+                      {/* <>
                         <button
                          
                           className="btn bg-white border border-1 "
@@ -91,9 +91,9 @@ if (trainees.length === 0) {
                             }}
                           />
                         </button>
-                      </>
+                      </> */}
 
-                    <button
+                      <Link  to={`/admin/training/${trainee.trainee_id}`}
                       className="btn bg-white border border-1"
                     >
                       <img
@@ -105,7 +105,7 @@ if (trainees.length === 0) {
                           height: "20px",
                         }}
                       />
-                    </button>
+                    </Link>
                   </td>
                 </tr>
               ))}

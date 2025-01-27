@@ -76,7 +76,6 @@ const EditCpdNewsForm = () => {
   
     try {
       const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-      console.log('Sending data:', formData); // Debug the payload
   
       const response = await axios.put(`${API_URL}/api/cpd_news/${id}`, formData, {
         headers: {
@@ -85,7 +84,6 @@ const EditCpdNewsForm = () => {
         },
       });
   
-      console.log('Response:', response.data); // Debug the response
       setSuccess("CPD News updated successfully!");
       setError("");
   

@@ -17,7 +17,6 @@ const AddPublicationForm = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
-console.log("file", file);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -31,7 +30,6 @@ console.log("file", file);
 
     try {
       const response = await publicationService.createPublication(formData, token);
-      console.log('response', response);
       if (response.error) {
         setError(response.error);
         setSuccess('');

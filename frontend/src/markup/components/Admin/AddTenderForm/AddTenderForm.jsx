@@ -47,7 +47,6 @@ const AddTenderForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validateForm()) {
-      console.log("Form Data Submitted:", formData);
       alert("Tender form submitted successfully!");
       setTenderFormVisible(true); // Show the TenderSubmitForm after validation
     } else {

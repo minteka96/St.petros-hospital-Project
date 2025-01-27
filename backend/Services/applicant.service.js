@@ -128,7 +128,6 @@ async function deleteAllApplicants() {
 async function updateApplicant(id, formData) {
   const connection = await conn.pool.getConnection();
   try {
-    console.log("first");
     // Update the status of the applicant
     const sql = `UPDATE applicant SET Status = ? WHERE id = ?`;
     const [result] = await connection.query(sql, [formData.status, id]);
