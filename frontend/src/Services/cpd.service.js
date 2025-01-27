@@ -32,7 +32,7 @@ const signin = async (formData) => {
       },
       body: JSON.stringify(formData), // Convert formData to JSON
     });
-
+    console.log(response);
     // Handle HTTP error
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -45,7 +45,5 @@ const signin = async (formData) => {
     throw error;
   }
 };
-
-
 
 export default { signup, signin };
