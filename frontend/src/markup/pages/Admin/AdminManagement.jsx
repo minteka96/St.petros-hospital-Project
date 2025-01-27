@@ -10,18 +10,24 @@ import {
   Pagination,
 } from "react-bootstrap";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const api_url = import.meta.env.VITE_API_URL;
 
 const AdminManagement = () => {
   const { user } = useAuth();
   const token = user ? user.token : null;
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
   const [editingUserId, setEditingUserId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
   const [privileges, setPrivileges] = useState([]);
+  const [originalPrivileges, setOriginalPrivileges] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 5;
 
@@ -71,8 +77,10 @@ const AdminManagement = () => {
         `${api_url}/api/users/${userId}`,
         requestOptions
       );
-      setEditingUser(response.data.data);
-      setPrivileges(response.data.data.privileges.split(","));
+      const userData = response.data.data;
+      setEditingUser(userData);
+      setPrivileges(userData.privileges.split(","));
+      setOriginalPrivileges(userData.privileges.split(","));
       setEditingUserId(userId);
       setShowModal(true);
     } catch (err) {
@@ -81,10 +89,16 @@ const AdminManagement = () => {
   };
 
   const handleUpdate = async () => {
+    const updatedPrivileges = privileges.join(",");
+    if (originalPrivileges.join(",") === updatedPrivileges) {
+      setError("No changes made to privileges.");
+      return;
+    }
+
     try {
       const updatedData = {
-        ...editingUser,
-        privileges: privileges.join(","),
+        username: editingUser.username,
+        privileges: updatedPrivileges,
       };
 
       await axios.put(
@@ -100,6 +114,9 @@ const AdminManagement = () => {
       setShowModal(false);
       setEditingUserId(null);
       setEditingUser(null);
+      setSuccessMessage("Successfully updated user details.");
+
+      setTimeout(() => setSuccessMessage(""), 3000);
     } catch (err) {
       setError("Failed to update user. Please try again.");
     }
@@ -116,7 +133,6 @@ const AdminManagement = () => {
   const handlePasswordReset = async () => {
     try {
       const updatedData = {
-        ...editingUser,
         password: "123456",
       };
 
@@ -125,7 +141,7 @@ const AdminManagement = () => {
         updatedData,
         requestOptions
       );
-      alert("Password has been reset to '123456'.");
+      alert("Password has been reset.");
     } catch (err) {
       setError("Failed to reset password. Please try again.");
     }
@@ -158,10 +174,11 @@ const AdminManagement = () => {
   };
 
   // Pagination logic
-  const totalPages = Math.ceil(users.length / usersPerPage);
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  const totalPages = Math.ceil(users.length / usersPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -171,6 +188,7 @@ const AdminManagement = () => {
     <div className="container py-5">
       <h1 className="mb-4">Admin Management</h1>
       {error && <Alert variant="danger">{error}</Alert>}
+      {successMessage && <Alert variant="success">{successMessage}</Alert>}
 
       <Table bordered hover responsive className="text-center">
         <thead className="table-light">
@@ -217,14 +235,14 @@ const AdminManagement = () => {
         </tbody>
       </Table>
 
-      <Pagination className="justify-content-center">
-        {Array.from({ length: totalPages }, (_, index) => (
+      <Pagination>
+        {[...Array(totalPages)].map((_, idx) => (
           <Pagination.Item
-            key={index + 1}
-            active={index + 1 === currentPage}
-            onClick={() => handlePageChange(index + 1)}
+            key={idx + 1}
+            active={currentPage === idx + 1}
+            onClick={() => handlePageChange(idx + 1)}
           >
-            {index + 1}
+            {idx + 1}
           </Pagination.Item>
         ))}
       </Pagination>

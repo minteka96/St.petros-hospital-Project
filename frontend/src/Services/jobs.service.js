@@ -163,7 +163,6 @@ const archiveJob = async (jobId, token) => {
       `${api_url}/api/vacancies/${jobId}`,
       requestOptions
     );
-    console.log(response);
     if (!response.ok) {
       const errorText = await response.text();
       throw new Error(
