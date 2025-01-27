@@ -35,8 +35,8 @@ const JobArchivePage = () => {
       setApplicants(applicantResponse.data);
 
       // Separate active and archived jobs based on status
-      const active = jobResponse.filter((job) => job.status === 1);
-      const archived = jobResponse.filter((job) => job.status !== 1);
+      const active = jobResponse.filter((job) => job.status === 0);
+      const archived = jobResponse.filter((job) => job.status !== 0);
 
       setActiveJobs(active);
       setArchivedJobs(archived);
@@ -286,7 +286,7 @@ const JobArchivePage = () => {
               </p>
               <p>
                 <strong>Status:</strong>{" "}
-                {jobDetails.status === 1 ? "Active" : "Archived"}
+                {jobDetails.status === 0 ? "Active" : "Archived"}
               </p>
               <p>
                 <strong>Last Updated:</strong>{" "}

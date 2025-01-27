@@ -42,7 +42,7 @@ const HRManagerApplicants = () => {
 
         // Filter active jobs where status === 1 (active jobs)
         const activeVacancies = vacanciesResponse.filter(
-          (vacancy) => vacancy.status === 1
+          (vacancy) => vacancy.status === 0
         );
 
         setVacancies(activeVacancies);

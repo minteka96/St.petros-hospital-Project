@@ -140,7 +140,6 @@ async function deleteJob(req, res) {
 }
 async function updateStatus(req, res) {
   const { jobId } = req.params;
-  console.log(jobId);
   try {
     const deleted = await jobService.updateStatus(jobId);
 

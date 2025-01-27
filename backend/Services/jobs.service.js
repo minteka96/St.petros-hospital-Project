@@ -107,8 +107,7 @@ async function deleteJob(vacancy_id) {
   }
 }
 async function updateStatus(jobId) {
-  const status = 0;
-  console.log(jobId);
+  const status = 1;
   const updateStatusQuery = `UPDATE vacancy SET status = ? WHERE vacancy_id = ?`;
 
   const connection = await conn.pool.getConnection();
