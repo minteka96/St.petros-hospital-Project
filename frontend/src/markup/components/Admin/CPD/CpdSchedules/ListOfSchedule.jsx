@@ -208,7 +208,11 @@ function ListOfSchedule() {
                           <img
                             src="https://img.icons8.com/?size=100&id=114092&format=png&color=000000"
                             alt="Edit"
-                            style={{ width: "20px", height: "20px" }}
+                            style={{
+                              maxWidth: "20px",
+                              width: "20px",
+                              height: "20px",
+                            }}
                           />
                         </button>
                         <button
@@ -218,7 +222,11 @@ function ListOfSchedule() {
                           <img
                             src="https://img.icons8.com/?size=100&id=gjhtZ8keOudc&format=png&color=000000"
                             alt="Delete"
-                            style={{ width: "20px", height: "20px" }}
+                            style={{
+                              maxWidth: "20px",
+                              width: "20px",
+                              height: "20px",
+                            }}
                           />
                         </button>
                       </>
@@ -244,7 +252,11 @@ function ListOfSchedule() {
                       <img
                         src="https://img.icons8.com/?size=100&id=47863&format=png&color=000000"
                         alt="Trainees"
-                        style={{ width: "20px", height: "20px" }}
+                        style={{
+                          maxWidth: "20px",
+                          width: "20px",
+                          height: "20px",
+                        }}
                       />
                     </Link>
                   </td>
@@ -271,25 +283,46 @@ function ListOfSchedule() {
           <form onSubmit={handleUpdateSchedule}>
             <div className="mb-3">
               {updateSchedule && (
-                <div className="alert alert-success">
-                  Schedule has been updated successfully
+                <div className="alert alert-success py-1">
+                  Schedule updated successfully
                 </div>
               )}
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Course Name</label>
+              <label className="form-label">Registration Start Date</label>
               <input
-                type="text"
+                type="date"
                 className="form-control"
-                name="course_name"
-                value={editSchedule.course_name || ""}
+                name="registration_start_date"
                 onChange={handleScheduleChange}
+                min={new Date().toISOString().split("T")[0]}
+              />
+              <label className="form-label">Registration End Date</label>
+              <input
+                type="date"
+                className="form-control"
+                name="registration_end_date"
+                onChange={handleScheduleChange}
+                min={new Date().toISOString().split("T")[0]}
+              />
+              <label className="form-label">Training Start Date</label>
+              <input
+                type="date"
+                className="form-control"
+                name="course_start_date"
+                onChange={handleScheduleChange}
+                min={new Date().toISOString().split("T")[0]}
+              />
+              <label className="form-label">Training End Date</label>
+              <input
+                type="date"
+                className="form-control"
+                name="course_end_date"
+                onChange={handleScheduleChange}
+                min={new Date().toISOString().split("T")[0]}
               />
             </div>
-            {/* Add other fields similarly */}
-            <Button variant="primary" type="submit">
+            <button type="submit" className="btn btn-primary">
               Update Schedule
-            </Button>
+            </button>
           </form>
         </Modal.Body>
       </Modal>

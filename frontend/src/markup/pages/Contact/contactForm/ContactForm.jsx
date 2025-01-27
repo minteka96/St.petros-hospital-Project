@@ -2,12 +2,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import contactService from "../../../../Services/contact.service";
-import { useAuth } from "../../../../contexts/AuthContext";
 import styles from "./ContactForm.module.css";
 
 const ContactForm = () => {
-  const { user } = useAuth();
-  const token = user?.token || null;
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -19,14 +16,11 @@ const ContactForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!token) {
-      setError('You must be logged in to submit feedback.');
-      return;
-    }
+   
 
     try {
       const contactData = { name, email, subject, message };
-      await contactService.createContact(contactData, token);
+      await contactService.createContact(contactData);
       setSuccess('Your feedback has been submitted successfully');
       setName('');
       setEmail('');

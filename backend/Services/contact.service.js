@@ -1,4 +1,4 @@
-const { query } = require('../config/db.config'); // Database query function
+const { query } = require('../Config/db.config'); // Database query function
 
 async function createContact(name, email, subject, message) {
   try {

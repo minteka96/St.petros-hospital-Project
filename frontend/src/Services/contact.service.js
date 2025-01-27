@@ -2,14 +2,12 @@
 const api_url = import.meta.env.VITE_API_URL; // Define the API base URL
 
 // Function to send POST request to create a new contact
-const createContact = async (contactData, token) => {
-  if (!token) throw new Error("Token is missing.");
+const createContact = async (contactData) => {
 
   const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json", // Ensure the content type is JSON
-      "x-access-token": token, // Authorization header
     },
     body: JSON.stringify(contactData), // Send contact data as JSON
   };
