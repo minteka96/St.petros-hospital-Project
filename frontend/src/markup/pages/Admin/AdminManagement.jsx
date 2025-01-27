@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import UpdateAdmin from "./AdminUpdate";
+import {
+  Table,
+  Button,
+  Badge,
+  Modal,
+  Form,
+  Alert,
+  Pagination,
+} from "react-bootstrap";
 import { useAuth } from "../../../contexts/AuthContext";
 
 const api_url = import.meta.env.VITE_API_URL;
@@ -8,12 +16,15 @@ const api_url = import.meta.env.VITE_API_URL;
 const AdminManagement = () => {
   const { user } = useAuth();
   const token = user ? user.token : null;
-  const role = user ? user.role : null;
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
-  const [editingUserId, setEditingUserId] = useState(null); // Track the user being edited
+  const [editingUserId, setEditingUserId] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [editingUser, setEditingUser] = useState(null);
+  const [privileges, setPrivileges] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 5;
 
-  // Fetch users from the backend
   const requestOptions = {
     headers: {
       "x-access-token": token,
@@ -39,10 +50,8 @@ const AdminManagement = () => {
     };
 
     fetchUsers();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
-  // Handle user deletion
   const handleDelete = async (userId) => {
     if (!window.confirm("Are you sure you want to delete this user?")) {
       return;
@@ -56,153 +65,212 @@ const AdminManagement = () => {
     }
   };
 
-  // Fetch user data for UpdateUser
-  const fetchUserData = async (userId) => {
-    const response = await axios.get(
-      `${api_url}/api/users/${userId}`,
-      requestOptions
-    );
-    return response.data.data; // Assume the API returns a single user's data
+  const handleEdit = async (userId) => {
+    try {
+      const response = await axios.get(
+        `${api_url}/api/users/${userId}`,
+        requestOptions
+      );
+      setEditingUser(response.data.data);
+      setPrivileges(response.data.data.privileges.split(","));
+      setEditingUserId(userId);
+      setShowModal(true);
+    } catch (err) {
+      setError("Failed to fetch user data. Please try again.");
+    }
   };
 
-  // Handle user update
-  const handleUpdate = async (userId, updatedData) => {
+  const handleUpdate = async () => {
     try {
+      const updatedData = {
+        ...editingUser,
+        privileges: privileges.join(","),
+      };
+
       await axios.put(
-        `${api_url}/api/user/${userId}`,
+        `${api_url}/api/user/${editingUserId}`,
         updatedData,
         requestOptions
       );
-      // Update the local users list with the updated user
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
-          user.user_id === userId ? { ...user, ...updatedData } : user
+          user.user_id === editingUserId ? { ...user, ...updatedData } : user
         )
       );
-      setEditingUserId(null); // Close the form after successful update
+      setShowModal(false);
+      setEditingUserId(null);
+      setEditingUser(null);
     } catch (err) {
       setError("Failed to update user. Please try again.");
     }
   };
 
+  const handlePrivilegeChange = (privilege) => {
+    setPrivileges((prev) =>
+      prev.includes(privilege)
+        ? prev.filter((item) => item !== privilege)
+        : [...prev, privilege]
+    );
+  };
+
+  const handlePasswordReset = async () => {
+    try {
+      const updatedData = {
+        ...editingUser,
+        password: "123456",
+      };
+
+      await axios.put(
+        `${api_url}/api/user/${editingUserId}`,
+        updatedData,
+        requestOptions
+      );
+      alert("Password has been reset to '123456'.");
+    } catch (err) {
+      setError("Failed to reset password. Please try again.");
+    }
+  };
+
+  const renderPrivileges = (role) => {
+    const privilegesMap = {
+      HR: [
+        "Post Vacancy",
+        "Manage Applicants",
+        "Screen Applicants",
+        "Archive Vacancy",
+      ],
+      CPD: ["Schedule CPD course", "Active CPD Test", "Add CPD course"],
+      Comm: ["Post News", "Approve News"],
+      HL: ["Post Health Tip", "Approve Post"],
+    };
+
+    const privilegesList = privilegesMap[role] || [];
+
+    return privilegesList.map((privilege) => (
+      <Form.Check
+        type="checkbox"
+        key={privilege}
+        label={privilege}
+        checked={privileges.includes(privilege)}
+        onChange={() => handlePrivilegeChange(privilege)}
+      />
+    ));
+  };
+
+  // Pagination logic
+  const totalPages = Math.ceil(users.length / usersPerPage);
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div className="container py-5">
       <h1 className="mb-4">Admin Management</h1>
-      {error && <div className="alert alert-danger mb-4">{error}</div>}
+      {error && <Alert variant="danger">{error}</Alert>}
 
-      {editingUserId ? (
-        <UpdateAdmin
-          cancelEditing={setEditingUserId}
-          userId={editingUserId}
-          fetchUserData={fetchUserData}
-          onSubmit={handleUpdate}
-        />
-      ) : (
-        <table className="table table-bordered">
-          <thead className="thead-light">
-            <tr>
-              <th scope="col">Username</th>
-              <th scope="col">Email</th>
-              <th scope="col">Role</th>
-              <th scope="col">Status</th>
-              <th scope="col">Actions</th>
+      <Table bordered hover responsive className="text-center">
+        <thead className="table-light">
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentUsers.map((user) => (
+            <tr key={user.user_id}>
+              <td>{user.username}</td>
+              <td>{user.email}</td>
+              <td>{user.role === "superadmin" ? "Super Admin" : user.role}</td>
+              <td>
+                <Badge bg={user.active_status ? "success" : "secondary"}>
+                  {user.active_status ? "Active" : "Inactive"}
+                </Badge>
+              </td>
+              <td>
+                {user.role !== "superadmin" && (
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    className="me-2"
+                    onClick={() => handleDelete(user.user_id)}
+                  >
+                    Delete
+                  </Button>
+                )}
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={() => handleEdit(user.user_id)}
+                >
+                  Edit
+                </Button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.user_id}>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td>
-                  {user.role === "superadmin"
-                    ? "Super Admin"
-                    : user.role === "Admin"
-                    ? "Admin"
-                    : user.role === "HR"
-                    ? "HR"
-                    : user.role === "RCUB"
-                    ? "Research Publication"
-                    : user.role === "Health Literacy"
-                    ? "Health Literacy"
-                    : user.role === "CPD"
-                    ? "CPD Training"
-                    : user.role === "Comm"
-                    ? "Communication"
-                    : "Unknown Role"}
-                </td>
-                <td>
-                  <span
-                    className={`badge ${
-                      user.active_status ? "badge-success" : "badge-secondary"
-                    }`}
-                  >
-                    {user.active_status ? "Active" : "Inactive"}
-                  </span>
-                </td>
-                <td>
-                  {user.role !== "superadmin" && (
-                    <button
-                      className="btn btn-danger btn-sm me-2"
-                      onClick={() => handleDelete(user.user_id)}
-                    >
-                      Delete
-                    </button>
-                  )}
-                  <button
-                    className="btn btn-primary btn-sm"
-                    onClick={() => setEditingUserId(user.user_id)} // Set editing user
-                  >
-                    Edit
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-          <div className="mt-4" style={{ fontSize: "12px" }}>
-            <h5 style={{ fontSize: "16px", padding: 0, margin: 0 }}>
-              Role Access definition
-            </h5>
-            <div
-              style={{
-                textAlign: "left",
-                display: "flow",
-                backgroundColor: "#F4F4F9",
-              }}
-            >
-              <p
-                style={{
-                  fontSize: "12px",
-                  padding: 0,
-                  backgroundColor: "#F4F4F9",
-                }}
-              >
-                Admin : <span>access all without admin Management</span>
-              </p>
-              <p
-                style={{
-                  fontSize: "12px",
-                  padding: 0,
-                  backgroundColor: "#F4F4F9",
-                }}
-              >
-                HR : <span>access only Job and Applicant</span>
-              </p>
-              <p style={{ fontSize: "12px", padding: 0,backgroundColor: "#F4F4F9", }}>
-                Health Literacy : <span>access only Health-Tip</span>
-              </p>
-              <p style={{ fontSize: "12px", padding: 0,backgroundColor: "#F4F4F9", }}>
-                Communication : <span>access only News</span>
-              </p>
-              <p style={{ fontSize: "12px", padding: 0,backgroundColor: "#F4F4F9", }}>
-                Research Publication : <span>access only Publication</span>
-              </p>
-              <p style={{ fontSize: "12px", padding: 0,backgroundColor: "#F4F4F9", }}>
-                CPD Training : <span>access only CPD Training</span>
-              </p>
-            </div>
-          </div>
-        </table>
-      )}
+          ))}
+        </tbody>
+      </Table>
+
+      <Pagination className="justify-content-center">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <Pagination.Item
+            key={index + 1}
+            active={index + 1 === currentPage}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </Pagination.Item>
+        ))}
+      </Pagination>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit User</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {editingUser && (
+            <Form>
+              <Form.Group className="mb-3">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={editingUser.username}
+                  onChange={(e) =>
+                    setEditingUser({ ...editingUser, username: e.target.value })
+                  }
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="email" value={editingUser.email} disabled />
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Privileges</Form.Label>
+                <div>{renderPrivileges(editingUser.role)}</div>
+              </Form.Group>
+            </Form>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Cancel
+          </Button>
+          <Button variant="warning" onClick={handlePasswordReset}>
+            Reset Password
+          </Button>
+          <Button variant="primary" onClick={handleUpdate}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

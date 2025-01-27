@@ -67,14 +67,16 @@ const TraineesDashboard = () => {
           {
             headers: {
               "y-access-token": token,
-
             },
-
           }
         );
         const data = await response.json();
-console.log("response", data.data);
-        if (response.status === 404 || response.status === 403 || data.data.length === 0) {
+        console.log("response", data.data);
+        if (
+          response.status === 404 ||
+          response.status === 403 ||
+          data.data.length === 0
+        ) {
           navigate("/cpd/trainee-info");
         }
         // const data = await response.json();
@@ -89,11 +91,14 @@ console.log("response", data.data);
   useEffect(() => {
     const fetchRegisteredCourses = async () => {
       try {
-        const response = await fetch(`${api_url}/api/cpd/IsApply/${traineeId}`, {
-          headers: {
-            "y-access-token": token,
-          },
-        });
+        const response = await fetch(
+          `${api_url}/api/cpd/IsApply/${traineeId}`,
+          {
+            headers: {
+              "y-access-token": token,
+            },
+          }
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch registered courses");
         }

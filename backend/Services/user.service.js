@@ -20,7 +20,7 @@ async function createUser(user) {
     // Hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(user.password_hashed, salt);
-const updated_by="superAdmin";
+    const updated_by = "superAdmin";
     // Begin a transaction
     await connection.beginTransaction();
 
@@ -35,7 +35,7 @@ const updated_by="superAdmin";
       hashedPassword,
       user.department,
       user.active_status,
-      updated_by
+      updated_by,
     ]);
 
     const userId = result.insertId;
@@ -131,10 +131,26 @@ async function getUserByEmail(email) {
 
 // get user by id
 async function getUserById(userId) {
-  const sql = `SELECT * FROM Users WHERE user_id = ?`;
+  const sql = `
+  SELECT 
+    Users.*,
+    GROUP_CONCAT(user_privileges.privilege) AS privileges
+  FROM 
+    Users
+  LEFT JOIN 
+    user_privileges
+  ON 
+    Users.user_id = user_privileges.user_id
+  WHERE 
+    Users.user_id = ?
+  GROUP BY 
+    Users.user_id;
+`;
+
   const connection = await conn.pool.getConnection();
   try {
     const [rows] = await connection.query(sql, [userId]);
+    console.log(rows[0]);
     return rows[0];
   } catch (error) {
     throw error;
@@ -144,11 +160,12 @@ async function getUserById(userId) {
 }
 
 //update user by id
-async function updateUserById(userId, formData) {
+const updateUserById = async (userId, formData) => {
+  console.log(formData);
   const connection = await conn.pool.getConnection();
 
   try {
-    // Dynamically build the SQL query and parameters
+    // Build the SQL query for updating the Users table
     const updates = [];
     const values = [];
 
@@ -156,50 +173,80 @@ async function updateUserById(userId, formData) {
       updates.push("username = ?");
       values.push(formData.username);
     }
-    if (formData.email) {
-      updates.push("email = ?");
-      values.push(formData.email);
-    }
-    if (formData.password_hashed) {
+
+    if (formData.password) {
       const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(formData.password_hashed, salt);
+      const hashedPassword = await bcrypt.hash(formData.password, salt);
       updates.push("password_hashed = ?");
       values.push(hashedPassword);
     }
-    if (formData.role) {
-      updates.push("role = ?");
-      values.push(formData.role);
-    }
-    if (formData.active_status !== undefined) {
-      updates.push("active_status = ?");
-      values.push(formData.active_status);
-    }
+
     if (formData.updated_by) {
       updates.push("updated_by = ?");
       values.push(formData.updated_by);
     }
 
     // Ensure there are updates to make
-    if (updates.length === 0) {
+    if (updates.length === 0 && !formData.privileges) {
       throw new Error("No fields to update");
     }
 
-    // Add the WHERE clause
-    const sql = `UPDATE Users SET ${updates.join(", ")} WHERE user_id = ?`;
-    values.push(userId);
+    // Update Users table if there are updates
+    if (updates.length > 0) {
+      const sql = `UPDATE Users SET ${updates.join(", ")} WHERE user_id = ?`;
+      values.push(userId);
+      await connection.query(sql, values);
+    }
 
-    await connection.beginTransaction();
-    const [result] = await connection.query(sql, values);
-    await connection.commit();
+    // Handle privileges if provided
+    if (formData.privileges) {
+      const privileges = formData.privileges;
+      const optionsArray = privileges.split(",").map((option) => option.trim());
+      console.log(optionsArray);
 
-    return result.affectedRows > 0;
+      if (optionsArray && optionsArray.length > 0) {
+        // Begin a transaction
+        await connection.beginTransaction();
+
+        try {
+          // Step 1: Delete existing privileges for the user
+          const deletePrivilegesQuery = `
+            DELETE FROM user_privileges
+            WHERE user_id = ?
+          `;
+          await connection.query(deletePrivilegesQuery, [userId]);
+
+          // Step 2: Insert new privileges
+          const privilegeInsertQuery = `
+            INSERT INTO user_privileges (user_id, privilege)
+            VALUES ?
+          `;
+          const privilegeValues = optionsArray.map((privilege) => [
+            userId,
+            privilege,
+          ]);
+
+          await connection.query(privilegeInsertQuery, [privilegeValues]);
+
+          // Commit the transaction
+          await connection.commit();
+        } catch (err) {
+          // Rollback the transaction in case of an error
+          await connection.rollback();
+          throw err; // Re-throw the error to handle it upstream
+        }
+      }
+    }
+
+    return true;
   } catch (error) {
-    await connection.rollback();
+    await connection.rollback(); // Rollback the transaction in case of an error
+    console.error("Error updating user:", error.message);
     throw error;
   } finally {
     connection.release();
   }
-}
+};
 
 //delete user by id
 async function deleteUserById(userId) {
@@ -230,7 +277,11 @@ async function updatePasswordByEmail(email, newPassword) {
 
     try {
       await connection.beginTransaction();
-      const [result] = await connection.query(sql, [hashedPassword, updated_by, email]);
+      const [result] = await connection.query(sql, [
+        hashedPassword,
+        updated_by,
+        email,
+      ]);
       await connection.commit();
       return result.affectedRows > 0;
     } catch (error) {
@@ -253,5 +304,5 @@ module.exports = {
   getUserById,
   updateUserById,
   deleteUserById,
-  updatePasswordByEmail
+  updatePasswordByEmail,
 };

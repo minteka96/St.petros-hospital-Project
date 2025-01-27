@@ -17,6 +17,10 @@ function ListOfSchedule() {
   const [editSchedule, setEditSchedule] = useState({});
   const [showSchedule, setShowSchedule] = useState(false);
 
+  // Pagination States
+  const [currentPage, setCurrentPage] = useState(1);
+  const [schedulesPerPage] = useState(5); // Number of items per page
+
   // Handle schedule change for editing
   const handleScheduleChange = (e) => {
     const { name, value } = e.target;
@@ -148,6 +152,17 @@ function ListOfSchedule() {
     item.course_end_date = formatDateToYearMonthDate(item.course_end_date);
   });
 
+  // Pagination logic
+  const indexOfLastSchedule = currentPage * schedulesPerPage;
+  const indexOfFirstSchedule = indexOfLastSchedule - schedulesPerPage;
+  const currentSchedules = schedule.slice(
+    indexOfFirstSchedule,
+    indexOfLastSchedule
+  );
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="container py-5">
       <h2 className="text-gray">List of Schedule</h2>
@@ -166,7 +181,7 @@ function ListOfSchedule() {
             </tr>
           </thead>
           <tbody>
-            {schedule
+            {currentSchedules
               .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
               .map((item, index) => (
                 <tr key={index}>
@@ -214,7 +229,7 @@ function ListOfSchedule() {
                     >
                       <img
                         src="https://img.icons8.com/?size=100&id=zo9eHF24MB3R&format=png&color=000000"
-                        alt=""
+                        alt="Check Exam"
                         style={{
                           maxWidth: "20px",
                           minWidth: "20px",
@@ -256,49 +271,46 @@ function ListOfSchedule() {
           <form onSubmit={handleUpdateSchedule}>
             <div className="mb-3">
               {updateSchedule && (
-                <div className="alert alert-success py-1">
-                  Schedule updated successfully
+                <div className="alert alert-success">
+                  Schedule has been updated successfully
                 </div>
               )}
-              <label className="form-label">Registration Start Date</label>
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Course Name</label>
               <input
-                type="date"
+                type="text"
                 className="form-control"
-                name="registration_start_date"
+                name="course_name"
+                value={editSchedule.course_name || ""}
                 onChange={handleScheduleChange}
-                min={new Date().toISOString().split("T")[0]}
-              />
-              <label className="form-label">Registration End Date</label>
-              <input
-                type="date"
-                className="form-control"
-                name="registration_end_date"
-                onChange={handleScheduleChange}
-                min={new Date().toISOString().split("T")[0]}
-              />
-              <label className="form-label">Training Start Date</label>
-              <input
-                type="date"
-                className="form-control"
-                name="course_start_date"
-                onChange={handleScheduleChange}
-                min={new Date().toISOString().split("T")[0]}
-              />
-              <label className="form-label">Training End Date</label>
-              <input
-                type="date"
-                className="form-control"
-                name="course_end_date"
-                onChange={handleScheduleChange}
-                min={new Date().toISOString().split("T")[0]}
               />
             </div>
-            <button type="submit" className="btn btn-primary">
+            {/* Add other fields similarly */}
+            <Button variant="primary" type="submit">
               Update Schedule
-            </button>
+            </Button>
           </form>
         </Modal.Body>
       </Modal>
+
+      {/* Pagination Controls */}
+      <nav>
+        <ul className="pagination justify-content-center">
+          {[...Array(Math.ceil(schedule.length / schedulesPerPage))].map(
+            (_, index) => (
+              <li className="page-item" key={index}>
+                <button
+                  className="page-link"
+                  onClick={() => paginate(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              </li>
+            )
+          )}
+        </ul>
+      </nav>
     </div>
   );
 }
