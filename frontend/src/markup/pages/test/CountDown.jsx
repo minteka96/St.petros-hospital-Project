@@ -23,7 +23,7 @@ function CountDown({ duration, startAt, handleFinish }) {
 
   return (
     <div>
-      <h1>{formatTime(timeLeft)}</h1>
+      <h3>{formatTime(timeLeft)}</h3>
     </div>
   );
 }

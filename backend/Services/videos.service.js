@@ -1,29 +1,5 @@
 const db = require("../Config/db.config");
 
-// Function to create a video embed entry in the database
-// const createVideoEmbed = async (data) => {
-//   const { title, videoLink } = data;
-
-//   try {
-//     // Insert query with placeholders for parameters
-//     const result = await db.query(
-//       `INSERT INTO video_embeds (title, video_link)
-//       VALUES (?, ?)`,
-//       [title, videoLink]
-//     );
-
-//     // Return the created video embed details including the generated ID
-//     return {
-//       id: result.insertId,
-//       title,
-//       videoLink,
-//     };
-//   } catch (err) {
-//     console.error("Error creating video embed:", err);
-//     throw new Error("Error creating video embed: " + err.message);
-//   }
-// };
-
 // Function to fetch a single video embed by ID
 const getVideoById = async (videoId) => {
   try {

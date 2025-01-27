@@ -82,7 +82,6 @@ async function getAllJobs(req, res) {
 // Controller to get a job by ID
 async function getJobById(req, res) {
   const { id } = req.params;
-  console.log("id", id);
 
   try {
     const job = await jobService.getJobById(id);
@@ -140,7 +139,6 @@ async function deleteJob(req, res) {
 }
 async function updateStatus(req, res) {
   const { jobId } = req.params;
-  console.log(jobId);
   try {
     const deleted = await jobService.updateStatus(jobId);
 

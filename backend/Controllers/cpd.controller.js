@@ -86,7 +86,6 @@ async function updateCpdCourse(req, res) {
       minimum_score: min_score,
       credits,
     };
-    console.log("courseData", courseData);
     const updatedCpdCourse = await cpdservice.updateCpdCourseById(
       id,
       courseData

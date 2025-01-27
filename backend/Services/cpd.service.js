@@ -175,7 +175,6 @@ async function ApplyCourses(
 
     if (existingRegistration.length > 0) {
       // Trainee is already registered for the course
-      console.log("You are already registered for this course.");
       return {
         success: false,
         message: "You are already registered for this course.",
@@ -226,7 +225,6 @@ async function ApplyCourses(
 
 async function IsApply(trainee_id) {
   try {
-    console.log("Trainee ID:", trainee_id);
 
     // Fetch all courses the trainee has applied for
     const appliedCourses = await conn.query(

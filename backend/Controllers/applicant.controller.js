@@ -15,7 +15,6 @@ async function createApplicant(req, res) {
       const applicantExists = await applicantService.checkIfApplicantExists(
         email_address
       );
-      console.log("applicantExists", applicantExists);
       if (applicantExists) {
         return res
           .status(400)

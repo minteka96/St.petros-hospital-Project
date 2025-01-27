@@ -104,11 +104,12 @@ const GenerateCertificate = () => {
       if (line2.trim()) {
         ctx.fillText(line2.trim(), canvas.width / 3.7, canvas.height * 0.558);
       }
-
+ctx.textAlign = "center";
       // Draw Credits
-      ctx.fillText(credits, canvas.width / 1.78, canvas.height * 0.634);
+      ctx.fillText(credits, canvas.width / 1.76, canvas.height * 0.634);
 
       // Draw Training Dates
+      ctx.textAlign = "start";
       ctx.fillText(
         `${trainingStart} - ${trainingEnd}`,
         canvas.width / 2.44,

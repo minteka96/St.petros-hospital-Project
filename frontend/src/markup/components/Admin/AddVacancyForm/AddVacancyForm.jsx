@@ -33,7 +33,6 @@ const AddVacancyForm = () => {
       deadline,
     };
 
-    console.log("Submitting data:", formattedData);
 
     try {
       await addVacancy(formattedData);

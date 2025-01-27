@@ -29,7 +29,7 @@ async function getAllTrainingData() {
   }
 }
 
-async function getTrainingDataById(trainee_id ) {
+async function getTrainingDataById(trainee_id) {
   const sql = `
     SELECT 
       c.course_id,
@@ -47,17 +47,21 @@ async function getTrainingDataById(trainee_id ) {
     LEFT JOIN trainees_status ts 
       ON c.trainee_id = ts.trainee_id 
       AND c.course_name = ts.course_name
-    WHERE ts.trainee_id  = ?
+    WHERE ts.trainee_id = ?
   `;
 
   const connection = await conn.pool.getConnection();
   try {
     const [rows] = await connection.query(sql, [trainee_id]);
-    return rows[0];
+    return rows || null; // Return null if no data is found
+  } catch (error) {
+    console.error("Database Query Error:", error.message);
+    throw error; // Re-throw the error for further handling
   } finally {
     await connection.release();
   }
 }
+
 
 module.exports = {
   getAllTrainingData,
