@@ -20,7 +20,6 @@ const getTraineesByScheduleId = async (scheduleId) => {
       WHERE c.schedule_id = ?;
     `;
     const trainees = await db.query(query, [scheduleId]);
-    // console.log("trainees", trainees);
     return trainees;
   } catch (err) {
     throw new Error("Error fetching trainees by schedule ID: " + err.message);

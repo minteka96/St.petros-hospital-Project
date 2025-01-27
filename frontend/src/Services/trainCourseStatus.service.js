@@ -38,7 +38,6 @@ const getTrainingDataById = async (token,trainee_id ) => {
       `${api_url}/api/training-data/${trainee_id}`,
       requestOptions
     );
-    console.log("first response",response)
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }

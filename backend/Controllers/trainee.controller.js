@@ -4,7 +4,6 @@ const traineeService= require("../Services/trainee.service");
 //getTraineesByScheduleId
 const getTraineesByScheduleId = async ( req, res ) => {
  const scheduleId = req.params.schedule_id;
- console.log("scheduleId", scheduleId);
  try {
   const trainees = await traineeService.getTraineesByScheduleId(scheduleId);
   if (!trainees) {

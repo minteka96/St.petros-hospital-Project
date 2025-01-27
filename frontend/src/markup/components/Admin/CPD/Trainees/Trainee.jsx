@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 function Trainee() {
 const{schedule_id}=useParams();
 const [trainees, setTrainees] = useState([]);
-console.log("trainees", trainees);
 useEffect(() => {
  const fetchTrainees = async () => {
   try {

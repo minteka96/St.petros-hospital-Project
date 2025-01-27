@@ -122,11 +122,9 @@ async function getTraineeInfoById(req, res) {
 
 async function getTraineeInfoByTraineeId(req, res) {
   try {
-    console.log("first");
     const traineeInfo = await traineesInfoService.getTraineeInfoByTraineeId(
       req.params.traineeId
     );
-    console.log(req.params.traineeId);
     if (!traineeInfo) {
       return res.status(404).json({ error: "Trainee info not found" });
     }

@@ -113,8 +113,7 @@ router.post("/api/cpd/apply", cpdController.apply);
 router.put(
   "/api/cpdResult/update/:trainee_id/:course_name",
   [
-    authMiddleware.verifyBothTokens ,
-    authMiddleware.checkRoles(["superadmin", "Admin", "CPD"]),
+    authMiddleware.verifyBothTokens 
   ],
   cpdController.updateTestResult
 );
