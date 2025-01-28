@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `NewsImages` (
 CREATE TABLE IF NOT EXISTS `Health_Tips` (
     `health_tip_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `health_tip_title` VARCHAR(255) NOT NULL,
-    `health_tip_detail` VARCHAR(255),
+    `health_tip_detail` TEXT NOT NULL,
     `health_tip_description` TEXT NOT NULL,
     `health_tip_link` VARCHAR(255),
     `health_tip_video_link` VARCHAR(255),
