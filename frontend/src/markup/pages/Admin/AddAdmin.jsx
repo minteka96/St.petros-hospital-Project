@@ -12,7 +12,9 @@ import {
   Alert,
   Row,
   Col,
+  InputGroup,
 } from "react-bootstrap";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons from react-icons
 
 const AddAdmin = () => {
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ const AddAdmin = () => {
   const [error, setError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [success, setSuccess] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
   const privilegesMap = {
     Admin: ["All Privileges"],
@@ -62,13 +65,6 @@ const AddAdmin = () => {
 
   const handlePrivilegeChange = (e) => {
     const { value, checked } = e.target;
-
-    // if (formData.department==="Admin") {
-    //   setFormData({
-    //     ...formData,
-    //     privileges: "access all privileges",
-    //   })
-    // }
     setFormData((prevState) => {
       const updatedPrivileges = checked
         ? [...prevState.privileges, value]
@@ -155,14 +151,22 @@ const AddAdmin = () => {
 
             <Form.Group className="mb-3">
               <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                name="password_hashed"
-                value={formData.password_hashed}
-                onChange={handleChange}
-                placeholder="Enter password"
-                required
-              />
+              <InputGroup>
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  name="password_hashed"
+                  value={formData.password_hashed}
+                  onChange={handleChange}
+                  placeholder="Enter password"
+                  required
+                />
+                <Button
+                  variant="outline-secondary"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </Button>
+              </InputGroup>
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -182,12 +186,12 @@ const AddAdmin = () => {
               </Form.Select>
             </Form.Group>
 
-            {formData.department &&
-              privilegesMap[formData.department] && (
-                <Form.Group className="mb-3">
-                  <Form.Label>Privileges</Form.Label>
-                  <Row>
-                    {privilegesMap[formData.department].length > 0 && privilegesMap[formData.department].map((privilege) => (
+            {formData.department && privilegesMap[formData.department] && (
+              <Form.Group className="mb-3">
+                <Form.Label>Privileges</Form.Label>
+                <Row>
+                  {privilegesMap[formData.department].length > 0 &&
+                    privilegesMap[formData.department].map((privilege) => (
                       <Col xs={6} key={privilege}>
                         <Form.Check
                           type="checkbox"
@@ -196,13 +200,12 @@ const AddAdmin = () => {
                           value={privilege}
                           checked={formData.privileges.includes(privilege)}
                           onChange={handlePrivilegeChange}
-                          // disabled={formData.department === "Admin"}
                         />
                       </Col>
                     ))}
-                  </Row>
-                </Form.Group>
-              )}
+                </Row>
+              </Form.Group>
+            )}
 
             <Form.Group className="mb-3">
               <Form.Check
