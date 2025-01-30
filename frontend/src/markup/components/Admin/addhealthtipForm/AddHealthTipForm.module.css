@@ -48,8 +48,24 @@
   font-size: 1em;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: 15px;
 }
 
 .submitButton:hover {
   background-color: #009C91;
+}
+.notice {
+  padding: 10px;
+  margin: 20px 0;
+  background-color: #f9f9f9;
+  border-left: 4px solid#00A99E;;
+  font-size: 14px;
+  color: #333;
+}
+
+.notice strong {
+  color: #d9534f;
+}
+.notice p {
+    font-size: 12px;
 }

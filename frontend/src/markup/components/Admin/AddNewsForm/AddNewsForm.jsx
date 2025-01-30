@@ -95,18 +95,18 @@ const AddNewsForm = () => {
       />
 
       <textarea
+        placeholder="News Description"
+        value={newsDescription}
+        onChange={(e) => setNewsDescription(e.target.value)}
+        className={classes.textareaField}
+      />
+
+      <textarea
         placeholder="News Detail"
         value={newsDetail}
         onChange={(e) => setNewsDetail(e.target.value)}
         className={classes.textareaField}
         required
-      />
-
-      <textarea
-        placeholder="News Description"
-        value={newsDescription}
-        onChange={(e) => setNewsDescription(e.target.value)}
-        className={classes.textareaField}
       />
 
       <input
@@ -144,8 +144,9 @@ const AddNewsForm = () => {
 
       <div className={classes.notice}>
         <p>
-          <strong>Note:</strong> Please use images with the standard size of
-          1200x675 pixels for the best display on the website.
+          <strong>Note:</strong> Please use images with the standard size of{" "}
+          <strong>1200 x 675</strong> pixels for the best display on the
+          website.
         </p>
       </div>
 

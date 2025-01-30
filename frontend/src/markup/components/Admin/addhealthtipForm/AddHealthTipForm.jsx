@@ -79,18 +79,18 @@ const AddHealthTipForm = () => {
       />
 
       <textarea
+        placeholder="Health Tip Description"
+        value={healthTipDescription}
+        onChange={(e) => setHealthTipDescription(e.target.value)}
+        className={classes.textareaField}
+      />
+
+      <textarea
         placeholder="Health Tip Detail"
         value={healthTipDetail}
         onChange={(e) => setHealthTipDetail(e.target.value)}
         className={classes.textareaField}
         required
-      />
-
-      <textarea
-        placeholder="Health Tip Description"
-        value={healthTipDescription}
-        onChange={(e) => setHealthTipDescription(e.target.value)}
-        className={classes.textareaField}
       />
 
       <input
@@ -117,6 +117,14 @@ const AddHealthTipForm = () => {
       <button type="submit" className={classes.submitButton}>
         Add Health Tip
       </button>
+
+      <div className={classes.notice}>
+        <p>
+          <strong>Note:</strong> Please use images with the standard size of{" "}
+          <strong>1200 x 675</strong> pixels for the best display on the
+          website.
+        </p>
+      </div>
 
       {/* Toast container to display success and error messages */}
       <ToastContainer />
