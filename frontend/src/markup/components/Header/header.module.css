@@ -67,10 +67,10 @@
 .moto_box:before {
   position: absolute;
   content: "";
-  left: -42px;
-  top: -1px;
+  right: 0;
+  top: 0px;
   height: 103px;
-  width: 200%;
+  width: 150%;
   transform: skewX(50deg);
   background-color: #1f867e;
   z-index: 11;
@@ -87,7 +87,10 @@
   z-index: 12;
 }
 .moto_text {
-  margin-left: -4px;
+  /* position: absolute; */
+  /* left: 0; */
+  /* margin-left: -4px; */
+  margin: 0 auto;
   font-size: 17px;
   font-weight: bold;
 }

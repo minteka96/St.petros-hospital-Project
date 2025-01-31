@@ -75,7 +75,7 @@ const AddJobForm = () => {
   return (
     <div className="p-4">
       <form onSubmit={handleSubmit} className={classes.formContainer}>
-        <h2>Add Job</h2>
+        <h2>Post Job</h2>
         {error && <div className={classes.errorMessage}>{error}</div>}
         {success && <div className={classes.successMessage}>{success}</div>}
 
@@ -141,6 +141,9 @@ const AddJobForm = () => {
           className={classes.inputField}
           required
         />
+        <div className="d-flex align-items-center gap-2 mx-1">
+
+        <label htmlFor="deadline"> Deadline</label>
         <input
           type="date"
           placeholder="Deadline"
@@ -148,7 +151,8 @@ const AddJobForm = () => {
           onChange={(e) => setDeadline(e.target.value)}
           className={classes.inputField}
           required
-        />
+          />
+          </div>
         <button type="submit" className={classes.submitButton}>
           Add Job
         </button>

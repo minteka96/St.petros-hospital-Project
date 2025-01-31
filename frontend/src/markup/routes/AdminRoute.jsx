@@ -650,7 +650,7 @@ const AdminRoute = () => {
         </div>
 
         <div className="d-flex align-items-center justify-content-end position-relative">
-          <h2 className=" m-0 text-white pr-3">Welcom: {user?.username}</h2>
+          <h2 className=" m-0 text-white pr-3">Welcome: {user?.username}</h2>
 
           <button onClick={logOut} className="btn btn-danger">
             <img

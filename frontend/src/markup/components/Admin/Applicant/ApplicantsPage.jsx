@@ -354,16 +354,24 @@ const ApplicantsPage = () => {
                 Download CV
               </a>
             </p>
-            <p>
-              <strong>Testimonials:</strong>{" "}
-              <a
-                href={selectedApplicant.other_testimonials}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Download Testimonials
-              </a>
-            </p>
+            {selectedApplicant.other_testimonials ? (
+              <p>
+                <strong>Testimonials:</strong>{" "}
+                <a
+                  href={selectedApplicant.other_testimonials}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download Testimonials
+                </a>
+              </p>
+            ) : (
+              <p>
+                <strong>
+                  Testimonials: <a style={{ color: "red" }}>not attached</a>
+                </strong>
+              </p>
+            )}
           </Modal.Body>
           <Modal.Footer>
             <Button

@@ -58,6 +58,10 @@ const logOut = () => {
       setError("Email is not correct");
       return;
     }
+    if(currentPassword === newPassword){
+      setError("New password cannot be same as current password");
+      return;
+    }
 
     try {
       const response = await axios.put(

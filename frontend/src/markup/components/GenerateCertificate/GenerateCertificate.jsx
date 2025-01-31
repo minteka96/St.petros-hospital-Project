@@ -96,7 +96,10 @@ const GenerateCertificate = () => {
 
       // If there are remaining words, set them for the second line
       line2 = words.slice(i).join(" ");
-
+// text color
+      ctx.fillStyle = "#f16425";
+      // text bold
+      ctx.font = "bold 24px Arial";
       // Draw first line
       ctx.fillText(line1.trim(), canvas.width / 1.85, canvas.height * 0.52);
 
@@ -105,9 +108,12 @@ const GenerateCertificate = () => {
         ctx.fillText(line2.trim(), canvas.width / 3.7, canvas.height * 0.558);
       }
 ctx.textAlign = "center";
+ctx.font = "bold 24px Arial";
+ctx.fillStyle = "#000";
       // Draw Credits
       ctx.fillText(credits, canvas.width / 1.76, canvas.height * 0.634);
-
+ctx.fillStyle = "#f16425";
+ctx.font = "24px Arial";
       // Draw Training Dates
       ctx.textAlign = "start";
       ctx.fillText(

@@ -5,7 +5,6 @@ const jwtSecret = process.env.JWT_SECRET;
 async function signIn(req, res) {
   try {
     const { email, password } = req.body;
-    console.log(email);
     // Validate required fields
     if (!email || !password) {
       return res.status(400).json({
@@ -19,7 +18,6 @@ async function signIn(req, res) {
       email,
       password,
     });
-    console.log(signInResponse);
     if (signInResponse.status === "fail") {
       return res.status(403).json(signInResponse);
     }

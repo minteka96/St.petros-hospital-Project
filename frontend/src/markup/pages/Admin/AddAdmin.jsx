@@ -113,7 +113,7 @@ const AddAdmin = () => {
         privileges: [],
       });
     } catch (err) {
-      setError("Failed to add user. Please try again.");
+      setError(err.response.data.error);
     }
   };
 

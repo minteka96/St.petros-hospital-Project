@@ -72,6 +72,9 @@ function AdminMenu() {
             <Link to="/admin/contact" className="list-group-item">
               List of feedbacks
             </Link>
+            <Link to="/admin/video" className="list-group-item">
+              update video
+            </Link>
           </>
         )}
         {isHE && (
