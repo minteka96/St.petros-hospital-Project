@@ -77,7 +77,7 @@ const TraineeAddForm = () => {
         <div className="col-md-8">
           <div className="card shadow">
             <div className="card-header  text-center">
-              <h3 className="mb-0 ">Trainee Registration</h3>
+              <h3 className="mb-0 ">Trainee Registration Form</h3>
             </div>
             <div className="card-body">
               <form onSubmit={handleSubmit}>
@@ -198,7 +198,7 @@ const TraineeAddForm = () => {
                         Adding...
                       </>
                     ) : (
-                      "Add Trainee"
+                      "submit"
                     )}
                   </button>
                 </div>

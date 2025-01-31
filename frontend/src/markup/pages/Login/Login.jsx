@@ -65,8 +65,8 @@ function Login() {
               <div className="card-body px-5 text-center">
                 <div className="mb-md-5 mt-md-4 pb-5">
                   <div className="d-flex align-items-center justify-content-between">
-                    <a href="/" >
-                    <img style={{ width: "40%" }} src={logo} alt="" />
+                    <a href="/">
+                      <img style={{ width: "40%" }} src={logo} alt="" />
                     </a>
                     <h1 className="fw-bold mb-2 text-uppercase">Login</h1>
                   </div>
@@ -123,18 +123,23 @@ function Login() {
                       <div className="invalid-feedback">{errors.password}</div>
                     )}
 
-                    <span
-                      className="position-absolute"
+                    <button
+                      type="button"
+                      className={`${styles.passwordToggle} ${styles.passwordToggleSize}`}
                       style={{
-                        right: "10px",
-                        top: "12px",
+                        right: "20px",
+                        top: "25px",
                         cursor: "pointer",
                         color: "gray",
                       }}
                       onClick={() => setShowPassword(!showPassword)}
                     >
-                      {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </span>
+                      {showPassword ? (
+                        <FaEyeSlash color="#E9C1C1" size={25} />
+                      ) : (
+                        <FaEye color="#E9C1C1" size={25} />
+                      )}
+                    </button>
                   </div>
 
                   <p className="small pb-lg-2">

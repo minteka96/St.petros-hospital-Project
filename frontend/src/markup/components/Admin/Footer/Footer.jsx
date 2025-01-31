@@ -224,7 +224,7 @@ function Footer() {
               <div className="col-sm-12">
                 <div className="text-center">
                   <p>
-                    Copyright &copy; 2024 Kidus Petros Hospital
+                    Copyright &copy; {new Date().getFullYear()} Kidus Petros Hospital
                     <a target="" href="#" className={classes.uparrowhover}>
                       <span className={classes.upArrow}>
                         <i className="icofont-arrow-up"></i>

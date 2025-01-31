@@ -150,7 +150,6 @@ async function getUserById(userId) {
   const connection = await conn.pool.getConnection();
   try {
     const [rows] = await connection.query(sql, [userId]);
-    console.log(rows[0]);
     return rows[0];
   } catch (error) {
     throw error;
@@ -161,7 +160,6 @@ async function getUserById(userId) {
 
 //update user by id
 const updateUserById = async (userId, formData) => {
-  console.log(formData);
   const connection = await conn.pool.getConnection();
 
   try {
@@ -202,7 +200,6 @@ const updateUserById = async (userId, formData) => {
     if (formData.privileges) {
       const privileges = formData.privileges;
       const optionsArray = privileges.split(",").map((option) => option.trim());
-      console.log(optionsArray);
 
       if (optionsArray && optionsArray.length > 0) {
         // Begin a transaction

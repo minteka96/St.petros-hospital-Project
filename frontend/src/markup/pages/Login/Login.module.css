@@ -9,4 +9,22 @@ background: -webkit-linear-gradient(to right, #F26524, #1F867E);
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 background: linear-gradient(to right, #F26524, #1F867E)
 }
+.passwordToggle {
+  position: absolute;
+  right: 10px;
+  top: 40%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
 
+.passwordToggleSize:hover {
+  background-color: transparent !important;
+  border: none !important; /* Optional: Removes border if present */
+  box-shadow: none !important; /* Optional: Removes shadow if present */
+}
+
+.passwordToggle:focus {
+  outline: none;
+}

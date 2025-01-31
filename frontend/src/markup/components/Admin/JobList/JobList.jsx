@@ -23,7 +23,7 @@ const JobsListPage = () => {
         }
       } catch (err) {
         console.error("Error fetching jobs:", err);
-        setError("Something went wrong while fetching jobs.");
+        setError("no jobs found");
       } finally {
         setLoading(false);
       }

@@ -50,7 +50,6 @@ async function createApplicant(req, res) {
       cv_file_path,
       other_testimonials,
     };
-    console.log("applicantData", applicantData);
     // Create applicant in the database
     await applicantService.createApplicant(applicantData);
     res

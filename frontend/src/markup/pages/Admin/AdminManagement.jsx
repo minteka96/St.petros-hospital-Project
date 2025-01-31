@@ -90,10 +90,10 @@ const AdminManagement = () => {
 
   const handleUpdate = async () => {
     const updatedPrivileges = privileges.join(",");
-    if (originalPrivileges.join(",") === updatedPrivileges) {
-      setError("No changes made to privileges.");
-      return;
-    }
+    // if (originalPrivileges.join(",") === updatedPrivileges) {
+    //   setError("No changes made to privileges.");
+    //   return;
+    // }
 
     try {
       const updatedData = {
@@ -133,7 +133,8 @@ const AdminManagement = () => {
   const handlePasswordReset = async () => {
     try {
       const updatedData = {
-        password: "123456",
+        password: "admin@123",
+        updated_by:"superAdmin",
       };
 
       await axios.put(
@@ -142,6 +143,7 @@ const AdminManagement = () => {
         requestOptions
       );
       alert("Password has been reset.");
+      setShowModal(false);
     } catch (err) {
       setError("Failed to reset password. Please try again.");
     }
@@ -269,11 +271,13 @@ const AdminManagement = () => {
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" value={editingUser.email} disabled />
               </Form.Group>
-
+              {editingUser.role !== "superadmin" && (
+                
               <Form.Group className="mb-3">
                 <Form.Label>Privileges</Form.Label>
                 <div>{renderPrivileges(editingUser.role)}</div>
               </Form.Group>
+              )}
             </Form>
           )}
         </Modal.Body>

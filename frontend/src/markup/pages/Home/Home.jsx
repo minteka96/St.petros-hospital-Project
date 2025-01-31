@@ -76,14 +76,16 @@ const Home = () => {
     <>
       <div className="wrapper home-default-wrapper">
         <main className="main-content site-wrapper-reveal">
-          <section className="hero-slider play_btn-wrapper" style={{height:"80vh"}}>
+          <section
+            className="hero-slider play_btn-wrapper"
+            style={{ height: "80vh" }}
+          >
             <Carousel
               controls={true}
               indicators={true}
               interval={3000}
               pause="hover"
             >
-              {/* Slide 1 */}
               <Carousel.Item>
                 <div
                   className="carousel-image"
@@ -105,7 +107,6 @@ const Home = () => {
                 </div>
               </Carousel.Item>
 
-              {/* Slide 2 */}
               <Carousel.Item>
                 <div
                   className="carousel-image"
@@ -118,9 +119,9 @@ const Home = () => {
                 >
                   <div className="container d-flex flex-column justify-content-center h-100 text-white">
                     <div className="slider-content">
-                      <h5 className="title">
+                      <h2 className="title">
                         መኖራችን <span className="d-block">ለእርስዎ ነዉ!</span>
-                      </h5>
+                      </h2>
                       <h2 className="title">
                         Our Existence is
                         <span className="d-block">For You</span>
@@ -130,7 +131,6 @@ const Home = () => {
                 </div>
               </Carousel.Item>
 
-              {/* Slide 3 */}
               <Carousel.Item>
                 <div
                   className="carousel-image"
@@ -143,9 +143,9 @@ const Home = () => {
                 >
                   <div className="container d-flex flex-column justify-content-center h-100 text-white">
                     <div className="slider-content">
-                      <h5 className="title">
+                      <h2 className="title">
                         መኖራችን <span className="d-block">ለእርስዎ ነዉ!</span>
-                      </h5>
+                      </h2>
                       <h2 className="title">
                         Our Existence is
                         <span className="d-block">For You</span>
@@ -157,12 +157,12 @@ const Home = () => {
             </Carousel>
             <div>
               {title && title !== "stop" && (
-                <div className="play_btn mt-4">
+                <div className="play_btn">
                   <a
                     href={videoLink}
                     className="overlay-link lightbox-image video-fancybox ripple"
                     target="_blank"
-                    rel="noopener noreferrer"
+                    // rel="noopener noreferrer"
                   >
                     <div className="play-icon">
                       <div className="play-button">
@@ -178,7 +178,6 @@ const Home = () => {
           <Services />
           <Doc />
           <LatestNews />
-          {/* End */}
           <div className="map-area">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4487.263531705987!2d38.75581056600536!3d9.073717297055985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b8ede0363bdaf%3A0xe1edc0f09e9bb639!2sSt.%20Peter%E2%80%99s%20Specialized%20Hospital!5e1!3m2!1sen!2set!4v1729108276923!5m2!1sen!2set"></iframe>
           </div>
@@ -288,9 +287,7 @@ const Home = () => {
                 </span>
                 <div className="media-content">
                   <span className="media-sub-heading">working hours</span>
-                  <span className="media-heading">
-                    MON - FRI: 2:00- 11:00{" "}
-                  </span>
+                  <span className="media-heading">MON - FRI: 2:00- 11:00 </span>
                 </div>
               </li>
 

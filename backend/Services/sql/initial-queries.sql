@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `user_privileges` (
 -- Insert default admin user
 INSERT INTO `Users` (`username`, `email`, `password_hashed`, `role`)
 VALUES 
-    ('admin', 'admin@admin.com', '$2b$10$DX9eZK099SgsYXIWOyYDTef4Z/7emhCt9MsMVxyqUyDIlIZ1oRkE6', 'superadmin')
+    ('superAdmin', 'admin@admin.com', '$2b$10$jqy1eNuZGEQkoXUZrwUlreFcaUsvB7K/XaN2kkgsksERKL0WewqIG', 'superadmin')
 ON DUPLICATE KEY UPDATE 
     `password_hashed` = VALUES(`password_hashed`), 
     `role` = VALUES(`role`);
@@ -31,9 +31,10 @@ ON DUPLICATE KEY UPDATE
 INSERT INTO `user_privileges` (`user_id`, `privilege`)
 SELECT `user_id`, 'All Privileges'
 FROM `Users`
-WHERE `username` = 'admin'
+WHERE `username` = 'superAdmin'
 ON DUPLICATE KEY UPDATE 
     `privilege` = VALUES(`privilege`);
+
 
 -- Create News Table
 CREATE TABLE IF NOT EXISTS `News` (
@@ -58,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `NewsImages` (
 -- Create Health Tips Table
 CREATE TABLE IF NOT EXISTS `Health_Tips` (
     `health_tip_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `health_tip_title` VARCHAR(255) NOT NULL,
+    `health_tip_title` TEXT NOT NULL,
     `health_tip_detail` TEXT NOT NULL,
     `health_tip_description` TEXT NOT NULL,
     `health_tip_link` VARCHAR(255),
@@ -78,7 +79,8 @@ CREATE TABLE IF NOT EXISTS `Vacancy` (
     `job_grade` VARCHAR(50),        
     `terms` TEXT,                   
     `salary` VARCHAR(100),          
-    `address` VARCHAR(255),         
+    `address` VARCHAR(255),
+    `status` TINYINT DEFAULT 0,  
     `deadline` DATE NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -93,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `Applicant` (
     `phone_number` VARCHAR(20),
     `position_applied_for` VARCHAR(100), 
     `additional_information` TEXT NOT NULL,
-    `status` VARCHAR(255) DEFAULT '0',
+    `Status` VARCHAR(255) DEFAULT 'Pending',
     `cv_file_path` VARCHAR(255) NOT NULL, 
     `other_testimonials` VARCHAR(255) NOT NULL, 
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 

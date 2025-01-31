@@ -20,14 +20,14 @@ const Header = () => {
 
   return (
     <>
-      <header className="header">
+      <header className="header position-relative">
         {/* Header Top Start */}
 
         {/* Header Top End */}
 
         {/* Header Middle Start */}
         <div
-          className={` ${classes.header_middle_bg} header-middle mobile-sticky d-lg-none`}
+          className={` ${classes.header_middle_bg}position-relative header-middle mobile-sticky d-lg-none`}
         >
           <div className="container">
             <div className="row">
@@ -73,9 +73,9 @@ const Header = () => {
         <div
           className={`${classes.header_bottom_bg} header-bottom d-none d-lg-block`}
         >
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-10">
+          <div className="container" style={{ marginLeft: "50px" }}>
+            <div className=" row">
+              <div className="col-lg-10" style={{ marginLeft: "0px" }}>
                 <div
                   className={`${classes.main_menu_wrapper} d-flex flex-wrap align-items-center justify-content-between`}
                 >
@@ -216,11 +216,14 @@ const Header = () => {
                   </ul>
                 </div>
               </div>
-              <div className={`${classes.moto_box} col-lg-2 `}>
-                <strong className={`${classes.moto_text}`}>
+              <div className={`${classes.moto_box} col-lg-2 position-absolute  ` } style={{ right: "60px" }}>
+                <div className="position-relative w-100">
+
+                <strong className={`${classes.moto_textk} position-absolute mt-3`} >
                   መኖራችን ለእርስዎ ነዉ!
                   <br /> Our Existence is For You
                 </strong>
+                </div>
               </div>
             </div>
           </div>
