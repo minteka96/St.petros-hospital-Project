@@ -11,54 +11,51 @@ const applicantRouter = require("./applicant.routes");
 const loginRouter = require("./logIn.routes");
 const userRouter = require("./user.routes");
 // Import the news router
-const newsRoutes = require("./news.routes");
-const cpdRoute = require("./cpd.routes");
-const cpdScheduleRoute = require("./cpdSchedule.routes");
+const newsRouter = require("./news.routes");
+const cpdRouter = require("./cpd.routes");
+const cpdScheduleRouter = require("./cpdSchedule.routes");
 // Import the video router
 const videoRouter = require("./videos.routes");
 // Import the cpd news router
 const cpdNewsRouter = require("./cpd_news.routes");
 // Import the trainees sign-up route
-const traineesSignUpRoute = require("./traineesSignUp.routes.js");
+const traineesSignUpRouter = require("./traineesSignUp.routes.js");
 // Import the trainees sign-in route
-const traineesSignInRoute = require("./traineesSignIn.routes.js");
+const traineesSignInRouter = require("./traineesSignIn.routes.js");
 
-const certificatRoute = require("./certificate.routes.js");
+const certificatRouter = require("./certificate.routes.js");
 const traineeRouter = require("./trainee.toutes.js");
-const traineesInfoRoutes = require('./trainees_info.routes.js');
-const trainCourseStatus= require('./trainCourseStatus.routes');
+const traineesInfoRouter = require('./trainees_info.routes.js');
+const trainCourseStatusRouter = require("./trainCourseStatus.routes");
 
 // Import the contact router
-const contactRoutes = require("./contact.routes");  // <-- Add this line
+const contactRouter = require("./contact.routes");  // <-- Add this line
 const researchPublicationRouter = require('./researchPublication.routes')
 // Use the routers in the main router
 // Use the sign-up route
-router.use(traineesSignUpRoute);
+router.use(traineesSignUpRouter);
 // Use the sign-in route
-router.use(traineesSignInRoute);
-router.use('/', traineesInfoRoutes);
+router.use(traineesSignInRouter);
+router.use('/', traineesInfoRouter);
 router.use(loginRouter);
 router.use(userRouter);
-router.use(cpdRoute);
-router.use(cpdScheduleRoute);
+router.use(cpdRouter);
+router.use(cpdScheduleRouter);
 router.use(applicantRouter);
 router.use(traineeRouter);
-router.use(trainCourseStatus);
+router.use(trainCourseStatusRouter);
 // Add the install router to the main router
 router.use(installRouter);
 router.use(jobsRouter);
-router.use(newsRoutes);
+router.use(newsRouter);
 router.use(videoRouter);
 router.use(healthtipRouter);
-router.use(traineesSignUpRoute);
-router.use(cpdNewsRouter);
-router.use(traineesSignInRoute);
-router.use(certificatRoute);
+router.use(certificatRouter);
 
 // Use the contact routes for the /api/contact path // Ensure correct path
 router.use('/api', researchPublicationRouter);
 // Use the routes
-router.use('/api', contactRoutes); 
+router.use('/api', contactRouter); // <-- Add this line
 router.use(cpdNewsRouter);
 
 // Export the router to be used in the main application file

@@ -44,10 +44,10 @@ router.get("/api/news", newsController.getAllNews);
 // Route to update a news entry
 router.put(
   "/api/news/:id",
-  upload.array("news_image", 10),
+  upload.array("news_image", 100),
   [
     authMiddleware.verifyToken,
-    authMiddleware.checkRoles(["superadmin", "Admin", "Comm"]),
+    authMiddleware.checkRoles(["superadmin", "Admin", "Communication"]),
   ],
   newsController.updateNews
 );
@@ -58,7 +58,7 @@ router.delete(
   "/api/news/:id",
   [
     authMiddleware.verifyToken,
-    authMiddleware.checkRoles(["superadmin", "Admin", "Comm"]),
+    authMiddleware.checkRoles(["superadmin", "Admin", "Communication"]),
   ],
   newsController.deleteNews
 );

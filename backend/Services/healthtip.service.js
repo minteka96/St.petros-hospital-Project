@@ -59,7 +59,9 @@ const getHealthTipById = async (healthTipId) => {
 // Function to fetch all health tips
 const getAllHealthTips = async () => {
   try {
-    const result = await db.query(`SELECT * FROM Health_Tips`);
+    const result = await db.query(
+      `SELECT * FROM Health_Tips ORDER BY created_at DESC`
+    );
     return result;
   } catch (err) {
     console.error("Error fetching all health tips:", err);
