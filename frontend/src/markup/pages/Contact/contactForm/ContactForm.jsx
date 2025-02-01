@@ -1,35 +1,38 @@
-
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import contactService from "../../../../Services/contact.service";
 import styles from "./ContactForm.module.css";
 
 const ContactForm = () => {
-
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-   
-
     try {
       const contactData = { name, email, subject, message };
       await contactService.createContact(contactData);
-      setSuccess('Your feedback has been submitted successfully');
-      setName('');
-      setEmail('');
-      setSubject('');
-      setMessage('');
-      setError('');
+      setSuccess("Your feedback has been submitted successfully");
+      setName("");
+      setEmail("");
+      setSubject("");
+      setMessage("");
+      setError("");
+
+      // Reset the success message after 5 seconds
+      setTimeout(() => {
+        setSuccess("");
+      }, 2000); // 5000 milliseconds = 5 seconds
     } catch (error) {
-      console.error('Error submitting feedback:', error);
-      setError(`There was an error submitting your feedback: ${error.message}. Please try again.`);
+      console.error("Error submitting feedback:", error);
+      setError(
+        `There was an error submitting your feedback: ${error.message}. Please try again.`
+      );
     }
   };
 
@@ -45,7 +48,12 @@ const ContactForm = () => {
           </div>
           {error && <div className={styles.errorMessage}>{error}</div>}
           {success && <div className={styles.successMessage}>{success}</div>}
-          <form className="contact-form-wrapper" id="contact-form" onSubmit={handleSubmit} method="post">
+          <form
+            className="contact-form-wrapper"
+            id="contact-form"
+            onSubmit={handleSubmit}
+            method="post"
+          >
             <div className="row">
               <div className="col-md-4">
                 <div className="form-group">
