@@ -37,6 +37,9 @@ const handleSubmit = async (e) => {
     } else {
       setSuccess("News added successfully!");
       setError("");
+      setTimeout(() => {
+        navigate("/admin/cpd-news-list");
+      }, 2000);
     }
   } catch (err) {
     console.error("Error submitting news:", err);

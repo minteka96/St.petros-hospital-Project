@@ -74,7 +74,7 @@ const CpdTraineesRoute = () => {
               className="btn  me-3"
               style={{ display: "flex", alignItems: "center", gap: "10px",border:"1px solid white" }}
             >
-              <span>Logout</span>
+              <span>Log Out</span>
               <img
                 src="https://img.icons8.com/?size=100&id=26215&format=png&color=FFFFFF"
                 alt="Logout Icon"

@@ -24,10 +24,10 @@ const ContactForm = () => {
       setMessage("");
       setError("");
 
-      // Reset the success message after 5 seconds
+      // Reset the success message after 2 seconds
       setTimeout(() => {
         setSuccess("");
-      }, 2000); // 5000 milliseconds = 5 seconds
+      }, 2000);
     } catch (error) {
       console.error("Error submitting feedback:", error);
       setError(
